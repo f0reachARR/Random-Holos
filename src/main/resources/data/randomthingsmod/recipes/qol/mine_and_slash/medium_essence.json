@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mmorpg:rare_mats/salvaging/lesser"
+    }
+  },
+  "result": {
+    "item": "mmorpg:rare_mats/salvaging/medium"
+  }
+}

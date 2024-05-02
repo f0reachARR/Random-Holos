@@ -1,0 +1,28 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "randomholos:item/humongous_baguette"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 22.5, 90, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 2, 2, 2 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 22.5, -90, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 2, 2, 2 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 85, 90, 0 ],
+      "translation": [ 0, 28, 28 ],
+      "scale": [ 4, 4, 4 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 85, -90, 0 ],
+      "translation": [ 0, 28, 28 ],
+      "scale": [ 2, 4, 4 ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "randomholos:item/glass_heel_single_side"
+  }
+}

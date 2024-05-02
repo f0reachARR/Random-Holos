@@ -1,0 +1,23 @@
+{
+  "item.randomholos.test": "How did we get here?",
+  "item.randomholos.baguette": "Baguette",
+  "item.randomholos.humongous_baguette": "Humongous Baguette",
+  "item.randomholos.gargantuan_baguette": "Gargantuan Baguette",
+
+  "item.randomholos.psychopath_axe": "Psychopath's Axe",
+  "item.randomholos.glass_heels": "Glass Heels",
+  "item.randomholos.glass_heel_single_side": "Single Glass Heel",
+
+  "item.randomholos.suisei_spawn_egg": "Hoshimachi Suisei Spawn Egg",
+
+  "block.randomholos.test_block": "Block of How did we get here?",
+
+  "creativetab.random_test": "Test Tab",
+  "creativetab.random_food": "Random Food",
+  "creativetab.holo": "The Tab of Dreams",
+
+  "tooltip.randomholos.tooltip": "Press <§eshift§r> for more info§r",
+  "tooltip.randomholos.psychopathaxe.shift": "An axe that belongs to a psychopath.\nHitting with it turns you into a §x§5§0§E§5§F§9c§x§6§3§E§8§F§Ao§x§7§5§E§B§F§Bs§x§8§8§E§D§F§Bm§x§9§A§F§0§F§Ci§x§A§D§F§3§F§Dc§r, §x§5§0§E§5§F§9d§x§6§6§D§4§E§Ea§x§7§D§C§3§E§3z§x§9§3§B§2§D§8z§x§A§9§A§1§C§El§x§B§F§9§0§C§3i§x§D§6§7§F§B§8n§x§E§C§6§E§A§Dg§r, §o≡speedy§r psychopath.",
+  "tooltip.randomholos.glassheels.shift": "A pair of glass heels. Don't Throw them.",
+  "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r\n我儘の随に 燦きに注意～§r"
+}

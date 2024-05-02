@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mmorpg:material/mining/3"
+    }
+  },
+  "result": {
+    "item": "mmorpg:material/mining/4"
+  }
+}

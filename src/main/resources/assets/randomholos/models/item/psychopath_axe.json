@@ -1,0 +1,28 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "randomholos:item/psychopath_axe"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 22.5, 90, 5 ],
+      "translation": [ 6, 6, 0 ],
+      "scale": [ 2, 2, 2 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 22.5, -90, 5 ],
+      "translation": [ 6, 6, 0 ],
+      "scale": [ 2, 2, 2 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 85, 90, 0 ],
+      "translation": [ 0, 12, 12 ],
+      "scale": [ 2, 2, 2 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 85, -90, 0 ],
+      "translation": [ 0, 12, 12 ],
+      "scale": [ 2, 2, 2 ]
+    }
+  }
+}

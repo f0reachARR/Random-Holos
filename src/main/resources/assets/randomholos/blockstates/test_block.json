@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "" : {"model" : "randomholos:block/test_block"}
+  }
+}

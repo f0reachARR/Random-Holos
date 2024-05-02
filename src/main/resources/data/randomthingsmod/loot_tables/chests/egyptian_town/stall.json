@@ -1,0 +1,30 @@
+{
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "loot_table",
+                    "weight": 1,
+                    "name": "randomholos:chests/egyptian_town/stall/stall_food"
+                },
+                {
+                    "type": "loot_table",
+                    "weight": 1,
+                    "name": "randomholos:chests/egyptian_town/stall/stall_gear"
+                },
+                {
+                    "type": "loot_table",
+                    "weight": 1,
+                    "name": "randomholos:chests/egyptian_town/stall/stall_book"
+                },
+                
+                {
+                    "type": "loot_table",
+                    "weight": 1,
+                    "name": "randomholos:chests/egyptian_town/stall/stall_decoration"
+                }
+            ]
+        }
+    ]
+}

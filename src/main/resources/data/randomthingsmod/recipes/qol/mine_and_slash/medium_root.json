@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mmorpg:rare_mats/farming/lesser"
+    }
+  },
+  "result": {
+    "item": "mmorpg:rare_mats/farming/medium"
+  }
+}

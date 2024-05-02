@@ -1,0 +1,32 @@
+{
+  "values": [
+    "minecraft:leather_helmet",
+    "minecraft:leather_chestplate",
+    "minecraft:leather_leggings",
+    "minecraft:leather_boots",
+    "cte_essentials:leather_0_helmet",
+    "cte_essentials:leather_0_chestplate",
+    "cte_essentials:leather_0_leggings",
+    "cte_essentials:leather_0_boots",
+    "cte_essentials:leather_1_helmet",
+    "cte_essentials:leather_1_chestplate",
+    "cte_essentials:leather_1_leggings",
+    "cte_essentials:leather_1_boots",
+    "cte_essentials:leather_2_helmet",
+    "cte_essentials:leather_2_chestplate",
+    "cte_essentials:leather_2_leggings",
+    "cte_essentials:leather_2_boots",
+    "cte_essentials:leather_3_helmet",
+    "cte_essentials:leather_3_chestplate",
+    "cte_essentials:leather_3_leggings",
+    "cte_essentials:leather_3_boots",
+    "cte_essentials:leather_4_helmet",
+    "cte_essentials:leather_4_chestplate",
+    "cte_essentials:leather_4_leggings",
+    "cte_essentials:leather_4_boots",
+    "cte_essentials:leather_5_helmet",
+    "cte_essentials:leather_5_chestplate",
+    "cte_essentials:leather_5_leggings",
+    "cte_essentials:leather_5_boots"
+  ]
+}
