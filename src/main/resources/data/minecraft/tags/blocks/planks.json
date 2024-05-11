@@ -1,13 +1,5 @@
 {
-  "replace": false,
   "values": [
-    "randomholos:cherry_planks",
-    "randomholos:beta_planks",
-    "randomholos:citrus_planks",
-    "randomholos:mango_planks",
-    "randomholos:orange_planks",
-    "randomholos:pear_planks",
-    "randomholos:peach_planks",
-    "randomholos:pomegranate_planks"
+    "randomholos:maple_planks"
   ]
 }

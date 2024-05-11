@@ -1,14 +1,5 @@
 {
   "replace": false,
   "values": [
-    "#randomholos:cherry_logs",
-    "#randomholos:beta_logs",
-    "#randomholos:banana_logs",
-    "#randomholos:citrus_logs",
-    "#randomholos:mango_logs",
-    "#randomholos:orange_logs",
-    "#randomholos:pear_logs",
-    "#randomholos:peach_logs",
-    "#randomholos:pomegranate_logs"
   ]
 }

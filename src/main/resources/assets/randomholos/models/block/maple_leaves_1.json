@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "randomholos:block/maple_leaves_1"
+  }
+}

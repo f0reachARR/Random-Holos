@@ -21,14 +21,15 @@ public class SingleGlassHeelItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        glassThrower = pPlayer;
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(),
                 SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!pLevel.isClientSide) {
-            GlassHeelsProjectileEntity diceProjectile = new GlassHeelsProjectileEntity(pLevel, pPlayer);
-            diceProjectile.setItem(itemstack);
-            diceProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2.0F, 0F);
-            pLevel.addFreshEntity(diceProjectile);
+            GlassHeelsProjectileEntity SingleGlassHeelProjectile = new GlassHeelsProjectileEntity(pLevel, pPlayer);
+            SingleGlassHeelProjectile.setItem(itemstack);
+            SingleGlassHeelProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2.0F, 0F);
+            pLevel.addFreshEntity(SingleGlassHeelProjectile);
         }
 
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
@@ -38,7 +39,7 @@ public class SingleGlassHeelItem extends Item {
 
         return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide());
     }
-
+    public static Player glassThrower;
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if(Screen.hasShiftDown()){
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.singleglassheels.shift"));

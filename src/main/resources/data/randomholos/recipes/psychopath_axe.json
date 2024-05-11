@@ -1,0 +1,24 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "#A#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_ingot"
+    },
+    "A": {
+      "item": "minecraft:golden_axe"
+    },
+    "S": {
+      "item": "randomholos:stellarite"
+    }
+  },
+  "result": {
+    "item": "randomholos:psychopath_axe",
+    "count": 1
+  }
+}

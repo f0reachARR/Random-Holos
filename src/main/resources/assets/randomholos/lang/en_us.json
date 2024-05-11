@@ -4,20 +4,52 @@
   "item.randomholos.humongous_baguette": "Humongous Baguette",
   "item.randomholos.gargantuan_baguette": "Gargantuan Baguette",
 
+  "block.randomholos.test_block": "Block of How did we get here?",
+
+  "block.randomholos.maple_log": "Maple Log",
+  "block.randomholos.maple_planks": "Maple Planks",
+  "block.randomholos.maple_wood": "Maple Wood",
+  "block.randomholos.stripped_maple_log": "Stripped Maple Log",
+  "block.randomholos.stripped_maple_wood": "Stripped Maple Wood",
+  "block.randomholos.maple_leaves": "Maple Leaves",
+  "block.randomholos.maple_sapling": "Maple Sapling",
+  "block.randomholos.fallen_leaves": "Fallen Leaves",
+
   "item.randomholos.psychopath_axe": "Psychopath's Axe",
   "item.randomholos.glass_heels": "Glass Heels",
   "item.randomholos.glass_heel_single_side": "Single Glass Heel",
+  "item.randomholos.meteorite_piece": "Meteorite Piece",
+  "item.randomholos.stellarite": "Stellarite",
+
+  "block.randomholos.crude_meteorite": "Crude Meteorite",
+  "block.randomholos.meteorite": "Meteorite",
+  "block.randomholos.rich_meteorite": "Rich Meteorite",
+
+  "item.randomholos.elite_lava_bucket": "Elite Lava Bucket",
+  "item.randomholos.ahoge": "Ahoge",
 
   "item.randomholos.suisei_spawn_egg": "Hoshimachi Suisei Spawn Egg",
+  "item.randomholos.miko_spawn_egg": "Sakura Miko Spawn Egg",
+  "item.randomholos.mikop_spawn_egg": "Mikop Spawn Egg",
 
-  "block.randomholos.test_block": "Block of How did we get here?",
+  "block.randomholos.kakuriyo_portal": "Portal of the Kakuriyo",
 
-  "creativetab.random_test": "Test Tab",
   "creativetab.random_food": "Random Food",
-  "creativetab.holo": "The Tab of Dreams",
+  "creativetab.holo": "Random Holo's",
+  "creativetab.holo_spawn_eggs": "Holomem's",
+  "creativetab.random_blocks": "Random Blocks",
 
-  "tooltip.randomholos.tooltip": "Press <§eshift§r> for more info§r",
+  "sounds.randomholos.metal_detector_found_ore": "Metal Detector Found an Ore",
+
+  "messages.randomholos.no_ahoge" : "seems like there is no need for a haricut.",
+
+  "tooltip.randomholos.tooltip": "Press <§eshift§r> for more info",
+  "tooltip.randomholos.tooltip.caution": "Press <§ealt§r> for §cprecautions",
   "tooltip.randomholos.psychopathaxe.shift": "An axe that belongs to a psychopath.\nHitting with it turns you into a §x§5§0§E§5§F§9c§x§6§3§E§8§F§Ao§x§7§5§E§B§F§Bs§x§8§8§E§D§F§Bm§x§9§A§F§0§F§Ci§x§A§D§F§3§F§Dc§r, §x§5§0§E§5§F§9d§x§6§6§D§4§E§Ea§x§7§D§C§3§E§3z§x§9§3§B§2§D§8z§x§A§9§A§1§C§El§x§B§F§9§0§C§3i§x§D§6§7§F§B§8n§x§E§C§6§E§A§Dg§r, §o≡speedy§r psychopath.",
   "tooltip.randomholos.glassheels.shift": "A pair of glass heels. Don't Throw them.",
-  "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r\n我儘の随に 燦きに注意～§r"
+  "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
+  "tooltip.randomholos.kakuriyo.shift": "A portal to the Kakuriyo. \nPlace down and <§eRight Click§r> to use.",
+  "tooltip.randomholos.elite_lava_bucket.shift": "A bucket of lava, cleansed by the maiden of the Dennou Sakura Shrine \n§oSafe even for babies!",
+  "tooltip.randomholos.ahoge.shift": "Did you... just take the true form of someone?",
+  "tooltip.randomholos.kakuriyo.alt": "<§cCaution§r>: Water destroys the portal! \nThere is also chances of the portal not spawning upon entering, bring more than one just in case!"
 }

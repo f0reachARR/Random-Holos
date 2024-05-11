@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#A#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "randomholos:meteorite_piece"
+    },
+    "A": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "randomholos:stellarite",
+    "count": 1
+  }
+}

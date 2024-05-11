@@ -1,0 +1,8 @@
+{
+  "metal_detector_found_ore": {
+    "subtitle": "sounds.randomholos.metal_detector_found_ore",
+    "sounds": [
+      "randomholos:metal_detector_found_ore"
+    ]
+  }
+}

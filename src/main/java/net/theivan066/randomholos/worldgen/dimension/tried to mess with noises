@@ -1,0 +1,191 @@
+//    public static final ResourceKey<NoiseGeneratorSettings> KAKURIYO_NOISE_GEN = ResourceKey.create(Registries.NOISE_SETTINGS,
+//            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
+
+//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
+//        context.register(KAKURIYO_NOISE_GEN, makeNoiseSettings(context));
+//    }
+
+//    public static final ResourceKey<DensityFunction> KAKURIYO_DENSITY_FUCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_density_fuction"));
+//    public static NoiseGeneratorSettings makeNoiseSettings(BootstapContext<NoiseGeneratorSettings> context) {
+//        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
+//        DensityFunction finalDensity = new DensityFunctions.HolderHolder(densityFunctions.getOrThrow(KAKURIYO_TERRAIN));
+//
+//        NoiseSettings tfNoise = NoiseSettings.create(
+//                0,
+//                512,
+//                2,
+//                2
+//        );
+//
+//        return new NoiseGeneratorSettings(
+//                tfNoise,
+//                Blocks.STONE.defaultBlockState(),
+//                Blocks.WATER.defaultBlockState(),
+//                new NoiseRouter(
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        finalDensity,
+//                        finalDensity,
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero(),
+//                        DensityFunctions.zero()
+//                ),
+//                ModSurfaceRules.makeRules(),
+//                List.of(),
+//                30,
+//                false,
+//                false,
+//                false,
+//                false
+//        );
+//    }
+//
+//    public static final ResourceKey<DensityFunction> KAKURIYO_TERRAIN = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, ""));
+//    public static void bootstrap(BootstapContext<DensityFunction> context) {
+//        DensityFunction ambientTerrainNoise = makeAmbientNoise2D(context);
+//        makeSkylightTerrain(context, ambientTerrainNoise);
+//    }
+//
+//    @NotNull
+//    private static DensityFunction makeAmbientNoise2D(BootstapContext<DensityFunction> context) {
+//        HolderGetter<NormalNoise.NoiseParameters> noiseLookup = context.lookup(Registries.NOISE);
+//        Holder.Reference<NormalNoise.NoiseParameters> surfaceParams = noiseLookup.getOrThrow(Noises.SURFACE);
+//        Holder.Reference<NormalNoise.NoiseParameters> ridgeParams = noiseLookup.getOrThrow(Noises.RIDGE);
+//
+//        DensityFunction noiseInterpolator = mulAddHalf(DensityFunctions.noise(surfaceParams, 1, 0));
+//        DensityFunction wideNoise = mulAddHalf(DensityFunctions.noise(ridgeParams, 1, 0));
+//        DensityFunction thinNoise = mulAddHalf(DensityFunctions.noise(ridgeParams, 4, 0));
+//
+//        DensityFunction jitteredNoise = DensityFunctions.lerp(
+//                noiseInterpolator.clamp(0, 1),
+//                wideNoise,
+//                thinNoise
+//        );
+//
+//        return DensityFunctions.flatCache(jitteredNoise);
+//    }
+//
+//    @NotNull
+//    private static DensityFunction mulAddHalf(DensityFunction input) {
+//        // mulAddHalf(x) = x * 0.5 + 0.5
+//        // Useful for squeezing function range [-1,1] into [0,1]
+//        return DensityFunctions.add(
+//                DensityFunctions.constant(0.5),
+//                DensityFunctions.mul(
+//                        DensityFunctions.constant(0.5),
+//                        input
+//                )
+//        );
+//    }
+//
+//    private static void makeSkylightTerrain(BootstapContext<DensityFunction> context, DensityFunction rawBiomeDensity) {
+//
+//        DensityFunction skyIslandNoise = DensityFunctions.add(
+//                DensityFunctions.constant(-0.5),
+//                DensityFunctions.mul(
+//                        DensityFunctions.constant(-0.5),
+//                        DensityFunctions.constant(5)
+//                )
+//        );
+//
+//        DensityFunction biomeDensity = DensityFunctions.mul(
+//                DensityFunctions.constant(-0.25),
+//                DensityFunctions.mul(DensityFunctions.add(
+//                        rawBiomeDensity,
+//                        DensityFunctions.yClampedGradient(1, 256, 31, -256)
+//                ), DensityFunctions.constant(-1)).halfNegative().abs()
+//        );
+//
+//        DensityFunction finalDensity = DensityFunctions.add(
+//                DensityFunctions.mul(
+//                        DensityFunctions.interpolated(skyIslandNoise).clamp(0, 2),
+//                        DensityFunctions.interpolated(skyIslandNoise).clamp(0, 2)
+//                ),
+//                biomeDensity
+//        );
+//        context.register(KAKURIYO_TERRAIN, finalDensity.clamp(-0.1, 1));
+//    }
+}
+
+
+//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
+//        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
+//        HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
+//
+//        context.register(KAKURIYO_NOISE_GEN, new NoiseGeneratorSettings(
+//                NoiseSettings.create(0, 512, 2, 2),
+//                Blocks.STONE.defaultBlockState(),
+//                Blocks.WATER.defaultBlockState(),
+//                new NoiseRouter(
+//                        DensityFunctions, //barrier
+//                        DensityFunctions.zero(), //fluid level floodedness
+//                        DensityFunctions.zero(), //fluid level spread
+//                        DensityFunctions.zero(), //lava
+//                        DensityFunctions.blendOffset(), //temperature
+//                        DensityFunctions.blendOffset(), //vegetation
+//                        NoiseRouterData.CONTINENTS, //continents
+//                        NoiseRouterData.EROSION, //erosion
+//                        NoiseRouterData.DEPTH, //depth
+//                        NoiseRouterData.RIDGES, //ridges
+//                        DensityFunctions.zero(), //initial density
+//                        DensityFunctions.mul(
+//                                DensityFunctions.constant(0.64D),
+//                                DensityFunctions.interpolated(
+//                                        DensityFunctions.blendDensity(
+//                                                DensityFunctions.add(
+//                                                        DensityFunctions.constant(2.5D),
+//                                                        DensityFunctions.mul(
+//                                                                DensityFunctions.yClampedGradient(-8, 24, 0.0D, 1.0D),
+//                                                                DensityFunctions.add(
+//                                                                        DensityFunctions.constant(-2.5D),
+//                                                                        DensityFunctions.add(
+//                                                                                DensityFunctions.constant(0.5D),
+//                                                                                DensityFunctions.mul(
+//                                                                                        DensityFunctions.yClampedGradient(110, 128, 1.0D, 0.0D),
+//                                                                                        DensityFunctions.add(
+//                                                                                                DensityFunctions.constant(-0.5F),
+//                                                                                                BlendedNoise.createUnseeded(0.1D, 0.3D, 80.0D, 60.0D, 1.0D))
+//                                                                                )
+//                                                                        )
+//                                                                )
+//                                                        )
+//                                                )
+//                                        )
+//                                )
+//                        ).squeeze(), //final density
+//                        DensityFunctions.zero(), //vein toggle
+//                        DensityFunctions.zero(), //vein ridged
+//                        DensityFunctions.zero() //vein gap
+//                ),
+//                SurfaceRules.sequence(
+//                        //bedrock floor
+//                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("minecraft:bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), SurfaceRules.state(Blocks.BEDROCK.defaultBlockState())),
+//                        //filler
+//                        SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.belowTop(5), 0), SurfaceRules.state(Blocks.STONE.defaultBlockState())),
+//                        //sediment
+//                        SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, CaveSurface.FLOOR), SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(33), 0)), SurfaceRules.state(Blocks.STONE.defaultBlockState()))),
+//                        //mix powder snow into icy biomes
+//                        SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.SAKURA_FOREST),
+//                                SurfaceRules.ifTrue(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(40), 2),
+//                                        SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.yBlockCheck(VerticalAnchor.absolute(50), 4)),
+//                                                SurfaceRules.state(Blocks.CALCITE.defaultBlockState()))))),
+//                        //cover the ground in deepturf
+//                        SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), SurfaceRules.state(Blocks.GRASS_BLOCK.defaultBlockState())),
+//                        //add deepsoil underneath
+//                    SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(0, true, 0, CaveSurface.FLOOR), SurfaceRules.state(Blocks.DIRT.defaultBlockState()))
+//               ),
+//                List.of(), //spawn targets
+//                32,
+//                false,
+//                false,
+//                true,
+//                false
+//        ));

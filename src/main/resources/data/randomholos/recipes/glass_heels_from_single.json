@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:glass_heel_single_side"
+    },
+    {
+      "item": "randomholos:glass_heel_single_side"
+    }
+  ],
+  "result": {
+    "item": "randomholos:glass_heels"
+  }
+}
