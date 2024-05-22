@@ -10,6 +10,7 @@ public class MikoAttackGoal extends MeleeAttackGoal {
 
     private final MikoEntity entity;
     private int attackDelay = 5;
+
     private int ticksUntilNextAttack = 5;
     private int attackTimes = 4;
     private boolean shouldCountTillNextAttack = false;
@@ -30,7 +31,6 @@ public class MikoAttackGoal extends MeleeAttackGoal {
     protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
         if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
             shouldCountTillNextAttack = true;
-
             if(isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }

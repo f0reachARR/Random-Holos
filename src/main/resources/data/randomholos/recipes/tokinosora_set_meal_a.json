@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:cooked_rice"
+    },
+    {
+      "item": "randomholos:ebi_katsu"
+    },
+    {
+      "item": "randomholos:chocolate_cake"
+    }
+  ],
+  "result": {
+    "item": "randomholos:tokinosora_set_meal_a",
+    "count" : 1
+  }
+}

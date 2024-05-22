@@ -4,5 +4,24 @@
     "sounds": [
       "randomholos:metal_detector_found_ore"
     ]
+  },
+  "sora_hurt": {
+    "subtitle": "sounds.randomholos.sora_hurt",
+    "sounds": [
+      "randomholos:sora_tekidane"
+    ]
+  },
+  "robogun_shoot": {
+    "subtitle": "sounds.randomholos.robogun_shoot",
+    "sounds": [
+      "randomholos:robogun_shoot"
+    ]
+  },
+  "miko_hurt": {
+    "subtitle": "sounds.randomholos.miko_hurt",
+    "sounds": [
+      "randomholos:miko_faq1",
+      "randomholos:miko_faq2"
+    ]
   }
 }

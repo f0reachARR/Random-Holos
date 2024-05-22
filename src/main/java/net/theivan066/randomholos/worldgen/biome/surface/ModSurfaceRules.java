@@ -1,9 +1,7 @@
 package net.theivan066.randomholos.worldgen.biome.surface;
 
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.theivan066.randomholos.worldgen.biome.ModBiomes;

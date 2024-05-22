@@ -15,6 +15,27 @@
   "block.randomholos.maple_sapling": "Maple Sapling",
   "block.randomholos.fallen_leaves": "Fallen Leaves",
 
+  "item.randomholos.shaken_bottle": "Shaken Bottle",
+  "item.randomholos.soda_water": "Soda Water",
+  "item.randomholos.tokino_soda": "Tokino Soda",
+  "item.randomholos.raw_rice": "Raw Rice",
+  "item.randomholos.uncooked_rice": "Uncooked Rice",
+  "item.randomholos.cooked_rice": "Cooked Rice",
+  "item.randomholos.flour": "Flour",
+  "item.randomholos.shrimp": "Shrimp",
+  "item.randomholos.cooked_shrimp": "Cooked Shrimp",
+  "item.randomholos.oil": "Oil",
+  "item.randomholos.ebi_katsu": "Ebi Katsu",
+  "item.randomholos.chocolate": "Chocolate",
+  "item.randomholos.chocolate_cake": "Chocolate Cake",
+  "item.randomholos.curry": "Curry",
+  "item.randomholos.curry_bread": "Curry Bread",
+  "item.randomholos.tokinosora_set_meal_a": "Tokino Sora Set Meal A",
+  "item.randomholos.tokinosora_set_meal_b": "Tokino Sora Set Meal B",
+
+  "item.randomholos.robogun": "Robogun",
+  "item.randomholos.robogun_ammo": "Robogun Ammo",
+
   "item.randomholos.psychopath_axe": "Psychopath's Axe",
   "item.randomholos.glass_heels": "Glass Heels",
   "item.randomholos.glass_heel_single_side": "Single Glass Heel",
@@ -27,12 +48,31 @@
 
   "item.randomholos.elite_lava_bucket": "Elite Lava Bucket",
   "item.randomholos.ahoge": "Ahoge",
+  "item.randomholos.ahoge_string": "Ahoge String",
+  "item.randomholos.miko_bow": "Bow of the Shrine Maiden",
+  "item.randomholos.mikomet_bow": "Bow of the Mikomet",
+  "item.randomholos.mikomet_arrow": "Arrow of the Mikomet",
 
-  "item.randomholos.suisei_spawn_egg": "Hoshimachi Suisei Spawn Egg",
-  "item.randomholos.miko_spawn_egg": "Sakura Miko Spawn Egg",
-  "item.randomholos.mikop_spawn_egg": "Mikop Spawn Egg",
+  "item.randomholos.copper_rod": "Copper Rod",
+  "item.randomholos.reinforced_copper_rod": "Reinforced Copper Rod",
+
+  "item.randomholos.sora_spawn_egg": "Tokino Sora",
+  "item.randomholos.nunnun_spawn_egg": "Nunnun",
+  "item.randomholos.roboco_spawn_egg": "Roboco",
+  "item.randomholos.suisei_spawn_egg": "Hoshimachi Suisei",
+  "item.randomholos.miko_spawn_egg": "Sakura Miko",
+  "item.randomholos.mikop_spawn_egg": "Mikop",
+
+  "entity.randomholos.sora": "Tokino Sora",
+  "entity.randomholos.nunnun": "Nunnun",
+  "entity.randomholos.roboco": "Roboco",
+  "entity.randomholos.suisei": "Hoshimachi Suisei",
+  "entity.randomholos.miko": "Sakura Miko",
+  "entity.randomholos.mikop": "Mikop",
 
   "block.randomholos.kakuriyo_portal": "Portal of the Kakuriyo",
+
+  "enchantment.randomholos.fast_draw": "Fast-draw",
 
   "creativetab.random_food": "Random Food",
   "creativetab.holo": "Random Holo's",
@@ -42,14 +82,23 @@
   "sounds.randomholos.metal_detector_found_ore": "Metal Detector Found an Ore",
 
   "messages.randomholos.no_ahoge" : "seems like there is no need for a haricut.",
+  "messages.randomholos.aenbien": "Miko expereienced the hell of Aenbien",
+  "messages.randomholos.reloading": "Reloading...",
+  "messages.randomholos.no_ammo": "Out of Ammo!",
 
   "tooltip.randomholos.tooltip": "Press <§eshift§r> for more info",
   "tooltip.randomholos.tooltip.caution": "Press <§ealt§r> for §cprecautions",
+  "tooltip.randomholos.robogun.shift": "A gun used by a robot",
   "tooltip.randomholos.psychopathaxe.shift": "An axe that belongs to a psychopath.\nHitting with it turns you into a §x§5§0§E§5§F§9c§x§6§3§E§8§F§Ao§x§7§5§E§B§F§Bs§x§8§8§E§D§F§Bm§x§9§A§F§0§F§Ci§x§A§D§F§3§F§Dc§r, §x§5§0§E§5§F§9d§x§6§6§D§4§E§Ea§x§7§D§C§3§E§3z§x§9§3§B§2§D§8z§x§A§9§A§1§C§El§x§B§F§9§0§C§3i§x§D§6§7§F§B§8n§x§E§C§6§E§A§Dg§r, §o≡speedy§r psychopath.",
   "tooltip.randomholos.glassheels.shift": "A pair of glass heels. Don't Throw them.",
   "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
   "tooltip.randomholos.kakuriyo.shift": "A portal to the Kakuriyo. \nPlace down and <§eRight Click§r> to use.",
   "tooltip.randomholos.elite_lava_bucket.shift": "A bucket of lava, cleansed by the maiden of the Dennou Sakura Shrine \n§oSafe even for babies!",
   "tooltip.randomholos.ahoge.shift": "Did you... just take the true form of someone?",
+  "tooltip.randomholos.ahoge_string.shift": "A reinforced string refined from multiple ahoges",
+  "tooltip.randomholos.miko_bow.shift": "A bow made from a maiden's hair \n§oSuper Elastic!",
+  "tooltip.randomholos.mikomet_bow.shift": "A compound bow combining both stellar and pon power \n§oOnly takes Mikomet Arrows!",
+  "tooltip.randomholos.mikomet_arrow.shift": "Arrows tailor-made for the Mikomet Bow",
+  "tooltip.randomholos.gun_ammo": "Ammo",
   "tooltip.randomholos.kakuriyo.alt": "<§cCaution§r>: Water destroys the portal! \nThere is also chances of the portal not spawning upon entering, bring more than one just in case!"
 }

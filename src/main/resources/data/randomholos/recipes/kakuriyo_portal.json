@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GRG",
+    "#A#",
+    "G#G"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "minecraft:ender_eye"
+    },
+    "R": {
+      "item": "minecraft:wither_rose"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "randomholos:kakuriyo_portal",
+    "count": 1
+  }
+}

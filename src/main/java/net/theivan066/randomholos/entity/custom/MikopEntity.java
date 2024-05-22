@@ -16,19 +16,19 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.variant.MikopVariant;
-import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 public class MikopEntity extends Animal{
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(MikopEntity.class, EntityDataSerializers.INT);
 
-    public final AnimationState attackAnimationState = new AnimationState();
-    public int attackAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public MikopEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -39,11 +39,14 @@ public class MikopEntity extends Animal{
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.1d));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.COOKED_BEEF), true));
 
-        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6f));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1d));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6f));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 
     }
 
@@ -58,7 +61,7 @@ public class MikopEntity extends Animal{
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return null;
+        return ModEntities.MIKOP.get().create(pLevel);
     }
 
     private void setupAnimationStates() {
@@ -91,20 +94,10 @@ public class MikopEntity extends Animal{
     }
 
     @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        if (pPlayer.isCrouching()) {
-            this.setItemInHand(pHand, new ItemStack(ModItems.PSYCHOPATH_AXE.get(), 1));
-        }
-        return super.mobInteract(pPlayer, pHand);
-    }
-
-    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
     }
-
-
 
 
     //VARIANT
@@ -139,6 +132,12 @@ public class MikopEntity extends Animal{
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getTypeVariant());
+    }
+
+    //Breeding
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return pStack.is(Items.COOKED_BEEF);
     }
 
     //Mob-specifics

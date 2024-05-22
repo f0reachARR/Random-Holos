@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:ahoge"
+    },
+    {
+      "item": "randomholos:ahoge"
+    },
+    {
+      "item": "randomholos:ahoge"
+    },
+    {
+      "item": "randomholos:ahoge"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "item": "randomholos:ahoge_string",
+    "count" : 2
+  }
+}

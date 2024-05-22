@@ -1,7 +1,6 @@
 package net.theivan066.randomholos.entity.custom;
 
 import net.minecraft.Util;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -16,20 +15,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.ai.SuiseiAttackGoal;
 import net.theivan066.randomholos.entity.variant.SuiseiVariant;
-import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.Nullable;
-import org.jline.terminal.impl.AbstractTerminal;
-import org.w3c.dom.Attr;
 
 public class SuiseiEntity extends Animal{
     private static final EntityDataAccessor<Boolean> ATTACKING =
@@ -50,12 +43,10 @@ public class SuiseiEntity extends Animal{
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
         this.goalSelector.addGoal(1, new SuiseiAttackGoal(this, 2, true));
-
-        this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.1d));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-
-        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6f));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, EnderMan.class, 10F, 2D, 2D));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6f));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
@@ -123,13 +114,6 @@ public class SuiseiEntity extends Animal{
     }
 
 
-    @Override
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        if (pPlayer.isCrouching()) {
-            this.setItemInHand(pHand, new ItemStack(ModItems.PSYCHOPATH_AXE.get(), 1));
-        }
-        return super.mobInteract(pPlayer, pHand);
-    }
 
     @Override
     protected void defineSynchedData() {
@@ -181,4 +165,6 @@ public class SuiseiEntity extends Animal{
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
         return super.interactAt(pPlayer, pVec, pHand);
     }
+
+
 }

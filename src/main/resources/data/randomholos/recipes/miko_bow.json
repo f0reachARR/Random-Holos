@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SA",
+    "C T",
+    " SA"
+  ],
+  "key": {
+    "A": {
+      "item": "randomholos:ahoge"
+    },
+    "T": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "randomholos:copper_rod"
+    }
+  },
+  "result": {
+    "item": "randomholos:miko_bow",
+    "count": 1
+  }
+}

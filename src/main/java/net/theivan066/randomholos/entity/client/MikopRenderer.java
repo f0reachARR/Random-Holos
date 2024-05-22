@@ -51,5 +51,4 @@ public class MikopRenderer extends MobRenderer<MikopEntity, MikopModel<MikopEnti
 
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
-
 }

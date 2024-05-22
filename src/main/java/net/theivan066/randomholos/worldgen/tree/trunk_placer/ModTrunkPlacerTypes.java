@@ -6,7 +6,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.theivan066.randomholos.RandomHolos;
-import net.theivan066.randomholos.worldgen.tree.trunk_placer.MapleTrunkPlacer;
 
 public class ModTrunkPlacerTypes {
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACERS =

@@ -1,0 +1,6 @@
+{
+    "parent": "randomholos:item/miko_bow",
+    "textures": {
+        "layer0": "randomholos:item/miko_bow_pulling_2"
+    }
+}

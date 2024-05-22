@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:curry"
+    },
+    {
+      "tag": "randomholos:cooked_meat"
+    },
+    {
+      "item": "randomholos:flour"
+    },
+    {
+      "item": "randomholos:flour"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "randomholos:oil"
+    }
+  ],
+  "result": {
+    "item": "randomholos:curry_bread",
+    "count" : 1
+  }
+}

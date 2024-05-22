@@ -10,8 +10,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.theivan066.randomholos.worldgen.ModConfiguredFeatures;
-import net.theivan066.randomholos.worldgen.ModPlacedFeatures;
 import net.theivan066.randomholos.worldgen.biome.ModBiomes;
 
 public class MapleForestBiome {

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:shaken_bottle"
+    }
+  ],
+  "result": {
+    "item": "minecraft:bottle",
+    "count" : 1
+  }
+}

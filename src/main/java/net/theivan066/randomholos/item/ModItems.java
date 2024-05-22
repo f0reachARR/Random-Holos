@@ -1,5 +1,6 @@
 package net.theivan066.randomholos.item;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,6 +11,7 @@ import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.custom.*;
+import net.theivan066.randomholos.sound.ModSounds;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -24,6 +26,63 @@ public class ModItems {
     public static final RegistryObject<Item> GARGANTUAN_BAGUETTE = ITEMS.register("gargantuan_baguette",
             () -> new Item(new Item.Properties().food(ModFoods.GARGANTUAN_BAGUETTE)));
 
+
+    public static final RegistryObject<Item> SHAKEN_BOTTLE = ITEMS.register("shaken_bottle",
+            () -> new ShakenBottleItem(new Item.Properties()));
+    public static final RegistryObject<Item> SODA_WATER = ITEMS.register("soda_water",
+            () -> new Item(new Item.Properties().food(ModFoods.SODA_WATER)));
+    public static final RegistryObject<Item> TOKINO_SODA = ITEMS.register("tokino_soda",
+            () -> new Item(new Item.Properties().food(ModFoods.TOKINO_SODA)));
+    public static final RegistryObject<Item> RAW_RICE = ITEMS.register("raw_rice", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> UNCOOKED_RICE = ITEMS.register("uncooked_rice", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
+            () -> new BowlFoodItem(new Item.Properties().food(ModFoods.COOKED_RICE).craftRemainder(Items.BOWL)));
+    public static final RegistryObject<Item> FLOUR = ITEMS.register("flour", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SHRIMP = ITEMS.register("shrimp",
+            () -> new Item(new Item.Properties().food(ModFoods.SHRIMP)));
+    public static final RegistryObject<Item> COOKED_SHRIMP = ITEMS.register("cooked_shrimp",
+            () -> new Item(new Item.Properties().food(ModFoods.COOKED_SHRIMP)));
+    public static final RegistryObject<Item> OIL = ITEMS.register("oil", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EBI_KATSU = ITEMS.register("ebi_katsu",
+            () -> new Item(new Item.Properties().food(ModFoods.EBI_KATSU)));
+    public static final RegistryObject<Item> CHOCOLATE = ITEMS.register("chocolate",
+            () -> new Item(new Item.Properties().food(ModFoods.CHOCOLATE)));
+    public static final RegistryObject<Item> CHOCOLATE_CAKE = ITEMS.register("chocolate_cake",
+            () -> new Item(new Item.Properties().food(ModFoods.CHOCOLATE_CAKE)));
+    public static final RegistryObject<Item> CURRY = ITEMS.register("curry",
+            () -> new Item(new Item.Properties().food(ModFoods.CURRY)));
+    public static final RegistryObject<Item> CURRY_BREAD = ITEMS.register("curry_bread",
+            () -> new Item(new Item.Properties().food(ModFoods.CURRY_BREAD)));
+    public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_A = ITEMS.register("tokinosora_set_meal_a",
+            () -> new BowlFoodItem(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_A)));
+    public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_B = ITEMS.register("tokinosora_set_meal_b",
+            () -> new Item(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_B)));
+
+    public static final RegistryObject<Item> ROBOGUN_AMMO = ITEMS.register("robogun_ammo", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROBOGUN = ITEMS.register("robogun",
+            () -> new RobogunItem(
+                    new Item.Properties().stacksTo(1),
+                    8,
+                    20,
+                    4,
+                    20,
+                    ROBOGUN_AMMO.get(),
+                    40,
+                    new float[] {0.1f, 0.1f},
+                    new float[] {0.1f, 0.2f},
+                    1,
+                    SoundEvents.CROSSBOW_QUICK_CHARGE_3,
+                    ModSounds.ROBOGUN_SHOOT.get(),
+                    1,
+                    false,
+                    false,
+                    10,
+                    11,
+                    21,
+                    GunItem.LoadingType.MAGAZINE,
+                    GunItem.FiringType.SEMI_AUTO
+                    ));
+
     public static final RegistryObject<Item> GLASS_HEELS = ITEMS.register("glass_heels",
             () -> new GlassHeelsBootItem(ModArmorMaterials.GLASS, ArmorItem.Type.BOOTS, new Item.Properties()));
     public static final RegistryObject<Item> PSYCHOPATH_AXE = ITEMS.register("psychopath_axe",
@@ -36,7 +95,31 @@ public class ModItems {
             () -> new EliteLavaBucketItem(ModFluids.SOURCE_ELITE_LAVA, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> AHOGE = ITEMS.register("ahoge",
             () ->  new AhogeItem(new Item.Properties()));
+    public static final RegistryObject<Item> AHOGE_STRING = ITEMS.register("ahoge_string",
+            () ->  new AhogeStringItem(new Item.Properties()));
+    public static final RegistryObject<Item> COPPER_ROD = ITEMS.register("copper_rod", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> REINFORCED_COPPER_ROD = ITEMS.register("reinforced_copper_rod", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MIKO_BOW = ITEMS.register("miko_bow",
+            () -> new MikoBowItem(new Item.Properties().durability(350)));
+    public static final RegistryObject<Item> MIKOMET_BOW = ITEMS.register("mikomet_bow",
+            () -> new MikometBowItem(new Item.Properties().durability(700)));
+    public static final RegistryObject<Item> MIKOMET_ARROW = ITEMS.register("mikomet_arrow",
+            () -> new MikometArrowItem(new Item.Properties()));
 
+
+
+
+
+
+    public static final RegistryObject<Item> SORA_SPAWN_EGG = ITEMS.register("sora_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SORA, 0x0146ea, 0x266aff,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> NUNNUN_SPAWN_EGG = ITEMS.register("nunnun_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.NUNNUN, 0xffffff, 0xe84b6f,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> ROBOCO_SPAWN_EGG = ITEMS.register("roboco_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.ROBOCO, 0x804e7f, 0xd192fe,
+                    new Item.Properties()));
     public static final RegistryObject<Item> SUISEI_SPAWN_EGG = ITEMS.register("suisei_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.SUISEI, 0x2dcde4, 0x50e5f9,
                     new Item.Properties()));

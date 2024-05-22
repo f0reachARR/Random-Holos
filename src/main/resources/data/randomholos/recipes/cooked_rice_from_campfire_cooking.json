@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "randomholos:uncooked_rice"
+  },
+  "result": "randomholos:cooked_rice"
+}

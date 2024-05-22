@@ -13,6 +13,9 @@ public class ModSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, RandomHolos.MOD_ID);
 
     public static final RegistryObject<SoundEvent> METAL_DETECTOR_FOUND_ORE = registerSoundEvents("metal_detector_found_ore");
+    public static final RegistryObject<SoundEvent> SORA_HURT = registerSoundEvents("sora_hurt");
+    public static final RegistryObject<SoundEvent> ROBOGUN_SHOOT = registerSoundEvents("robogun_shoot");
+    public static final RegistryObject<SoundEvent> MIKO_HURT = registerSoundEvents("miko_hurt");
 
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

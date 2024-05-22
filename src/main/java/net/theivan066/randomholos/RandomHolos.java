@@ -19,14 +19,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.theivan066.randomholos.block.ModBlocks;
+import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
-import net.theivan066.randomholos.entity.client.MikoRenderer;
-import net.theivan066.randomholos.entity.client.MikopRenderer;
-import net.theivan066.randomholos.entity.client.SuiseiRenderer;
+import net.theivan066.randomholos.entity.client.*;
 import net.theivan066.randomholos.fluid.ModFluidTypes;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModCreativeModeTabs;
+import net.theivan066.randomholos.item.ModItemProperties;
 import net.theivan066.randomholos.item.ModItems;
+import net.theivan066.randomholos.loot.ModLootModifiers;
 import net.theivan066.randomholos.sound.ModSounds;
 import net.theivan066.randomholos.util.ModWoodTypes;
 import net.theivan066.randomholos.worldgen.tree.trunk_placer.ModTrunkPlacerTypes;
@@ -47,8 +48,9 @@ public class RandomHolos {
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
 
+        ModEnchantments.register(modEventBus);
         ModSounds.register(modEventBus);
-
+        ModLootModifiers.register(modEventBus);
         ModEntities.register(modEventBus);
 
         ModTrunkPlacerTypes.register(modEventBus);
@@ -82,13 +84,20 @@ public class RandomHolos {
             event.enqueueWork(() -> {
                 Sheets.addWoodType(ModWoodTypes.MAPLE);
 
+                ModItemProperties.addCustomItemProperties();
+
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_ELITE_LAVA.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_ELITE_LAVA.get(), RenderType.translucent());
 
+                EntityRenderers.register(ModEntities.SORA.get(), SoraRenderer::new);
+                EntityRenderers.register(ModEntities.NUNNUN.get(), NunnunRenderer::new);
+                EntityRenderers.register(ModEntities.ROBOCO.get(), RobocoRenderer::new);
                 EntityRenderers.register(ModEntities.SUISEI.get(), SuiseiRenderer::new);
                 EntityRenderers.register(ModEntities.MIKO.get(), MikoRenderer::new);
                 EntityRenderers.register(ModEntities.MIKOP.get(), MikopRenderer::new);
                 EntityRenderers.register(ModEntities.GLASS_HEELS_PROJECTILE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(ModEntities.MIKOMET_ARROW.get(), MikometArrowRenderer::new);
+                EntityRenderers.register(ModEntities.BULLET_PROJECTILE.get(), BulletProjectileRenderer::new);
             });
         }
     }

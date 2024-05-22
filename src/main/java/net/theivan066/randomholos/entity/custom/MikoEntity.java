@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ import net.theivan066.randomholos.entity.variant.MikoVariant;
 import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
-public class MikoEntity extends Animal{
+public class MikoEntity extends Animal {
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(MikoEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
@@ -42,6 +42,7 @@ public class MikoEntity extends Animal{
     public int attackAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+
     public MikoEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -83,14 +84,14 @@ public class MikoEntity extends Animal{
             --this.idleAnimationTimeout;
         }
 
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+        if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20; // Length in ticks of your animation
             attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
 
-        if(!this.isAttacking()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
     }
@@ -149,7 +150,6 @@ public class MikoEntity extends Animal{
     }
 
 
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -157,8 +157,6 @@ public class MikoEntity extends Animal{
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
         this.entityData.define(WITH_AHOGE, true);
     }
-
-
 
 
     //VARIANT
@@ -201,4 +199,13 @@ public class MikoEntity extends Animal{
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
         return super.interactAt(pPlayer, pVec, pHand);
     }
+
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return super.getDeathSound();
+    }
+
 }
+

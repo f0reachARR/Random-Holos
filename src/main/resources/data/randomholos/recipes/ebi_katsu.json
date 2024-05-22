@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:shrimp"
+    },
+    {
+      "item": "randomholos:shrimp"
+    },
+    {
+      "item": "randomholos:flour"
+    },
+    {
+      "item": "randomholos:flour"
+    },
+    {
+      "item": "randomholos:oil"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "randomholos:ebi_katsu",
+    "count" : 1
+  }
+}

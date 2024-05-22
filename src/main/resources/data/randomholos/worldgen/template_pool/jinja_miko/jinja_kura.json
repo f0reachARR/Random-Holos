@@ -1,0 +1,15 @@
+{
+  "name": "randomholos:jinja_miko/jinja_kura",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:jinja/jinja_kura",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

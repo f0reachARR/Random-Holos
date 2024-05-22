@@ -60,13 +60,15 @@ public class ModDimensions {
         NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
-                                Pair.of(Climate.parameters(0.1F, 0.25F, 0.2F, 0.0F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.SAKURA_FOREST)),
-                                Pair.of(Climate.parameters(0.3F, 0.3F, 0.3F, 0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.CHERRY_GROVE)),
-                                Pair.of(Climate.parameters(0.2F, -0.3F, 0.1F, 0.2F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.MAPLE_FOREST)),
-                                Pair.of(Climate.parameters(0.5F, -0.5F, 0.1F, 0.3F, 0.0F, 0.2F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
-                                Pair.of(Climate.parameters(-0.1F, 0.0F, 0.0F, 0.5F, 0.05F, 0.2F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.LAND_OF_SOULS)),
-                                Pair.of(Climate.parameters(-0.6F, -0.25F, 0.0F, 0.1F, 0.1F, 0.1F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.SNOWY_LANDS)),
-                                Pair.of(Climate.parameters(-0.05F, -0.25F, -0.2F, 0.3F, -0.1F, 0.1F, 0.0F), biomeRegistry.getOrThrow(ModBiomes.MORIRIN))
+                                Pair.of(Climate.parameters(Climate.Parameter.span(-0.45F,0.2F)/*Temp*/, Climate.Parameter.span(-0.35F,-0.1F),/*Humid*/ Climate.Parameter.span(0.3F,1F)/*Continent*/, Climate.Parameter.span(-0.7799F,-0.375F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(0.2666F,0.4F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.SAKURA_FOREST)),
+                                Pair.of(Climate.parameters(Climate.Parameter.span(-0.45F,0.2F)/*Temp*/, Climate.Parameter.span(-0.35F,-0.1F),/*Humid*/ Climate.Parameter.span(0.3F,1F)/*Continent*/, Climate.Parameter.span(-0.375F,-0.2225F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(0.4F,1F)/*PV*/, 0.01F/*Offset*/), biomeRegistry.getOrThrow(Biomes.CHERRY_GROVE)),
+
+                                Pair.of(Climate.parameters(Climate.Parameter.span(0F,0.2F)/*Temp*/, Climate.Parameter.span(-0.35F,-0.1F),/*Humid*/ Climate.Parameter.span(0.03F,0.3F)/*Continent*/, Climate.Parameter.span(-0.2225F,0.55F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(0.4F,1F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.MAPLE_FOREST)),
+                                Pair.of(Climate.parameters(Climate.Parameter.span(-0.45F,0.2F)/*Temp*/, Climate.Parameter.span(-0.35F,-0.1F),/*Humid*/ Climate.Parameter.span(0.03F,0.3F)/*Continent*/, Climate.Parameter.span(0.05F,0.55F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(0.4F,1F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.MORIRIN)),
+
+                                Pair.of(Climate.parameters(Climate.Parameter.span(0.55F,1F)/*Temp*/, Climate.Parameter.span(-1F,-0.35F),/*Humid*/ Climate.Parameter.span(0.3F,1F)/*Continent*/, Climate.Parameter.span(0.05F,1F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(-0.6F,0.2F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
+                                Pair.of(Climate.parameters(Climate.Parameter.span(-0.15F,0.2F)/*Temp*/, Climate.Parameter.span(-1F,-0.35F),/*Humid*/ Climate.Parameter.span(-0.19F,-0.11F)/*Continent*/, Climate.Parameter.span(0.55F,1F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(-0.85F,-0.6F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.LAND_OF_SOULS)),
+                                Pair.of(Climate.parameters(Climate.Parameter.span(-1F,-0.45F)/*Temp*/, Climate.Parameter.span(-1F,0.35F),/*Humid*/ Climate.Parameter.span(0.03F,1F)/*Continent*/, Climate.Parameter.span(-1F,-0.375F)/*Erosion*/, Climate.Parameter.span(0F,1F)/*Depth*/, Climate.Parameter.span(0.2F,1F)/*PV*/, 0.0F/*Offset*/), biomeRegistry.getOrThrow(ModBiomes.SNOWY_LANDS))
 
                         ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));

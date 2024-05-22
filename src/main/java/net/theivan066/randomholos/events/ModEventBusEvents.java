@@ -10,25 +10,29 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.ModEntities;
-import net.theivan066.randomholos.entity.client.MikoModel;
-import net.theivan066.randomholos.entity.client.MikopModel;
-import net.theivan066.randomholos.entity.client.SuiseiModel;
-import net.theivan066.randomholos.entity.custom.MikoEntity;
-import net.theivan066.randomholos.entity.custom.MikopEntity;
-import net.theivan066.randomholos.entity.custom.SuiseiEntity;
+import net.theivan066.randomholos.entity.client.*;
+import net.theivan066.randomholos.entity.custom.*;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModModelLayers.SORA_LAYER, SoraModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.NUNNUN_LAYER, NunnunModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.ROBOCO_LAYER, RobocoModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SUISEI_LAYER, SuiseiModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKO_LAYER, MikoModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKOP_LAYER, MikopModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.MIKOMET_ARROW_LAYER, MikometArrowModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.BULLET_PROJECTILE_LAYER, BulletProjectileModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.SORA.get(), SoraEntity.createAttributes().build());
+        event.put(ModEntities.NUNNUN.get(), NunnunEntity.createAttributes().build());
+        event.put(ModEntities.ROBOCO.get(), RobocoEntity.createAttributes().build());
         event.put(ModEntities.SUISEI.get(), SuiseiEntity.createAttributes().build());
         event.put(ModEntities.MIKO.get(), MikoEntity.createAttributes().build());
         event.put(ModEntities.MIKOP.get(), MikopEntity.createAttributes().build());
@@ -37,6 +41,8 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerSpawnPlacement(SpawnPlacementRegisterEvent event) {
         event.register(ModEntities.MIKO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.MIKOP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

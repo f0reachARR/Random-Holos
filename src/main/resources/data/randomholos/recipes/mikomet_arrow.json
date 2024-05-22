@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACO"
+  ],
+  "key": {
+    "A": {
+      "item": "randomholos:ahoge"
+    },
+    "C": {
+      "item": "randomholos:copper_rod"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "randomholos:mikomet_arrow",
+    "count": 16
+  }
+}

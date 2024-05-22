@@ -3,7 +3,6 @@ package net.theivan066.randomholos.item;
 import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -15,6 +14,7 @@ import net.theivan066.randomholos.RandomHolos;
 import java.util.EnumMap;
 import java.util.function.Supplier;
 
+@SuppressWarnings("deprecation")
 public enum ModArmorMaterials implements ArmorMaterial {
     GLASS("glass", 5,Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266652_) -> {
         p_266652_.put(ArmorItem.Type.BOOTS, 1);

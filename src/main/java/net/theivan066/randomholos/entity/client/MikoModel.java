@@ -7,7 +7,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.theivan066.randomholos.entity.animations.ModAnimationDefinitions;
 import net.theivan066.randomholos.entity.custom.MikoEntity;
 

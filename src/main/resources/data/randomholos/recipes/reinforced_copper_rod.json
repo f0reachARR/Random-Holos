@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C#C",
+    "C#C",
+    "C#C"
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "#": {
+      "item": "randomholos:copper_rod"
+    }
+  },
+  "result": {
+    "item": "randomholos:reinforced_copper_rod",
+    "count": 3
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TRT",
+    "RSR",
+    "A#A"
+  ],
+  "key": {
+    "A": {
+      "item": "randomholos:ahoge_string"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "S": {
+      "item": "randomholos:stellarite"
+    },
+    "R": {
+      "item": "randomholos:reinforced_copper_rod"
+    },
+    "#": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "randomholos:mikomet_bow",
+    "count": 1
+  }
+}
