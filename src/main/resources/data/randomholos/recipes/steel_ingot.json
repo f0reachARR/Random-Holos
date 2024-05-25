@@ -1,0 +1,21 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "tag": "forge:coals"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:alloy_blueprint"
+  },
+  "output": {
+    "item": "randomholos:steel_ingot",
+    "count": 2
+  }
+}

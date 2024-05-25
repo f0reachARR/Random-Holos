@@ -1,13 +1,14 @@
 package net.theivan066.randomholos.item.custom;
 
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.theivan066.randomholos.entity.custom.BulletProjectileEntity;
+import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
 import net.theivan066.randomholos.util.InventoryUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,6 +27,7 @@ import java.util.function.Predicate;
 
 @SuppressWarnings("deprecation")
 public class GunItem extends ProjectileWeaponItem {
+
     public final Random random;
     private final float gunDamage;
     private final float bulletSpeed;
@@ -104,7 +106,7 @@ public class GunItem extends ProjectileWeaponItem {
 
     public void shoot(Level pLevel, Player pPlayer, ItemStack itemStack) {
 
-        double h_kick = getRecoilX(itemStack);
+        float h_kick = getRecoilX(itemStack);
         float v_kick = getRecoilY(itemStack);
 
 
@@ -116,9 +118,9 @@ public class GunItem extends ProjectileWeaponItem {
 
                 Vec3 v0 = pPlayer.getDeltaMovement();
                 Vec3 lookDirect = pPlayer.getLookAngle();
-                Vec3 v1 = lookDirect.scale(bulletSpeed) ;
+                Vec3 v1 = lookDirect.scale(bulletSpeed).add(v0);
                 float spreadModifier = (float) ((pPlayer.isPushedByFluid() ? 1.5 : 0) + (pPlayer.isSwimming() ? 2.5 : 0)
-                        + (pPlayer.isSprinting() ? 1.5 : 0) + (pPlayer.isCrouching() ? -0.5 : 0));
+                        + (pPlayer.isSprinting() ? 2.5 : 0) + (pPlayer.isCrouching() ? -0.5 : 0));
                 float verticalSpread = random.nextFloat(-bulletSpread[0] * Math.max(spreadModifier, 0), bulletSpread[0] * Math.min(spreadModifier, 0));
                 float horizontalSpread = random.nextFloat(-bulletSpread[1] * Math.max(spreadModifier, 0), bulletSpread[1] * Math.min(spreadModifier, 0));
 
@@ -127,6 +129,8 @@ public class GunItem extends ProjectileWeaponItem {
 
                 pLevel.addFreshEntity(bullet);
             }
+            pPlayer.setYRot(pPlayer.getYRot() + v_kick);
+            pPlayer.setXRot(pPlayer.getXRot() + random.nextFloat(-h_kick, h_kick));
         }
         pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.shootSound, SoundSource.PLAYERS, 1.0f, 1.0f);
     }
@@ -279,6 +283,11 @@ public class GunItem extends ProjectileWeaponItem {
 
     public boolean isReloading() {
         return this.isReloading;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
+        return InteractionResult.FAIL;
     }
 
     @Override

@@ -1,0 +1,38 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "item": "randomholos:steel_block"
+    },
+    {
+      "item": "randomholos:reinforced_copper_rod"
+    },
+    {
+      "item": "randomholos:steel_block"
+    },
+    {
+      "item": "randomholos:robotic_parts"
+    },
+    {
+      "item": "randomholos:energy_core"
+    },
+    {
+      "item": "randomholos:robotic_parts"
+    },
+    {
+      "item": "randomholos:steel_block"
+    },
+    {
+      "item": "randomholos:steel_block"
+    },
+    {
+      "item": "randomholos:steel_block"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:firearm_blueprint"
+  },
+  "output": {
+    "item": "randomholos:robosniper"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "randomholos:block/scallion_stage0"
+    },
+    "age=1": {
+      "model": "randomholos:block/scallion_stage1"
+    },
+    "age=2": {
+      "model": "randomholos:block/scallion_stage2"
+    },
+    "age=3": {
+      "model": "randomholos:block/scallion_stage3"
+    },
+    "age=4": {
+      "model": "randomholos:block/scallion_stage4"
+    }
+  }
+}

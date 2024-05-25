@@ -5,7 +5,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "randomholos:jinja/jinja_deco_big_1",
+        "location": "randomholos:jinja_miko/jinja_deco_big_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

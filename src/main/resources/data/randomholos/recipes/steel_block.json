@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomholos:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "randomholos:steel_block",
+    "count": 1
+  }
+}

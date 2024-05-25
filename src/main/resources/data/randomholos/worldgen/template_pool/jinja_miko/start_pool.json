@@ -18,7 +18,7 @@
         // Note, this will automatically check into the 'structures' folder for the nbt file.
         // The final path would look like 'resources/data/mccourse/structures/kaupen_house.nbt'
         // The Jigsaw block in the structure will point to side_pool.json to spawn the other half of the house.
-        "location": "randomholos:jinja/jinja_section_1",
+        "location": "randomholos:jinja_miko/jinja_section_1",
 
         // Processor JSON files can be used to randomize or replace blocks dynamically. Here, we don't do any of that.
         "processors": "randomholos:randomize_saisenbako",

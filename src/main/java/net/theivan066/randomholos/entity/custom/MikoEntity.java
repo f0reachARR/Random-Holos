@@ -1,6 +1,7 @@
 package net.theivan066.randomholos.entity.custom;
 
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -8,6 +9,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,6 +29,7 @@ import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.ai.MikoAttackGoal;
 import net.theivan066.randomholos.entity.variant.MikoVariant;
 import net.theivan066.randomholos.item.ModItems;
+import net.theivan066.randomholos.util.InventoryUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class MikoEntity extends Animal {
@@ -126,29 +130,40 @@ public class MikoEntity extends Animal {
 
     @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        ItemStack mainhand = pPlayer.getItemInHand(pHand);
-        ItemStack offhand = pPlayer.getOffhandItem();
-        boolean hasItemForCleansing = mainhand.is(Items.LAVA_BUCKET) && (offhand.is(Items.PINK_PETALS) || offhand.is(Items.CHERRY_SAPLING)) && offhand.getCount() >= 4;
+        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+        int countSapling = pPlayer.getInventory().countItem(Items.CHERRY_SAPLING);
+        int countPetal = pPlayer.getInventory().countItem(Items.PINK_PETALS);
+        boolean hasItemForCleansing = itemInHand.is(Items.LAVA_BUCKET) && (countSapling >= 4 || countPetal >= 4);
         if (hasItemForCleansing) {
-            mainhand.setCount(mainhand.getCount() - 1);
-            offhand.setCount(offhand.getCount() - 4);
-            pPlayer.addItem(new ItemStack(ModItems.ELITE_LAVA_BUCKET.get(), 1));
+            if (countSapling >= 4) {
+                InventoryUtil.removeItem(pPlayer, Items.CHERRY_SAPLING, 4);
+                cleanseLava(pPlayer, itemInHand);
+            } else {
+                InventoryUtil.removeItem(pPlayer, Items.PINK_PETALS, 4);
+                cleanseLava(pPlayer, itemInHand);
+            }
         }
 
-        if (mainhand.is(Items.SHEARS)) {
+        if (itemInHand.is(Items.SHEARS)) {
             if (this.entityData.get(WITH_AHOGE)) {
                 this.entityData.set(WITH_AHOGE, false);
-                mainhand.setDamageValue(mainhand.getDamageValue() - 1);
+                itemInHand.setDamageValue(itemInHand.getDamageValue() - 1);
+                pPlayer.level().playSound(pPlayer, this.getX(), this.getY(), this.getZ(), SoundEvents.SHEEP_SHEAR, SoundSource.PLAYERS, 1, 1);
                 pPlayer.addItem(new ItemStack(ModItems.AHOGE.get(), 1));
             } else {
                 if (this.level().isClientSide) {
                     pPlayer.sendSystemMessage(Component.translatable("messages.randomholos.no_ahoge"));
+                    pPlayer.level().playSound(pPlayer, this.getX(), this.getY(), this.getZ(), SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, 1, 1);
                 }
             }
         }
         return super.mobInteract(pPlayer, pHand);
     }
 
+    private void cleanseLava(Player pPlayer, ItemStack lava) {
+        lava.setCount(lava.getCount() - 1);
+        pPlayer.addItem(new ItemStack(ModItems.ELITE_LAVA_BUCKET.get(), 1));
+    }
 
     @Override
     protected void defineSynchedData() {

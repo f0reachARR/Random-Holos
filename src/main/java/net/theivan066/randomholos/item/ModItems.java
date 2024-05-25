@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.theivan066.randomholos.RandomHolos;
+import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.custom.*;
@@ -31,6 +32,7 @@ public class ModItems {
             () -> new ShakenBottleItem(new Item.Properties()));
     public static final RegistryObject<Item> SODA_WATER = ITEMS.register("soda_water",
             () -> new Item(new Item.Properties().food(ModFoods.SODA_WATER)));
+    public static final RegistryObject<Item> CAN = ITEMS.register("can", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> TOKINO_SODA = ITEMS.register("tokino_soda",
             () -> new Item(new Item.Properties().food(ModFoods.TOKINO_SODA)));
     public static final RegistryObject<Item> RAW_RICE = ITEMS.register("raw_rice", () ->  new Item(new Item.Properties()));
@@ -58,18 +60,32 @@ public class ModItems {
     public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_B = ITEMS.register("tokinosora_set_meal_b",
             () -> new Item(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_B)));
 
+    public static final RegistryObject<Item> BLUEPRINT = ITEMS.register("blueprint", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ALLOY_BLUEPRINT = ITEMS.register("alloy_blueprint", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FIREARM_BLUEPRINT = ITEMS.register("firearm_blueprint", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLADE_BLUEPRINT = ITEMS.register("blade_blueprint", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLUNT_BLUEPRINT = ITEMS.register("blunt_blueprint", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ENERGY_CORE = ITEMS.register("energy_core", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROBOTIC_PARTS = ITEMS.register("robotic_parts", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> ROBOGUN_AMMO = ITEMS.register("robogun_ammo", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROBOSNIPER_AMMO = ITEMS.register("robosniper_ammo", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHIVES = ITEMS.register("chives",
+            () -> new ItemNameBlockItem(ModBlocks.CHIVES_CROP.get(), new Item.Properties().food(ModFoods.CHIVES)));
+    public static final RegistryObject<Item> SCALLION = ITEMS.register("scallion",
+            () -> new ItemNameBlockItem(ModBlocks.SCALLION_CROP.get(), new Item.Properties().food(ModFoods.SCALLION)));
+
     public static final RegistryObject<Item> ROBOGUN = ITEMS.register("robogun",
             () -> new RobogunItem(
                     new Item.Properties().stacksTo(1),
                     8,
-                    20,
-                    4,
+                    15,
+                    5,
                     20,
                     ROBOGUN_AMMO.get(),
-                    40,
+                    50,
                     new float[] {0.1f, 0.1f},
-                    new float[] {0.1f, 0.2f},
+                    new float[] {0f, 0f},
                     1,
                     SoundEvents.CROSSBOW_QUICK_CHARGE_3,
                     ModSounds.ROBOGUN_SHOOT.get(),
@@ -82,6 +98,30 @@ public class ModItems {
                     GunItem.LoadingType.MAGAZINE,
                     GunItem.FiringType.SEMI_AUTO
                     ));
+
+    public static final RegistryObject<Item> ROBOSNIPER = ITEMS.register("robosniper",
+            () -> new RobosniperItem(
+                    new Item.Properties().stacksTo(1),
+                    30,
+                    40,
+                    30,
+                    3,
+                    ROBOSNIPER_AMMO.get(),
+                    100,
+                    new float[] {0.1f, 0.1f},
+                    new float[] {1f, 0.2f},
+                    1,
+                    SoundEvents.CROSSBOW_QUICK_CHARGE_3,
+                    ModSounds.ROBOGUN_SHOOT.get(),
+                    1,
+                    false,
+                    false,
+                    10,
+                    11,
+                    21,
+                    GunItem.LoadingType.MAGAZINE,
+                    GunItem.FiringType.SEMI_AUTO
+            ));
 
     public static final RegistryObject<Item> GLASS_HEELS = ITEMS.register("glass_heels",
             () -> new GlassHeelsBootItem(ModArmorMaterials.GLASS, ArmorItem.Type.BOOTS, new Item.Properties()));
@@ -106,6 +146,8 @@ public class ModItems {
     public static final RegistryObject<Item> MIKOMET_ARROW = ITEMS.register("mikomet_arrow",
             () -> new MikometArrowItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> GUESSER_PIN = ITEMS.register("guesser_pin",
+            () -> new GuesserPinItem(new Item.Properties()));
 
 
 

@@ -9,6 +9,8 @@ public class ModFoods {
     public static final FoodProperties BAGUETTE = new FoodProperties.Builder().nutrition(9).saturationMod(11f).build();
     public static final FoodProperties HUMONGOUS_BAGUETTE = new FoodProperties.Builder().nutrition(18).saturationMod(17f).build();
     public static final FoodProperties GARGANTUAN_BAGUETTE = new FoodProperties.Builder().nutrition(36).saturationMod(34f).build();
+    public static final FoodProperties CHIVES = new FoodProperties.Builder().nutrition(1).saturationMod(0.75f).build();
+    public static final FoodProperties SCALLION = new FoodProperties.Builder().nutrition(1).saturationMod(0.75f).build();
     public static final FoodProperties SODA_WATER = new FoodProperties.Builder().nutrition(1).saturationMod(0.5f).build();
     public static final FoodProperties TOKINO_SODA = new FoodProperties.Builder().nutrition(2).saturationMod(1f)
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600,0), 1f).build();

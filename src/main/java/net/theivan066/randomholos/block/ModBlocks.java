@@ -13,8 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.theivan066.randomholos.RandomHolos;
-import net.theivan066.randomholos.block.custom.KakuriyoPortalBlock;
-import net.theivan066.randomholos.block.custom.ModFlammableRotatedPillarBlock;
+import net.theivan066.randomholos.block.custom.*;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.worldgen.tree.MapleTreeGrower;
@@ -87,7 +86,15 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE)));
     public static final RegistryObject<Block> RICH_METEORITE = registerBlock("rich_meteorite", ()->
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 10)));
-//state -> state.getValue(AlexandriteLampBlock.CLICKED) ? 15 : 0
+
+    public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block", ()->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0f, 7.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER)));
+    public static final RegistryObject<Block> MANUFACTURING_TABLE = registerBlock("manufacturing_table", ()->
+            new ManufacturingTableBlock(BlockBehaviour.Properties.of().strength(2f).sound(SoundType.STONE).lightLevel(state -> 12).noOcclusion()));
+    public static final RegistryObject<Block> CHIVES_CROP = BLOCKS.register("chives_crop",
+            () -> new ChivesCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+    public static final RegistryObject<Block> SCALLION_CROP = BLOCKS.register("scallion_crop",
+            () -> new ScallionCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
 
     public static final RegistryObject<Block> KAKURIYO_PORTAL = registerBlock("kakuriyo_portal",
             () -> new KakuriyoPortalBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_PORTAL).noLootTable().noOcclusion().noCollission()));

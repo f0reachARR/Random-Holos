@@ -21,6 +21,7 @@ public class ModCreativeModeTabs {
                         //sora
                         pOutput.accept(ModItems.SHAKEN_BOTTLE.get());
                         pOutput.accept(ModItems.SODA_WATER.get());
+                        pOutput.accept(ModItems.CAN.get());
                         pOutput.accept(ModItems.TOKINO_SODA.get());
                         pOutput.accept(ModItems.RAW_RICE.get());
                         pOutput.accept(ModItems.UNCOOKED_RICE.get());
@@ -37,8 +38,22 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.TOKINOSORA_SET_MEAL_A.get());
                         pOutput.accept(ModItems.TOKINOSORA_SET_MEAL_B.get());
                         //roboko
+                        pOutput.accept(ModItems.BLUEPRINT.get());
+                        pOutput.accept(ModItems.FIREARM_BLUEPRINT.get());
+                        pOutput.accept(ModItems.BLADE_BLUEPRINT.get());
+                        pOutput.accept(ModItems.BLUNT_BLUEPRINT.get());
+                        pOutput.accept(ModItems.ALLOY_BLUEPRINT.get());
+                        pOutput.accept(ModItems.ENERGY_CORE.get());
+                        pOutput.accept(ModItems.ROBOTIC_PARTS.get());
+                        pOutput.accept(ModItems.STEEL_INGOT.get());
+                        pOutput.accept(ModBlocks.STEEL_BLOCK.get());
+                        pOutput.accept(ModBlocks.MANUFACTURING_TABLE.get());
                         pOutput.accept(ModItems.ROBOGUN.get());
                         pOutput.accept(ModItems.ROBOGUN_AMMO.get());
+                        pOutput.accept(ModItems.ROBOSNIPER.get());
+                        pOutput.accept(ModItems.ROBOSNIPER_AMMO.get());
+                        pOutput.accept(ModItems.CHIVES.get());
+                        pOutput.accept(ModItems.SCALLION.get());
                         //suisei
                         pOutput.accept(ModItems.PSYCHOPATH_AXE.get());
                         pOutput.accept(ModItems.GLASS_HEELS.get());
@@ -56,6 +71,8 @@ public class ModCreativeModeTabs {
                         //mikomet
                         pOutput.accept(ModItems.MIKOMET_BOW.get());
                         pOutput.accept(ModItems.MIKOMET_ARROW.get());
+                        //azki
+                        pOutput.accept(ModItems.GUESSER_PIN.get());
                         //ayame
                         pOutput.accept(ModBlocks.KAKURIYO_PORTAL.get());
                         //mats

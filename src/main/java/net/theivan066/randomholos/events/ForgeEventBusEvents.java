@@ -29,6 +29,7 @@ import net.theivan066.randomholos.entity.custom.MikoEntity;
 import net.theivan066.randomholos.item.custom.GunItem;
 import net.theivan066.randomholos.item.custom.MikoBowItem;
 import net.theivan066.randomholos.item.custom.MikometBowItem;
+import net.theivan066.randomholos.item.custom.RobosniperItem;
 
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,9 @@ public class ForgeEventBusEvents {
             }
             fovModifier *= 1.0F - deltaTicks * 0.5F;
             event.setNewFovModifier(fovModifier);
+        }
+        if (event.getPlayer().getOffhandItem().getItem() instanceof RobosniperItem) {
+            event.setNewFovModifier(0.2F);
         }
     }
 

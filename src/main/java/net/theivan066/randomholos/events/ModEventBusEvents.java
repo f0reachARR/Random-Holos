@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.client.*;
+import net.theivan066.randomholos.entity.client.projectile.BulletProjectileModel;
+import net.theivan066.randomholos.entity.client.projectile.MikometArrowModel;
 import net.theivan066.randomholos.entity.custom.*;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 

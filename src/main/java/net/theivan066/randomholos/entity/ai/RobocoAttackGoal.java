@@ -75,6 +75,7 @@ public class RobocoAttackGoal extends RangedAttackGoal {
             this.mob.getNavigation().moveTo(this.target, this.speedModifier);
             this.attackDelay = 43;
             entity.setAttacking(false);
+            entity.setCocked(false);
         }
     }
 
@@ -83,6 +84,9 @@ public class RobocoAttackGoal extends RangedAttackGoal {
             this.mob.getLookControl().setLookAt(target);
             this.rangedAttackMob.performRangedAttack((LivingEntity) target, 1);
             this.attackDelay = 30;
+            if (!entity.isCocked()) {
+                entity.setCocked(true);
+            }
         }
     }
 }

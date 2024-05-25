@@ -1,0 +1,39 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/copper"
+    },
+    {
+      "tag": "forge:storage_blocks/copper"
+    },
+    {
+      "tag": "forge:storage_blocks/copper"
+    },
+    {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    {
+      "item": "randomholos:energy_core"
+    },
+    {
+      "item": "randomholos:steel_block"
+    },
+    {
+      "tag": "forge:storage_blocks/copper"
+    },
+    {
+      "tag": "forge:storage_blocks/copper"
+    },
+    {
+      "tag": "forge:storage_blocks/copper"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:firearm_blueprint"
+  },
+  "output": {
+    "item": "randomholos:robosniper_ammo",
+    "count": 3
+  }
+}

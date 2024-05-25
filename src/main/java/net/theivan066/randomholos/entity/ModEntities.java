@@ -8,6 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.custom.*;
+import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
+import net.theivan066.randomholos.entity.custom.projectile.GlassHeelsProjectileEntity;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -35,15 +37,23 @@ public class ModEntities {
     public static final RegistryObject<EntityType<GlassHeelsProjectileEntity>> GLASS_HEELS_PROJECTILE =
             ENTITY_TYPES.register("glass_heels_projectile",
                     () -> EntityType.Builder.<GlassHeelsProjectileEntity>of(GlassHeelsProjectileEntity::new, MobCategory.MISC)
-                            .sized(0.3f, 0.3f)
+                            .sized(0.25f, 0.25f)
                             .clientTrackingRange(4)
                             .updateInterval(20)
                             .setCustomClientFactory((spawnEntity, level) -> new GlassHeelsProjectileEntity(level))
                             .build("glass_heels_projectile"));
+    public static final RegistryObject<EntityType<GlassHeelsProjectileEntity>> GUESSER_PIN_PROJECTILE =
+            ENTITY_TYPES.register("guesser_pin_projectile",
+                    () -> EntityType.Builder.<GlassHeelsProjectileEntity>of(GlassHeelsProjectileEntity::new, MobCategory.MISC)
+                            .sized(0.3f, 0.5f)
+                            .clientTrackingRange(4)
+                            .updateInterval(20)
+                            .setCustomClientFactory((spawnEntity, level) -> new GlassHeelsProjectileEntity(level))
+                            .build("guesser_pin_projectile"));
     public static final RegistryObject<EntityType<BulletProjectileEntity>> BULLET_PROJECTILE =
             ENTITY_TYPES.register("bullet_projectile",
                     () -> EntityType.Builder.<BulletProjectileEntity>of(BulletProjectileEntity::new, MobCategory.MISC)
-                            .sized(0.5f, 0.5f)
+                            .sized(0.0625f, 0.0625f)
                             .clientTrackingRange(4)
                             .updateInterval(20)
                             .build("bullet_projectile"));
