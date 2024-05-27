@@ -32,8 +32,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<MikopEntity>> MIKOP =
             ENTITY_TYPES.register("mikop", () -> EntityType.Builder.of(MikopEntity::new, MobCategory.CREATURE)
                     .sized(1f, 1.6f).build("mikop"));
-
-
+    public static final RegistryObject<EntityType<AzkiEntity>> AZKI =
+            ENTITY_TYPES.register("azki", () -> EntityType.Builder.of(AzkiEntity::new, MobCategory.CREATURE)
+                    .sized(1f, 1.8f).build("azki"));
     public static final RegistryObject<EntityType<GlassHeelsProjectileEntity>> GLASS_HEELS_PROJECTILE =
             ENTITY_TYPES.register("glass_heels_projectile",
                     () -> EntityType.Builder.<GlassHeelsProjectileEntity>of(GlassHeelsProjectileEntity::new, MobCategory.MISC)

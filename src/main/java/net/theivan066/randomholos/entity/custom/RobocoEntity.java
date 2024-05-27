@@ -83,19 +83,22 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
             --this.idleAnimationTimeout;
         }
 
-        if (this.isCocked() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 30; // Length in ticks of your animation
-            attackLoadedAnimationState.start(this.tickCount);
-        } else if (this.isAttacking() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 43;
-            attackAnimationState.start(this.tickCount);
+        if (attackAnimationTimeout <= 0 && this.isAttacking()) {
+            if (this.isCocked()) {
+                attackAnimationTimeout = 30; // Length in ticks of your animation
+                attackLoadedAnimationState.start(this.tickCount);
+            } else {
+                attackAnimationTimeout = 43;
+                attackAnimationState.start(this.tickCount);
+            }
         } else {
             --this.attackAnimationTimeout;
         }
-
-        if (!this.isAttacking() && !this.isCocked()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
             attackLoadedAnimationState.stop();
+            this.setCocked(false);
+            idleAnimationState.start(1);
         }
     }
 

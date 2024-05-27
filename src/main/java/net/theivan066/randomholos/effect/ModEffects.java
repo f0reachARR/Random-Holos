@@ -15,7 +15,7 @@ public class ModEffects {
             DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, RandomHolos.MOD_ID);
 
     public static final RegistryObject<MobEffect> ZERO_GUESSER_EFFECT = MOB_EFFECTS.register("zero_guesser",
-            () -> new ZeroGuesserEffect(MobEffectCategory.NEUTRAL, 0xf4348b));
+            () -> new ZeroGuesserEffect(MobEffectCategory.BENEFICIAL, 0xf4348b));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

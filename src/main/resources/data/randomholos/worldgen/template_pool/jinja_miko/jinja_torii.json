@@ -1,6 +1,6 @@
 {
   "name": "randomholos:jinja_miko/jinja_torii",
-  "fallback": "minecraft:empty",
+  "fallback": "randomholos:jinja_miko/jinja_torii",
   "elements": [
     {
       "weight": 1,

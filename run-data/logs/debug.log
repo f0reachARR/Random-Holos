@@ -277,8 +277,8 @@
 [23May2024 05:06:22.322] [modloading-worker-0/DEBUG] [mezz.jei.common.platform.Services/]: Loaded mezz.jei.forge.platform.PlatformHelper@692e1ccd for service interface mezz.jei.common.platform.IPlatformHelper
 [23May2024 05:06:22.327] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for randomholos
 [23May2024 05:06:22.341] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.datagen.DataGenerators to MOD
-[23May2024 05:06:22.351] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.events.ForgeEventBusEvents to FORGE
-[23May2024 05:06:22.363] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.events.ModEventBusEvents to MOD
+[23May2024 05:06:22.351] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.events.PovModifyEvent to FORGE
+[23May2024 05:06:22.363] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.events.CustomEntityEvents to MOD
 [23May2024 05:06:22.372] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.theivan066.randomholos.RandomHolos$ClientModEvents to MOD
 [23May2024 05:06:22.407] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: -Dio.netty.noUnsafe: false
 [23May2024 05:06:22.407] [modloading-worker-0/DEBUG] [io.netty.util.internal.PlatformDependent0/]: Java version: 17

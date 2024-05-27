@@ -1,5 +1,6 @@
 package net.theivan066.randomholos.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -31,10 +32,10 @@ public class ModItems {
     public static final RegistryObject<Item> SHAKEN_BOTTLE = ITEMS.register("shaken_bottle",
             () -> new ShakenBottleItem(new Item.Properties()));
     public static final RegistryObject<Item> SODA_WATER = ITEMS.register("soda_water",
-            () -> new Item(new Item.Properties().food(ModFoods.SODA_WATER)));
+            () -> new DrinkItem(new Item.Properties().food(ModFoods.SODA_WATER)));
     public static final RegistryObject<Item> CAN = ITEMS.register("can", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> TOKINO_SODA = ITEMS.register("tokino_soda",
-            () -> new Item(new Item.Properties().food(ModFoods.TOKINO_SODA)));
+            () -> new DrinkItem(new Item.Properties().food(ModFoods.TOKINO_SODA)));
     public static final RegistryObject<Item> RAW_RICE = ITEMS.register("raw_rice", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> UNCOOKED_RICE = ITEMS.register("uncooked_rice", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> COOKED_RICE = ITEMS.register("cooked_rice",
@@ -74,6 +75,14 @@ public class ModItems {
             () -> new ItemNameBlockItem(ModBlocks.CHIVES_CROP.get(), new Item.Properties().food(ModFoods.CHIVES)));
     public static final RegistryObject<Item> SCALLION = ITEMS.register("scallion",
             () -> new ItemNameBlockItem(ModBlocks.SCALLION_CROP.get(), new Item.Properties().food(ModFoods.SCALLION)));
+    public static final RegistryObject<Item> CHINESE_CABBAGE = ITEMS.register("chinese_cabbage",
+            () -> new ItemNameBlockItem(ModBlocks.CHINESE_CABBAGE_CROP.get(), new Item.Properties().food(ModFoods.CHINESE_CABBAGE)));
+    public static final RegistryObject<Item> RED_CHILI_PEPPER = ITEMS.register("red_chili_pepper",
+            () -> new ItemNameBlockItem(ModBlocks.CHILI_BUSH.get(), new Item.Properties().food(ModFoods.RED_CHILI_PEPPER)));
+    public static final RegistryObject<Item> GREEN_CHILI_PEPPER = ITEMS.register("green_chili_pepper",
+            () -> new ItemNameBlockItem(ModBlocks.CHILI_BUSH.get(), new Item.Properties().food(ModFoods.GREEN_CHILI_PEPPER)));
+    public static final RegistryObject<Item> GHOST_PEPPER = ITEMS.register("ghost_pepper",
+            () -> new GhostPepperItem(ModBlocks.CHILI_BUSH.get(), new Item.Properties().food(ModFoods.GHOST_PEPPER)));
 
     public static final RegistryObject<Item> ROBOGUN = ITEMS.register("robogun",
             () -> new RobogunItem(
@@ -129,7 +138,9 @@ public class ModItems {
             () -> new PsychopathAxeItem(Tiers.DIAMOND, 5.5f, -3.0f, new Item.Properties().durability(1024)));
     public static final RegistryObject<Item> SINGLE_GLASS_HEEL = ITEMS.register("glass_heel_single_side", () ->  new SingleGlassHeelItem(new Item.Properties()));
     public static final RegistryObject<Item> METEORITE_PIECE = ITEMS.register("meteorite_piece", () ->  new Item(new Item.Properties()));
-    public static final RegistryObject<Item> STELLARITE = ITEMS.register("stellarite", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STELLARITE = ITEMS.register("stellarite", () ->  new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> APPLE_JUICE = ITEMS.register("apple_juice",
+            () -> new AppleJuiceItem(new Item.Properties().food(ModFoods.APPLE_JUICE),  Component.translatable("tooltip.randomholos.apple_juice.shift")));
 
     public static final RegistryObject<Item> ELITE_LAVA_BUCKET = ITEMS.register("elite_lava_bucket",
             () -> new EliteLavaBucketItem(ModFluids.SOURCE_ELITE_LAVA, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
@@ -170,6 +181,9 @@ public class ModItems {
                     new Item.Properties()));
     public static final RegistryObject<Item> MIKOP_SPAWN_EGG = ITEMS.register("mikop_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.MIKOP, 0xffffff, 0xfcaebc,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> AZKI_SPAWN_EGG = ITEMS.register("azki_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.AZKI, 0xd11c76, 0xf4348b,
                     new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

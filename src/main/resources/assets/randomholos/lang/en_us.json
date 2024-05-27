@@ -50,12 +50,20 @@
   "item.randomholos.robosniper_ammo": "Robosniper Ammo",
   "item.randomholos.chives": "Chives",
   "item.randomholos.scallion": "Scallion",
+  "item.randomholos.chinese_cabbage": "Chinese Cabbage",
+  "item.randomholos.red_chili_pepper": "Red Chili Pepper",
+  "item.randomholos.green_chili_pepper": "Green Chili Pepper",
+  "item.randomholos.ghost_pepper": "Ghost Pepper",
+  "item.randomholos.kimchi": "Kimchi",
+  "block.randomholos.cooking_pot": "Cooking Pot",
+  "block.randomholos.kimchi_hotpot": "Kimchi Hotpot",
 
   "item.randomholos.psychopath_axe": "Psychopath's Axe",
   "item.randomholos.glass_heels": "Glass Heels",
   "item.randomholos.glass_heel_single_side": "Single Glass Heel",
   "item.randomholos.meteorite_piece": "Meteorite Piece",
   "item.randomholos.stellarite": "Stellarite",
+  "item.randomholos.apple_juice": "Apple Juice",
 
   "block.randomholos.crude_meteorite": "Crude Meteorite",
   "block.randomholos.meteorite": "Meteorite",
@@ -81,6 +89,7 @@
   "item.randomholos.suisei_spawn_egg": "Hoshimachi Suisei",
   "item.randomholos.miko_spawn_egg": "Sakura Miko",
   "item.randomholos.mikop_spawn_egg": "Mikop",
+  "item.randomholos.azki_spawn_egg": "AZKi",
 
   "entity.randomholos.sora": "Tokino Sora",
   "entity.randomholos.nunnun": "Nunnun",
@@ -88,6 +97,7 @@
   "entity.randomholos.suisei": "Hoshimachi Suisei",
   "entity.randomholos.miko": "Sakura Miko",
   "entity.randomholos.mikop": "Mikop",
+  "entity.randomholos.azki": "AZKi",
 
   "block.randomholos.kakuriyo_portal": "Portal of the Kakuriyo",
 
@@ -107,6 +117,7 @@
   "messages.randomholos.aenbien": "Miko expereienced the hell of Aenbien",
   "messages.randomholos.reloading": "Reloading...",
   "messages.randomholos.no_ammo": "Out of Ammo!",
+  "messages.randomholos.ghost_pepper": "Hot! Hot! Hot!",
 
   "tooltip.randomholos.tooltip": "Press <§eshift§r> for more info",
   "tooltip.randomholos.tooltip.caution": "Press <§ealt§r> for §cprecautions",
@@ -116,6 +127,7 @@
   "tooltip.randomholos.psychopathaxe.shift": "An axe that belongs to a psychopath.\nHitting with it turns you into a §x§5§0§E§5§F§9c§x§6§3§E§8§F§Ao§x§7§5§E§B§F§Bs§x§8§8§E§D§F§Bm§x§9§A§F§0§F§Ci§x§A§D§F§3§F§Dc§r, §x§5§0§E§5§F§9d§x§6§6§D§4§E§Ea§x§7§D§C§3§E§3z§x§9§3§B§2§D§8z§x§A§9§A§1§C§El§x§B§F§9§0§C§3i§x§D§6§7§F§B§8n§x§E§C§6§E§A§Dg§r, §o≡speedy§r psychopath.",
   "tooltip.randomholos.glassheels.shift": "A pair of glass heels. Don't Throw them.",
   "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
+  "tooltip.randomholos.apple_juice.shift": "Actually §kcc§r Lemon tastes better",
   "tooltip.randomholos.kakuriyo.shift": "A portal to the Kakuriyo. \nPlace down and <§eRight Click§r> to use.",
   "tooltip.randomholos.elite_lava_bucket.shift": "A bucket of lava, cleansed by the maiden of the Dennou Sakura Shrine \n§oSafe even for babies!",
   "tooltip.randomholos.ahoge.shift": "Did you... just take the true form of someone?",

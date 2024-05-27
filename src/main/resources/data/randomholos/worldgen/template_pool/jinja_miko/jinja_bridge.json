@@ -1,6 +1,6 @@
 {
   "name": "randomholos:jinja_miko/jinja_bridge",
-  "fallback": "minecraft:empty",
+  "fallback": "randomholos:jinja_miko/jinja_bridge",
   "elements": [
     {
       "weight": 1,

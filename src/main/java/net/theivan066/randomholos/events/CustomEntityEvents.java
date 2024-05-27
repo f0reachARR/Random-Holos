@@ -17,7 +17,7 @@ import net.theivan066.randomholos.entity.custom.*;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEventBusEvents {
+public class CustomEntityEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.SORA_LAYER, SoraModel::createBodyLayer);
@@ -26,6 +26,7 @@ public class ModEventBusEvents {
         event.registerLayerDefinition(ModModelLayers.SUISEI_LAYER, SuiseiModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKO_LAYER, MikoModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKOP_LAYER, MikopModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.AZKI_LAYER, AzkiModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKOMET_ARROW_LAYER, MikometArrowModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BULLET_PROJECTILE_LAYER, BulletProjectileModel::createBodyLayer);
     }
@@ -38,6 +39,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.SUISEI.get(), SuiseiEntity.createAttributes().build());
         event.put(ModEntities.MIKO.get(), MikoEntity.createAttributes().build());
         event.put(ModEntities.MIKOP.get(), MikopEntity.createAttributes().build());
+        event.put(ModEntities.AZKI.get(), AzkiEntity.createAttributes().build());
     }
 
     @SubscribeEvent

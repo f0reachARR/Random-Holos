@@ -11,6 +11,11 @@ public class ModFoods {
     public static final FoodProperties GARGANTUAN_BAGUETTE = new FoodProperties.Builder().nutrition(36).saturationMod(34f).build();
     public static final FoodProperties CHIVES = new FoodProperties.Builder().nutrition(1).saturationMod(0.75f).build();
     public static final FoodProperties SCALLION = new FoodProperties.Builder().nutrition(1).saturationMod(0.75f).build();
+    public static final FoodProperties CHINESE_CABBAGE = new FoodProperties.Builder().nutrition(3).saturationMod(1.25f).build();
+    public static final FoodProperties RED_CHILI_PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.25f).build();
+    public static final FoodProperties GREEN_CHILI_PEPPER = new FoodProperties.Builder().nutrition(1).saturationMod(0.25f).build();
+    public static final FoodProperties GHOST_PEPPER = new FoodProperties.Builder().nutrition(2).saturationMod(0.25f).build();
+    public static final FoodProperties KIMCHI = new FoodProperties.Builder().nutrition(5).saturationMod(2f).build();
     public static final FoodProperties SODA_WATER = new FoodProperties.Builder().nutrition(1).saturationMod(0.5f).build();
     public static final FoodProperties TOKINO_SODA = new FoodProperties.Builder().nutrition(2).saturationMod(1f)
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600,0), 1f).build();
@@ -22,6 +27,7 @@ public class ModFoods {
     public static final FoodProperties CHOCOLATE_CAKE = new FoodProperties.Builder().nutrition(10).saturationMod(8f).build();
     public static final FoodProperties CURRY = new FoodProperties.Builder().nutrition(5).saturationMod(3f).build();
     public static final FoodProperties CURRY_BREAD = new FoodProperties.Builder().nutrition(8).saturationMod(7.5f).build();
+    public static final FoodProperties APPLE_JUICE = new FoodProperties.Builder().nutrition(4).saturationMod(2f).build();
     public static final FoodProperties TOKINOSORA_SET_MEAL_A = new FoodProperties.Builder().nutrition(18).saturationMod(10f)
             .effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 12000,2), 1f)
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 12000,0), 1f).build();

@@ -8,6 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -95,6 +96,14 @@ public class ModBlocks {
             () -> new ChivesCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
     public static final RegistryObject<Block> SCALLION_CROP = BLOCKS.register("scallion_crop",
             () -> new ScallionCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+    public static final RegistryObject<Block> CHINESE_CABBAGE_CROP = BLOCKS.register("chinese_cabbage_crop",
+            () -> new ChineseCabbageCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+    public static final RegistryObject<Block> CHILI_BUSH = BLOCKS.register("chili_bush",
+            () -> new ChiliBushBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+    public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot",
+            () -> new CookingPotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> KIMCHI_HOTPOT = BLOCKS.register("kimchi_hotpot",
+            () -> new KimchiHotpotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0F).noOcclusion()));
 
     public static final RegistryObject<Block> KAKURIYO_PORTAL = registerBlock("kakuriyo_portal",
             () -> new KakuriyoPortalBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_PORTAL).noLootTable().noOcclusion().noCollission()));

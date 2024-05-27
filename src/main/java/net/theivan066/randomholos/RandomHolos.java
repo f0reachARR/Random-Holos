@@ -84,6 +84,7 @@ public class RandomHolos {
         event.enqueueWork(() -> {
             ComposterBlock.COMPOSTABLES.put(ModItems.CHIVES.get(), 0.3f);
             ComposterBlock.COMPOSTABLES.put(ModItems.SCALLION.get(), 0.3f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.CHINESE_CABBAGE.get(), 0.4f);
             ComposterBlock.COMPOSTABLES.put(ModBlocks.MAPLE_LEAVES.get(), 0.3f);
             ComposterBlock.COMPOSTABLES.put(ModBlocks.MAPLE_SAPLING.get(), 0.3f);
         });
@@ -119,6 +120,7 @@ public class RandomHolos {
                 EntityRenderers.register(ModEntities.SUISEI.get(), SuiseiRenderer::new);
                 EntityRenderers.register(ModEntities.MIKO.get(), MikoRenderer::new);
                 EntityRenderers.register(ModEntities.MIKOP.get(), MikopRenderer::new);
+                EntityRenderers.register(ModEntities.AZKI.get(), AzkiRenderer::new);
                 EntityRenderers.register(ModEntities.GLASS_HEELS_PROJECTILE.get(), ThrownItemRenderer::new);
                 EntityRenderers.register(ModEntities.GUESSER_PIN_PROJECTILE.get(), GuesserPinProjectileRenderer::new);
                 EntityRenderers.register(ModEntities.MIKOMET_ARROW.get(), MikometArrowRenderer::new);

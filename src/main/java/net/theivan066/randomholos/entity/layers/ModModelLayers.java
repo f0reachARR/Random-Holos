@@ -22,6 +22,8 @@ public class ModModelLayers {
 
     public static final ModelLayerLocation MIKOP_LAYER = new ModelLayerLocation(
             new ResourceLocation(RandomHolos.MOD_ID, "mikop_layer"), "mikop_layer");
+    public static final ModelLayerLocation AZKI_LAYER = new ModelLayerLocation(
+            new ResourceLocation(RandomHolos.MOD_ID, "azki_layer"), "azki_layer");
 
 
     public static final ModelLayerLocation MIKOMET_ARROW_LAYER = new ModelLayerLocation(

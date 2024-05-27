@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,times_eaten=0": {
+      "model": "randomholos:block/kimchi_hotpot_full",
+      "y": 90
+    },
+    "facing=east,times_eaten=1": {
+      "model": "randomholos:block/kimchi_hotpot_eaten1",
+      "y": 90
+    },
+    "facing=east,times_eaten=2": {
+      "model": "randomholos:block/kimchi_hotpot_eaten2",
+      "y": 90
+    },
+    "facing=east,times_eaten=3": {
+      "model": "randomholos:block/kimchi_hotpot_eaten3",
+      "y": 90
+    },
+    "facing=north,times_eaten=0": {
+      "model": "randomholos:block/kimchi_hotpot_full"
+    },
+    "facing=north,times_eaten=1": {
+      "model": "randomholos:block/kimchi_hotpot_eaten1"
+    },
+    "facing=north,times_eaten=2": {
+      "model": "randomholos:block/kimchi_hotpot_eaten2"
+    },
+    "facing=north,times_eaten=3": {
+      "model": "randomholos:block/kimchi_hotpot_eaten3"
+    },
+    "facing=south,times_eaten=0": {
+      "model": "randomholos:block/kimchi_hotpot_full",
+      "y": 180
+    },
+    "facing=south,times_eaten=1": {
+      "model": "randomholos:block/kimchi_hotpot_eaten1",
+      "y": 180
+    },
+    "facing=south,times_eaten=2": {
+      "model": "randomholos:block/kimchi_hotpot_eaten2",
+      "y": 180
+    },
+    "facing=south,times_eaten=3": {
+      "model": "randomholos:block/kimchi_hotpot_eaten3",
+      "y": 180
+    },
+    "facing=west,times_eaten=0": {
+      "model": "randomholos:block/kimchi_hotpot_full",
+      "y": 270
+    },
+    "facing=west,times_eaten=1": {
+      "model": "randomholos:block/kimchi_hotpot_eaten1",
+      "y": 270
+    },
+    "facing=west,times_eaten=2": {
+      "model": "randomholos:block/kimchi_hotpot_eaten2",
+      "y": 270
+    },
+    "facing=west,times_eaten=3": {
+      "model": "randomholos:block/kimchi_hotpot_eaten3",
+      "y": 270
+    }
+  }
+}

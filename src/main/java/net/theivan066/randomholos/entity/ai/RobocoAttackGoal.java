@@ -36,14 +36,22 @@ public class RobocoAttackGoal extends RangedAttackGoal {
 
     public boolean canUse() {
         LivingEntity livingentity = this.mob.getTarget();
-        if (livingentity != null && livingentity.isAlive()) {
-            this.target = livingentity;
-            return true;
+        if (livingentity instanceof Player && ((Player) livingentity).isCreative()) {
+            entity.setAttacking(false);
+            this.attackDelay = 43;
+            return false;
+        }
+        if (livingentity != null) {
+            if (livingentity.isAlive()) {
+                this.target = livingentity;
+                return true;
+            }
         } else {
             entity.setAttacking(false);
             this.attackDelay = 43;
             return false;
         }
+        return false;
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
   "name": "randomholos:jinja_miko/jinja_main_4",
-  "fallback": "minecraft:empty",
+  "fallback": "randomholos:jinja_miko/jinja_main_4",
   "elements": [
     {
       "weight": 1,

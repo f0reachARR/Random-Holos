@@ -10,7 +10,7 @@
   "size": 7,
 
   // Maximum distance away from center that pieces can spawn. Cannot be greater than 128
-  "max_distance_from_center": 16,
+  "max_distance_from_center": 32,
 
   // The biome tag to use for what biomes that this structure can spawn in"
   "biomes": "#randomholos:has_structure/jinja_miko",

@@ -28,11 +28,14 @@ import org.joml.Matrix4f;
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModClientEventBusEvents {
+    //Particle
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ModParticles.GUESSER_PIN_PARTICLES.get(), GuesserPinParticles.Provider::new);
     }
 
+
+    //Effect
     private static final ResourceLocation PIN_TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/particle/guesser_pin.png");
 
     @OnlyIn(Dist.CLIENT)
@@ -86,7 +89,7 @@ public class ModClientEventBusEvents {
         buffer.vertex(pose, size, -size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
         buffer.vertex(pose, -size, -size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
 
-        // Back face (reversed order to flip the texture)
+        // Back face
         buffer.vertex(pose, -size, -size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
         buffer.vertex(pose, size, -size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
         buffer.vertex(pose, size, size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();

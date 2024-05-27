@@ -54,6 +54,12 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.ROBOSNIPER_AMMO.get());
                         pOutput.accept(ModItems.CHIVES.get());
                         pOutput.accept(ModItems.SCALLION.get());
+                        pOutput.accept(ModItems.CHINESE_CABBAGE.get());
+                        pOutput.accept(ModItems.RED_CHILI_PEPPER.get());
+                        pOutput.accept(ModItems.GREEN_CHILI_PEPPER.get());
+                        pOutput.accept(ModItems.GHOST_PEPPER.get());
+                        pOutput.accept(ModBlocks.COOKING_POT.get());
+                        pOutput.accept(ModBlocks.KIMCHI_HOTPOT.get());
                         //suisei
                         pOutput.accept(ModItems.PSYCHOPATH_AXE.get());
                         pOutput.accept(ModItems.GLASS_HEELS.get());
@@ -63,6 +69,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.RICH_METEORITE.get());
                         pOutput.accept(ModItems.METEORITE_PIECE.get());
                         pOutput.accept(ModItems.STELLARITE.get());
+                        pOutput.accept(ModItems.APPLE_JUICE.get());
                         //miko
                         pOutput.accept(ModItems.ELITE_LAVA_BUCKET.get());
                         pOutput.accept(ModItems.AHOGE.get());;
@@ -91,6 +98,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.SUISEI_SPAWN_EGG.get());
                         pOutput.accept(ModItems.MIKO_SPAWN_EGG.get());
                         pOutput.accept(ModItems.MIKOP_SPAWN_EGG.get());
+                        pOutput.accept(ModItems.AZKI_SPAWN_EGG.get());
                     })
                     .build());
 

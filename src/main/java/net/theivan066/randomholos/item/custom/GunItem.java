@@ -306,6 +306,7 @@ public class GunItem extends ProjectileWeaponItem {
     public enum FiringType
     {
         SEMI_AUTO,
+        BURST,
         AUTO
     }
 }
