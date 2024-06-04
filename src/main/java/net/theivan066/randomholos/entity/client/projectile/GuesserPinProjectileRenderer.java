@@ -25,7 +25,7 @@ public class GuesserPinProjectileRenderer <T extends Entity & ItemSupplier> exte
     protected GuesserPinProjectileRenderer(EntityRendererProvider.Context pContext, float pScale, boolean pFullBright) {
         super(pContext);
         this.itemRenderer = pContext.getItemRenderer();
-        this.scale = pScale;
+        this.scale = 2;
         this.fullBright = pFullBright;
     }
 
@@ -42,7 +42,7 @@ public class GuesserPinProjectileRenderer <T extends Entity & ItemSupplier> exte
             pPoseStack.pushPose();
             pPoseStack.scale(this.scale, this.scale, this.scale);
             pPoseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            pPoseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+            pPoseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
             this.itemRenderer.renderStatic(pEntity.getItem(), ItemDisplayContext.GROUND, pPackedLight, OverlayTexture.NO_OVERLAY, pPoseStack, pBuffer, pEntity.level(), pEntity.getId());
             pPoseStack.popPose();
             super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);

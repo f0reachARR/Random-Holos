@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:chinese_cabbage"
+    },
+    {
+      "tag": "randomholos:hot_peppers"
+    },
+    {
+      "tag": "randomholos:hot_peppers"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "randomholos:kimchi",
+    "count" : 1
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "tag": "randomholos:coals"
+    },
+    {
+      "tag": "randomholos:coals"
+    },
+    {
+      "item": "randomholos:tourmaline"
+    },
+    {
+      "tag": "randomholos:coals"
+    },
+    {
+      "item": "randomholos:tourmaline_block"
+    },
+    {
+      "tag": "randomholos:coals"
+    },
+    {
+      "item": "randomholos:copper_rod"
+    },
+    {
+      "tag": "randomholos:coals"
+    },
+    {
+      "tag": "randomholos:coals"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:blade_blueprint"
+  },
+  "output": {
+    "item": "randomholos:micsaber"
+  }
+}

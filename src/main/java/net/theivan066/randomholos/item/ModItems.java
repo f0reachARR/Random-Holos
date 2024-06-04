@@ -20,6 +20,8 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, RandomHolos.MOD_ID);
 
     public static final RegistryObject<Item> TEST = ITEMS.register("test", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HOLO_LOGO = ITEMS.register("holo_logo", () ->  new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LETTER = ITEMS.register("letter", () ->  new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BAGUETTE = ITEMS.register("baguette",
             () -> new Item(new Item.Properties().food(ModFoods.BAGUETTE)));
@@ -60,6 +62,7 @@ public class ModItems {
             () -> new BowlFoodItem(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_A)));
     public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_B = ITEMS.register("tokinosora_set_meal_b",
             () -> new Item(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_B)));
+    public static final RegistryObject<Item> BROKEN_HAIR_ACCESSORY = ITEMS.register("broken_hair_accessory", () ->  new ShiftTooltipItem(new Item.Properties(), Component.translatable("tooltip.randomholos.broken_hair_accessory.shift")));
 
     public static final RegistryObject<Item> BLUEPRINT = ITEMS.register("blueprint", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALLOY_BLUEPRINT = ITEMS.register("alloy_blueprint", () ->  new Item(new Item.Properties()));
@@ -83,6 +86,9 @@ public class ModItems {
             () -> new ItemNameBlockItem(ModBlocks.CHILI_BUSH.get(), new Item.Properties().food(ModFoods.GREEN_CHILI_PEPPER)));
     public static final RegistryObject<Item> GHOST_PEPPER = ITEMS.register("ghost_pepper",
             () -> new GhostPepperItem(ModBlocks.CHILI_BUSH.get(), new Item.Properties().food(ModFoods.GHOST_PEPPER)));
+    public static final RegistryObject<Item> KIMCHI = ITEMS.register("kimchi",
+            () -> new Item(new Item.Properties().food(ModFoods.KIMCHI)));
+
 
     public static final RegistryObject<Item> ROBOGUN = ITEMS.register("robogun",
             () -> new RobogunItem(
@@ -159,13 +165,17 @@ public class ModItems {
 
     public static final RegistryObject<Item> GUESSER_PIN = ITEMS.register("guesser_pin",
             () -> new GuesserPinItem(new Item.Properties()));
-
-
+    public static final RegistryObject<Item> MICSABER = ITEMS.register("micsaber",
+            () -> new MicsaberItem(ModToolTiers.ABOVE_DIAMOND, 4, -2.2f, new Item.Properties().durability(2000)));
+    public static final RegistryObject<Item> TOURMALINE = ITEMS.register("tourmaline", () ->  new Item(new Item.Properties()));
 
 
 
     public static final RegistryObject<Item> SORA_SPAWN_EGG = ITEMS.register("sora_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.SORA, 0x0146ea, 0x266aff,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> KUROSORA_SPAWN_EGG = ITEMS.register("kurosora_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.KUROSORA, 0x0146ea, 0x000000,
                     new Item.Properties()));
     public static final RegistryObject<Item> NUNNUN_SPAWN_EGG = ITEMS.register("nunnun_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.NUNNUN, 0xffffff, 0xe84b6f,

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "randomholos:manufacturing_table"
+    "randomholos:manufacturing_table",
+    "randomholos:tourmaline_ore",
+    "randomholos:deepslate_tourmaline_ore",
+    "randomholos:tourmaline_block"
   ]
 }

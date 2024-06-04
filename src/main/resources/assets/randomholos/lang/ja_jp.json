@@ -33,6 +33,7 @@
   "item.randomholos.curry_bread": "カレーパン",
   "item.randomholos.tokinosora_set_meal_a": "ときのそら定食A",
   "item.randomholos.tokinosora_set_meal_b": "ときのそら定食B",
+  "item.randomholos.broken_hair_accessory": "壊れた髪飾り",
 
   "item.randomholos.blueprint": "空き設計図",
   "item.randomholos.firearm_blueprint": "銃器設計図",
@@ -80,9 +81,15 @@
   "item.randomholos.reinforced_copper_rod": "強化された銅棒",
 
   "item.randomholos.guesser_pin": "ゲッサーピン",
+  "item.randomholos.micsaber": "マイクセーバー",
   "effect.randomholos.zero_guesser": "ゼロゲッサー",
+  "block.randomholos.tourmaline_ore": "トルマリン鉱石",
+  "block.randomholos.deepslate_tourmaline_ore": "深層トルマリン鉱石",
+  "item.randomholos.tourmaline": "トルマリン",
+  "block.randomholos.tourmaline_block": "トルマリンブロック",
 
   "item.randomholos.sora_spawn_egg": "ときのそら",
+  "item.randomholos.kurosora_spawn_egg": "黒化したそら",
   "item.randomholos.nunnun_spawn_egg": "ぬんぬん",
   "item.randomholos.roboco_spawn_egg": "ロボ子",
   "item.randomholos.suisei_spawn_egg": "星街すいせい",
@@ -91,12 +98,15 @@
   "item.randomholos.azki_spawn_egg": "AZKi",
 
   "entity.randomholos.sora": "ときのそら",
+  "entity.randomholos.kurosora": "黒化したそら",
   "entity.randomholos.nunnun": "ぬんぬん",
   "entity.randomholos.roboco": "ロボ子",
   "entity.randomholos.suisei": "星街すいせい",
   "entity.randomholos.miko": "さくらみこ",
   "entity.randomholos.mikop": "35p",
   "entity.randomholos.azki": "AZKi",
+
+  "bossbar.randomholos.kurosora": "黒化したそら",
 
   "block.randomholos.kakuriyo_portal": "幽世へのポータル",
 
@@ -106,6 +116,16 @@
   "creativetab.holo": "ホロアイテム",
   "creativetab.holo_spawn_eggs": "ホロメン",
   "creativetab.random_blocks": "ブロック",
+
+  "creativetab.sora": "ときのそら",
+  "creativetab.roboco": "ロボ子",
+  "creativetab.miko": "さくらみこ",
+  "creativetab.suisei": "星街すいせい",
+  "creativetab.azki": "AZKi",
+  "creativetab.ayame": "百鬼あやめ",
+  "creativetab.collab": "コラボアイテム",
+  "creativetab.materials": "原料",
+  "creativetab.book": "本",
 
   "sounds.randomholos.metal_detector_found_ore": "Metal Detector Found an Ore",
 
@@ -117,10 +137,13 @@
   "messages.randomholos.reloading": "リロード中...",
   "messages.randomholos.no_ammo": "弾切れた!",
   "messages.randomholos.ghost_pepper": "あちゅい！あちゅい！あちゅいい！",
+  "messages.randomholos.kuroka1": "一体§oなに§rを。 やりあがったか。",
+  "messages.randomholos.kuroka2": "じゃあ... §4敵§rだね。",
 
   "tooltip.randomholos.tooltip": "<§eshift§r>を押して詳細を見る",
   "tooltip.randomholos.tooltip.caution": "<§ealt§r>を押して注意事項を確認",
   "tooltip.randomholos.shaken_bottle.shift": "ソーダには水を、オイルには溶岩を",
+  "tooltip.randomholos.broken_hair_accessory.shift": "§4§oどうして。",
   "tooltip.randomholos.robogun.shift": "ロボットが使っていた銃",
   "tooltip.randomholos.robosniper.shift": "強化されたロボットが使っていた大型反物質ライフル",
   "tooltip.randomholos.psychopathaxe.shift": "サイコパスの持ち物。\nこれで誰かを殴ると、§4コ§6ス§eミ§aッ§bク§5の§r、§4矍§e鑠§5た§bる§r、§o≡速やかな§rサイコパスになれる.",

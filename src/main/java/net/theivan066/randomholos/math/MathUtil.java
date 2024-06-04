@@ -1,8 +1,5 @@
 package net.theivan066.randomholos.math;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
-
 public class MathUtil {
     public static double square (double d) {
         return d * d;

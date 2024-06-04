@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.theivan066.randomholos.RandomHolos;
-import net.theivan066.randomholos.entity.custom.MikometArrowEntity;
+import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 public class MikometArrowRenderer extends EntityRenderer<MikometArrowEntity> {

@@ -1,11 +1,16 @@
 package net.theivan066.randomholos.entity.custom;
 
+import com.google.common.collect.Sets;
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,23 +19,39 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.npc.Npc;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.ModEntities;
+import net.theivan066.randomholos.entity.trade.ModTrades;
 import net.theivan066.randomholos.entity.variant.MikopVariant;
+import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
-public class MikopEntity extends Animal{
+import java.util.Set;
+
+public class MikopEntity extends Animal implements Npc, Merchant {
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(MikopEntity.class, EntityDataSerializers.INT);
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+    @Nullable
+    private Player customer;
+    @Nullable
+    protected MerchantOffers offers;
+    private long lastRestockGameTime;
+    private int numberOfRestocksToday;
+    private long lastRestockCheckDayTime;
+    private int restockTimer = 24000;
     public MikopEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -91,6 +112,15 @@ public class MikopEntity extends Animal{
         if (this.level().isClientSide()) {
             this.setupAnimationStates();
         }
+
+        if (restockTimer <= 0) {
+            restockTimer = random.nextInt(12000, 28000);
+            if (this.shouldRestock()) {
+                this.restock();
+            }
+        } else {
+            restockTimer --;
+        }
     }
 
     @Override
@@ -126,12 +156,16 @@ public class MikopEntity extends Animal{
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Variant"));
+        this.lastRestockGameTime = pCompound.getLong("LastRestock");
+        this.numberOfRestocksToday = pCompound.getInt("RestocksToday");
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getTypeVariant());
+        pCompound.putLong("LastRestock", this.lastRestockGameTime);
+        pCompound.putInt("RestocksToday", this.numberOfRestocksToday);
     }
 
     //Breeding
@@ -143,7 +177,183 @@ public class MikopEntity extends Animal{
     //Mob-specifics
 
     @Override
-    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
-        return super.interactAt(pPlayer, pVec, pHand);
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+        if (itemInHand.getItem() != ModItems.MIKOP_SPAWN_EGG.get() && itemInHand.getItem() != Items.COOKED_BEEF && this.isAlive() && !this.hasCustomer()) {
+            if (!this.getOffers().isEmpty()) {
+                if (!this.level().isClientSide()) {
+                    this.setTradingPlayer(pPlayer);
+                    this.openTradingScreen(pPlayer, this.getDisplayName(), 1);
+                }
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
+        } else {
+            return super.mobInteract(pPlayer, pHand);
+        }
+    }
+
+    @Override
+    public void setTradingPlayer(@Nullable Player pTradingPlayer) {
+        this.customer = pTradingPlayer;
+    }
+
+    @Nullable
+    @Override
+    public Player getTradingPlayer() {
+        return this.customer;
+    }
+
+    @Override
+    public MerchantOffers getOffers() {
+        if (this.offers == null) {
+            this.offers = new MerchantOffers();
+            this.populateTradeData();
+        }
+        return this.offers;
+    }
+
+    protected void populateTradeData() {
+        ModTrades.ItemListing[] trades = ModTrades.MIKOP_TRADES.get(1);
+        if (trades != null) {
+            MerchantOffers merchantoffers = this.getOffers();
+            this.addTrades(merchantoffers, trades, 4);
+        }
+    }
+
+    protected void addTrades(MerchantOffers givenMerchantOffers, ModTrades.ItemListing[] newTrades, int maxNumbers) {
+        Set<Integer> set = Sets.newHashSet();
+        if (newTrades.length > maxNumbers) {
+            while (set.size() < maxNumbers) {
+                set.add(this.random.nextInt(newTrades.length));
+            }
+        } else {
+            for (int i = 0; i < newTrades.length; ++i) {
+                set.add(i);
+            }
+        }
+
+        for (Integer integer : set) {
+            ModTrades.ItemListing modtrades$itrade = newTrades[integer];
+            MerchantOffer merchantoffer = modtrades$itrade.getOffer(this, this.random);
+            if (merchantoffer != null) {
+                givenMerchantOffers.add(merchantoffer);
+            }
+        }
+    }
+
+    @Override
+    public void overrideOffers(MerchantOffers pOffers) {}
+
+    @Override
+    public void notifyTrade(MerchantOffer pOffer) {
+        pOffer.increaseUses();
+        this.ambientSoundTime = -this.getAmbientSoundInterval();
+        this.onTrade(pOffer);
+//        if (this.customer instanceof ServerPlayer) {
+//            CriteriaTriggers.TRADE.trigger((ServerPlayer)this.customer, this, pOffer.getResult());
+//        }
+    }
+
+    protected void onTrade(MerchantOffer offer) {
+        if (offer.shouldRewardExp()) {
+            int i = 3 + this.getRandom().nextInt(4);
+            this.level().addFreshEntity(new ExperienceOrb(this.level(), this.getX(), this.getY() + 0.5D, this.getZ(), i));
+        }
+    }
+
+    @Override
+    public void notifyTradeUpdated(ItemStack pStack) {
+        if (!this.level().isClientSide() && this.ambientSoundTime > -this.getAmbientSoundInterval() + 20) {
+            this.ambientSoundTime = -this.getAmbientSoundInterval();
+            this.playSound(this.getYesOrNoSound(!pStack.isEmpty()), this.getSoundVolume(), this.getVoicePitch());
+        }
+    }
+    protected SoundEvent getYesOrNoSound(boolean getYesSound) {
+        return getYesSound ? SoundEvents.VILLAGER_YES : SoundEvents.VILLAGER_NO;
+    }
+    @Override
+    public int getVillagerXp() {
+        return 0;
+    }
+
+    @Override
+    public void overrideXp(int pXp) {}
+
+    @Override
+    public boolean showProgressBar() {
+        return false;
+    }
+
+    @Override
+    public SoundEvent getNotifyTradeSound() {
+        return SoundEvents.VILLAGER_TRADE;
+    }
+
+    @Override
+    public boolean isClientSide() {
+        return this.level().isClientSide();
+    }
+
+    public boolean hasCustomer() {
+        return this.customer != null;
+    }
+
+    public boolean canRestock() {
+        return true;
+    }
+
+
+    public void restock() {
+        for(MerchantOffer merchantoffer : this.getOffers()) {
+            merchantoffer.resetUses();
+        }
+        this.resendOffersToTradingPlayer();
+        this.lastRestockGameTime = this.level().getGameTime();
+        ++this.numberOfRestocksToday;
+    }
+
+    private void resendOffersToTradingPlayer() {
+        MerchantOffers merchantoffers = this.getOffers();
+        Player player = this.getTradingPlayer();
+        if (player != null && !merchantoffers.isEmpty()) {
+            player.sendMerchantOffers(player.containerMenu.containerId, merchantoffers, 0, 0, false, this.canRestock());
+        }
+    }
+
+    private boolean needsToRestock() {
+        for(MerchantOffer merchantoffer : this.getOffers()) {
+            if (merchantoffer.needsRestock()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean allowedToRestock() {
+        return this.numberOfRestocksToday == 0 || this.numberOfRestocksToday < 2 && this.level().getGameTime() > this.lastRestockGameTime + 2400L;
+    }
+
+    public boolean shouldRestock() {
+        long i = this.lastRestockGameTime + 12000L;
+        long j = this.level().getGameTime();
+        boolean flag = j > i;
+        long k = this.level().getDayTime();
+        if (this.lastRestockCheckDayTime > 0L) {
+            long l = this.lastRestockCheckDayTime / 24000L;
+            long i1 = k / 24000L;
+            flag |= i1 > l;
+        }
+
+        this.lastRestockCheckDayTime = k;
+        if (flag) {
+            this.lastRestockGameTime = j;
+            this.resetNumberOfRestocks();
+        }
+
+        return this.allowedToRestock() && this.needsToRestock();
+    }
+
+    private void resetNumberOfRestocks() {
+        this.numberOfRestocksToday = 0;
     }
 }

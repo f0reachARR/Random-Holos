@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomholos:tourmaline"
+    }
+  },
+  "result": {
+    "item": "randomholos:tourmaline_block",
+    "count": 1
+  }
+}

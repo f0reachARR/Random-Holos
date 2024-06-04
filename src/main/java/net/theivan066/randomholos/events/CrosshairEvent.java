@@ -6,5 +6,4 @@ import net.theivan066.randomholos.RandomHolos;
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, value = Dist.CLIENT)
 public class CrosshairEvent {
-
 }

@@ -1,4 +1,4 @@
-package net.theivan066.randomholos.entity.custom;
+package net.theivan066.randomholos.entity.custom.projectile;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

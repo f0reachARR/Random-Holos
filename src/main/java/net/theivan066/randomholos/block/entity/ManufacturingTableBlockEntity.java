@@ -21,7 +21,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
 import net.theivan066.randomholos.screen.ManufacturingTableMenu;
 import org.jetbrains.annotations.NotNull;

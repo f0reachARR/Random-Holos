@@ -11,7 +11,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -33,7 +36,7 @@ public class KimchiHotpotBlock extends Block {
         this.registerDefaultState(this.stateDefinition.any().setValue(TIMES_EATEN, Integer.valueOf(0)));
     }
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 10, 5, 10);
+    public static final VoxelShape SHAPE = Block.box(3, 3, 3, 13, 5, 13);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

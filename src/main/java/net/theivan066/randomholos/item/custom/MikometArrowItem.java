@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.theivan066.randomholos.entity.ModEntities;
-import net.theivan066.randomholos.entity.custom.MikometArrowEntity;
+import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

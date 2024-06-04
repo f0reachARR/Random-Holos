@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:tourmaline_block"
+    }
+  ],
+  "result": {
+    "item": "randomholos:tourmaline",
+    "count" : 9
+  }
+}

@@ -11,9 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.client.*;
+import net.theivan066.randomholos.entity.client.boss.KurosoraModel;
 import net.theivan066.randomholos.entity.client.projectile.BulletProjectileModel;
+import net.theivan066.randomholos.entity.client.projectile.DartProjectileModel;
 import net.theivan066.randomholos.entity.client.projectile.MikometArrowModel;
+import net.theivan066.randomholos.entity.client.projectile.NoteProjectileModel;
 import net.theivan066.randomholos.entity.custom.*;
+import net.theivan066.randomholos.entity.custom.boss.KurosoraEntity;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -22,11 +26,14 @@ public class CustomEntityEvents {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.SORA_LAYER, SoraModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.NUNNUN_LAYER, NunnunModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.KUROSORA_LAYER, KurosoraModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.ROBOCO_LAYER, RobocoModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SUISEI_LAYER, SuiseiModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKO_LAYER, MikoModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKOP_LAYER, MikopModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.AZKI_LAYER, AzkiModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.NOTE_PROJECTILE_LAYER, NoteProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.DART_PROJECTILE_LAYER, DartProjectileModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.MIKOMET_ARROW_LAYER, MikometArrowModel::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BULLET_PROJECTILE_LAYER, BulletProjectileModel::createBodyLayer);
     }
@@ -35,6 +42,7 @@ public class CustomEntityEvents {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.SORA.get(), SoraEntity.createAttributes().build());
         event.put(ModEntities.NUNNUN.get(), NunnunEntity.createAttributes().build());
+        event.put(ModEntities.KUROSORA.get(), KurosoraEntity.createAttributes().build());
         event.put(ModEntities.ROBOCO.get(), RobocoEntity.createAttributes().build());
         event.put(ModEntities.SUISEI.get(), SuiseiEntity.createAttributes().build());
         event.put(ModEntities.MIKO.get(), MikoEntity.createAttributes().build());

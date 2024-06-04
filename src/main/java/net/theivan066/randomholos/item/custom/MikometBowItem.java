@@ -19,7 +19,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
-import net.theivan066.randomholos.entity.custom.MikometArrowEntity;
+import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
 import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,0 +1,20 @@
+{
+  "name": "Introduction",
+  "icon": "randomholos:holo_logo",
+  "category": "randomholos:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Welcome to $(#34c9fe)Hololives' continuum$()!",
+      "text": "$(#34c9fe)HoloContinuum$() adds a variety of Hololive-related items, entities and even biomes to Minecraft.$(br2)This book will guide you through how to get started with this mod! $(br2)Although it works fine without needing to install other mods, $(#008001)JEI$() is highly recommended for the convenience of checking recipes and loot-drops!"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "randomholos:textures/gui/entries/book_logo.png"
+        ],
+      "border": false
+      }
+  ],
+  "sortnum": 1
+}

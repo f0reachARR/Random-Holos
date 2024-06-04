@@ -1,0 +1,18 @@
+{
+  "name": "Mobs",
+  "icon": "randomholos:nunnun_spawn_egg",
+  "category": "randomholos:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Mob Interactions",
+      "text": "This section will explain about mob interactions - some items require interacting with mobs to acquire."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "randomholos:sora",
+      "border": false
+      }
+  ],
+  "sortnum": 1
+}

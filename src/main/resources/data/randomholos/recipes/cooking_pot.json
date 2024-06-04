@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N N",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "tag": "randomholos:stone_or_bricks"
+    }
+  },
+  "result": {
+    "item": "randomholos:cooking_pot",
+    "count": 2
+  }
+}

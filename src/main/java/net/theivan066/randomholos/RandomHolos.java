@@ -6,12 +6,13 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,9 +27,8 @@ import net.theivan066.randomholos.effect.ModEffects;
 import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.client.*;
-import net.theivan066.randomholos.entity.client.projectile.BulletProjectileRenderer;
-import net.theivan066.randomholos.entity.client.projectile.GuesserPinProjectileRenderer;
-import net.theivan066.randomholos.entity.client.projectile.MikometArrowRenderer;
+import net.theivan066.randomholos.entity.client.boss.KurosoraRenderer;
+import net.theivan066.randomholos.entity.client.projectile.*;
 import net.theivan066.randomholos.fluid.ModFluidTypes;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModCreativeModeTabs;
@@ -36,6 +36,8 @@ import net.theivan066.randomholos.item.ModItemProperties;
 import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.loot.ModLootModifiers;
 import net.theivan066.randomholos.particle.ModParticles;
+import net.theivan066.randomholos.potion.BrewingRecipe;
+import net.theivan066.randomholos.potion.ModPotions;
 import net.theivan066.randomholos.recipe.ModRecipes;
 import net.theivan066.randomholos.screen.ManufacturingTableScreen;
 import net.theivan066.randomholos.screen.ModMenuTypes;
@@ -56,6 +58,7 @@ public class RandomHolos {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModPotions.register(modEventBus);
         ModFluidTypes.register(modEventBus);
         ModFluids.register(modEventBus);
 
@@ -80,6 +83,8 @@ public class RandomHolos {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAPLE_SAPLING.getId(), ModBlocks.POTTED_MAPLE_SAPLING);
+
+        //BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION.get()));
 
         event.enqueueWork(() -> {
             ComposterBlock.COMPOSTABLES.put(ModItems.CHIVES.get(), 0.3f);
@@ -115,14 +120,17 @@ public class RandomHolos {
                 ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_ELITE_LAVA.get(), RenderType.translucent());
 
                 EntityRenderers.register(ModEntities.SORA.get(), SoraRenderer::new);
+                EntityRenderers.register(ModEntities.KUROSORA.get(), KurosoraRenderer::new);
                 EntityRenderers.register(ModEntities.NUNNUN.get(), NunnunRenderer::new);
                 EntityRenderers.register(ModEntities.ROBOCO.get(), RobocoRenderer::new);
                 EntityRenderers.register(ModEntities.SUISEI.get(), SuiseiRenderer::new);
                 EntityRenderers.register(ModEntities.MIKO.get(), MikoRenderer::new);
                 EntityRenderers.register(ModEntities.MIKOP.get(), MikopRenderer::new);
                 EntityRenderers.register(ModEntities.AZKI.get(), AzkiRenderer::new);
-                EntityRenderers.register(ModEntities.GLASS_HEELS_PROJECTILE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(ModEntities.GLASS_HEELS_PROJECTILE.get(), GlassHeelProjectileRenderer::new);
                 EntityRenderers.register(ModEntities.GUESSER_PIN_PROJECTILE.get(), GuesserPinProjectileRenderer::new);
+                EntityRenderers.register(ModEntities.NOTE_PROJECTILE.get(), NoteProjectileRenderer::new);
+                EntityRenderers.register(ModEntities.DART_PROJECTILE.get(), DartProjectileRenderer::new);
                 EntityRenderers.register(ModEntities.MIKOMET_ARROW.get(), MikometArrowRenderer::new);
                 EntityRenderers.register(ModEntities.BULLET_PROJECTILE.get(), BulletProjectileRenderer::new);
 

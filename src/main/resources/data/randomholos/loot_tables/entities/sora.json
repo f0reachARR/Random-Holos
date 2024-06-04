@@ -1,0 +1,44 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:broken_hair_accessory"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:tokino_soda",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:tokinosora_set_meal_a",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:tokinosora_set_meal_b",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:curry_bread",
+          "weight": 5
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ]
+    }
+  ]
+}

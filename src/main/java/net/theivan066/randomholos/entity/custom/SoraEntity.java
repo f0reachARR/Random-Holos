@@ -1,7 +1,9 @@
 package net.theivan066.randomholos.entity.custom;
 
 import net.minecraft.Util;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -11,6 +13,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,8 +25,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.ai.SoraAttackGoal;
+import net.theivan066.randomholos.entity.custom.boss.KurosoraEntity;
 import net.theivan066.randomholos.entity.variant.SoraVariant;
+import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
@@ -166,10 +173,27 @@ public class SoraEntity extends Animal{
     //Mob-specifics
 
     @Override
-    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
-        return super.interactAt(pPlayer, pVec, pHand);
-    }
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        if (pPlayer.getMainHandItem().is(ModItems.BROKEN_HAIR_ACCESSORY.get())) {
+            Vec3 vec = new Vec3(this.getX(), this.getEyeY(), this.getZ());
 
+            pPlayer.lookAt(EntityAnchorArgument.Anchor.EYES, vec);
+            pPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1, 5));
+            pPlayer.sendSystemMessage(Component.translatable("messages.randomholos.kuroka1"));
+            pPlayer.sendSystemMessage(Component.translatable("messages.randomholos.kuroka2"));
+            pPlayer.playSound(ModSounds.SORA_HURT.get(), 1.25f, 1);
+            pPlayer.sendSystemMessage(Component.literal("§kfhakfjehahnfqwtewuiytiogwjfhawiuzxbnmvca"));
+
+            Vec3 loc = new Vec3(this.getX(), this.getY() + 0.5, this.getZ());
+            this.setPos(this.getX(), -100, this.getZ());
+            this.kill();
+
+            KurosoraEntity entity = new KurosoraEntity(ModEntities.KUROSORA.get(), pPlayer.level());
+            entity.setPos(loc);
+            pPlayer.level().addFreshEntity(entity);
+        }
+        return super.mobInteract(pPlayer, pHand);
+    }
     //sound
 
     @Nullable

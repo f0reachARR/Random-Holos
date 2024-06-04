@@ -1,0 +1,26 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:kimchi_hotpot",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "randomholos:kimchi_hotpot",
+              "properties": {
+                "times_eaten": "0"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:cooking_pot"
+        }
+      ]
+    }
+  ]
+}

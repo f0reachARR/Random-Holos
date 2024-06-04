@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.theivan066.randomholos.entity.custom.projectile.GlassHeelsProjectileEntity;
 import net.theivan066.randomholos.entity.custom.projectile.GuesserPinProjectileEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +29,7 @@ public class GuesserPinItem extends Item {
         if (!pLevel.isClientSide) {
             GuesserPinProjectileEntity pin = new GuesserPinProjectileEntity(pLevel, pPlayer);
             pin.setItem(itemstack);
-            pin.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 0F);
+            pin.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1F, 0F);
             pLevel.addFreshEntity(pin);
         }
 

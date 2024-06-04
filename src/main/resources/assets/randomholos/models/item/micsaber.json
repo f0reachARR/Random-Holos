@@ -1,0 +1,28 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "randomholos:item/micsaber"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 15, 90, 0 ],
+      "translation": [ 6, 11.5, -9 ],
+      "scale": [ 2, 2, 1 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 15, -90, 0 ],
+      "translation": [ 6, 11.5, -9 ],
+      "scale": [ 2, 2, 1 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 60, 90, 0 ],
+      "translation": [ 0, 14, 6.5 ],
+      "scale": [ 2, 2, 1 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 60, -90, 0 ],
+      "translation": [ 0, 14, 6.5 ],
+      "scale": [ 2, 2, 1 ]
+    }
+  }
+}

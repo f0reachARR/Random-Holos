@@ -22,7 +22,7 @@ public class CookingPotBlock extends Block {
         super(pProperties);
     }
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 10, 5, 10);
+    public static final VoxelShape SHAPE = Block.box(3, 3, 3, 13, 5, 13);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

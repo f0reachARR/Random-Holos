@@ -1,0 +1,65 @@
+{
+  "name": "Getting basic resources",
+  "icon": "randomholos:meteorite_piece",
+  "category": "randomholos:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "So what are there?",
+      "text": "$(br2)$(br2)This section will walk you through on how to get your hands on basic resources."
+    },
+    {
+      "type": "patchouli:empty",
+      "draw_filler": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "randomholos:meteorite_piece"
+      },
+      "title": "Meteorite Pieces",
+      "text": "Meteorite pieces can be obtained by mining meteorites(ores) found in comets and meteors fallen on the world(see next page). They come in crude, regular and rich versions. $(br2)They can be used to craft items related to the star, the street of the stellar, the $(l)Hoshimachi$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomholos:meteorite,randomholos:crude_meteorite,randomholos:rich_meteorite",
+      "text": "Meteorite ores"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "randomholos:textures/gui/entries/meteorite.png"
+        ],
+      "text": "      A fallen meteor!",
+      "border": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "randomholos:stellarite"
+      },
+      "title": "The Stellarite",
+      "text": "The $(#50e5f9)Stellarite$() is a rare material, combining the power of the stars."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:stellarite",
+      "text": "$(br)    $(o)Stellar Stellar~ ha~~"
+    },
+    {
+      "type": "patchouli:empty",
+      "draw_filler": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomholos:copper_rod,randomholos:reinforced_copper_rod",
+      "text": "Copper rods are used to make different tools and weapons. They are crafted using normal copper."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:copper_rod",
+      "recipe2": "randomholos:reinforced_copper_rod"
+    }
+  ],
+  "sortnum": 3
+}

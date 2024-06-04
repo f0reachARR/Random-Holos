@@ -1,0 +1,12 @@
+{
+  "name": "Letter to...",
+  "landing_text": "$(m)Kimoota sengen?",
+  "version": 1,
+  "creative_tab": "randomholos:zybook",
+  "use_resource_pack": true,
+  "header_color": "4e9eed",
+  "nameplate_color": "4e9eed",
+  "progress_bar_color": "c1c1c1",
+  "model": "randomholos:letter",
+  "book_texture": "randomholos:textures/gui/book_letter.png"
+}

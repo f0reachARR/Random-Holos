@@ -1,7 +1,6 @@
 package net.theivan066.randomholos.entity.custom;
 
 import net.minecraft.Util;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;

@@ -1,0 +1,24 @@
+{
+  "name": "The Manufacturing Table",
+  "icon": "randomholos:manufacturing_table",
+  "category": "randomholos:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The Manufacturing Table",
+      "text": "The manufacturing table is used to craft different items in $(#34c9fe)HoloContinuum$(). It is basically a crafting table, but with an extra slot. It takes in an extra item (usually a blueprint) to craft various items. $(br2)Check out the next page for how to craft the manufacturing table. $(br2)$(br)$(o)$(#008001)JEI$()$(o) is highly recommended for this part!!"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "randomholos:textures/gui/entries/manutable.png"
+        ],
+      "border": false
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:manufacturing_table"
+    }
+  ],
+  "sortnum": 4
+}

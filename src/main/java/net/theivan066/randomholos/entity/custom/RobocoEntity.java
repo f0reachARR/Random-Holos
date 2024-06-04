@@ -86,6 +86,7 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
         if (attackAnimationTimeout <= 0 && this.isAttacking()) {
             if (this.isCocked()) {
                 attackAnimationTimeout = 30; // Length in ticks of your animation
+                attackAnimationState.stop();
                 attackLoadedAnimationState.start(this.tickCount);
             } else {
                 attackAnimationTimeout = 43;
@@ -98,7 +99,6 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
             attackAnimationState.stop();
             attackLoadedAnimationState.stop();
             this.setCocked(false);
-            idleAnimationState.start(1);
         }
     }
 

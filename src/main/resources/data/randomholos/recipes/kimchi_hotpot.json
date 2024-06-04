@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomholos:kimchi"
+    },
+    {
+      "item": "randomholos:chinese_cabbage"
+    },
+    {
+      "item": "randomholos:chives"
+    },
+    {
+      "item": "randomholos:scallion"
+    },
+    {
+      "tag": "randomholos:cooked_meat"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "randomholos:cooking_pot"
+    }
+  ],
+  "result": {
+    "item": "randomholos:kimchi_hotpot",
+    "count" : 1
+  }
+}

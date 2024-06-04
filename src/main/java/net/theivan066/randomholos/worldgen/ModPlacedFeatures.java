@@ -8,6 +8,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.theivan066.randomholos.RandomHolos;
@@ -16,8 +17,8 @@ import net.theivan066.randomholos.block.ModBlocks;
 import java.util.List;
 
 public class ModPlacedFeatures {
+    public static final ResourceKey<PlacedFeature> TOURMALINE_ORE_PLACED_KEY = registerKey("tourmaline_ore_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
-
     public static final ResourceKey<PlacedFeature> FALLEN_LEAVES_PLACED_KEY = registerKey("fallen_leaves_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -27,9 +28,12 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.2f, 2),
                         ModBlocks.MAPLE_SAPLING.get()));
 
-
         register(context, FALLEN_LEAVES_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_LEAVES_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(40), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+
+        register(context, TOURMALINE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TOURMALINE_ORE_KEY),
+                ModOrePlacement.commonOrePlacement(8,
+                        HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(95))));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

@@ -1,4 +1,4 @@
-package net.theivan066.randomholos.entity.custom;
+package net.theivan066.randomholos.entity.custom.projectile;
 
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -60,6 +60,7 @@ public class MikometArrowEntity extends AbstractArrow {
         this(pEntityType, pLevel);
         this.setPos(pX, pY, pZ);
     }
+
 
     public MikometArrowEntity(EntityType<? extends AbstractArrow> pEntityType, LivingEntity pShooter, Level pLevel) {
         this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(), pLevel);
@@ -496,4 +497,5 @@ public class MikometArrowEntity extends AbstractArrow {
     protected ItemStack getPickupItem() {
         return new ItemStack(ModItems.MIKOMET_ARROW.get());
     }
+
 }

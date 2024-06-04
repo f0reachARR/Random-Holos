@@ -87,6 +87,13 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE)));
     public static final RegistryObject<Block> RICH_METEORITE = registerBlock("rich_meteorite", ()->
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 10)));
+    public static final RegistryObject<Block> TOURMALINE_ORE = registerBlock("tourmaline_ore", ()->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 1)));
+    public static final RegistryObject<Block> DEEPSLATE_TOURMALINE_ORE = registerBlock("deepslate_tourmaline_ore", ()->
+            new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 1)));
+    public static final RegistryObject<Block> TOURMALINE_BlOCK = registerBlock("tourmaline_block", ()->
+            new TourmalineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 8)));
+
 
     public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block", ()->
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0f, 7.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER)));
@@ -100,10 +107,10 @@ public class ModBlocks {
             () -> new ChineseCabbageCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
     public static final RegistryObject<Block> CHILI_BUSH = BLOCKS.register("chili_bush",
             () -> new ChiliBushBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
-    public static final RegistryObject<Block> COOKING_POT = BLOCKS.register("cooking_pot",
-            () -> new CookingPotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0F).noOcclusion()));
-    public static final RegistryObject<Block> KIMCHI_HOTPOT = BLOCKS.register("kimchi_hotpot",
-            () -> new KimchiHotpotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0F).noOcclusion()));
+    public static final RegistryObject<Block> COOKING_POT = registerBlock("cooking_pot", () ->
+            new CookingPotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(0.5F).noOcclusion()));
+    public static final RegistryObject<Block> KIMCHI_HOTPOT = registerBlock("kimchi_hotpot", () ->
+            new KimchiHotpotBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(0.5F).noOcclusion()));
 
     public static final RegistryObject<Block> KAKURIYO_PORTAL = registerBlock("kakuriyo_portal",
             () -> new KakuriyoPortalBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_PORTAL).noLootTable().noOcclusion().noCollission()));

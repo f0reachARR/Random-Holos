@@ -18,14 +18,10 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.ai.AzkiAttackGoal;
-import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
-import net.theivan066.randomholos.entity.custom.projectile.GlassHeelsProjectileEntity;
 import net.theivan066.randomholos.entity.custom.projectile.GuesserPinProjectileEntity;
 import net.theivan066.randomholos.entity.variant.AzkiVariant;
 import net.theivan066.randomholos.item.ModItems;
@@ -40,7 +36,6 @@ public class AzkiEntity extends Animal implements RangedAttackMob {
             SynchedEntityData.defineId(AzkiEntity.class, EntityDataSerializers.INT);
 
     public final AnimationState attackAnimationState = new AnimationState();
-    public final AnimationState attackLoadedAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
     public final AnimationState idleAnimationState = new AnimationState();
@@ -172,7 +167,7 @@ public class AzkiEntity extends Animal implements RangedAttackMob {
         Random ran = new Random();
         GuesserPinProjectileEntity guesserPin = new GuesserPinProjectileEntity(this.level(), this);
         guesserPin.setItem(new ItemStack(ModItems.GUESSER_PIN.get()));
-        guesserPin.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 2.0F, 0.5F);
+        guesserPin.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1F, 0.5F);
         this.level().addFreshEntity(guesserPin);
     }
 }

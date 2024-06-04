@@ -1,0 +1,12 @@
+{
+  "name": "HoloContinuum Guide",
+  "landing_text": "Welcome to HoloContinuum!",
+  "version": 1,
+  "creative_tab": "randomholos:zybook",
+  "use_resource_pack": true,
+  "header_color": "f6b600",
+  "nameplate_color": "f6b600",
+  "progress_bar_color": "c1c1c1",
+  "model": "randomholos:guidebook",
+  "book_texture": "randomholos:textures/gui/book_guide.png"
+}

@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -68,8 +67,6 @@ public class ModClientEventBusEvents {
             var buffer = bufferSource.getBuffer(RenderType.entityCutout(PIN_TEXTURE));
 
             renderQuad(poseStack, buffer);
-            System.out.println("Rendering pin on entity: " + entity.getType());
-
 
             RenderSystem.disableBlend();
             poseStack.popPose();
