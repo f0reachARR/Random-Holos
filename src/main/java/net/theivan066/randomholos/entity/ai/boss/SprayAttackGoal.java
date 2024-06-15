@@ -4,8 +4,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.custom.boss.KurosoraEntity;
 import net.theivan066.randomholos.entity.custom.projectile.NoteProjectileEntity;
+
+import java.util.Random;
 
 public class SprayAttackGoal extends Goal {
     private final KurosoraEntity mob;
@@ -13,6 +16,7 @@ public class SprayAttackGoal extends Goal {
     private final double projectileSpeed;
     private final int attackCooldown;
     private int attackTick;
+    private Random random = new Random();
 
     public SprayAttackGoal(KurosoraEntity mob, double flyUpSpeed, double projectileSpeed, int attackCooldown) {
         this.mob = mob;
@@ -46,22 +50,18 @@ public class SprayAttackGoal extends Goal {
                 mob.resetStates();
                 mob.setSpraying(true);
                 mob.sprayAnimationState.start(mob.tickCount);
-                // Fly up slowly for 2.37 seconds (47 ticks)
                 Vec3 mobPos = this.mob.position();
                 Vec3 targetPos = target.position();
                 this.mob.setNoGravity(true);
                 this.mob.setDeltaMovement(0, this.flyUpSpeed, 0);
                 this.mob.getNavigation().stop();
             } else if (this.attackTick == 47) {
-                // Wait until timeline 2.46s (2 ticks)
                 this.mob.setDeltaMovement(Vec3.ZERO);
             } else if (this.attackTick >= 48 && this.attackTick < 65) {
-                // Spawning 10 custom projectiles in a semi-circle from 2.46s to 2.88s (16 ticks)
-                if (this.attackTick % 2 == 0) {
+                if (this.attackTick % 4 == 0) {
                     this.spawnProjectiles(target);
                 }
             } else if (this.attackTick >= 65 && this.attackTick < 70) {
-                // Keep flying until 3.5s (70 ticks)
                 mob.sprayAnimationState.stop();
                 mob.resetStates();
                 this.mob.setNoGravity(false);
@@ -74,14 +74,14 @@ public class SprayAttackGoal extends Goal {
     private void spawnProjectiles(LivingEntity target) {
         Level level = this.mob.level();
         for (int i = 0; i < 10; i++) {
-            double angle = Math.toRadians(i * 18 - 90); // semi-circle
+            double angle = Math.toRadians(i * 18 - 90);
             Vec3 direction = new Vec3(Math.cos(angle), 0, Math.sin(angle));
             Vec3 spawnPos = this.mob.position().add(direction);
 
             NoteProjectileEntity projectile = new NoteProjectileEntity(level, this.mob, target, 5);
             projectile.setOwner(mob);
             projectile.setPos(spawnPos);
-            projectile.shoot(target.getX(), target.getY(), target.getZ(), (float) this.projectileSpeed, 0.0F);
+            projectile.shoot(target.getX(), target.getY(), target.getZ(), random.nextFloat(0, (float) this.projectileSpeed), 0.1F);
             level.addFreshEntity(projectile);
         }
     }

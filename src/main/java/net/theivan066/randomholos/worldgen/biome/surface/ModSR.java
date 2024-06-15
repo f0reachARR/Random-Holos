@@ -6,7 +6,7 @@ import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.theivan066.randomholos.worldgen.biome.ModBiomes;
 
-public class ModSurfaceRules {
+public class ModSR {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
     private static final SurfaceRules.RuleSource CALCITE = makeStateRule(Blocks.CALCITE);

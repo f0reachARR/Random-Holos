@@ -39,6 +39,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.TOKINOSORA_SET_MEAL_A.get());
                         pOutput.accept(ModItems.TOKINOSORA_SET_MEAL_B.get());
                         pOutput.accept(ModItems.BROKEN_HAIR_ACCESSORY.get());
+                        pOutput.accept(ModItems.TALISMAN_OF_THE_ETHER.get());
                     })
                     .build());
 

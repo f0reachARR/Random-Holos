@@ -34,6 +34,7 @@
   "item.randomholos.tokinosora_set_meal_a": "ときのそら定食A",
   "item.randomholos.tokinosora_set_meal_b": "ときのそら定食B",
   "item.randomholos.broken_hair_accessory": "壊れた髪飾り",
+  "item.randomholos.talisman_of_the_ether": "蒼穹の護符",
 
   "item.randomholos.blueprint": "空き設計図",
   "item.randomholos.firearm_blueprint": "銃器設計図",
@@ -144,6 +145,7 @@
   "tooltip.randomholos.tooltip.caution": "<§ealt§r>を押して注意事項を確認",
   "tooltip.randomholos.shaken_bottle.shift": "ソーダには水を、オイルには溶岩を",
   "tooltip.randomholos.broken_hair_accessory.shift": "§4§oどうして。",
+  "tooltip.randomholos.talisman_of_the_ether.shift": "腹が減るが、採掘は素早くできるようになる",
   "tooltip.randomholos.robogun.shift": "ロボットが使っていた銃",
   "tooltip.randomholos.robosniper.shift": "強化されたロボットが使っていた大型反物質ライフル",
   "tooltip.randomholos.psychopathaxe.shift": "サイコパスの持ち物。\nこれで誰かを殴ると、§4コ§6ス§eミ§aッ§bク§5の§r、§4矍§e鑠§5た§bる§r、§o≡速やかな§rサイコパスになれる.",

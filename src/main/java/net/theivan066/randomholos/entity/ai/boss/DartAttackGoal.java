@@ -50,13 +50,11 @@ public class DartAttackGoal extends Goal {
                 // Charge up the projectile until timeline 1.33s
                 if (this.attackTick % 2 == 0) {
                     this.spawnChargedProjectile();
-                    System.out.println("spawn");
                 }
                 this.mob.lookAt(target, 30, 30);
             } else if (this.attackTick >= 20 && this.attackTick < 29) { // Timeline 1.46s
                 // End animation and fire the projectile
                 this.fireProjectiles(target);
-                System.out.println("fire");
             } else if (this.attackTick > 29 && this.attackTick < 50) {
                 this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
             } else {

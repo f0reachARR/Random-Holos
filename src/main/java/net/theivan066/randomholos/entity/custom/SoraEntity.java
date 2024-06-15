@@ -181,7 +181,7 @@ public class SoraEntity extends Animal{
             pPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1, 5));
             pPlayer.sendSystemMessage(Component.translatable("messages.randomholos.kuroka1"));
             pPlayer.sendSystemMessage(Component.translatable("messages.randomholos.kuroka2"));
-            pPlayer.playSound(ModSounds.SORA_HURT.get(), 1.25f, 1);
+            pPlayer.playSound(ModSounds.SORA_TEKIDANE.get(), 1.25f, 1);
             pPlayer.sendSystemMessage(Component.literal("§kfhakfjehahnfqwtewuiytiogwjfhawiuzxbnmvca"));
 
             Vec3 loc = new Vec3(this.getX(), this.getY() + 0.5, this.getZ());
@@ -200,5 +200,17 @@ public class SoraEntity extends Animal{
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return ModSounds.SORA_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.SORA_DEATH.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.SORA_AMBIENT.get();
     }
 }

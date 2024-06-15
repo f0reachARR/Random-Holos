@@ -24,9 +24,13 @@ public class ModBiomeModifiers {
 
     public static final ResourceKey<BiomeModifier> ADD_TOURMALINE_ORE = registerKey("add_tourmaline_ore");
 
+    public static final ResourceKey<BiomeModifier> SPAWN_SORA = registerKey("spawn_sora");
+    public static final ResourceKey<BiomeModifier> SPAWN_NUNNUN = registerKey("spawn_nunnun");
     public static final ResourceKey<BiomeModifier> SPAWN_MIKO_MORIRIN = registerKey("spawn_miko_moririn");
     public static final ResourceKey<BiomeModifier> SPAWN_MIKO_SAKURA = registerKey("spawn_miko_sakura");
     public static final ResourceKey<BiomeModifier> SPAWN_MIKOP = registerKey("spawn_mikop");
+    public static final ResourceKey<BiomeModifier> SPAWN_SUISEI = registerKey("spawn_suisei");
+    public static final ResourceKey<BiomeModifier> SPAWN_AZKI = registerKey("spawn_azki");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -49,6 +53,7 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.TOURMALINE_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
 
+
         context.register(SPAWN_MIKO_MORIRIN, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MORIRIN)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.MIKO.get(), 15, 1, 1))));
@@ -61,6 +66,21 @@ public class ModBiomeModifiers {
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MORIRIN), biomes.getOrThrow(ModBiomes.SAKURA_FOREST)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.MIKOP.get(), 10, 1, 8))));
 
+        context.register(SPAWN_SUISEI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.SUISEI.get(), 4, 1, 1))));
+
+        context.register(SPAWN_AZKI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.AZKI.get(), 4, 1, 1))));
+
+        context.register(SPAWN_SORA, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.SORA.get(), 1, 1, 1))));
+
+        context.register(SPAWN_NUNNUN, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.NUNNUN.get(), 3, 1, 8))));
     }
 
 

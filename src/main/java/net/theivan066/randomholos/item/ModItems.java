@@ -63,6 +63,7 @@ public class ModItems {
     public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_B = ITEMS.register("tokinosora_set_meal_b",
             () -> new Item(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_B)));
     public static final RegistryObject<Item> BROKEN_HAIR_ACCESSORY = ITEMS.register("broken_hair_accessory", () ->  new ShiftTooltipItem(new Item.Properties(), Component.translatable("tooltip.randomholos.broken_hair_accessory.shift")));
+    public static final RegistryObject<Item> TALISMAN_OF_THE_ETHER = ITEMS.register("talisman_of_the_ether", () ->  new TalismanOfTheEtherItem(new Item.Properties()));
 
     public static final RegistryObject<Item> BLUEPRINT = ITEMS.register("blueprint", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALLOY_BLUEPRINT = ITEMS.register("alloy_blueprint", () ->  new Item(new Item.Properties()));

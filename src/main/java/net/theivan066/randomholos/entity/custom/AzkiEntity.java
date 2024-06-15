@@ -6,7 +6,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -25,6 +27,7 @@ import net.theivan066.randomholos.entity.ai.AzkiAttackGoal;
 import net.theivan066.randomholos.entity.custom.projectile.GuesserPinProjectileEntity;
 import net.theivan066.randomholos.entity.variant.AzkiVariant;
 import net.theivan066.randomholos.item.ModItems;
+import net.theivan066.randomholos.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -169,6 +172,24 @@ public class AzkiEntity extends Animal implements RangedAttackMob {
         guesserPin.setItem(new ItemStack(ModItems.GUESSER_PIN.get()));
         guesserPin.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1F, 0.5F);
         this.level().addFreshEntity(guesserPin);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return ModSounds.AZKI_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.AZKI_DEATH.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.AZKI_AMBIENT.get();
     }
 }
 

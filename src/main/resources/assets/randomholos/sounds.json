@@ -1,14 +1,36 @@
 {
-  "metal_detector_found_ore": {
-    "subtitle": "sounds.randomholos.metal_detector_found_ore",
-    "sounds": [
-      "randomholos:metal_detector_found_ore"
-    ]
-  },
   "sora_hurt": {
     "subtitle": "sounds.randomholos.sora_hurt",
     "sounds": [
-      "randomholos:sora_tekidane"
+      "randomholos:sora/sora_tekidane",
+      "randomholos:sora/sora_tekidane1",
+      "randomholos:sora/sora_hangyakusha",
+      "randomholos:sora/sora_yameteyo"
+    ]
+  },
+  "sora_tekidane": {
+    "subtitle": "sounds.randomholos.sora_tekidane",
+    "sounds": [
+      "randomholos:sora/sora_tekidane",
+      "randomholos:sora/sora_tekidane1"
+    ]
+  },
+  "sora_death": {
+    "subtitle": "sounds.randomholos.sora_death",
+    "sounds": [
+      "randomholos:sora/sora_nun",
+      "randomholos:sora/sora_waaaee"
+    ]
+  },
+  "sora_ambient": {
+    "subtitle": "sounds.randomholos.sora_ambient",
+    "sounds": [
+      "randomholos:sora/sora_dundundun",
+      "randomholos:sora/sora_e",
+      "randomholos:sora/sora_nana",
+      "randomholos:sora/sora_nana2",
+      "randomholos:sora/sora_yoshi",
+      "randomholos:sora/sora_yoshi2"
     ]
   },
   "robogun_shoot": {
@@ -20,8 +42,108 @@
   "miko_hurt": {
     "subtitle": "sounds.randomholos.miko_hurt",
     "sounds": [
-      "randomholos:miko_faq1",
-      "randomholos:miko_faq2"
+      "randomholos:miko/miko_faq",
+      "randomholos:miko/miko_linegoe",
+      "randomholos:miko/miko_dyamare",
+      "randomholos:miko/miko_chottomatte"
+    ]
+  },
+  "miko_death": {
+    "subtitle": "sounds.randomholos.miko_death",
+    "sounds": [
+      "randomholos:miko/miko_amyaaao",
+      "randomholos:miko/miko_faq_scream",
+      "randomholos:miko/miko_tasukete",
+      "randomholos:miko/miko_achu"
+    ]
+  },
+  "miko_ambient": {
+    "subtitle": "sounds.randomholos.miko_ambient",
+    "sounds": [
+      "randomholos:miko/miko_ikuzo",
+      "randomholos:miko/miko_bumbum",
+      "randomholos:miko/miko_nenene",
+      "randomholos:miko/miko_nyaharo",
+      "randomholos:miko/miko_nyaharosong"
+    ]
+  },
+  "azki_hurt": {
+    "subtitle": "sounds.randomholos.azki_hurt",
+    "sounds": [
+      "randomholos:azki/azki_naninani",
+      "randomholos:azki/azki_nanchukotta"
+    ]
+  },
+  "azki_death": {
+    "subtitle": "sounds.randomholos.azki_death",
+    "sounds": [
+      "randomholos:azki/azki_waaa",
+      "randomholos:azki/azki_nanchukotta"
+    ]
+  },
+  "azki_ambient": {
+    "subtitle": "sounds.randomholos.azki_ambient",
+    "sounds": [
+      "randomholos:azki/azki_aishiteru",
+      "randomholos:azki/azki_panpakapan",
+      "randomholos:azki/azki_pinponpanpon",
+      "randomholos:azki/azki_wasurero_beam"
+    ]
+  },
+  "suisei_hurt": {
+    "subtitle": "sounds.randomholos.suisei_hurt",
+    "sounds": [
+      "randomholos:suisei/suisei_cringe"
+    ]
+  },
+  "suisei_death": {
+    "subtitle": "sounds.randomholos.suisei_death",
+    "sounds": [
+      "randomholos:suisei/suisei_shotajanee",
+      "randomholos:suisei/suisei_kyoumokawaii_spam"
+    ]
+  },
+  "suisei_ambient": {
+    "subtitle": "sounds.randomholos.suisei_ambient",
+    "sounds": [
+      "randomholos:suisei/suisei_hihoney",
+      "randomholos:suisei/suisei_intro",
+      "randomholos:suisei/suisei_kawaii",
+      "randomholos:suisei/suisei_kawaii1",
+      "randomholos:suisei/suisei_kawaii2",
+      "randomholos:suisei/suisei_kawaii3",
+      "randomholos:suisei/suisei_seikou",
+      "randomholos:suisei/suisei_seikou1",
+      "randomholos:suisei/suisei_seikou2",
+      "randomholos:suisei/suisei_seikou3",
+      "randomholos:suisei/suisei_seikou4",
+      "randomholos:suisei/suisei_seikou_full",
+      "randomholos:suisei/suisei_suichanha"
+    ]
+  },
+  "roboco_hurt": {
+    "subtitle": "sounds.randomholos.roboco_hurt",
+    "sounds": [
+      "randomholos:roboco/roboco_uso",
+      "randomholos:roboco/roboco_yabai",
+      "randomholos:roboco/roboco_damekamo",
+      "randomholos:roboco/roboco_damekamo1"
+    ]
+  },
+  "roboco_death": {
+    "subtitle": "sounds.randomholos.roboco_death",
+    "sounds": [
+      "randomholos:roboco/roboco_cry",
+      "randomholos:roboco/roboco_robot_sound"
+    ]
+  },
+  "roboco_ambient": {
+    "subtitle": "sounds.randomholos.roboco_ambient",
+    "sounds": [
+      "randomholos:roboco/roboco_robot_sound_short",
+      "randomholos:roboco/roboco_robot_sound",
+      "randomholos:roboco/roboco_periperi",
+      "randomholos:roboco/roboco_uso"
     ]
   }
 }

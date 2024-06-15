@@ -24,6 +24,8 @@ import net.theivan066.randomholos.entity.ModEntities;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static net.theivan066.randomholos.util.HitTracker.noteHit;
+
 @SuppressWarnings({"deprecation"})
 public class NoteProjectileEntity extends Projectile {
 
@@ -111,6 +113,16 @@ public class NoteProjectileEntity extends Projectile {
         Entity hitEntity = pResult.getEntity();
         Entity owner = this.getOwner();
 
+        if (noteHit < 29) {
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.NOTE_BLOCK_FLUTE.get(), SoundSource.NEUTRAL,
+                    1F, starStarStart[noteHit]);
+            noteHit ++;
+        } else {
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.NOTE_BLOCK_FLUTE.get(), SoundSource.NEUTRAL,
+                    1F, starStarStart[noteHit]);
+            noteHit = 0;
+        }
+
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.NOTE_BLOCK_FLUTE.get(), SoundSource.NEUTRAL,
                 1F, random.nextFloat());
 
@@ -120,6 +132,36 @@ public class NoteProjectileEntity extends Projectile {
             ((LivingEntity) hitEntity).hurtTime = 0;
         }
     }
+
+   private static float FS4 = 0.5f;
+   private static float G4 = (float) Math.pow(2, ((double) -11 /12));
+   private static float GS4 = (float) Math.pow(2, ((double) -10 /12));
+   private static float A4 = (float) Math.pow(2, ((double) -9 /12));
+   private static float AS4 = (float) Math.pow(2, ((double) -8 /12));
+   private static float B4 = (float) Math.pow(2, ((double) -7 /12));
+   private static float C5 = (float) Math.pow(2, ((double) -6 /12));
+   private static float CS5 = (float) Math.pow(2, ((double) -5 /12));
+   private static float D5 = (float) Math.pow(2, ((double) -4 /12));
+   private static float DS5 = (float) Math.pow(2, ((double) -3 /12));
+   private static float E5 = (float) Math.pow(2, ((double) -2 /12));
+   private static float F5 = (float) Math.pow(2, ((double) -1 /12));
+   private static float FS5 = 1;
+   private static float G5 = (float) Math.pow(2, ((double) 1 /12));
+   private static float GS5 = (float) Math.pow(2, ((double) 2 /12));
+   private static float A5 = (float) Math.pow(2, ((double) 3 /12));
+   private static float AS5 = (float) Math.pow(2, ((double) 4 /12));
+   private static float B5 = (float) Math.pow(2, ((double) 5 /12));
+   private static float C6 = (float) Math.pow(2, ((double) 6 /12));
+   private static float CS6 = (float) Math.pow(2, ((double) 7 /12));
+   private static float D6 = (float) Math.pow(2, ((double) 8 /12));
+   private static float DS6 = (float) Math.pow(2, ((double) 9 /12));
+   private static float E6 = (float) Math.pow(2, ((double) 10 /12));
+   private static float F6 = (float) Math.pow(2, ((double) 11 /12));
+   private static float FS6 = 2;
+
+   private static final float[] starStarStart = {
+     A4,A4,A4,A4,B4,B4,B4,C5,C5,C5,C5,D5,D5,D5,D5,E5,E5,E5,E5,G5,G5,B5,B5,D6,D6,FS5,F5,DS5,FS4,FS4
+   };
 
     @Override
     protected void onHit(HitResult pResult) {

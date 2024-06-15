@@ -23,8 +23,9 @@ public class ModWorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
             .add(Registries.BIOME, ModBiomes::boostrap)
             .add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
-            .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType);
-//            .add(Registries.NOISE_SETTINGS, ModDimensions::bootstrapNoise);
+            .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
+            .add(Registries.NOISE_SETTINGS, ModDimensions::bootstrapNoise)
+            .add(Registries.DENSITY_FUNCTION, ModDimensions::bootstrapDensity);
 
     public ModWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(RandomHolos.MOD_ID));

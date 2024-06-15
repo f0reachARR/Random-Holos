@@ -1,18 +1,8 @@
 package net.theivan066.randomholos;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,9 +16,6 @@ import net.theivan066.randomholos.block.entity.ModBlockEntities;
 import net.theivan066.randomholos.effect.ModEffects;
 import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
-import net.theivan066.randomholos.entity.client.*;
-import net.theivan066.randomholos.entity.client.boss.KurosoraRenderer;
-import net.theivan066.randomholos.entity.client.projectile.*;
 import net.theivan066.randomholos.fluid.ModFluidTypes;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModCreativeModeTabs;
@@ -36,13 +23,11 @@ import net.theivan066.randomholos.item.ModItemProperties;
 import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.loot.ModLootModifiers;
 import net.theivan066.randomholos.particle.ModParticles;
-import net.theivan066.randomholos.potion.BrewingRecipe;
 import net.theivan066.randomholos.potion.ModPotions;
 import net.theivan066.randomholos.recipe.ModRecipes;
-import net.theivan066.randomholos.screen.ManufacturingTableScreen;
+import net.theivan066.randomholos.registries.*;
 import net.theivan066.randomholos.screen.ModMenuTypes;
 import net.theivan066.randomholos.sound.ModSounds;
-import net.theivan066.randomholos.util.ModWoodTypes;
 import net.theivan066.randomholos.worldgen.tree.trunk_placer.ModTrunkPlacerTypes;
 import org.slf4j.Logger;
 
@@ -82,17 +67,10 @@ public class RandomHolos {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAPLE_SAPLING.getId(), ModBlocks.POTTED_MAPLE_SAPLING);
+        FlowerPotBlockRegistries.registerFlowerPots();
+        BrewingRecipeRegistries.registerBrewingRecipes();
+        CompostableRegistries.registerCompostableItems(event);
 
-        //BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION.get()));
-
-        event.enqueueWork(() -> {
-            ComposterBlock.COMPOSTABLES.put(ModItems.CHIVES.get(), 0.3f);
-            ComposterBlock.COMPOSTABLES.put(ModItems.SCALLION.get(), 0.3f);
-            ComposterBlock.COMPOSTABLES.put(ModItems.CHINESE_CABBAGE.get(), 0.4f);
-            ComposterBlock.COMPOSTABLES.put(ModBlocks.MAPLE_LEAVES.get(), 0.3f);
-            ComposterBlock.COMPOSTABLES.put(ModBlocks.MAPLE_SAPLING.get(), 0.3f);
-        });
     }
 
     // Add the example block item to the building blocks tab
@@ -112,29 +90,11 @@ public class RandomHolos {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                Sheets.addWoodType(ModWoodTypes.MAPLE);
-
+                WoodTypeRegistries.registerWoodTypes();
                 ModItemProperties.addCustomItemProperties();
-
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_ELITE_LAVA.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_ELITE_LAVA.get(), RenderType.translucent());
-
-                EntityRenderers.register(ModEntities.SORA.get(), SoraRenderer::new);
-                EntityRenderers.register(ModEntities.KUROSORA.get(), KurosoraRenderer::new);
-                EntityRenderers.register(ModEntities.NUNNUN.get(), NunnunRenderer::new);
-                EntityRenderers.register(ModEntities.ROBOCO.get(), RobocoRenderer::new);
-                EntityRenderers.register(ModEntities.SUISEI.get(), SuiseiRenderer::new);
-                EntityRenderers.register(ModEntities.MIKO.get(), MikoRenderer::new);
-                EntityRenderers.register(ModEntities.MIKOP.get(), MikopRenderer::new);
-                EntityRenderers.register(ModEntities.AZKI.get(), AzkiRenderer::new);
-                EntityRenderers.register(ModEntities.GLASS_HEELS_PROJECTILE.get(), GlassHeelProjectileRenderer::new);
-                EntityRenderers.register(ModEntities.GUESSER_PIN_PROJECTILE.get(), GuesserPinProjectileRenderer::new);
-                EntityRenderers.register(ModEntities.NOTE_PROJECTILE.get(), NoteProjectileRenderer::new);
-                EntityRenderers.register(ModEntities.DART_PROJECTILE.get(), DartProjectileRenderer::new);
-                EntityRenderers.register(ModEntities.MIKOMET_ARROW.get(), MikometArrowRenderer::new);
-                EntityRenderers.register(ModEntities.BULLET_PROJECTILE.get(), BulletProjectileRenderer::new);
-
-                MenuScreens.register(ModMenuTypes.MANUFACTURING_TABLE_MENU.get(), ManufacturingTableScreen::new);
+                ItemRenderLayerRegistries.registerRenderLayers();
+                EntityRendererRegistries.registerEntityRenderer();
+                MenuScreenRegistries.registerMenuScreens();
             });
         }
     }

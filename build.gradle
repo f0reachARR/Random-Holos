@@ -158,6 +158,9 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+
+//    comment out for genData
+
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:[1.20.1-84-FORGE]:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:[1.20.1-84-FORGE]")
 

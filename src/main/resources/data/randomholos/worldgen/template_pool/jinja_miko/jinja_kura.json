@@ -1,6 +1,6 @@
 {
   "name": "randomholos:jinja_miko/jinja_kura",
-  "fallback": "randomholos:jinja_miko/jinja_kura",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,

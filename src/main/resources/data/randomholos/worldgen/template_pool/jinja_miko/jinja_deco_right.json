@@ -1,6 +1,6 @@
 {
   "name": "randomholos:jinja_miko/jinja_deco_right",
-  "fallback": "randomholos:jinja_miko/jinja_deco_right",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
