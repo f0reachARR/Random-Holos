@@ -1,0 +1,51 @@
+{
+  "name": "randomholos:stall/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:stall/stall1",
+        "processors": "randomholos:randomize_lantern",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:stall/stall2",
+        "processors": "randomholos:randomize_lantern",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:stall/stall3",
+        "processors": "randomholos:randomize_lantern",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:stall/stall4",
+        "processors": "randomholos:randomize_lantern",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "randomholos:stall/stall5",
+        "processors": "randomholos:randomize_lantern",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

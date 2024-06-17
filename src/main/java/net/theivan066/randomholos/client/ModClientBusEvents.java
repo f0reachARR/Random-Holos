@@ -1,4 +1,4 @@
-package net.theivan066.randomholos.events;
+package net.theivan066.randomholos.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -26,7 +26,7 @@ import org.joml.Matrix4f;
 
 
 @Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ModClientEventBusEvents {
+public class ModClientBusEvents {
     //Particle
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

@@ -13,6 +13,9 @@ import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.custom.*;
+import net.theivan066.randomholos.item.custom.base_items.GunItem;
+import net.theivan066.randomholos.item.custom.base_items.HammerItem;
+import net.theivan066.randomholos.item.custom.base_items.ShiftTooltipItem;
 import net.theivan066.randomholos.sound.ModSounds;
 
 public class ModItems {
@@ -63,7 +66,7 @@ public class ModItems {
     public static final RegistryObject<Item> TOKINOSORA_SET_MEAL_B = ITEMS.register("tokinosora_set_meal_b",
             () -> new Item(new Item.Properties().food(ModFoods.TOKINOSORA_SET_MEAL_B)));
     public static final RegistryObject<Item> BROKEN_HAIR_ACCESSORY = ITEMS.register("broken_hair_accessory", () ->  new ShiftTooltipItem(new Item.Properties(), Component.translatable("tooltip.randomholos.broken_hair_accessory.shift")));
-    public static final RegistryObject<Item> TALISMAN_OF_THE_ETHER = ITEMS.register("talisman_of_the_ether", () ->  new TalismanOfTheEtherItem(new Item.Properties()));
+    public static final RegistryObject<Item> TALISMAN_OF_THE_ETHER = ITEMS.register("talisman_of_the_ether", () ->  new TalismanOfTheEtherItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BLUEPRINT = ITEMS.register("blueprint", () ->  new Item(new Item.Properties()));
     public static final RegistryObject<Item> ALLOY_BLUEPRINT = ITEMS.register("alloy_blueprint", () ->  new Item(new Item.Properties()));
@@ -170,7 +173,9 @@ public class ModItems {
             () -> new MicsaberItem(ModToolTiers.ABOVE_DIAMOND, 4, -2.2f, new Item.Properties().durability(2000)));
     public static final RegistryObject<Item> TOURMALINE = ITEMS.register("tourmaline", () ->  new Item(new Item.Properties()));
 
-
+    public static final RegistryObject<Item> SIDEREAL_INGOT = ITEMS.register("sidereal_ingot", () ->  new ShiftTooltipItem(new Item.Properties(), Component.translatable("tooltip.randomholos.sidereal_ingot.shift")));
+    public static final RegistryObject<Item> STAR_DIVA_HAMMER = ITEMS.register("star_diva_hammer",
+            () -> new StarDivaHammerItem(ModToolTiers.SIDEREAL, 5, -3.25f, 2, new Item.Properties().durability(4000)));
 
     public static final RegistryObject<Item> SORA_SPAWN_EGG = ITEMS.register("sora_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.SORA, 0x0146ea, 0x266aff,

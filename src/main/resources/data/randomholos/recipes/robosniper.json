@@ -2,13 +2,13 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
       "item": "randomholos:reinforced_copper_rod"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
       "item": "randomholos:robotic_parts"
@@ -20,13 +20,13 @@
       "item": "randomholos:robotic_parts"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     }
   ],
   "additional_input": {

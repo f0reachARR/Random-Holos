@@ -1,4 +1,4 @@
-package net.theivan066.randomholos.events;
+package net.theivan066.randomholos.client;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;

@@ -16,4 +16,8 @@ public class ModToolTiers {
             new ForgeTier(3, 1500, 9f, 2.5f, 26,
                     Tags.Blocks.NEEDS_NETHERITE_TOOL, () -> Ingredient.of(ModItems.TEST.get())),
             new ResourceLocation(RandomHolos.MOD_ID, "above_diamond"), List.of(Tiers.IRON), List.of());
+    public static final Tier SIDEREAL = TierSortingRegistry.registerTier(
+            new ForgeTier(5, 4000, 9.5f, 5f, 26,
+                    Tags.Blocks.NEEDS_NETHERITE_TOOL, () -> Ingredient.of(ModItems.SIDEREAL_INGOT.get())),
+            new ResourceLocation(RandomHolos.MOD_ID, "sidereal"), List.of(Tiers.NETHERITE), List.of());
 }

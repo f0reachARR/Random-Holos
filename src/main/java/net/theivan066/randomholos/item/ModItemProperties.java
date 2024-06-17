@@ -3,7 +3,7 @@ package net.theivan066.randomholos.item;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.theivan066.randomholos.item.custom.GunItem;
+import net.theivan066.randomholos.item.custom.base_items.GunItem;
 
 public class ModItemProperties {
     public static void addCustomItemProperties() {

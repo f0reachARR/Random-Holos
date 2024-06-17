@@ -8,6 +8,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -199,6 +201,11 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
         bullet.setOwner(this);
 
         this.level().addFreshEntity(bullet);
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        return super.mobInteract(pPlayer, pHand);
     }
 
     @Nullable

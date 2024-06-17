@@ -1,0 +1,38 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "item": "randomholos:ahoge_string"
+    },
+    {
+      "item": "randomholos:stellarite"
+    },
+    {
+      "item": "randomholos:ahoge_string"
+    },
+    {
+      "item": "randomholos:robotic_parts"
+    },
+    {
+      "item": "randomholos:talisman_of_the_ether"
+    },
+    {
+      "item": "randomholos:robotic_parts"
+    },
+    {
+      "item": "randomholos:tourmaline"
+    },
+    {
+      "item": "randomholos:stellarite"
+    },
+    {
+      "item": "randomholos:tourmaline"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:alloy_blueprint"
+  },
+  "output": {
+    "item": "randomholos:sidereal_ingot"
+  }
+}

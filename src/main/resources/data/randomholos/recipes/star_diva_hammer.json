@@ -1,0 +1,38 @@
+{
+  "type": "randomholos:manufacturing",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/steel"
+    },
+    {
+      "item": "randomholos:sidereal_ingot"
+    },
+    {
+      "tag": "forge:storage_blocks/steel"
+    },
+    {
+      "tag": "forge:ingots/steel"
+    },
+    {
+      "item": "randomholos:reinforced_copper_rod"
+    },
+    {
+      "item": "randomholos:sidereal_ingot"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "tag": "forge:ingots/steel"
+    },
+    {
+      "tag": "forge:ingots/steel"
+    }
+  ],
+  "additional_input": {
+    "item": "randomholos:blunt_blueprint"
+  },
+  "output": {
+    "item": "randomholos:star_diva_hammer"
+  }
+}

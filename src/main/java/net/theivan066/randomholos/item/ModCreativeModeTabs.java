@@ -132,6 +132,8 @@ public class ModCreativeModeTabs {
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.MIKOMET_BOW.get());
                         pOutput.accept(ModItems.MIKOMET_ARROW.get());
+                        pOutput.accept(ModItems.SIDEREAL_INGOT.get());
+                        pOutput.accept(ModItems.STAR_DIVA_HAMMER.get());
                     })
                     .build());
 
@@ -155,6 +157,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.TOURMALINE_ORE.get());
                         pOutput.accept(ModBlocks.DEEPSLATE_TOURMALINE_ORE.get());
                         pOutput.accept(ModItems.TOURMALINE.get());
+                        pOutput.accept(ModItems.SIDEREAL_INGOT.get());
                     })
                     .build());
 

@@ -4,6 +4,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,13 +24,22 @@ public class TalismanOfTheEtherItem extends Item {
     @Override
     public void onInventoryTick(ItemStack stack, Level level, Player player, int slotIndex, int selectedIndex) {
         super.onInventoryTick(stack, level, player, slotIndex, selectedIndex);
-        if (player.getOffhandItem().is(this)) {
-            if (tick >= 100) {
-                tick = 0;
-                player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 1);
-                player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 2));
-            } else {
-                tick ++;
+
+    }
+
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+        if (pEntity instanceof Player) {
+            Player player = (Player) pEntity;
+            if (player.getOffhandItem().is(this)) {
+                if (tick >= 400) {
+                    tick = 0;
+                    player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 1);
+                    player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 800, 2));
+                } else {
+                    tick ++;
+                }
             }
         }
     }

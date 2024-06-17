@@ -1,0 +1,17 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "randomholos:chests/plants"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "randomholos:chests/woods"
+        }
+      ]
+    }
+  ]
+}

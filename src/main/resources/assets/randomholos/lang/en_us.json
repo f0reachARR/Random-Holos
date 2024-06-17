@@ -95,6 +95,9 @@
   "item.randomholos.tourmaline": "Tourmaline",
   "block.randomholos.tourmaline_block": "Tourmaline Block",
 
+  "item.randomholos.sidereal_ingot": "Sidereal Ingot",
+  "item.randomholos.star_diva_hammer": "Hammer of The Star Divas",
+
   "item.randomholos.sora_spawn_egg": "Tokino Sora",
   "item.randomholos.kurosora_spawn_egg": "Kuroka Sora",
   "item.randomholos.nunnun_spawn_egg": "Nunnun",
@@ -167,5 +170,11 @@
   "tooltip.randomholos.mikomet_arrow.shift": "Arrows tailor-made for the Mikomet Bow",
   "tooltip.randomholos.guesser_pin.shift": "Zero-guess your heart! ♡",
   "tooltip.randomholos.gun_ammo": "Ammo",
-  "tooltip.randomholos.kakuriyo.alt": "<§cCaution§r>: Water destroys the portal! \nThere is also chances of the portal not spawning upon entering, bring more than one just in case!"
+  "tooltip.randomholos.kakuriyo.alt": "<§cCaution§r>: Water destroys the portal! \nThere is also chances of the portal not spawning upon entering, bring more than one just in case!",
+  "tooltip.randomholos.sidereal_ingot.shift": "§bClouds drift away, as the days pass by.\nStars drift across the night, as how many seasons came, and went.\nWith the five, they shine bright as Polaris,\nno matter how many frontiers they have lasted,\nno matter how difficult of a game they have conquered,\nno matter how big of a pon they have tripped on,\nno matter how long of a path they have pioneered - \nIt's not a fairy tale.\n'Cause, They §oARE§r the star.\n§bThey §oARE§r the never-extinguishing, eternally-dazzling star.",
+  "tooltip.randomholos.star_diva_hammer.shift": "The ultimate hammer combining the forces of the five\n§oMines in a 5x5 area!",
+
+  "key.randomholos.ability": "Ability",
+  "key.randomholos.secondary_ability": "Secondary Ability",
+  "key.categories.randomholos": "Holo Continuum"
 }

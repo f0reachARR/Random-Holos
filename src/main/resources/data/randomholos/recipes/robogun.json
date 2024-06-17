@@ -11,13 +11,13 @@
       "tag": "forge:glass_panes"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
       "item": "randomholos:energy_core"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
       "tag": "forge:glass_panes"

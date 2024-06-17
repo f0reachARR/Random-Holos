@@ -89,6 +89,9 @@
   "item.randomholos.tourmaline": "トルマリン",
   "block.randomholos.tourmaline_block": "トルマリンブロック",
 
+  "item.randomholos.sidereal_ingot": "恒星インゴット",
+  "item.randomholos.star_diva_hammer": "星の歌姫ハンマー",
+
   "item.randomholos.sora_spawn_egg": "ときのそら",
   "item.randomholos.kurosora_spawn_egg": "黒化したそら",
   "item.randomholos.nunnun_spawn_egg": "ぬんぬん",
@@ -148,18 +151,24 @@
   "tooltip.randomholos.talisman_of_the_ether.shift": "腹が減るが、採掘は素早くできるようになる",
   "tooltip.randomholos.robogun.shift": "ロボットが使っていた銃",
   "tooltip.randomholos.robosniper.shift": "強化されたロボットが使っていた大型反物質ライフル",
-  "tooltip.randomholos.psychopathaxe.shift": "サイコパスの持ち物。\nこれで誰かを殴ると、§4コ§6ス§eミ§aッ§bク§5の§r、§4矍§e鑠§5た§bる§r、§o≡速やかな§rサイコパスになれる.",
+  "tooltip.randomholos.psychopathaxe.shift": "サイコパスの持ち物\nこれで誰かを殴ると、§4コ§6ス§eミ§aッ§bク§5の§r、§4矍§e鑠§5た§bる§r、§o≡速やかな§rサイコパスになれる.",
   "tooltip.randomholos.glassheels.shift": "ガラス製のハイヒール。投げんなよ",
-  "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin' §lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
+  "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin'\n§lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
   "tooltip.randomholos.apple_juice.shift": "実は§kcc§rレモンのほうがおいしいんだよね",
-  "tooltip.randomholos.kakuriyo.shift": "幽世に繋がるポータル。 \n置いて<§e右クリック§r>で使える。",
-  "tooltip.randomholos.elite_lava_bucket.shift": "電脳桜神社の巫女より洗浄された溶岩 \n§o赤ちゃんが使っても大丈夫!",
+  "tooltip.randomholos.kakuriyo.shift": "幽世に繋がるポータル。\n置いて<§e右クリック§r>で使える。",
+  "tooltip.randomholos.elite_lava_bucket.shift": "電脳桜神社の巫女より洗浄された溶岩\n§o赤ちゃんが使っても大丈夫!",
   "tooltip.randomholos.ahoge.shift": "あんた... 誰かの本体を手に入ったの?",
   "tooltip.randomholos.ahoge_string.shift": "アホ毛から精錬された糸",
-  "tooltip.randomholos.miko_bow.shift": "巫女の髪から作った弓 \n§oとんでもない弾力!",
-  "tooltip.randomholos.mikomet_bow.shift": "ステラとポンのパワーを併せ持ったステラとポン \n§oみこめっとの矢しか使わない!",
+  "tooltip.randomholos.miko_bow.shift": "巫女の髪から作った弓\n§oとんでもない弾力!",
+  "tooltip.randomholos.mikomet_bow.shift": "ステラとポンのパワーを併せ持ったステラとポン\n§oみこめっとの矢しか使わない!",
   "tooltip.randomholos.mikomet_arrow.shift": "みこめっとの弓のために作りあげた矢",
   "tooltip.randomholos.guesser_pin.shift": "あなたの心をゼロゲッサー！ ♡",
   "tooltip.randomholos.gun_ammo": "弾数",
-  "tooltip.randomholos.kakuriyo.alt": "<§c注意§r>: 水はポータルを壊す! \nポータルが向こう側で生成しない可能性があるから、もう一個持っといてね!"
+  "tooltip.randomholos.kakuriyo.alt": "<§c注意§r>: 水はポータルを壊す!\nポータルが向こう側で生成しない可能性があるから、もう一個持っといてね!",
+  "tooltip.randomholos.sidereal_ingot.shift": "§b閒雲潭影日に悠悠、物換り星移りて幾度の秋ぞ。\n幾度の春秋が去って行くとも、五人が共に、ポラリスのように耀く。\nどれだけ多くのフロンティアを踰えても、どれだけ無理矢理なゲームを挑んでも、\nどれだけ狂いポンで躓いても、どれだけ長い旅路を切り拓いても。\n夢見がちの御伽噺じゃない―― \nだって、五人は§o星だから§r。\n§b熄滅ことなき、永久に矍鑠たる§o星、だから§r§b。",
+  "tooltip.randomholos.star_diva_hammer.shift": "五人の力が合わせた究極のハンマー\n§o5x5のエリアを一気に掘削！",
+
+  "key.randomholos.ability": "アビリティー",
+  "key.randomholos.secondary_ability": "セカンダリーアビリティー",
+  "key.categories.randomholos": "ホロコンティニュアム"
 }

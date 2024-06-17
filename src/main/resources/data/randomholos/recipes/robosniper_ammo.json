@@ -17,7 +17,7 @@
       "item": "randomholos:energy_core"
     },
     {
-      "item": "randomholos:steel_block"
+      "tag": "forge:storage_blocks/steel"
     },
     {
       "tag": "forge:storage_blocks/copper"

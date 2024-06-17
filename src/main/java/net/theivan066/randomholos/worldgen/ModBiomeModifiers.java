@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +32,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_MIKOP = registerKey("spawn_mikop");
     public static final ResourceKey<BiomeModifier> SPAWN_SUISEI = registerKey("spawn_suisei");
     public static final ResourceKey<BiomeModifier> SPAWN_AZKI = registerKey("spawn_azki");
+    public static final ResourceKey<BiomeModifier> SPAWN_ROBOCO = registerKey("spawn_roboco");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -68,11 +70,11 @@ public class ModBiomeModifiers {
 
         context.register(SPAWN_SUISEI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.SUISEI.get(), 4, 1, 1))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.SUISEI.get(), 3, 1, 1))));
 
         context.register(SPAWN_AZKI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
-                List.of(new MobSpawnSettings.SpawnerData(ModEntities.AZKI.get(), 4, 1, 1))));
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.AZKI.get(), 3, 1, 1))));
 
         context.register(SPAWN_SORA, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
@@ -81,6 +83,10 @@ public class ModBiomeModifiers {
         context.register(SPAWN_NUNNUN, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.NUNNUN.get(), 3, 1, 8))));
+
+        context.register(SPAWN_ROBOCO, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.ROBOCO.get(), 2, 1, 1))));
     }
 
 

@@ -1,4 +1,4 @@
-package net.theivan066.randomholos.item.custom;
+package net.theivan066.randomholos.item.custom.base_items;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
