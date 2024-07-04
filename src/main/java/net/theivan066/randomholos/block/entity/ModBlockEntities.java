@@ -17,6 +17,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(ManufacturingTableBlockEntity::new,
                             ModBlocks.MANUFACTURING_TABLE.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<HumidifierBlockEntity>> HUMIDIFIER_BE =
+            BLOCK_ENTITIES.register("humidifier_block_entity", () ->
+                    BlockEntityType.Builder.of(HumidifierBlockEntity::new,
+                            ModBlocks.HUMIDIFIER.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

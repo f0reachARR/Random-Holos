@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "randomholos:block/kimchi_hotpot_full",
-		"particle": "randomholos:block/kimchi_hotpot_full"
+		"0": "randomholos:block/humidifier_empty",
+		"particle": "randomholos:block/humidifier_empty"
 	},
 	"elements": [
 		{

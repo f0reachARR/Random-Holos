@@ -9,10 +9,33 @@
       "text": "This section will explain about mob interactions - some items require interacting with mobs to acquire."
     },
     {
+      "type": "patchouli:empty",
+      "draw_filler": false
+    },
+    {
       "type": "patchouli:entity",
       "entity": "randomholos:sora",
-      "border": false
-      }
+      "border": false,
+      "text": "The first one has got to be the beginning of everything, the Pangaea of the legacy - the one and only Tokino Sora. Adorable."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "randomholos:kurosora",
+      "border": false,
+      "text": "A boss mob with very strong attacks. You can either summon her using a broken hair accessory on a normal Sora, or they can be found in their lairs (WIP). Killing one will drop a $(9)talisman of the ether$()."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "randomholos:miko",
+      "border": false,
+      "text": "The beginning of Pon. A shrine maiden that can cleanse your lava and make it safe for all beings. Right click her with a lava bucket in hand while having 4 $(9)pink petals$() or 4 $(9)cherry saplings$()."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "randomholos:mikop",
+      "border": false,
+      "text": "A cute being, that will trade you sometimes suspicious items."
+    }
   ],
-  "sortnum": 1
+  "sortnum": 5
 }

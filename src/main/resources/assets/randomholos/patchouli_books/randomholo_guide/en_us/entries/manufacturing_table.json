@@ -18,6 +18,25 @@
     {
       "type": "patchouli:crafting",
       "recipe": "randomholos:manufacturing_table"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "The different blueprints",
+      "text": "There are different blueprints for manufacturing different items. See the next page for their recipes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:blueprint",
+      "recipe2": "randomholos:alloy_blueprint"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:blade_blueprint",
+      "recipe2": "randomholos:blunt_blueprint"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "randomholos:firearm_blueprint"
     }
   ],
   "sortnum": 4

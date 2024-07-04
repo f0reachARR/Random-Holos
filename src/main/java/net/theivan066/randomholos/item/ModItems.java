@@ -13,8 +13,8 @@ import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.custom.*;
+import net.theivan066.randomholos.item.custom.base_items.DrinkItem;
 import net.theivan066.randomholos.item.custom.base_items.GunItem;
-import net.theivan066.randomholos.item.custom.base_items.HammerItem;
 import net.theivan066.randomholos.item.custom.base_items.ShiftTooltipItem;
 import net.theivan066.randomholos.sound.ModSounds;
 

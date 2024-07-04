@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -32,16 +33,17 @@ public class GuesserPinProjectileEntity extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        LivingEntity entity = (LivingEntity) pResult.getEntity();
-        this.level().playSound(entity, entity.getOnPos(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.PLAYERS, 1f, 1f);
+        if (pResult.getEntity() instanceof LivingEntity entity) {
+            this.level().playSound(entity, entity.getOnPos(), SoundEvents.ARROW_HIT_PLAYER, SoundSource.PLAYERS, 1f, 1f);
 
-        MobEffectInstance effect = entity.getEffect(ModEffects.ZERO_GUESSER_EFFECT.get());
-        int lvl = effect != null ? effect.getAmplifier() : -1;
-        float dmg = lvl > 0 ? (float) Math.pow(1.1, Math.min(lvl, 128)) : 0.5f;
+            MobEffectInstance effect = entity.getEffect(ModEffects.ZERO_GUESSER_EFFECT.get());
+            int lvl = effect != null ? effect.getAmplifier() : -1;
+            float dmg = lvl > 0 ? (float) Math.pow(1.1, Math.min(lvl, 128)) : 0.5f;
 
-        entity.hurt(entity.damageSources().mobProjectile(this, GuesserPinItem.thrower), dmg);
-        entity.addEffect(new MobEffectInstance(ModEffects.ZERO_GUESSER_EFFECT.get(), 200, lvl + 1));
+            entity.hurt(entity.damageSources().mobProjectile(this, GuesserPinItem.thrower), dmg);
+            entity.addEffect(new MobEffectInstance(ModEffects.ZERO_GUESSER_EFFECT.get(), 200, lvl + 1));
 
+        }
         super.onHitEntity(pResult);
     }
 

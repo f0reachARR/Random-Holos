@@ -17,7 +17,7 @@ public class ScallionCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.CHIVES.get();
+        return ModItems.SCALLION.get();
     }
 
     @Override

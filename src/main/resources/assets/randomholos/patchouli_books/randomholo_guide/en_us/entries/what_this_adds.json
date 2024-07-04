@@ -1,12 +1,16 @@
 {
-  "name": "What are the features?",
+  "name": "Basic Features",
   "icon": "randomholos:holo_logo",
   "category": "randomholos:welcome",
   "pages": [
     {
       "type": "patchouli:text",
       "title": "So what are there?",
-      "text": "This mod is planning to add all of the Holomems' (Yes, JP, EN and ID) as mobs/npcs and features based on them$(o) (So if you haven't seen your oshi here it's working in progress - future updates will add them in one by one~)$()."
+      "text": "This mod is planning to add all of the Holomems' (Yes, JP, EN and ID) as mobs/npcs and features based on them$(o) (So if you haven't seen your oshi here it's working in progress - future updates will add them in one by one~)$().$(br2)$(o)p.s. I'm a solo developer so things might take time *wink."
+    },
+    {
+      "type": "patchouli:empty",
+      "draw_filler": false
     },
     {
       "type": "patchouli:image",

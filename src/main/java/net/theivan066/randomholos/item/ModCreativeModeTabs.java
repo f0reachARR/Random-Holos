@@ -84,6 +84,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.AHOGE.get());;
                         pOutput.accept(ModItems.AHOGE_STRING.get());
                         pOutput.accept(ModItems.MIKO_BOW.get());
+                        pOutput.accept(ModBlocks.HUMIDIFIER.get());
                     })
                     .build());
 

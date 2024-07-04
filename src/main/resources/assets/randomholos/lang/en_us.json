@@ -83,6 +83,7 @@
   "item.randomholos.miko_bow": "Bow of the Shrine Maiden",
   "item.randomholos.mikomet_bow": "Bow of the Mikomet",
   "item.randomholos.mikomet_arrow": "Arrow of the Mikomet",
+  "block.randomholos.humidifier": "Humidifier",
 
   "item.randomholos.copper_rod": "Copper Rod",
   "item.randomholos.reinforced_copper_rod": "Reinforced Copper Rod",
@@ -141,6 +142,8 @@
 
   "gui.randomholos.manufacturing_table": "Manufacturing",
   "title.randomholos.manufacturing": "Manufacturing",
+  "gui.randomholos.humidifier": "Humidifier",
+  "title.randomholos.humidifier": "Humidifier",
 
   "messages.randomholos.no_ahoge" : "seems like there is no need for a haricut.",
   "messages.randomholos.aenbien": "Miko expereienced the hell of Aenbien",
@@ -173,6 +176,9 @@
   "tooltip.randomholos.kakuriyo.alt": "<§cCaution§r>: Water destroys the portal! \nThere is also chances of the portal not spawning upon entering, bring more than one just in case!",
   "tooltip.randomholos.sidereal_ingot.shift": "§bClouds drift away, as the days pass by.\nStars drift across the night, as how many seasons came, and went.\nWith the five, they shine bright as Polaris,\nno matter how many frontiers they have lasted,\nno matter how difficult of a game they have conquered,\nno matter how big of a pon they have tripped on,\nno matter how long of a path they have pioneered - \nIt's not a fairy tale.\n'Cause, They §oARE§r the star.\n§bThey §oARE§r the never-extinguishing, eternally-dazzling star.",
   "tooltip.randomholos.star_diva_hammer.shift": "The ultimate hammer combining the forces of the five\n§oMines in a 5x5 area!",
+
+  "tooltip.randomholos.liquid.amount.with.capacity": "%s / %s mB",
+  "tooltip.randomholos.liquid.amount": "%s mB",
 
   "key.randomholos.ability": "Ability",
   "key.randomholos.secondary_ability": "Secondary Ability",

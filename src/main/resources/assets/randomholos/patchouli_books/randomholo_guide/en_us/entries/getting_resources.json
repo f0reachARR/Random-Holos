@@ -6,7 +6,7 @@
     {
       "type": "patchouli:text",
       "title": "So what are there?",
-      "text": "$(br2)$(br2)This section will walk you through on how to get your hands on basic resources."
+      "text": "$(br2)$(br2)This section will walk you through on how to get your hands on basic resources. These are used to craft various things."
     },
     {
       "type": "patchouli:empty",
@@ -49,6 +49,31 @@
     {
       "type": "patchouli:empty",
       "draw_filler": false
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": {
+        "item": "randomholos:tourmaline"
+      },
+      "title": "Tourmaline",
+      "text": "Tourmaline is a mineral containing electricity. Its ore can be found almost everywhere."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomholos:tourmaline_ore,randomholos:deepslate_tourmaline_ore",
+      "text": "Tourmaline ores"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomholos:raw_rice,randomholos:chives,randomholos:scallion,randomholos:chinese_cabbage,randomholos:red_chili_pepper,randomholos:green_chili_pepper,randomholos:ghost_pepper",
+      "title": "Plants",
+      "text": "Plants are the basis for most food items in $(#34c9fe)HoloContinuum$(). They are available pretty much everywhere in chests, villages etc..."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "randomholos:raw_rice,minecraft:seagrass,randomholos:curry,minecraft:fern",
+      "title": "Alternative ways",
+      "text": "There are also some alternative ways to obtain plants. You can find rice in seagrass, and curry in ferns."
     },
     {
       "type": "patchouli:spotlight",

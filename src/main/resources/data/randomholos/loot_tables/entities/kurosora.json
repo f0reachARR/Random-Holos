@@ -1,0 +1,13 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "randomholos:talisman_of_the_ether"
+        }
+      ]
+    }
+  ]
+}

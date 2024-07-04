@@ -77,6 +77,7 @@
   "item.randomholos.miko_bow": "巫女の弓",
   "item.randomholos.mikomet_bow": "みこめっとの弓",
   "item.randomholos.mikomet_arrow": "みこめっとの矢",
+  "block.randomholos.humidifier": "加湿器",
 
   "item.randomholos.copper_rod": "銅の棒",
   "item.randomholos.reinforced_copper_rod": "強化された銅棒",
@@ -135,6 +136,8 @@
 
   "gui.randomholos.manufacturing_table": "製造",
   "title.randomholos.manufacturing": "製造",
+  "gui.randomholos.humidifier": "加湿器",
+  "title.randomholos.humidifier": "加湿器",
 
   "messages.randomholos.no_ahoge" : "髪切るのは要らなさそうね",
   "messages.randomholos.aenbien": "あるみこは阿鼻叫喚（亜鉛鼻炎）を体験した",
@@ -167,6 +170,9 @@
   "tooltip.randomholos.kakuriyo.alt": "<§c注意§r>: 水はポータルを壊す!\nポータルが向こう側で生成しない可能性があるから、もう一個持っといてね!",
   "tooltip.randomholos.sidereal_ingot.shift": "§b閒雲潭影日に悠悠、物換り星移りて幾度の秋ぞ。\n幾度の春秋が去って行くとも、五人が共に、ポラリスのように耀く。\nどれだけ多くのフロンティアを踰えても、どれだけ無理矢理なゲームを挑んでも、\nどれだけ狂いポンで躓いても、どれだけ長い旅路を切り拓いても。\n夢見がちの御伽噺じゃない―― \nだって、五人は§o星だから§r。\n§b熄滅ことなき、永久に矍鑠たる§o星、だから§r§b。",
   "tooltip.randomholos.star_diva_hammer.shift": "五人の力が合わせた究極のハンマー\n§o5x5のエリアを一気に掘削！",
+
+  "tooltip.randomholos.liquid.amount.with.capacity": "%s / %s mB",
+  "tooltip.randomholos.liquid.amount": "%s mB",
 
   "key.randomholos.ability": "アビリティー",
   "key.randomholos.secondary_ability": "セカンダリーアビリティー",

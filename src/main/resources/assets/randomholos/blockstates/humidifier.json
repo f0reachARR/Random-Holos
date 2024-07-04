@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,with_water=true,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 90
+    },
+    "facing=east,with_water=true,with_lava=false": {
+      "model": "randomholos:block/humidifier_with_water",
+      "y": 90
+    },
+    "facing=east,with_water=false,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 90
+    },
+    "facing=east,with_water=false,with_lava=false": {
+      "model": "randomholos:block/humidifier_empty",
+      "y": 90
+    },
+    "facing=north,with_water=true,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit"
+    },
+    "facing=north,with_water=true,with_lava=false": {
+      "model": "randomholos:block/humidifier_with_water"
+    },
+    "facing=north,with_water=false,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit"
+    },
+    "facing=north,with_water=false,with_lava=false": {
+      "model": "randomholos:block/humidifier_empty"
+    },
+    "facing=south,with_water=true,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 180
+    },
+    "facing=south,with_water=true,with_lava=false": {
+      "model": "randomholos:block/humidifier_with_water",
+      "y": 180
+    },
+    "facing=south,with_water=false,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 180
+    },
+    "facing=south,with_water=false,with_lava=false": {
+      "model": "randomholos:block/humidifier_empty",
+      "y": 180
+    },
+    "facing=west,with_water=true,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 270
+    },
+    "facing=west,with_water=true,with_lava=false": {
+      "model": "randomholos:block/humidifier_with_water",
+      "y": 270
+    },
+    "facing=west,with_water=false,with_lava=true": {
+      "model": "randomholos:block/humidifier_lit",
+      "y": 270
+    },
+    "facing=west,with_water=false,with_lava=false": {
+      "model": "randomholos:block/humidifier_empty",
+      "y": 270
+    }
+  }
+}

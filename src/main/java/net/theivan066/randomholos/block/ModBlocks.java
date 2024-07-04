@@ -79,7 +79,8 @@ public class ModBlocks {
 
     public static final RegistryObject<LiquidBlock> ELITE_LAVA_BLOCK = BLOCKS.register("elite_lava_block",
             () -> new LiquidBlock(ModFluids.SOURCE_ELITE_LAVA, BlockBehaviour.Properties.copy(Blocks.LAVA).lightLevel(state -> 10).noLootTable()));
-
+    public static final RegistryObject<Block> HUMIDIFIER = registerBlock("humidifier", ()->
+            new HumidifierBlock(BlockBehaviour.Properties.of().strength(0.6f).sound(SoundType.AMETHYST_CLUSTER).noOcclusion()));
 
     public static final RegistryObject<Block> METEORITE = registerBlock("meteorite", ()->
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE)));
