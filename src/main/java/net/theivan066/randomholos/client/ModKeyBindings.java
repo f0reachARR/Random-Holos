@@ -2,12 +2,15 @@ package net.theivan066.randomholos.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.client.settings.KeyConflictContext;
+import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.theivan066.randomholos.RandomHolos;
 
 public class ModKeyBindings {
     public static final ModKeyBindings INSTANCE = new ModKeyBindings();
-    private ModKeyBindings() {}
+
+    private ModKeyBindings() {
+    }
+
     private static final String CATEGORY = "key.categories." + RandomHolos.MOD_ID;
 
     public final KeyMapping ABILITY_KEY = new KeyMapping(

@@ -1,6 +1,5 @@
 package net.theivan066.randomholos.block.entity;
 
-import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,17 +26,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.custom.HumidifierBlock;
 import net.theivan066.randomholos.fluid.ModFluids;
@@ -70,7 +68,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
 
     protected final ContainerData data;
 
@@ -82,10 +80,11 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
             @Override
             protected void onContentsChanged() {
                 setChanged();
-                if(!level.isClientSide()) {
+                if (!level.isClientSide()) {
                     level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
                 }
             }
+
             @Override
             public boolean isFluidValid(FluidStack stack) {
                 return true;
@@ -102,14 +101,18 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
             }
         };
     }
+
     public IEnergyStorage getEnergyStorage() {
         return this.ENERGY_STORAGE;
     }
+
     public IFluidTank getFluidTank() {
         return this.FLUID_TANK;
     }
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
+
+    private BlockCapabilityCache<IItemHandler, @Nullable Void> itemHandlerCache;
+    private BlockCapabilityCache<IEnergyStorage, @Nullable Void> energyStorageCache;
+    private BlockCapabilityCache<IFluidTank, @Nullable Void> fluidTankCache;
 
     private void extractEnergy() {
         this.ENERGY_STORAGE.extractEnergy(1, false);
@@ -136,8 +139,6 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     }
 
 
-
-
     //load and save
     @Override
     public void onLoad() {
@@ -145,7 +146,14 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
         lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
         lazyFluidHandler = LazyOptional.of(() -> FLUID_TANK);
+        itemHandlerCache = BlockCapabilityCache.create(
+                Capabilities.ItemHandler.BLOCK, // capability to cache
+                level, // level
+                getBlockPos(), // target position
+                Direction.NORTH // context
+        );
     }
+
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
@@ -153,6 +161,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
         lazyEnergyHandler.invalidate();
         lazyFluidHandler.invalidate();
     }
+
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -160,6 +169,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
         pTag = FLUID_TANK.writeToNBT(pTag);
         super.saveAdditional(pTag);
     }
+
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
@@ -190,7 +200,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
                     }
                 }
             }
-            for (int i = 0 ; i < 2 ; i ++) {
+            for (int i = 0; i < 2; i++) {
                 this.getLevel().addParticle(ParticleTypes.BUBBLE, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
             }
         } else if (fluidStack.isFluidEqual(new ItemStack(Items.LAVA_BUCKET))) {
@@ -199,10 +209,10 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
             List<Entity> entities = level.getEntitiesOfClass(Entity.class, box);
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.setSecondsOnFire(3);
+                    livingEntity.setRemainingFireTicks(30);
                 }
             }
-            for (int i = 0 ; i < 2 ; i ++) {
+            for (int i = 0; i < 2; i++) {
                 this.getLevel().addParticle(ParticleTypes.LAVA, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
             }
         } else if (fluidStack.isFluidEqual(new FluidStack(ModFluids.SOURCE_ELITE_LAVA.get(), 1))) {
@@ -217,7 +227,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 35, 0, true, false));
                 }
             }
-            for (int i = 0 ; i < 2 ; i ++) {
+            for (int i = 0; i < 2; i++) {
                 this.getLevel().addParticle(ParticleTypes.CHERRY_LEAVES, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
             }
         } else {
@@ -226,7 +236,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void fillOrDrainFluid() {
-        if(hasFluidSource(INPUT_SLOT)) {
+        if (hasFluidSource(INPUT_SLOT)) {
             transferFluidIn(INPUT_SLOT);
         } else if (this.itemHandler.getStackInSlot(INPUT_SLOT).is(ModItems.ELITE_LAVA_BUCKET.get())) {
             eliteLava();
@@ -288,15 +298,18 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
 
 
     public HumidifierBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.HUMIDIFIER_BE.get(), pPos, pBlockState);
+        super(ModBlockEntities.HUMIDIFIER_BE, pPos, pBlockState);
         this.humidifierBlock = (HumidifierBlock) ModBlocks.HUMIDIFIER.get();
         this.data = new ContainerData() {
             @Override
             public int get(int pIndex) {
                 return 0;
             }
+
             @Override
-            public void set(int pIndex, int pValue) {}
+            public void set(int pIndex, int pValue) {
+            }
+
             @Override
             public int getCount() {
                 return 0;
@@ -319,17 +332,18 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ENERGY) {
+        if (cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
-        if(cap == ForgeCapabilities.FLUID_HANDLER) {
+        if (cap == ForgeCapabilities.FLUID_HANDLER) {
             return lazyFluidHandler.cast();
         }
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
         return super.getCapability(cap, side);
     }
+
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {

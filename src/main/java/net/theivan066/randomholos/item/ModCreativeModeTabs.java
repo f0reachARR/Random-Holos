@@ -4,16 +4,16 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.block.ModBlocks;
 
 public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, RandomHolos.MOD_ID);
-    public static final RegistryObject<CreativeModeTab> AASORA = CREATIVE_MODE_TABS.register("aasora",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AASORA = CREATIVE_MODE_TABS.register("aasora",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.TOKINOSORA_SET_MEAL_A.get()))
                     .title(Component.translatable("creativetab.sora"))
                     .displayItems((pParameters, pOutput) -> {
@@ -43,7 +43,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ABROBOCO = CREATIVE_MODE_TABS.register("abroboco",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ABROBOCO = CREATIVE_MODE_TABS.register("abroboco",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ROBOGUN.get()))
                     .title(Component.translatable("creativetab.roboco"))
                     .displayItems((pParameters, pOutput) -> {
@@ -74,21 +74,22 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ACMIKO = CREATIVE_MODE_TABS.register("acmiko",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ACMIKO = CREATIVE_MODE_TABS.register("acmiko",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ELITE_LAVA_BUCKET.get()))
                     .title(Component.translatable("creativetab.miko"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.MIKO_SPAWN_EGG.get());
                         pOutput.accept(ModItems.MIKOP_SPAWN_EGG.get());
                         pOutput.accept(ModItems.ELITE_LAVA_BUCKET.get());
-                        pOutput.accept(ModItems.AHOGE.get());;
+                        pOutput.accept(ModItems.AHOGE.get());
+                        ;
                         pOutput.accept(ModItems.AHOGE_STRING.get());
                         pOutput.accept(ModItems.MIKO_BOW.get());
                         pOutput.accept(ModBlocks.HUMIDIFIER.get());
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ADSUISEI = CREATIVE_MODE_TABS.register("adsuisei",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ADSUISEI = CREATIVE_MODE_TABS.register("adsuisei",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.GLASS_HEELS.get()))
                     .title(Component.translatable("creativetab.suisei"))
                     .displayItems((pParameters, pOutput) -> {
@@ -105,7 +106,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> AEAZKI = CREATIVE_MODE_TABS.register("aeazki",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AEAZKI = CREATIVE_MODE_TABS.register("aeazki",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.GUESSER_PIN.get()))
                     .title(Component.translatable("creativetab.azki"))
                     .displayItems((pParameters, pOutput) -> {
@@ -119,7 +120,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> AMAYAME = CREATIVE_MODE_TABS.register("amayame",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AMAYAME = CREATIVE_MODE_TABS.register("amayame",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.KAKURIYO_PORTAL.get()))
                     .title(Component.translatable("creativetab.ayame"))
                     .displayItems((pParameters, pOutput) -> {
@@ -127,7 +128,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZACOLLAB = CREATIVE_MODE_TABS.register("zacollab",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZACOLLAB = CREATIVE_MODE_TABS.register("zacollab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.MIKOMET_BOW.get()))
                     .title(Component.translatable("creativetab.collab"))
                     .displayItems((pParameters, pOutput) -> {
@@ -138,7 +139,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZBMATERIALS = CREATIVE_MODE_TABS.register("zbmaterials",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZBMATERIALS = CREATIVE_MODE_TABS.register("zbmaterials",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.STELLARITE.get()))
                     .title(Component.translatable("creativetab.materials"))
                     .displayItems((pParameters, pOutput) -> {
@@ -148,7 +149,8 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.STEEL_BLOCK.get());
                         pOutput.accept(ModItems.COPPER_ROD.get());
                         pOutput.accept(ModItems.REINFORCED_COPPER_ROD.get());
-                        pOutput.accept(ModItems.AHOGE.get());;
+                        pOutput.accept(ModItems.AHOGE.get());
+                        ;
                         pOutput.accept(ModItems.AHOGE_STRING.get());
                         pOutput.accept(ModBlocks.METEORITE.get());
                         pOutput.accept(ModBlocks.CRUDE_METEORITE.get());
@@ -162,7 +164,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZCHOLO_SPAWN_EGGS = CREATIVE_MODE_TABS.register("zcholo_spawn_eggs",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZCHOLO_SPAWN_EGGS = CREATIVE_MODE_TABS.register("zcholo_spawn_eggs",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.SUISEI_SPAWN_EGG.get()))
                     .title(Component.translatable("creativetab.holo_spawn_eggs"))
                     .displayItems((pParameters, pOutput) -> {
@@ -177,7 +179,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZZBRANDOM_BLOCKS = CREATIVE_MODE_TABS.register("zzbrandom_blocks",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZZBRANDOM_BLOCKS = CREATIVE_MODE_TABS.register("zzbrandom_blocks",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.FALLEN_LEAVES.get()))
                     .title(Component.translatable("creativetab.random_blocks"))
                     .displayItems((pParameters, pOutput) -> {
@@ -192,7 +194,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZZARANDOM_FOOD = CREATIVE_MODE_TABS.register("zzarandom_food",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZZARANDOM_FOOD = CREATIVE_MODE_TABS.register("zzarandom_food",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BAGUETTE.get()))
                     .title(Component.translatable("creativetab.random_food"))
                     .displayItems((pParameters, pOutput) -> {
@@ -202,7 +204,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
-    public static final RegistryObject<CreativeModeTab> ZYBOOK = CREATIVE_MODE_TABS.register("zybook",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ZYBOOK = CREATIVE_MODE_TABS.register("zybook",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.LETTER.get()))
                     .title(Component.translatable("creativetab.book"))
                     .displayItems((pParameters, pOutput) -> {

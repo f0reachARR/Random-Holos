@@ -16,11 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
 import net.theivan066.randomholos.screen.ManufacturingTableMenu;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +35,7 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0,1,2,3,4,5,6,7,8,9 -> true;
+                case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 -> true;
                 case 10 -> false;
                 default -> super.isItemValid(slot, stack);
             };
@@ -57,7 +54,7 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     private static final int INPUT_SLOT_PATTERN = 9;
     private static final int OUTPUT_SLOT = 10;
 
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private IItemHandler lazyItemHandler = null;
 
     protected final ContainerData data;
     private int progress = 0;
@@ -68,13 +65,7 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
-
+    
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
@@ -133,7 +124,7 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return lazyItemHandler.cast();
         }
         return super.getCapability(cap, side);
@@ -153,10 +144,10 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
             setChanged(level, pPos, pState);
             if (isProgressDone()) {
                 craftItem();
-                 this.progress = 0;
+                this.progress = 0;
             }
         } else {
-             this.progress = 0;
+            this.progress = 0;
         }
     }
 
@@ -192,7 +183,7 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
 
     private Optional<ManufacturingRecipe> getCurrentRecipe() {
         SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
-        for(int i = 0; i < this.itemHandler.getSlots(); i++) {
+        for (int i = 0; i < this.itemHandler.getSlots(); i++) {
             inventory.setItem(i, this.itemHandler.getStackInSlot(i));
         }
         return this.level.getRecipeManager().getRecipeFor(ManufacturingRecipe.Type.INSTANCE, inventory, level);

@@ -34,7 +34,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.network.NetworkHooks;
 import net.theivan066.randomholos.item.ModItems;
 
 import javax.annotation.Nullable;
@@ -52,6 +51,7 @@ public class MikometArrowEntity extends AbstractArrow {
     private IntOpenHashSet piercingIgnoreEntityIds;
     @Nullable
     private List<Entity> piercedAndKilledEntities;
+
     public MikometArrowEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -63,7 +63,7 @@ public class MikometArrowEntity extends AbstractArrow {
 
 
     public MikometArrowEntity(EntityType<? extends AbstractArrow> pEntityType, LivingEntity pShooter, Level pLevel) {
-        this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double)0.1F, pShooter.getZ(), pLevel);
+        this(pEntityType, pShooter.getX(), pShooter.getEyeY() - (double) 0.1F, pShooter.getZ(), pLevel);
         this.setOwner(pShooter);
         if (pShooter instanceof Player) {
             this.pickup = AbstractArrow.Pickup.ALLOWED;
@@ -77,6 +77,7 @@ public class MikometArrowEntity extends AbstractArrow {
         }
 
     }
+
     @Override
     public void tick() {
         super.tick();
@@ -84,8 +85,8 @@ public class MikometArrowEntity extends AbstractArrow {
         Vec3 vec3 = this.getDeltaMovement();
         if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
             double d0 = vec3.horizontalDistance();
-            this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
-            this.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
+            this.setYRot((float) (Mth.atan2(vec3.x, vec3.z) * (double) (180F / (float) Math.PI)));
+            this.setXRot((float) (Mth.atan2(vec3.y, d0) * (double) (180F / (float) Math.PI)));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
         }
@@ -117,23 +118,23 @@ public class MikometArrowEntity extends AbstractArrow {
                 vec33 = hitresult.getLocation();
             }
 
-            while(!this.isRemoved()) {
+            while (!this.isRemoved()) {
                 EntityHitResult entityhitresult = this.findHitEntity(vec32, vec33);
                 if (entityhitresult != null) {
                     hitresult = entityhitresult;
                 }
 
                 if (hitresult != null && hitresult.getType() == HitResult.Type.ENTITY) {
-                    Entity entity = ((EntityHitResult)hitresult).getEntity();
+                    Entity entity = ((EntityHitResult) hitresult).getEntity();
                     Entity entity1 = this.getOwner();
-                    if (entity instanceof Player && entity1 instanceof Player && !((Player)entity1).canHarmPlayer((Player)entity)) {
+                    if (entity instanceof Player && entity1 instanceof Player && !((Player) entity1).canHarmPlayer((Player) entity)) {
                         hitresult = null;
                         entityhitresult = null;
                     }
                 }
 
                 if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag) {
-                    switch (net.minecraftforge.event.ForgeEventFactory.onProjectileImpactResult(this, hitresult)) {
+                    switch (.onProjectileImpactResult(this, hitresult)) {
                         case SKIP_ENTITY:
                             if (hitresult.getType() != HitResult.Type.ENTITY) { // If there is no entity, we just return default behaviour
                                 this.onHit(hitresult);
@@ -171,8 +172,8 @@ public class MikometArrowEntity extends AbstractArrow {
             double d6 = vec3.y;
             double d1 = vec3.z;
             if (this.isCritArrow()) {
-                for(int i = 0; i < 4; ++i) {
-                    this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+                for (int i = 0; i < 4; ++i) {
+                    this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double) i / 4.0D, this.getY() + d6 * (double) i / 4.0D, this.getZ() + d1 * (double) i / 4.0D, -d5, -d6 + 0.2D, -d1);
                 }
             }
 
@@ -181,27 +182,27 @@ public class MikometArrowEntity extends AbstractArrow {
             double d3 = this.getZ() + d1;
             double d4 = vec3.horizontalDistance();
             if (flag) {
-                this.setYRot((float)(Mth.atan2(-d5, -d1) * (double)(180F / (float)Math.PI)));
+                this.setYRot((float) (Mth.atan2(-d5, -d1) * (double) (180F / (float) Math.PI)));
             } else {
-                this.setYRot((float)(Mth.atan2(d5, d1) * (double)(180F / (float)Math.PI)));
+                this.setYRot((float) (Mth.atan2(d5, d1) * (double) (180F / (float) Math.PI)));
             }
 
-            this.setXRot((float)(Mth.atan2(d6, d4) * (double)(180F / (float)Math.PI)));
+            this.setXRot((float) (Mth.atan2(d6, d4) * (double) (180F / (float) Math.PI)));
             this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
             this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
             float resistance = 0.99F;
             if (this.isInWater()) {
-                for(int j = 0; j < 4; ++j) {
+                for (int j = 0; j < 4; ++j) {
                     this.level().addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
                 }
                 resistance = this.getWaterInertia();
             }
 
-            for(int i = 1; i < 5; ++i) {
-                this.level().addParticle(ParticleTypes.FIREWORK, d7-(d5*2), d2-(d6*2), d3-(d1*2), d5, d6 - 0.1D, d1);
+            for (int i = 1; i < 5; ++i) {
+                this.level().addParticle(ParticleTypes.FIREWORK, d7 - (d5 * 2), d2 - (d6 * 2), d3 - (d1 * 2), d5, d6 - 0.1D, d1);
             }
 
-            this.setDeltaMovement(vec3.scale((double)resistance));
+            this.setDeltaMovement(vec3.scale((double) resistance));
             if (!this.isNoGravity() && !flag) {
                 Vec3 vec34 = this.getDeltaMovement();
                 this.setDeltaMovement(vec34.scale(resistance));
@@ -230,8 +231,8 @@ public class MikometArrowEntity extends AbstractArrow {
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
         Entity entity = pResult.getEntity();
-        float f = (float)this.getDeltaMovement().length();
-        int i = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
+        float f = (float) this.getDeltaMovement().length();
+        int i = Mth.ceil(Mth.clamp((double) f * this.baseDamage, 0.0D, (double) Integer.MAX_VALUE));
         if (this.getPierceLevel() > 0) {
             if (this.piercingIgnoreEntityIds == null) {
                 this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
@@ -250,8 +251,8 @@ public class MikometArrowEntity extends AbstractArrow {
         }
 
         if (this.isCritArrow()) {
-            long j = (long)this.random.nextInt(i / 2 + 2);
-            i = (int)Math.min(j + (long)i, 2147483647L);
+            long j = (long) this.random.nextInt(i / 2 + 2);
+            i = (int) Math.min(j + (long) i, 2147483647L);
         }
 
         Entity entity1 = this.getOwner();
@@ -261,7 +262,7 @@ public class MikometArrowEntity extends AbstractArrow {
         } else {
             damagesource = this.damageSources().arrow(this, entity1);
             if (entity1 instanceof LivingEntity) {
-                ((LivingEntity)entity1).setLastHurtMob(entity);
+                ((LivingEntity) entity1).setLastHurtMob(entity);
             }
         }
 
@@ -271,7 +272,7 @@ public class MikometArrowEntity extends AbstractArrow {
             entity.setSecondsOnFire(5);
         }
 
-        if (entity.hurt(damagesource, (float)i)) {
+        if (entity.hurt(damagesource, (float) i)) {
             if (isEnderman) {
                 return;
             }
@@ -283,7 +284,7 @@ public class MikometArrowEntity extends AbstractArrow {
 
                 if (this.knockback > 0) {
                     double d0 = Math.max(0.0D, 1.0D - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
-                    Vec3 vec3 = this.getDeltaMovement().multiply(1.0D, 0.0D, 1.0D).normalize().scale((double)this.knockback * 0.2D * d0);
+                    Vec3 vec3 = this.getDeltaMovement().multiply(1.0D, 0.0D, 1.0D).normalize().scale((double) this.knockback * 0.2D * d0);
                     if (vec3.lengthSqr() > 0.0D) {
                         livingentity.push(vec3.x, 0.05D, vec3.z);
                     }
@@ -291,12 +292,12 @@ public class MikometArrowEntity extends AbstractArrow {
 
                 if (!this.level().isClientSide && entity1 instanceof LivingEntity) {
                     EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity)entity1, livingentity);
+                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
                 }
 
                 this.doPostHurtEffects(livingentity);
                 if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this.isSilent()) {
-                    ((ServerPlayer)entity1).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
+                    ((ServerPlayer) entity1).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
                 }
 
                 if (!entity.isAlive() && this.piercedAndKilledEntities != null) {
@@ -340,9 +341,10 @@ public class MikometArrowEntity extends AbstractArrow {
     private void startFalling() {
         this.inGround = false;
         Vec3 vec3 = this.getDeltaMovement();
-        this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * 0.8F), (double)(this.random.nextFloat() * 0.8F), (double)(this.random.nextFloat() * 0.8F)));
+        this.setDeltaMovement(vec3.multiply((double) (this.random.nextFloat() * 0.8F), (double) (this.random.nextFloat() * 0.8F), (double) (this.random.nextFloat() * 0.8F)));
         this.life = 0;
     }
+
     @Override
     public void move(MoverType pType, Vec3 pPos) {
         super.move(pType, pPos);
@@ -357,13 +359,13 @@ public class MikometArrowEntity extends AbstractArrow {
         super.onHitBlock(pResult);
         Vec3 vec3 = pResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(vec3);
-        Vec3 vec31 = vec3.normalize().scale((double)0.05F);
+        Vec3 vec31 = vec3.normalize().scale((double) 0.05F);
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
         this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.inGround = true;
         this.shakeTime = 7;
         this.setCritArrow(false);
-        this.setPierceLevel((byte)0);
+        this.setPierceLevel((byte) 0);
         this.setSoundEvent(SoundEvents.ARROW_HIT);
         this.setShotFromCrossbow(false);
         this.resetPiercedEntities();
@@ -386,14 +388,14 @@ public class MikometArrowEntity extends AbstractArrow {
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putShort("life", (short)this.life);
+        pCompound.putShort("life", (short) this.life);
         if (this.lastState != null) {
             pCompound.put("inBlockState", NbtUtils.writeBlockState(this.lastState));
         }
 
-        pCompound.putByte("shake", (byte)this.shakeTime);
+        pCompound.putByte("shake", (byte) this.shakeTime);
         pCompound.putBoolean("inGround", this.inGround);
-        pCompound.putByte("pickup", (byte)this.pickup.ordinal());
+        pCompound.putByte("pickup", (byte) this.pickup.ordinal());
         pCompound.putDouble("damage", this.baseDamage);
         pCompound.putBoolean("crit", this.isCritArrow());
         pCompound.putByte("PierceLevel", this.getPierceLevel());
@@ -430,7 +432,7 @@ public class MikometArrowEntity extends AbstractArrow {
     public void setOwner(@Nullable Entity pEntity) {
         super.setOwner(pEntity);
         if (pEntity instanceof Player) {
-            this.pickup = ((Player)pEntity).getAbilities().instabuild ? AbstractArrow.Pickup.CREATIVE_ONLY : AbstractArrow.Pickup.ALLOWED;
+            this.pickup = ((Player) pEntity).getAbilities().instabuild ? AbstractArrow.Pickup.CREATIVE_ONLY : AbstractArrow.Pickup.ALLOWED;
         }
 
     }
@@ -463,9 +465,9 @@ public class MikometArrowEntity extends AbstractArrow {
     public void setEnchantmentEffectsFromEntity(LivingEntity pShooter, float pVelocity) {
         int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER_ARROWS, pShooter);
         int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH_ARROWS, pShooter);
-        this.setBaseDamage((double)(pVelocity * 2.5F) + this.random.triangle((double)this.level().getDifficulty().getId() * 0.11D, 0.57425D));
+        this.setBaseDamage((double) (pVelocity * 2.5F) + this.random.triangle((double) this.level().getDifficulty().getId() * 0.11D, 0.57425D));
         if (i > 0) {
-            this.setBaseDamage(this.getBaseDamage() + (double)i * 0.5D + 0.5D);
+            this.setBaseDamage(this.getBaseDamage() + (double) i * 0.5D + 0.5D);
         }
 
         if (j > 0) {

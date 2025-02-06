@@ -20,16 +20,15 @@ import net.theivan066.randomholos.potion.ModPotions;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class ModTrades {
 
     public static final Int2ObjectMap<ModTrades.ItemListing[]> MIKOP_TRADES = toIntMap(ImmutableMap.of(1, new ModTrades.ItemListing[]{
-            new ItemToItem(ModItems.AHOGE.get(), 2, Items.DIAMOND, 1,5),
+            new ItemToItem(ModItems.AHOGE.get(), 2, Items.DIAMOND, 1, 5),
             new ItemToItem(Items.SLIME_BALL, 32, Items.DIAMOND, 1, 2),
             new ItemAndItemToItem(Items.ARROW, 8, ModItems.METEORITE_PIECE.get(), 1, ModItems.MIKOMET_ARROW.get(), 8, 6),
             new ItemToItem(Items.BREAD, 2, ModItems.BAGUETTE.get(), 1, 3),
             new ItemAndItemToItem(Items.GLASS_BOTTLE, 1, Items.PUFFERFISH, 4, PotionUtils.setPotion(Items.POTION.getDefaultInstance(), ModPotions.SEVERE_POISON.get()).getItem(), 1, 2)
-          }));
+    }));
 
     private static Int2ObjectMap<ModTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, ModTrades.ItemListing[]> pMap) {
         return new Int2ObjectOpenHashMap<>(pMap);
@@ -63,7 +62,7 @@ public class ModTrades {
 
         @Nullable
         public MerchantOffer getOffer(Entity pTrader, RandomSource pRandom) {
-            return new MerchantOffer(new ItemStack(this.fromItem.getItem(), this.fromCount), new ItemStack(this.fromItem2.getItem(), this.fromCount2), new ItemStack(this.toItem.getItem(), this.toCount), this.maxUses,0, this.priceMultiplier);
+            return new MerchantOffer(new ItemStack(this.fromItem.getItem(), this.fromCount), new ItemStack(this.fromItem2.getItem(), this.fromCount2), new ItemStack(this.toItem.getItem(), this.toCount), this.maxUses, 0, this.priceMultiplier);
         }
     }
 
@@ -90,7 +89,9 @@ public class ModTrades {
     }
 
     static class ItemAndItemToPotionedItem implements ModTrades.ItemListing {
-        /** An ItemStack that can have potion effects written to it. */
+        /**
+         * An ItemStack that can have potion effects written to it.
+         */
         private final ItemStack toItem;
         private final int toCount;
         private final int maxUses;

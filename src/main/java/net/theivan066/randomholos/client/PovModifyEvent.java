@@ -2,10 +2,10 @@ package net.theivan066.randomholos.client;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.item.custom.MikoBowItem;
@@ -13,7 +13,7 @@ import net.theivan066.randomholos.item.custom.MikometBowItem;
 import net.theivan066.randomholos.item.custom.RobosniperItem;
 
 @SuppressWarnings("deprecation")
-@Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class PovModifyEvent {
 
     //bow FOVs
@@ -32,7 +32,7 @@ public class PovModifyEvent {
             event.setNewFovModifier(fovModifier);
         }
         if (event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() instanceof MikometBowItem) {
-            int fastDraw = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.FAST_DRAW.get(), event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND));
+            int fastDraw = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.FAST_DRAW, event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND));
             float i = fastDraw * 5;
             float totalDrawTime = 40 - i;
             float fovModifier = 1f;

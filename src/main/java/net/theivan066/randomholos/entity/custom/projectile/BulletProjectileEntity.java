@@ -20,8 +20,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.network.NetworkHooks;
 import net.theivan066.randomholos.entity.ModEntities;
 
 @SuppressWarnings({"deprecation"})
@@ -39,14 +37,14 @@ public class BulletProjectileEntity extends Projectile {
     }
 
     public BulletProjectileEntity(Level pLevel, Player player, float dmg, int pelletGpCount) {
-        super(ModEntities.BULLET_PROJECTILE.get(), pLevel);
+        super(ModEntities.BULLET_PROJECTILE, pLevel);
         this.setDamage(dmg);
         this.pelletGpCount = pelletGpCount;
         setOwner(player);
         BlockPos blockpos = player.blockPosition();
-        double d0 = (double)blockpos.getX() + 0.5D;
-        double d1 = (double)blockpos.getY() + 1.75D;
-        double d2 = (double)blockpos.getZ() + 0.5D;
+        double d0 = (double) blockpos.getX() + 0.5D;
+        double d1 = (double) blockpos.getY() + 1.75D;
+        double d2 = (double) blockpos.getZ() + 0.5D;
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
 
@@ -56,11 +54,12 @@ public class BulletProjectileEntity extends Projectile {
         this.pelletGpCount = pelletGpCount;
         setOwner(entity);
         BlockPos blockpos = entity.blockPosition();
-        double d0 = (double)blockpos.getX() + 0.5D;
-        double d1 = (double)blockpos.getY() + 1.75D;
-        double d2 = (double)blockpos.getZ() + 0.5D;
+        double d0 = (double) blockpos.getX() + 0.5D;
+        double d1 = (double) blockpos.getY() + 1.75D;
+        double d2 = (double) blockpos.getZ() + 0.5D;
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
+
     public void setDamage(double pDamage) {
         this.damage = pDamage;
     }
@@ -72,8 +71,8 @@ public class BulletProjectileEntity extends Projectile {
     @Override
     public void tick() {
         super.tick();
-        if(this.entityData.get(HIT)) {
-            if(this.tickCount >= counter) {
+        if (this.entityData.get(HIT)) {
+            if (this.tickCount >= counter) {
                 this.discard();
             }
         }
@@ -95,8 +94,8 @@ public class BulletProjectileEntity extends Projectile {
         double d5 = vec3.x;
         double d6 = vec3.y;
         double d7 = vec3.z;
-        for(int i = 0; i < 4; ++i) {
-            this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d7 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+        for (int i = 0; i < 4; ++i) {
+            this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double) i / 4.0D, this.getY() + d6 * (double) i / 4.0D, this.getZ() + d7 * (double) i / 4.0D, -d5, -d6 + 0.2D, -d1);
         }
 
         if (this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)) {
@@ -116,7 +115,7 @@ public class BulletProjectileEntity extends Projectile {
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ARROW_HIT, SoundSource.NEUTRAL,
                 2F, 1F);
 
-        LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
+        LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity) owner : null;
         boolean hurt = hitEntity.hurt(this.damageSources().mobProjectile(this, livingentity), (float) damage);
         // effect
 //        if (hurt) {
@@ -135,11 +134,11 @@ public class BulletProjectileEntity extends Projectile {
 //                        Math.cos(x*20) * 0.15d, Math.cos(y*20) * 0.15d, Math.sin(x*20) * 0.15d);
 //            }
 //        }
-        if(this.level().isClientSide()) {
+        if (this.level().isClientSide()) {
             return;
         }
 
-        if(pResult.getType() == HitResult.Type.ENTITY && pResult instanceof EntityHitResult) {
+        if (pResult.getType() == HitResult.Type.ENTITY && pResult instanceof EntityHitResult) {
             this.entityData.set(HIT, true);
             counter = this.tickCount + 5;
         }

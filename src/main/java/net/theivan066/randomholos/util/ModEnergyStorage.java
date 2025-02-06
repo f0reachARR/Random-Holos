@@ -1,6 +1,7 @@
 package net.theivan066.randomholos.util;
 
-import net.minecraftforge.energy.EnergyStorage;
+
+import net.neoforged.neoforge.energy.EnergyStorage;
 
 public abstract class ModEnergyStorage  extends EnergyStorage {
     public ModEnergyStorage(int capacity, int maxTransfer) {

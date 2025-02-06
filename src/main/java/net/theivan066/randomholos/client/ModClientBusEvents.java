@@ -11,12 +11,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.effect.ModEffects;
 import net.theivan066.randomholos.particle.GuesserPinParticles;
@@ -25,23 +25,23 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 
-@Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ModClientBusEvents {
     //Particle
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.GUESSER_PIN_PARTICLES.get(), GuesserPinParticles.Provider::new);
+        event.registerSpriteSet(ModParticles.GUESSER_PIN_PARTICLES, GuesserPinParticles.Provider::new);
     }
 
 
     //Effect
-    private static final ResourceLocation PIN_TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/particle/guesser_pin.png");
+    private static final ResourceLocation PIN_TEXTURE = ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/particle/guesser_pin.png");
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onRenderLiving(RenderLivingEvent.Pre<LivingEntity, ?> event) {
         LivingEntity entity = event.getEntity();
-        MobEffectInstance effectInstance = entity.getEffect(ModEffects.ZERO_GUESSER_EFFECT.get());
+        MobEffectInstance effectInstance = entity.getEffect(ModEffects.ZERO_GUESSER_EFFECT);
 
         if (effectInstance != null) {
             PoseStack poseStack = event.getPoseStack();
