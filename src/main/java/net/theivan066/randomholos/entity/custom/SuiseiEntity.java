@@ -27,7 +27,7 @@ import net.theivan066.randomholos.entity.variant.SuiseiVariant;
 import net.theivan066.randomholos.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
-public class SuiseiEntity extends Animal{
+public class SuiseiEntity extends Animal {
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(SuiseiEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
@@ -37,6 +37,7 @@ public class SuiseiEntity extends Animal{
     public int attackAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+
     public SuiseiEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -76,14 +77,14 @@ public class SuiseiEntity extends Animal{
             --this.idleAnimationTimeout;
         }
 
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+        if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 10; // Length in ticks of your animation
             attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
 
-        if(!this.isAttacking()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
     }
@@ -117,15 +118,12 @@ public class SuiseiEntity extends Animal{
     }
 
 
-
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
     }
-
-
 
 
     //VARIANT

@@ -1,5 +1,6 @@
 package net.theivan066.randomholos.item.custom.base_items;
 
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -10,6 +11,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -19,15 +21,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
 import net.theivan066.randomholos.util.InventoryUtil;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
 @SuppressWarnings("deprecation")
 public class GunItem extends ProjectileWeaponItem {
-
     public final Random random;
     private final float gunDamage;
     private final float bulletSpeed;
@@ -38,8 +39,8 @@ public class GunItem extends ProjectileWeaponItem {
     private final float[] bulletSpread;
     private final float[] gunRecoil;
     private final int pelletCount;
-    private final SoundEvent reloadSound;
-    private final SoundEvent shootSound;
+    private final Holder<SoundEvent> reloadSound;
+    private final Holder<SoundEvent> shootSound;
     private final int reloadCycles;
     private final boolean isScoped;
     private final boolean unscopeAfterShot;
@@ -53,8 +54,11 @@ public class GunItem extends ProjectileWeaponItem {
     private int clip;
 
 
-    public GunItem(Properties pProperties, float gunDamage, float bulletSpeed, int rateOfFire, int magSize, Item ammoType, int reloadCooldown, float[] bulletSpread,
-                   float[] gunRecoil, int pelletCount, SoundEvent reloadSound, SoundEvent shootSound, int reloadCycles, boolean isScoped, boolean unscopeAfterShot,
+    public GunItem(Properties pProperties, float gunDamage, float bulletSpeed, int rateOfFire, int magSize,
+                   Item ammoType, int reloadCooldown, float[] bulletSpread,
+                   float[] gunRecoil, int pelletCount, Holder<SoundEvent> reloadSound,
+                   Holder<SoundEvent> shootSound, int reloadCycles, boolean isScoped,
+                   boolean unscopeAfterShot,
                    int reloadStage1, int reloadStage2, int reloadStage3, LoadingType loadingType, FiringType firingType) {
         super(pProperties);
         this.random = new Random();
@@ -80,17 +84,17 @@ public class GunItem extends ProjectileWeaponItem {
         this.clip = magSize;
     }
 
-//    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
-//        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-//        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
-//            if (!pPlayer.getCooldowns().isOnCooldown(item)) {
-//                item.shoot(pLevel, pPlayer, stack);
-//                pPlayer.getCooldowns().addCooldown(item, item.rateOfFire);
-//            }
-//        } else if (item.getClip() <= 0) {
-//            item.reload(pPlayer, stack);
-//        }
-//    }
+    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
+            if (!pPlayer.getCooldowns().isOnCooldown(item)) {
+                item.shoot(pLevel, pPlayer, stack);
+                pPlayer.getCooldowns().addCooldown(item, item.rateOfFire);
+            }
+        } else if (item.getClip() <= 0) {
+            item.reload(pPlayer, stack);
+        }
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -102,6 +106,11 @@ public class GunItem extends ProjectileWeaponItem {
             this.reload(pPlayer, stack);
         }
         return InteractionResultHolder.fail(stack);
+    }
+
+    @Override
+    protected void shootProjectile(LivingEntity shooter, Projectile projectile, int index, float velocity, float inaccuracy, float angle, @Nullable LivingEntity target) {
+        projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot() + angle, 0.0F, velocity, inaccuracy);
     }
 
     public void shoot(Level pLevel, Player pPlayer, ItemStack itemStack) {
@@ -143,10 +152,9 @@ public class GunItem extends ProjectileWeaponItem {
 
     private void reload(Player player, ItemStack stack) {
         this.isReloading = true;
-        player.playSound(reloadSound,1,1);
+        player.playSound(reloadSound.value(), 1, 1);
         switch (this.loadingType) {
-            case MAGAZINE ->
-            {
+            case MAGAZINE -> {
                 player.getCooldowns().addCooldown(this, reloadCooldown);
                 if (reserveAmmoCount(player, this.ammoType) > 0) {
                     if (!player.level().isClientSide) {
@@ -162,8 +170,7 @@ public class GunItem extends ProjectileWeaponItem {
                 }
             }
             //not fixed yet
-            case PER_CARTRIDGE ->
-            {
+            case PER_CARTRIDGE -> {
                 int ammo = reserveAmmoCount(player, this.ammoType);
                 if (ammo > magSize) {
                     player.displayClientMessage(Component.translatable("messages.randomholos.reloading"), true);
@@ -212,6 +219,7 @@ public class GunItem extends ProjectileWeaponItem {
         return 0;
     }
 
+
     public float getRecoilX(ItemStack stack) {
         boolean ran = this.random.nextBoolean();
         return stack.getOrCreateTag().getBoolean("isAiming") ?
@@ -220,7 +228,7 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     public float getRecoilY(ItemStack stack) {
-        return stack.getOrCreateTag().getBoolean("isAiming") ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
+        return stack.getco().getBoolean("isAiming") ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
     }
 
     public int getRateOfFire() {
@@ -235,7 +243,7 @@ public class GunItem extends ProjectileWeaponItem {
         return this.clip;
     }
 
-    public void setClip(int i){
+    public void setClip(int i) {
         clip = i;
     }
 
@@ -247,7 +255,7 @@ public class GunItem extends ProjectileWeaponItem {
         return this.magSize;
     }
 
-    public void setReloadTicks(int i){
+    public void setReloadTicks(int i) {
         reloadingTicks = i;
     }
 
@@ -269,7 +277,7 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
         return false;
     }
 
@@ -291,20 +299,18 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("tooltip.randomholos.gun_ammo").append(Component.literal(": " + this.getClip() + " / " + this.getMagSize())));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
     //Types
-    public enum LoadingType
-    {
+    public enum LoadingType {
         MAGAZINE,
         PER_CARTRIDGE
     }
 
-    public enum FiringType
-    {
+    public enum FiringType {
         SEMI_AUTO,
         BURST,
         AUTO

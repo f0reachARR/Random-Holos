@@ -2,16 +2,15 @@ package net.theivan066.randomholos.worldgen;
 
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.worldgen.biome.ModBiomes;
@@ -34,63 +33,63 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> SPAWN_AZKI = registerKey("spawn_azki");
     public static final ResourceKey<BiomeModifier> SPAWN_ROBOCO = registerKey("spawn_roboco");
 
-    public static void bootstrap(BootstapContext<BiomeModifier> context) {
+    public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 
-        context.register(ADD_TREE_MAPLE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_TREE_MAPLE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MAPLE_FOREST)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.MAPLE_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
 
-        context.register(ADD_FALLEN_LEAVES, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_FALLEN_LEAVES, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MAPLE_FOREST)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.FALLEN_LEAVES_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
 
-        context.register(ADD_TOURMALINE_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_TOURMALINE_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.TOURMALINE_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
 
 
-        context.register(SPAWN_MIKO_MORIRIN, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_MIKO_MORIRIN, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MORIRIN)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.MIKO.get(), 15, 1, 1))));
 
-        context.register(SPAWN_MIKO_SAKURA, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_MIKO_SAKURA, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SAKURA_FOREST)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.MIKO.get(), 2, 1, 1))));
 
-        context.register(SPAWN_MIKOP, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_MIKOP, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.MORIRIN), biomes.getOrThrow(ModBiomes.SAKURA_FOREST)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.MIKOP.get(), 10, 1, 8))));
 
-        context.register(SPAWN_SUISEI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_SUISEI, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.SUISEI.get(), 3, 1, 1))));
 
-        context.register(SPAWN_AZKI, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_AZKI, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.AZKI.get(), 3, 1, 1))));
 
-        context.register(SPAWN_SORA, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_SORA, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.SORA.get(), 1, 1, 1))));
 
-        context.register(SPAWN_NUNNUN, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_NUNNUN, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SKYLAND)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.NUNNUN.get(), 3, 1, 8))));
 
-        context.register(SPAWN_ROBOCO, new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
+        context.register(SPAWN_ROBOCO, new BiomeModifiers.AddSpawnsBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(ModBiomes.SHATTERED_GROUNDS)),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.ROBOCO.get(), 2, 1, 1))));
     }
 
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(RandomHolos.MOD_ID, name));
+        return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, name));
     }
 }

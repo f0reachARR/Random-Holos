@@ -12,6 +12,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -20,18 +21,17 @@ import java.util.List;
 public class MikoBowItem extends BowItem {
 
 
-
     /**
      * Called when the player stops using an Item (stops holding the right mouse button).
      */
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
         if (pEntityLiving instanceof Player player) {
-            boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, pStack) > 0;
+            boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, pStack) > 0;
             ItemStack itemstack = player.getProjectile(pStack);
 
-            int i = this.getUseDuration(pStack) - pTimeLeft;
-            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(pStack, pLevel, player, i, !itemstack.isEmpty() || flag);
+            int i = this.getUseDuration(pStack, pEntityLiving) - pTimeLeft;
+            i = EventHooks.onArrowLoose(pStack, pLevel, player, i, !itemstack.isEmpty() || flag);
             if (i < 0) return;
 
             if (!itemstack.isEmpty() || flag) {
@@ -40,11 +40,11 @@ public class MikoBowItem extends BowItem {
                 }
 
                 float f = getPowerForTime(i);
-                if (!((double)f < 0.1D)) {
-                    boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, pStack, player));
+                if (!((double) f < 0.1D)) {
+                    boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, pStack, player));
                     if (!pLevel.isClientSide) {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractArrow abstractarrow = arrowitem.createArrow(pLevel, itemstack, player);
+                        ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                        AbstractArrow abstractarrow = arrowitem.createArrow(pLevel, pEntityLiving.getEyePosition(), itemstack, player);
                         abstractarrow = customArrow(abstractarrow);
                         double dmg = abstractarrow.getBaseDamage() + 1;
                         abstractarrow.setBaseDamage(dmg);
@@ -55,7 +55,7 @@ public class MikoBowItem extends BowItem {
 
                         int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
                         if (j > 0) {
-                            abstractarrow.setBaseDamage(dmg + (double)j * 0.5D + 0.5D);
+                            abstractarrow.setBaseDamage(dmg + (double) j * 0.5D + 0.5D);
                         }
 
                         int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, pStack);
@@ -77,7 +77,7 @@ public class MikoBowItem extends BowItem {
                         pLevel.addFreshEntity(abstractarrow);
                     }
 
-                    pLevel.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    pLevel.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!flag1 && !player.getAbilities().instabuild) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
@@ -95,7 +95,7 @@ public class MikoBowItem extends BowItem {
      * Gets the velocity of the arrow entity from the bow's charge
      */
     public static float getPowerForTime(int pCharge) {
-        float f = (float)pCharge / 20.0F;
+        float f = (float) pCharge / 20.0F;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
@@ -104,7 +104,7 @@ public class MikoBowItem extends BowItem {
     }
 
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if(Screen.hasShiftDown()){
+        if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.miko_bow.shift"));
         } else {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.tooltip"));

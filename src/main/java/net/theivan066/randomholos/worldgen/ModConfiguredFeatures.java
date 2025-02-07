@@ -1,6 +1,7 @@
 package net.theivan066.randomholos.worldgen;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +28,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_TOURMALINE_ORE_KEY = registerKey("tourmaline_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_LEAVES_KEY = registerKey("fallen_leaves");
 
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         //ore
         RuleTest stoneReplaceabeles = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceabeles = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -50,18 +51,19 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBlocks.MAPLE_LOG.get()),
                 new MapleTrunkPlacer(4, 1, 2),
                 BlockStateProvider.simple(ModBlocks.MAPLE_LEAVES.get()),
-                new MegaPineFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2),ConstantInt.of(8)),
+                new MegaPineFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), ConstantInt.of(8)),
                 new TwoLayersFeatureSize(1, 0, 2)).build());
 
         register(context, FALLEN_LEAVES_KEY, Feature.FLOWER,
                 new RandomPatchConfiguration(32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.FALLEN_LEAVES.get())))));
     }
+
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(RandomHolos.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, name));
     }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context,
+    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context,
                                                                                           ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }

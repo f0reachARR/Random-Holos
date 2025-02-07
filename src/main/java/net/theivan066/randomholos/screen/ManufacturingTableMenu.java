@@ -7,8 +7,8 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.SlotItemHandler;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.entity.ManufacturingTableBlockEntity;
 
@@ -31,7 +31,7 @@ public class ManufacturingTableMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
+        this.blockEntity.getCapability(Capabilities.ItemHandler).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 14, 17));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 32, 17));
             this.addSlot(new SlotItemHandler(iItemHandler, 2, 50, 17));
@@ -78,6 +78,7 @@ public class ManufacturingTableMenu extends AbstractContainerMenu {
 
     // THIS YOU HAVE TO DEFINE!
     private static final int TE_INVENTORY_SLOT_COUNT = 11;  //number of slots
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

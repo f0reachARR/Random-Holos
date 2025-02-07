@@ -2,16 +2,16 @@ package net.theivan066.randomholos.events;
 
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.blockbehaviour.GlassHeelProjectileDispenseBehaviour;
 import net.theivan066.randomholos.blockbehaviour.GuesserPinProjectileDispenseBehaviour;
 import net.theivan066.randomholos.blockbehaviour.MikometArrowDispenseBehaviour;
 import net.theivan066.randomholos.item.ModItems;
 
-@Mod.EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DispenserBehaviourEvent {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {

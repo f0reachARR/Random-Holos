@@ -4,7 +4,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.theivan066.randomholos.math.MathUtil;
 
 import javax.annotation.Nullable;
@@ -38,11 +38,12 @@ public class FollowSpecificMobGoal extends Goal {
         this.target = target;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
+
     @Override
     public boolean canUse() {
-        List<Mob> list = (List<Mob>) this.mob.level().getEntitiesOfClass(target.getClass(), this.mob.getBoundingBox().inflate((double)this.areaSize), this.followPredicate);
+        List<Mob> list = (List<Mob>) this.mob.level().getEntitiesOfClass(target.getClass(), this.mob.getBoundingBox().inflate((double) this.areaSize), this.followPredicate);
         if (!list.isEmpty()) {
-            for(Mob mob : list) {
+            for (Mob mob : list) {
                 if (!mob.isInvisible()) {
                     this.followingMob = mob;
                     return true;
@@ -53,7 +54,7 @@ public class FollowSpecificMobGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return this.followingMob != null && !this.navigation.isDone() && this.mob.distanceToSqr(this.followingMob) > (double)(MathUtil.square(this.stopDistance));
+        return this.followingMob != null && !this.navigation.isDone() && this.mob.distanceToSqr(this.followingMob) > (double) (MathUtil.square(this.stopDistance));
     }
 
     /**
@@ -61,8 +62,8 @@ public class FollowSpecificMobGoal extends Goal {
      */
     public void start() {
         this.timeToRecalcPath = 0;
-        this.oldWaterCost = this.mob.getPathfindingMalus(BlockPathTypes.WATER);
-        this.mob.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.oldWaterCost = this.mob.getPathfindingMalus(PathType.WATER);
+        this.mob.setPathfindingMalus(PathType.WATER, 0.0F);
     }
 
     /**
@@ -71,7 +72,7 @@ public class FollowSpecificMobGoal extends Goal {
     public void stop() {
         this.followingMob = null;
         this.navigation.stop();
-        this.mob.setPathfindingMalus(BlockPathTypes.WATER, this.oldWaterCost);
+        this.mob.setPathfindingMalus(PathType.WATER, this.oldWaterCost);
     }
 
     /**
@@ -79,19 +80,19 @@ public class FollowSpecificMobGoal extends Goal {
      */
     public void tick() {
         if (this.followingMob != null && !this.mob.isLeashed()) {
-            this.mob.getLookControl().setLookAt(this.followingMob, 10.0F, (float)this.mob.getMaxHeadXRot());
+            this.mob.getLookControl().setLookAt(this.followingMob, 10.0F, (float) this.mob.getMaxHeadXRot());
             if (--this.timeToRecalcPath <= 0) {
                 this.timeToRecalcPath = this.adjustedTickDelay(10);
                 double d0 = this.mob.getX() - this.followingMob.getX();
                 double d1 = this.mob.getY() - this.followingMob.getY();
                 double d2 = this.mob.getZ() - this.followingMob.getZ();
                 double d3 = MathUtil.sqrDistance(d0, d1, d2);
-                if (!(d3 <= (double)(this.stopDistance * this.stopDistance))) {
+                if (!(d3 <= (double) (this.stopDistance * this.stopDistance))) {
                     this.navigation.moveTo(this.followingMob, this.speedModifier);
                 } else {
                     this.navigation.stop();
                     LookControl lookcontrol = this.followingMob.getLookControl();
-                    if (d3 <= (double)this.stopDistance || lookcontrol.getWantedX() == this.mob.getX() && lookcontrol.getWantedY() == this.mob.getY() && lookcontrol.getWantedZ() == this.mob.getZ()) {
+                    if (d3 <= (double) this.stopDistance || lookcontrol.getWantedX() == this.mob.getX() && lookcontrol.getWantedY() == this.mob.getY() && lookcontrol.getWantedZ() == this.mob.getZ()) {
                         double d4 = this.followingMob.getX() - this.mob.getX();
                         double d5 = this.followingMob.getZ() - this.mob.getZ();
                         this.navigation.moveTo(this.mob.getX() - d4, this.mob.getY(), this.mob.getZ() - d5, this.speedModifier);

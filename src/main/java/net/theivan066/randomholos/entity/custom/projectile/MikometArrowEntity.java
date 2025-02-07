@@ -134,27 +134,8 @@ public class MikometArrowEntity extends AbstractArrow {
                 }
 
                 if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag) {
-                    switch (.onProjectileImpactResult(this, hitresult)) {
-                        case SKIP_ENTITY:
-                            if (hitresult.getType() != HitResult.Type.ENTITY) { // If there is no entity, we just return default behaviour
-                                this.onHit(hitresult);
-                                this.hasImpulse = true;
-                                break;
-                            }
-                            ignoredEntities.add(entityhitresult.getEntity().getId());
-                            entityhitresult = null; // Don't process any further
-                            break;
-                        case STOP_AT_CURRENT_NO_DAMAGE:
-                            this.discard();
-                            entityhitresult = null; // Don't process any further
-                            break;
-                        case STOP_AT_CURRENT:
-                            this.setPierceLevel((byte) 0);
-                        case DEFAULT:
-                            this.onHit(hitresult);
-                            this.hasImpulse = true;
-                            break;
-                    }
+                    this.onHit(hitresult);
+                    this.hasImpulse = true;
                 }
 
                 if (entityhitresult == null || this.getPierceLevel() <= 0) {

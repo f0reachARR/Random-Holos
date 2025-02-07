@@ -13,13 +13,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.theivan066.randomholos.entity.custom.projectile.GuesserPinProjectileEntity;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class GuesserPinItem extends Item {
 
     public static Player thrower;
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         thrower = pPlayer;
@@ -41,14 +41,16 @@ public class GuesserPinItem extends Item {
         return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide());
     }
 
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if(Screen.hasShiftDown()){
+    @Override
+    public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.guesser_pin.shift"));
         } else {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.tooltip"));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
+
     public GuesserPinItem(Properties pProperties) {
         super(pProperties);
     }

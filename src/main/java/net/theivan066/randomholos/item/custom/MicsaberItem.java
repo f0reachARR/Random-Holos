@@ -18,7 +18,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.theivan066.randomholos.item.ModItems;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
 @SuppressWarnings("deprecation")
 public class MicsaberItem extends Item {
@@ -47,13 +48,13 @@ public class MicsaberItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Player player, int slotIndex, boolean isSelected) {
-        super.inventoryTick(stack, level, player, slotIndex, isSelected);
-        if (player.getMainHandItem().is(ModItems.MICSABER.get())) {
-
-        }
-    }
+//    @Override
+//    public void inventoryTick(ItemStack stack, Level level, Player player, int slotIndex, boolean isSelected) {
+//        super.inventoryTick(stack, level, player, slotIndex, isSelected);
+//        if (player.getMainHandItem().is(ModItems.MICSABER.get())) {
+//
+//        }
+//    }
 
     public float getDamage() {
         return this.attackDamage;
@@ -72,17 +73,13 @@ public class MicsaberItem extends Item {
     }
 
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
-        pStack.hurtAndBreak(1, pAttacker, (p_43296_) -> {
-            p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-        });
+        pStack.hurtAndBreak(1, pAttacker, EquipmentSlot.MAINHAND);
         return true;
     }
 
     public boolean mineBlock(ItemStack pStack, Level pLevel, BlockState pState, BlockPos pPos, LivingEntity pEntityLiving) {
         if (pState.getDestroySpeed(pLevel, pPos) != 0.0F) {
-            pStack.hurtAndBreak(2, pEntityLiving, (p_43276_) -> {
-                p_43276_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-            });
+            pStack.hurtAndBreak(2, pEntityLiving, EquipmentSlot.MAINHAND);
         }
 
         return true;
@@ -100,7 +97,7 @@ public class MicsaberItem extends Item {
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+        return ItemAbilities.DEFAULT_SWORD_ACTIONS.contains(itemAbility);
     }
 }

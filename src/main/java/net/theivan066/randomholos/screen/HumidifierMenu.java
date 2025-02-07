@@ -7,8 +7,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.entity.HumidifierBlockEntity;
 
@@ -16,6 +15,7 @@ public class HumidifierMenu extends AbstractContainerMenu {
     public final HumidifierBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
+
     public HumidifierMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }

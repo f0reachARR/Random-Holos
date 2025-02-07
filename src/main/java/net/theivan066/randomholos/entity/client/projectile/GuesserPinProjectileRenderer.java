@@ -13,15 +13,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
-public class GuesserPinProjectileRenderer <T extends Entity & ItemSupplier> extends EntityRenderer<T> {
+public class GuesserPinProjectileRenderer<T extends Entity & ItemSupplier> extends EntityRenderer<T> {
     private final ItemRenderer itemRenderer;
     private final float scale;
     private final boolean fullBright;
+
     protected GuesserPinProjectileRenderer(EntityRendererProvider.Context pContext, float pScale, boolean pFullBright) {
         super(pContext);
         this.itemRenderer = pContext.getItemRenderer();

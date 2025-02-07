@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import net.theivan066.randomholos.block.entity.ManufacturingTableBlockEntity;
 import net.theivan066.randomholos.block.entity.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class ManufacturingTableBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
     public ManufacturingTableBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -46,6 +46,7 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
     /**
      * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
      * blockstate.
+     *
      * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#mirror} whenever
      * possible. Implementing/overriding is fine.
      */
@@ -86,8 +87,8 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof ManufacturingTableBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (ManufacturingTableBlockEntity)entity, pPos);
+            if (entity instanceof ManufacturingTableBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (ManufacturingTableBlockEntity) entity, pPos);
             } else {
                 throw new IllegalStateException("Container provider is missing!");
             }
@@ -104,7 +105,7 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if(pLevel.isClientSide()) {
+        if (pLevel.isClientSide()) {
             return null;
         }
 

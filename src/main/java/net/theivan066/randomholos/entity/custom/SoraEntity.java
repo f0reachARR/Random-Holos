@@ -33,7 +33,7 @@ import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
-public class SoraEntity extends Animal{
+public class SoraEntity extends Animal {
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(SoraEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
@@ -43,6 +43,7 @@ public class SoraEntity extends Animal{
     public int attackAnimationTimeout = 0;
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+
     public SoraEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -84,14 +85,14 @@ public class SoraEntity extends Animal{
             --this.idleAnimationTimeout;
         }
 
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+        if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 15; // Length in ticks of your animation
             attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
 
-        if(!this.isAttacking()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
     }
@@ -125,15 +126,12 @@ public class SoraEntity extends Animal{
     }
 
 
-
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
     }
-
-
 
 
     //VARIANT

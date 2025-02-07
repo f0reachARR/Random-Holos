@@ -17,6 +17,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.EventHooks;
 import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
@@ -38,11 +39,11 @@ public class MikometBowItem extends BowItem {
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
         if (pEntityLiving instanceof Player player) {
             Random random = new Random();
-            boolean infiniteArrows = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, pStack) > 0;
+            boolean infiniteArrows = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY, pStack) > 0;
             ItemStack itemstack = player.getProjectile(pStack);
 
-            int drawtime = this.getUseDuration(pStack) - pTimeLeft;
-            drawtime = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(pStack, pLevel, player, drawtime, !itemstack.isEmpty() || infiniteArrows);
+            int drawtime = this.getUseDuration(pStack, pEntityLiving) - pTimeLeft;
+            drawtime = EventHooks.onArrowLoose(pStack, pLevel, player, drawtime, !itemstack.isEmpty() || infiniteArrows);
             if (drawtime < 0) return;
 
             if (!itemstack.isEmpty() || infiniteArrows) {
@@ -51,7 +52,7 @@ public class MikometBowItem extends BowItem {
                 }
 
                 float velocity = getPowerForTime(drawtime);
-                if (!((double)velocity < 0.1D)) {
+                if (!((double) velocity < 0.1D)) {
                     boolean infin = player.getAbilities().instabuild || (itemstack.getItem() instanceof MikometArrowItem && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.FAST_DRAW.get(), pStack) > 0);
                     if (!pLevel.isClientSide) {
                         MikometArrowEntity mikometArrow = new MikometArrowEntity(ModEntities.MIKOMET_ARROW.get(), player, pLevel);
@@ -59,7 +60,7 @@ public class MikometBowItem extends BowItem {
                         double dmg = mikometArrow.getBaseDamage();
                         mikometArrow.setBaseDamage(dmg);
                         if (random.nextInt(1, 100) < 35) {
-                            mikometArrow.setPierceLevel((byte) random.nextInt(3,5));
+                            mikometArrow.setPierceLevel((byte) random.nextInt(3, 5));
                         }
                         mikometArrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 4.141F, 1.0F);
                         if (velocity == 1.0F) {
@@ -68,7 +69,7 @@ public class MikometBowItem extends BowItem {
 
                         int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, pStack);
                         if (j > 0) {
-                            mikometArrow.setBaseDamage(dmg + (double)j * 0.75D + 0.5D);
+                            mikometArrow.setBaseDamage(dmg + (double) j * 0.75D + 0.5D);
                         }
 
                         int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, pStack);
@@ -86,7 +87,7 @@ public class MikometBowItem extends BowItem {
                         pLevel.addFreshEntity(mikometArrow);
                     }
 
-                    pLevel.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + velocity * 0.5F);
+                    pLevel.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + velocity * 0.5F);
 
                     if (!infin && !player.getAbilities().instabuild) {
                         takeArrows(itemstack, player);
@@ -117,7 +118,8 @@ public class MikometBowItem extends BowItem {
         itemStack.shrink(1);
         if (itemStack.isEmpty()) {
             player.getInventory().removeItem(itemStack);
-        };
+        }
+        ;
     }
 
     public static float chargeTime = 40F;
@@ -150,7 +152,7 @@ public class MikometBowItem extends BowItem {
      */
 
     public static float getPowerForTime(int pCharge) {
-        float f = (float)pCharge / chargeTime;
+        float f = (float) pCharge / chargeTime;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
@@ -159,7 +161,7 @@ public class MikometBowItem extends BowItem {
     }
 
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if(Screen.hasShiftDown()){
+        if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.mikomet_bow.shift"));
         } else {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.tooltip"));

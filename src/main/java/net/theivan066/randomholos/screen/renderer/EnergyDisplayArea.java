@@ -2,11 +2,11 @@ package net.theivan066.randomholos.screen.renderer;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import java.util.List;
 
- /*
+/*
  *  BluSunrize
  *  Copyright (c) 2021
  *
@@ -21,11 +21,11 @@ public class EnergyDisplayArea {
     private final int height;
     private final IEnergyStorage energy;
 
-    public EnergyDisplayArea(int xMin, int yMin, IEnergyStorage energy)  {
-        this(xMin, yMin, energy,10,64);
+    public EnergyDisplayArea(int xMin, int yMin, IEnergyStorage energy) {
+        this(xMin, yMin, energy, 10, 64);
     }
 
-    public EnergyDisplayArea(int xMin, int yMin, IEnergyStorage energy, int width, int height)  {
+    public EnergyDisplayArea(int xMin, int yMin, IEnergyStorage energy, int width, int height) {
         xPos = xMin;
         yPos = yMin;
         this.width = width;
@@ -34,12 +34,12 @@ public class EnergyDisplayArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(energy.getEnergyStored()+" / "+energy.getMaxEnergyStored()+" FE"));
+        return List.of(Component.literal(energy.getEnergyStored() + " / " + energy.getMaxEnergyStored() + " FE"));
     }
 
     public void render(GuiGraphics guiGraphics) {
-        int stored = (int)(height * (energy.getEnergyStored() / (float)energy.getMaxEnergyStored()));
-        guiGraphics.fillGradient(xPos,yPos + (height - stored),xPos + width,
-                yPos + height,0xffb51500, 0xff600b00);
+        int stored = (int) (height * (energy.getEnergyStored() / (float) energy.getMaxEnergyStored()));
+        guiGraphics.fillGradient(xPos, yPos + (height - stored), xPos + width,
+                yPos + height, 0xffb51500, 0xff600b00);
     }
 }

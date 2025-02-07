@@ -1,12 +1,12 @@
 //    public static final ResourceKey<NoiseGeneratorSettings> KAKURIYO_NOISE_GEN = ResourceKey.create(Registries.NOISE_SETTINGS,
 //            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
 
-//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
+//    public static void bootstrapNoise(BootstrapContext<NoiseGeneratorSettings> context) {
 //        context.register(KAKURIYO_NOISE_GEN, makeNoiseSettings(context));
 //    }
 
 //    public static final ResourceKey<DensityFunction> KAKURIYO_DENSITY_FUCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_density_fuction"));
-//    public static NoiseGeneratorSettings makeNoiseSettings(BootstapContext<NoiseGeneratorSettings> context) {
+//    public static NoiseGeneratorSettings makeNoiseSettings(BootstrapContext<NoiseGeneratorSettings> context) {
 //        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
 //        DensityFunction finalDensity = new DensityFunctions.HolderHolder(densityFunctions.getOrThrow(KAKURIYO_TERRAIN));
 //
@@ -49,13 +49,13 @@
 //    }
 //
 //    public static final ResourceKey<DensityFunction> KAKURIYO_TERRAIN = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, ""));
-//    public static void bootstrap(BootstapContext<DensityFunction> context) {
+//    public static void bootstrap(BootstrapContext<DensityFunction> context) {
 //        DensityFunction ambientTerrainNoise = makeAmbientNoise2D(context);
 //        makeSkylightTerrain(context, ambientTerrainNoise);
 //    }
 //
 //    @NotNull
-//    private static DensityFunction makeAmbientNoise2D(BootstapContext<DensityFunction> context) {
+//    private static DensityFunction makeAmbientNoise2D(BootstrapContext<DensityFunction> context) {
 //        HolderGetter<NormalNoise.NoiseParameters> noiseLookup = context.lookup(Registries.NOISE);
 //        Holder.Reference<NormalNoise.NoiseParameters> surfaceParams = noiseLookup.getOrThrow(Noises.SURFACE);
 //        Holder.Reference<NormalNoise.NoiseParameters> ridgeParams = noiseLookup.getOrThrow(Noises.RIDGE);
@@ -86,7 +86,7 @@
 //        );
 //    }
 //
-//    private static void makeSkylightTerrain(BootstapContext<DensityFunction> context, DensityFunction rawBiomeDensity) {
+//    private static void makeSkylightTerrain(BootstrapContext<DensityFunction> context, DensityFunction rawBiomeDensity) {
 //
 //        DensityFunction skyIslandNoise = DensityFunctions.add(
 //                DensityFunctions.constant(-0.5),
@@ -116,7 +116,7 @@
 }
 
 
-//    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
+//    public static void bootstrapNoise(BootstrapContext<NoiseGeneratorSettings> context) {
 //        HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
 //        HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 //

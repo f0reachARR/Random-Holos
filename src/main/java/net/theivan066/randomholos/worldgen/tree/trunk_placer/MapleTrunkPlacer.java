@@ -1,7 +1,7 @@
 package net.theivan066.randomholos.worldgen.tree.trunk_placer;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class MapleTrunkPlacer extends TrunkPlacer {
-    public static final Codec<MapleTrunkPlacer> CODEC = RecordCodecBuilder.create(mapleTrunkPlacerInstance ->
+    public static final MapCodec<MapleTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(mapleTrunkPlacerInstance ->
             trunkPlacerParts(mapleTrunkPlacerInstance).apply(mapleTrunkPlacerInstance, MapleTrunkPlacer::new));
 
     public MapleTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
@@ -40,24 +40,23 @@ public class MapleTrunkPlacer extends TrunkPlacer {
             }
             return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(height), 0, false));
         } else {
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
                 placeLog(pLevel, pBlockSetter, pRandom, pPos.above(i), pConfig);
             }
             int times = (int) Math.floor((double) height / 4 - 1);
             int leftover = height % 4;
 
             if (pRandom.nextFloat() < 0.25f) {
-               for (int j = 0; j < times + 1; j++) {
-                   for (int k = 0; k < 4; k++) {
-                       placeLog(pLevel, pBlockSetter, pRandom, pPos.east(j).above(j * 4 + k), pConfig);
-                   }
-               }
-               for (int l = 0; l < leftover; l++) {
-                   placeLog(pLevel, pBlockSetter, pRandom, pPos.east(times).above(height - (height % 4) + l), pConfig);
-               }
+                for (int j = 0; j < times + 1; j++) {
+                    for (int k = 0; k < 4; k++) {
+                        placeLog(pLevel, pBlockSetter, pRandom, pPos.east(j).above(j * 4 + k), pConfig);
+                    }
+                }
+                for (int l = 0; l < leftover; l++) {
+                    placeLog(pLevel, pBlockSetter, pRandom, pPos.east(times).above(height - (height % 4) + l), pConfig);
+                }
                 return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.east(times).above(height), 0, false));
-            }
-            else if (0.25f < pRandom.nextFloat() && pRandom.nextFloat() < 0.5f) {
+            } else if (0.25f < pRandom.nextFloat() && pRandom.nextFloat() < 0.5f) {
                 for (int j = 0; j < times + 1; j++) {
                     for (int k = 0; k < 4; k++) {
                         placeLog(pLevel, pBlockSetter, pRandom, pPos.south(j).above(j * 4 + k), pConfig);

@@ -20,17 +20,17 @@ public class SuiseiRenderer extends MobRenderer<SuiseiEntity, SuiseiModel<Suisei
     private static final Map<SuiseiVariant, ResourceLocation> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(SuiseiVariant.class), map -> {
                 map.put(SuiseiVariant.DEFAULT,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/suisei.png"));
                 map.put(SuiseiVariant.KOJINSEI,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/kojinsei_suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/kojinsei_suisei.png"));
                 map.put(SuiseiVariant.NORMAL_IDOL,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/normal_idol_suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/normal_idol_suisei.png"));
                 map.put(SuiseiVariant.SAILOR,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/sailor_suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/sailor_suisei.png"));
                 map.put(SuiseiVariant.WAR_MAID,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/war_maid_suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/war_maid_suisei.png"));
                 map.put(SuiseiVariant.IKEMEN_NI_NACCHATTA,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/suisei/ikemen_ni_nacchatta_suisei.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/suisei/ikemen_ni_nacchatta_suisei.png"));
             });
 
     public SuiseiRenderer(EntityRendererProvider.Context pContext) {
@@ -45,7 +45,7 @@ public class SuiseiRenderer extends MobRenderer<SuiseiEntity, SuiseiModel<Suisei
     @Override
     public void render(SuiseiEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.45f, 0.45f, 0.45f);
         }
 

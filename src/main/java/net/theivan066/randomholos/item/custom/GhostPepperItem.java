@@ -15,9 +15,9 @@ public class GhostPepperItem extends ItemNameBlockItem {
 
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
-        Player player = (Player)pLivingEntity;
-        player.setSecondsOnFire(10);
-        player.displayClientMessage(Component.translatable("messages.randomholos.ghost_pepper"),true);
+        Player player = (Player) pLivingEntity;
+        player.setRemainingFireTicks(10);
+        player.displayClientMessage(Component.translatable("messages.randomholos.ghost_pepper"), true);
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }
 }

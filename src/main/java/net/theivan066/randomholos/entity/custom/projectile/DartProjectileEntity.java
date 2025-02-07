@@ -22,8 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.event.EventHooks;
 import net.theivan066.randomholos.entity.ModEntities;
 
 @SuppressWarnings({"deprecation"})
@@ -48,9 +47,9 @@ public class DartProjectileEntity extends Projectile {
         this.setDamage(dmg);
         setOwner(entity);
         BlockPos blockpos = entity.blockPosition();
-        double d0 = (double)blockpos.getX() + 0.5D;
-        double d1 = (double)blockpos.getY() + 1.75D;
-        double d2 = (double)blockpos.getZ() + 0.5D;
+        double d0 = (double) blockpos.getX() + 0.5D;
+        double d1 = (double) blockpos.getY() + 1.75D;
+        double d2 = (double) blockpos.getZ() + 0.5D;
         this.moveTo(d0, d1, d2, this.getYRot(), this.getXRot());
     }
 
@@ -88,8 +87,8 @@ public class DartProjectileEntity extends Projectile {
             }
         }
 
-        if(this.entityData.get(HIT)) {
-            if(this.tickCount >= counter) {
+        if (this.entityData.get(HIT)) {
+            if (this.tickCount >= counter) {
                 this.discard();
             }
         }
@@ -100,7 +99,7 @@ public class DartProjectileEntity extends Projectile {
 
         Vec3 vec3 = this.getDeltaMovement();
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        if (hitresult.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hitresult))
+        if (hitresult.getType() != HitResult.Type.MISS && !EventHooks.onProjectileImpact(this, hitresult))
             this.onHit(hitresult);
 
         double d0 = this.getX() + vec3.x;
@@ -111,8 +110,8 @@ public class DartProjectileEntity extends Projectile {
         double d5 = vec3.x;
         double d6 = vec3.y;
         double d7 = vec3.z;
-        for(int i = 0; i < 4; ++i) {
-            this.level().addParticle(ParticleTypes.DRIPPING_LAVA, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d7 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+        for (int i = 0; i < 4; ++i) {
+            this.level().addParticle(ParticleTypes.DRIPPING_LAVA, this.getX() + d5 * (double) i / 4.0D, this.getY() + d6 * (double) i / 4.0D, this.getZ() + d7 * (double) i / 4.0D, -d5, -d6 + 0.2D, -d1);
         }
 
         if (this.level().getBlockStates(this.getBoundingBox()).noneMatch(BlockBehaviour.BlockStateBase::isAir)) {
@@ -132,18 +131,18 @@ public class DartProjectileEntity extends Projectile {
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL,
                 2F, 1F);
 
-        LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
+        LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity) owner : null;
         hitEntity.hurt(this.damageSources().mobProjectile(this, livingentity), (float) damage);
     }
 
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if(this.level().isClientSide()) {
+        if (this.level().isClientSide()) {
             return;
         }
 
-        if(pResult.getType() == HitResult.Type.ENTITY && pResult instanceof EntityHitResult) {
+        if (pResult.getType() == HitResult.Type.ENTITY && pResult instanceof EntityHitResult) {
             this.entityData.set(HIT, true);
             counter = this.tickCount + 5;
         }
@@ -156,8 +155,8 @@ public class DartProjectileEntity extends Projectile {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(HIT, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(HIT, false);
     }
 
     @Override

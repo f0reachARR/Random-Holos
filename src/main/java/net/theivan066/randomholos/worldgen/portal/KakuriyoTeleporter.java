@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.util.ITeleporter;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.custom.KakuriyoPortalBlock;
 
@@ -19,6 +18,7 @@ public class KakuriyoTeleporter implements ITeleporter {
         thisPos = pos;
         insideDimension = insideDim;
     }
+
     @Override
     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld,
                               float yaw, Function<Boolean, Entity> repositionEntity) {
@@ -34,7 +34,7 @@ public class KakuriyoTeleporter implements ITeleporter {
         int tries = 0;
         while ((destinationWorld.getBlockState(destinationPos).getBlock() != Blocks.AIR) &&
                 !destinationWorld.getBlockState(destinationPos).canBeReplaced(Fluids.WATER) &&
-                (destinationWorld.getBlockState(destinationPos.above()).getBlock()  != Blocks.AIR) &&
+                (destinationWorld.getBlockState(destinationPos.above()).getBlock() != Blocks.AIR) &&
                 !destinationWorld.getBlockState(destinationPos.above()).canBeReplaced(Fluids.WATER) && (tries < 25)) {
             destinationPos = destinationPos.above(2);
             tries++;

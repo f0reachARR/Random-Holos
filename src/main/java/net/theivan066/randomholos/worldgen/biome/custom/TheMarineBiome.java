@@ -2,7 +2,7 @@ package net.theivan066.randomholos.worldgen.biome.custom;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.*;
 import net.theivan066.randomholos.worldgen.biome.ModBiomes;
 
 public class TheMarineBiome {
-    public static Biome theMarine(BootstapContext<Biome> context) {
+    public static Biome theMarine(BootstrapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
         BiomeDefaultFeatures.oceanSpawns(spawnBuilder, 2, 3, 5);

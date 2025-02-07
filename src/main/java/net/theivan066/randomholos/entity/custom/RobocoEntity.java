@@ -142,11 +142,11 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
-        this.entityData.define(COCKED, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
+        builder.define(COCKED, false);
     }
 
 
@@ -197,7 +197,7 @@ public class RobocoEntity extends Animal implements RangedAttackMob {
         float vel = 35;
         Vec3 lookDirect = this.getLookAngle().scale(vel);
 
-        bullet.setDeltaMovement(lookDirect.x + ran.nextFloat(-2f, 2f), lookDirect.y , lookDirect.z + ran.nextFloat(-2f, 2f));
+        bullet.setDeltaMovement(lookDirect.x + ran.nextFloat(-2f, 2f), lookDirect.y, lookDirect.z + ran.nextFloat(-2f, 2f));
         bullet.setOwner(this);
 
         this.level().addFreshEntity(bullet);

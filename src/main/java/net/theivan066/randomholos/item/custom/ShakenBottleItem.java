@@ -18,7 +18,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.theivan066.randomholos.item.ModItems;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -52,8 +51,8 @@ public class ShakenBottleItem extends Item {
         }
     }
 
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if(Screen.hasShiftDown()){
+    public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.shaken_bottle.shift"));
         } else {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.tooltip"));

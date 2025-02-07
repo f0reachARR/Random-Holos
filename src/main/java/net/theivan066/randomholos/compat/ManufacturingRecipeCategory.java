@@ -17,8 +17,8 @@ import net.theivan066.randomholos.recipe.ManufacturingRecipe;
 
 
 public class ManufacturingRecipeCategory implements IRecipeCategory<ManufacturingRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(RandomHolos.MOD_ID, "manufacturing");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/gui/manufacturing_table_gui_jei.png");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "manufacturing");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/gui/manufacturing_table_gui_jei.png");
 
     public static final RecipeType<ManufacturingRecipe> MANUFACTURING_TYPE =
             new RecipeType<>(UID, ManufacturingRecipe.class);
@@ -40,10 +40,10 @@ public class ManufacturingRecipeCategory implements IRecipeCategory<Manufacturin
         return Component.translatable("title.randomholos.manufacturing");
     }
 
-    @Override
-    public IDrawable getBackground() {
-        return this.background;
-    }
+//    @Override
+//    public IDrawable getBackground() {
+//        return this.background;
+//    }
 
     @Override
     public IDrawable getIcon() {

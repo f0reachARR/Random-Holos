@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class KurosoraEntity extends PathfinderMob{
+public class KurosoraEntity extends PathfinderMob {
     private static final Predicate<LivingEntity> LIVING_ENTITY_SELECTOR = LivingEntity::attackable;
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(KurosoraEntity.class, EntityDataSerializers.BOOLEAN);
@@ -50,8 +50,8 @@ public class KurosoraEntity extends PathfinderMob{
     private final List<Runnable> goalChanges = new ArrayList<>();
     private Goal currentGoal;
 
-     private final ServerBossEvent bossEvent =
-             (ServerBossEvent) new ServerBossEvent(Component.translatable("bossbar.randomholos.kurosora"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_20).setDarkenScreen(true).setCreateWorldFog(true);
+    private final ServerBossEvent bossEvent =
+            (ServerBossEvent) new ServerBossEvent(Component.translatable("bossbar.randomholos.kurosora"), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.NOTCHED_20).setDarkenScreen(true).setCreateWorldFog(true);
 
     public KurosoraEntity(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -113,7 +113,7 @@ public class KurosoraEntity extends PathfinderMob{
             dashAnimationState.stop();
         }
         if (!this.isSpraying()) {
-           sprayAnimationState.stop();
+            sprayAnimationState.stop();
         }
         if (!this.isDart()) {
             dartAnimationState.stop();
@@ -147,13 +147,13 @@ public class KurosoraEntity extends PathfinderMob{
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-        this.entityData.define(SPRAY, false);
-        this.entityData.define(DART, false);
-        this.entityData.define(TELEPORT, false);
-        this.entityData.define(DASHING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
+        builder.define(SPRAY, false);
+        builder.define(DART, false);
+        builder.define(TELEPORT, false);
+        builder.define(DASHING, false);
     }
 
     public void setAttacking(boolean attacking) {
@@ -187,6 +187,7 @@ public class KurosoraEntity extends PathfinderMob{
     public boolean isTeleporting() {
         return this.entityData.get(TELEPORT);
     }
+
     public void setDashing(boolean dashing) {
         this.entityData.set(DASHING, dashing);
     }

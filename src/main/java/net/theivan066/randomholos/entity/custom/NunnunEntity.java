@@ -83,10 +83,10 @@ public class NunnunEntity extends Animal {
                 .add(Attributes.ATTACK_KNOCKBACK, 0.6f);
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ID_SIZE, 1);
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ID_SIZE, 1);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
     @VisibleForTesting
@@ -96,8 +96,8 @@ public class NunnunEntity extends Animal {
         this.reapplyPosition();
         this.refreshDimensions();
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MathUtil.square(i) - (0.5 * i));
-        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue((double)(0.2F + 0.1F * (float)i));
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue((double)i);
+        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue((double) (0.2F + 0.1F * (float) i));
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue((double) i);
         if (pResetHealth) {
             this.setHealth(this.getMaxHealth());
         }
@@ -127,6 +127,7 @@ public class NunnunEntity extends Animal {
     public boolean isTiny() {
         return this.getSize() <= 1;
     }
+
     protected ParticleOptions getParticleType() {
         return ParticleTypes.CLOUD;
     }
@@ -143,12 +144,12 @@ public class NunnunEntity extends Animal {
 
             // Forge: Don't spawn particles if it's handled by the implementation itself
             if (!spawnCustomParticles())
-                for(int j = 0; j < i * 8; ++j) {
-                    float f = this.random.nextFloat() * ((float)Math.PI * 2F);
+                for (int j = 0; j < i * 8; ++j) {
+                    float f = this.random.nextFloat() * ((float) Math.PI * 2F);
                     float f1 = this.random.nextFloat() * 0.5F + 0.5F;
-                    float f2 = Mth.sin(f) * (float)i * 0.5F * f1;
-                    float f3 = Mth.cos(f) * (float)i * 0.5F * f1;
-                    this.level().addParticle(this.getParticleType(), this.getX() + (double)f2, this.getY(), this.getZ() + (double)f3, 0.0D, 0.0D, 0.0D);
+                    float f2 = Mth.sin(f) * (float) i * 0.5F * f1;
+                    float f3 = Mth.cos(f) * (float) i * 0.5F * f1;
+                    this.level().addParticle(this.getParticleType(), this.getX() + (double) f2, this.getY(), this.getZ() + (double) f3, 0.0D, 0.0D, 0.0D);
                 }
 
             this.playSound(this.getSquishSound(), this.getSoundVolume(), ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) / 0.8F);
@@ -194,7 +195,7 @@ public class NunnunEntity extends Animal {
     }
 
     public @NotNull EntityType<? extends NunnunEntity> getType() {
-        return (EntityType<? extends NunnunEntity>)super.getType();
+        return (EntityType<? extends NunnunEntity>) super.getType();
     }
 
     public void remove(Entity.RemovalReason pReason) {
@@ -202,13 +203,13 @@ public class NunnunEntity extends Animal {
         if (!this.level().isClientSide && i > 1 && this.isDeadOrDying()) {
             Component component = this.getCustomName();
             boolean flag = this.isNoAi();
-            float f = (float)i / 4.0F;
+            float f = (float) i / 4.0F;
             int j = i / 2;
             int k = 2 + this.random.nextInt(3);
 
-            for(int l = 0; l < k; ++l) {
-                float f1 = ((float)(l % 2) - 0.5F) * f;
-                float f2 = ((float)(l / 2) - 0.5F) * f;
+            for (int l = 0; l < k; ++l) {
+                float f1 = ((float) (l % 2) - 0.5F) * f;
+                float f2 = ((float) (l / 2) - 0.5F) * f;
                 NunnunEntity nunnunEntity = this.getType().create(this.level());
                 if (nunnunEntity != null) {
                     if (this.isPersistenceRequired()) {
@@ -219,7 +220,7 @@ public class NunnunEntity extends Animal {
                     nunnunEntity.setNoAi(flag);
                     nunnunEntity.setInvulnerable(this.isInvulnerable());
                     nunnunEntity.setSize(j, true);
-                    nunnunEntity.moveTo(this.getX() + (double)f1, this.getY() + 0.5D, this.getZ() + (double)f2, this.random.nextFloat() * 360.0F, 0.0F);
+                    nunnunEntity.moveTo(this.getX() + (double) f1, this.getY() + 0.5D, this.getZ() + (double) f2, this.random.nextFloat() * 360.0F, 0.0F);
                     this.level().addFreshEntity(nunnunEntity);
                 }
             }
@@ -232,7 +233,9 @@ public class NunnunEntity extends Animal {
     }
 
 
-    protected boolean spawnCustomParticles() { return false; }
+    protected boolean spawnCustomParticles() {
+        return false;
+    }
 
     @Override
     public boolean isFood(ItemStack pStack) {
@@ -275,7 +278,7 @@ public class NunnunEntity extends Animal {
     }
 
     public @NotNull EntityDimensions getDimensions(Pose pPose) {
-        return super.getDimensions(pPose).scale(0.5F * (float)this.getSize());
+        return super.getDimensions(pPose).scale(0.5F * (float) this.getSize());
     }
 
     /**
@@ -283,7 +286,7 @@ public class NunnunEntity extends Animal {
      */
     protected void jumpFromGround() {
         Vec3 vec3 = this.getDeltaMovement();
-        this.setDeltaMovement(vec3.x, (double)this.getJumpPower(), vec3.z);
+        this.setDeltaMovement(vec3.x, (double) this.getJumpPower(), vec3.z);
         this.hasImpulse = true;
     }
 
@@ -311,7 +314,7 @@ public class NunnunEntity extends Animal {
     }
 
     public float getSoundVolume() {
-        return 0.4F * (float)this.getSize();
+        return 0.4F * (float) this.getSize();
     }
 
     public boolean doPlayJumpSound() {

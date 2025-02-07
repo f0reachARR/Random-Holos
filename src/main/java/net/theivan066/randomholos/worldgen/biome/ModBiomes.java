@@ -2,7 +2,7 @@ package net.theivan066.randomholos.worldgen.biome;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -20,7 +20,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> SKYLAND = register("skyland");
     public static final ResourceKey<Biome> THE_MARINE = register("the_marine");
 
-    public static void boostrap(BootstapContext<Biome> context) {
+    public static void boostrap(BootstrapContext<Biome> context) {
         context.register(SAKURA_FOREST, SakuraForestBiome.sakuraForest(context));
         context.register(MAPLE_FOREST, MapleForestBiome.mapleForest(context));
         context.register(SHATTERED_GROUNDS, ShatteredGroundsBiome.shatteredGrounds(context));
@@ -28,7 +28,7 @@ public class ModBiomes {
         context.register(SNOWY_LANDS, SnowyLandsBiome.snowyLands(context));
         context.register(MORIRIN, MoririnBiome.moririn(context));
         context.register(SKYLAND, SkylandBiome.skyland(context));
-        context.register(THE_MARINE,TheMarineBiome.theMarine(context));
+        context.register(THE_MARINE, TheMarineBiome.theMarine(context));
     }
 
     public static void globalOverworldGeneration(BiomeGenerationSettings.Builder builder) {

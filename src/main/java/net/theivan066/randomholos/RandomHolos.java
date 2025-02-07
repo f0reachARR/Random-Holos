@@ -1,16 +1,17 @@
 package net.theivan066.randomholos;
 
 import com.mojang.logging.LogUtils;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.entity.ModBlockEntities;
 import net.theivan066.randomholos.effect.ModEffects;
@@ -18,6 +19,7 @@ import net.theivan066.randomholos.enchantment.ModEnchantments;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.fluid.ModFluidTypes;
 import net.theivan066.randomholos.fluid.ModFluids;
+import net.theivan066.randomholos.item.ModArmorMaterials;
 import net.theivan066.randomholos.item.ModCreativeModeTabs;
 import net.theivan066.randomholos.item.ModItemProperties;
 import net.theivan066.randomholos.item.ModItems;
@@ -37,9 +39,7 @@ public class RandomHolos {
     public static final String MOD_ID = "randomholos";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public RandomHolos() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public RandomHolos(IEventBus modEventBus, ModContainer modContainer) {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -57,12 +57,13 @@ public class RandomHolos {
         ModEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModArmorMaterials.register(modEventBus);
 
         ModTrunkPlacerTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
 
@@ -85,7 +86,7 @@ public class RandomHolos {
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
@@ -93,8 +94,6 @@ public class RandomHolos {
                 WoodTypeRegistries.registerWoodTypes();
                 ModItemProperties.addCustomItemProperties();
                 ItemRenderLayerRegistries.registerRenderLayers();
-                EntityRendererRegistries.registerEntityRenderer();
-                MenuScreenRegistries.registerMenuScreens();
             });
         }
     }

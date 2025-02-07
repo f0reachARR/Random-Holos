@@ -10,7 +10,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,12 +19,13 @@ public class MikometArrowItem extends ArrowItem {
     }
 
     @Override
-    public AbstractArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter) {
+    public AbstractArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter, ItemStack pArrowStack) {
         return new MikometArrowEntity(ModEntities.MIKOMET_ARROW.get(), pShooter, pLevel);
     }
 
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        if(Screen.hasShiftDown()){
+    @Override
+    public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.mikomet_arrow.shift"));
         } else {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.tooltip"));

@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -17,7 +18,6 @@ import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.block.custom.*;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModItems;
-import net.theivan066.randomholos.worldgen.tree.MapleTreeGrower;
 
 import java.util.function.Supplier;
 
@@ -25,7 +25,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(RandomHolos.MOD_ID);
 
-    public static final DeferredBlock<Block> TEST_BLOCK = registerBlock("test_block", ()->
+    public static final DeferredBlock<Block> TEST_BLOCK = registerBlock("test_block", () ->
             new Block(BlockBehaviour.Properties.of().strength(1f).sound(SoundType.BAMBOO_WOOD)));
 
     public static final DeferredBlock<Block> MAPLE_LOG = registerBlock("maple_log",
@@ -71,34 +71,34 @@ public class ModBlocks {
                 }
             });
     public static final DeferredBlock<Block> MAPLE_SAPLING = registerBlock("maple_sapling",
-            () -> new SaplingBlock(new MapleTreeGrower(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+            () -> new SaplingBlock(TreeGrower.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     public static final DeferredBlock<Block> POTTED_MAPLE_SAPLING = BLOCKS.register("potted_maple_sapling",
             () -> new FlowerPotBlock((() -> (FlowerPotBlock) Blocks.FLOWER_POT), MAPLE_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)));
-    public static final DeferredBlock<Block> FALLEN_LEAVES = registerBlock("fallen_leaves", ()->
+    public static final DeferredBlock<Block> FALLEN_LEAVES = registerBlock("fallen_leaves", () ->
             new PinkPetalsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).sound(SoundType.PINK_PETALS)));
 
     public static final DeferredBlock<LiquidBlock> ELITE_LAVA_BLOCK = BLOCKS.register("elite_lava_block",
-            () -> new LiquidBlock(ModFluids.SOURCE_ELITE_LAVA, BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA).lightLevel(state -> 10).noLootTable()));
-    public static final DeferredBlock<Block> HUMIDIFIER = registerBlock("humidifier", ()->
+            () -> new LiquidBlock(ModFluids.SOURCE_ELITE_LAVA.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA).lightLevel(state -> 10).noLootTable()));
+    public static final DeferredBlock<Block> HUMIDIFIER = registerBlock("humidifier", () ->
             new HumidifierBlock(BlockBehaviour.Properties.of().strength(0.6f).sound(SoundType.AMETHYST_CLUSTER).noOcclusion()));
 
-    public static final DeferredBlock<Block> METEORITE = registerBlock("meteorite", ()->
+    public static final DeferredBlock<Block> METEORITE = registerBlock("meteorite", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE)));
-    public static final DeferredBlock<Block> CRUDE_METEORITE = registerBlock("crude_meteorite", ()->
+    public static final DeferredBlock<Block> CRUDE_METEORITE = registerBlock("crude_meteorite", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE)));
-    public static final DeferredBlock<Block> RICH_METEORITE = registerBlock("rich_meteorite", ()->
+    public static final DeferredBlock<Block> RICH_METEORITE = registerBlock("rich_meteorite", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 10)));
-    public static final DeferredBlock<Block> TOURMALINE_ORE = registerBlock("tourmaline_ore", ()->
+    public static final DeferredBlock<Block> TOURMALINE_ORE = registerBlock("tourmaline_ore", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 1)));
-    public static final DeferredBlock<Block> DEEPSLATE_TOURMALINE_ORE = registerBlock("deepslate_tourmaline_ore", ()->
+    public static final DeferredBlock<Block> DEEPSLATE_TOURMALINE_ORE = registerBlock("deepslate_tourmaline_ore", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 1)));
-    public static final DeferredBlock<Block> TOURMALINE_BlOCK = registerBlock("tourmaline_block", ()->
+    public static final DeferredBlock<Block> TOURMALINE_BlOCK = registerBlock("tourmaline_block", () ->
             new TourmalineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(state -> 8)));
 
 
-    public static final DeferredBlock<Block> STEEL_BLOCK = registerBlock("steel_block", ()->
+    public static final DeferredBlock<Block> STEEL_BLOCK = registerBlock("steel_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(6.0f, 7.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER)));
-    public static final DeferredBlock<Block> MANUFACTURING_TABLE = registerBlock("manufacturing_table", ()->
+    public static final DeferredBlock<Block> MANUFACTURING_TABLE = registerBlock("manufacturing_table", () ->
             new ManufacturingTableBlock(BlockBehaviour.Properties.of().strength(2f).sound(SoundType.STONE).lightLevel(state -> 12).noOcclusion()));
     public static final DeferredBlock<Block> CHIVES_CROP = BLOCKS.register("chives_crop",
             () -> new ChivesCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT).noCollission().noOcclusion()));

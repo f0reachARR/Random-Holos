@@ -30,7 +30,7 @@ public class ModClientBusEvents {
     //Particle
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ModParticles.GUESSER_PIN_PARTICLES, GuesserPinParticles.Provider::new);
+        event.registerSpriteSet(ModParticles.GUESSER_PIN_PARTICLES.get(), GuesserPinParticles.Provider::new);
     }
 
 
@@ -81,15 +81,15 @@ public class ModClientBusEvents {
         float size = 0.5F;
 
         // Front face
-        buffer.vertex(pose, -size, size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
-        buffer.vertex(pose, size, size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
-        buffer.vertex(pose, size, -size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
-        buffer.vertex(pose, -size, -size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, -1.0F).endVertex();
+        buffer.addVertex(pose, -size, size, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, -1.0F);
+        buffer.addVertex(pose, size, size, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, -1.0F);
+        buffer.addVertex(pose, size, -size, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, -1.0F);
+        buffer.addVertex(pose, -size, -size, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, -1.0F);
 
         // Back face
-        buffer.vertex(pose, -size, -size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
-        buffer.vertex(pose, size, -size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
-        buffer.vertex(pose, size, size, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
-        buffer.vertex(pose, -size, size, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normal, 0.0F, 0.0F, 1.0F).endVertex();
+        buffer.addVertex(pose, -size, -size, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, 1.0F);
+        buffer.addVertex(pose, size, -size, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 1.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, 1.0F);
+        buffer.addVertex(pose, size, size, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, 1.0F);
+        buffer.addVertex(pose, -size, size, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 0.0F).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(lastPose, 0.0F, 0.0F, 1.0F);
     }
 }

@@ -1,7 +1,7 @@
 package net.theivan066.randomholos.worldgen.tree.trunk_placer;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class BushTrunkPlacer extends TrunkPlacer {
-    public static final Codec<BushTrunkPlacer> CODEC = RecordCodecBuilder.create(mapleTrunkPlacerInstance ->
-        trunkPlacerParts(mapleTrunkPlacerInstance).apply(mapleTrunkPlacerInstance, BushTrunkPlacer::new));
+    public static final MapCodec<BushTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(mapleTrunkPlacerInstance ->
+            trunkPlacerParts(mapleTrunkPlacerInstance).apply(mapleTrunkPlacerInstance, BushTrunkPlacer::new));
 
     public BushTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);

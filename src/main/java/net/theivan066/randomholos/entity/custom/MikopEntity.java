@@ -31,6 +31,7 @@ import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.trade.ModTrades;
 import net.theivan066.randomholos.entity.variant.MikopVariant;
 import net.theivan066.randomholos.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -49,6 +50,7 @@ public class MikopEntity extends Animal implements Npc, Merchant {
     private int numberOfRestocksToday;
     private long lastRestockCheckDayTime;
     private int restockTimer = 24000;
+
     public MikopEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -116,14 +118,14 @@ public class MikopEntity extends Animal implements Npc, Merchant {
                 this.restock();
             }
         } else {
-            restockTimer --;
+            restockTimer--;
         }
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
 
@@ -239,7 +241,8 @@ public class MikopEntity extends Animal implements Npc, Merchant {
     }
 
     @Override
-    public void overrideOffers(MerchantOffers pOffers) {}
+    public void overrideOffers(MerchantOffers pOffers) {
+    }
 
     @Override
     public void notifyTrade(MerchantOffer pOffer) {
@@ -265,16 +268,19 @@ public class MikopEntity extends Animal implements Npc, Merchant {
             this.playSound(this.getYesOrNoSound(!pStack.isEmpty()), this.getSoundVolume(), this.getVoicePitch());
         }
     }
+
     protected SoundEvent getYesOrNoSound(boolean getYesSound) {
         return getYesSound ? SoundEvents.VILLAGER_YES : SoundEvents.VILLAGER_NO;
     }
+
     @Override
     public int getVillagerXp() {
         return 0;
     }
 
     @Override
-    public void overrideXp(int pXp) {}
+    public void overrideXp(int pXp) {
+    }
 
     @Override
     public boolean showProgressBar() {
@@ -301,7 +307,7 @@ public class MikopEntity extends Animal implements Npc, Merchant {
 
 
     public void restock() {
-        for(MerchantOffer merchantoffer : this.getOffers()) {
+        for (MerchantOffer merchantoffer : this.getOffers()) {
             merchantoffer.resetUses();
         }
         this.resendOffersToTradingPlayer();
@@ -318,7 +324,7 @@ public class MikopEntity extends Animal implements Npc, Merchant {
     }
 
     private boolean needsToRestock() {
-        for(MerchantOffer merchantoffer : this.getOffers()) {
+        for (MerchantOffer merchantoffer : this.getOffers()) {
             if (merchantoffer.needsRestock()) {
                 return true;
             }

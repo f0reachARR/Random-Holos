@@ -2,7 +2,7 @@ package net.theivan066.randomholos.registries;
 
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.ComposterBlock;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.item.ModItems;
 

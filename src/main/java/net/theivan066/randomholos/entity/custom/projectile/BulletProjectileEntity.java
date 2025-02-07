@@ -145,8 +145,8 @@ public class BulletProjectileEntity extends Projectile {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(HIT, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(HIT, false);
     }
 
     @Override

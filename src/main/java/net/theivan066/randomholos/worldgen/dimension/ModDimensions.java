@@ -1,7 +1,5 @@
 package net.theivan066.randomholos.worldgen.dimension;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.TerrainProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -19,8 +17,8 @@ import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -29,7 +27,6 @@ import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.synth.BlendedNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.theivan066.randomholos.RandomHolos;
-import net.theivan066.randomholos.worldgen.biome.ModBiomes;
 
 import java.util.List;
 import java.util.OptionalLong;
@@ -37,16 +34,16 @@ import java.util.stream.Stream;
 
 public class ModDimensions {
     public static final ResourceKey<LevelStem> KAKURIYO_KEY = ResourceKey.create(Registries.LEVEL_STEM,
-            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo"));
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo"));
     public static final ResourceKey<Level> KAKURIYO_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
-            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo"));
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo"));
     public static final ResourceKey<DimensionType> KAKURIYO_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE,
-            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_type"));
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo_type"));
     public static final ResourceKey<NoiseGeneratorSettings> KAKURIYO_NOISE_GEN = ResourceKey.create(Registries.NOISE_SETTINGS,
-            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
 
 
-    public static void bootstrapType(BootstapContext<DimensionType> context) {
+    public static void bootstrapType(BootstrapContext<DimensionType> context) {
         context.register(KAKURIYO_TYPE, new DimensionType(
                 OptionalLong.of(12000), // fixedTime
                 true, // hasSkylight
@@ -66,7 +63,7 @@ public class ModDimensions {
     }
 
 
-    public static void bootstrapStem(BootstapContext<LevelStem> context) {
+    public static void bootstrapStem(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
@@ -82,35 +79,35 @@ public class ModDimensions {
         context.register(KAKURIYO_KEY, stem);
     }
 
-    public static final ResourceKey<DensityFunction> SHIFT_X = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "shift_x"));
-    public static final ResourceKey<DensityFunction> SHIFT_Z = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "shift_z"));
-    public static final ResourceKey<DensityFunction> FACTOR = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/factor"));
-    public static final ResourceKey<DensityFunction> DEPTH = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/depth"));
-    public static final ResourceKey<DensityFunction> SLOPED_CHEESE = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/sloped_cheese"));
-    public static final ResourceKey<DensityFunction> Y = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "y"));
-    public static final ResourceKey<DensityFunction> ENTRANCES = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/entrances"));
-    public static final ResourceKey<DensityFunction> NOODLE = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/noodle"));
-    public static final ResourceKey<DensityFunction> CONTINENTS = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/continents"));
-    public static final ResourceKey<DensityFunction> EROSION = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/erosion"));
-    public static final ResourceKey<DensityFunction> RIDGES = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/ridges"));
-    private static final ResourceKey<DensityFunction> PILLARS = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/pillars"));
-    private static final ResourceKey<DensityFunction> SPAGHETTI_ROUGHNESS_FUNCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_roughness_function"));
-    private static final ResourceKey<DensityFunction> SPAGHETTI_2D = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_2d"));
-    private static final ResourceKey<DensityFunction> BASE_3D_NOISE_OVERWORLD = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/base_3d_noise"));
+    public static final ResourceKey<DensityFunction> SHIFT_X = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "shift_x"));
+    public static final ResourceKey<DensityFunction> SHIFT_Z = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "shift_z"));
+    public static final ResourceKey<DensityFunction> FACTOR = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/factor"));
+    public static final ResourceKey<DensityFunction> DEPTH = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/depth"));
+    public static final ResourceKey<DensityFunction> SLOPED_CHEESE = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/sloped_cheese"));
+    public static final ResourceKey<DensityFunction> Y = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "y"));
+    public static final ResourceKey<DensityFunction> ENTRANCES = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/entrances"));
+    public static final ResourceKey<DensityFunction> NOODLE = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/noodle"));
+    public static final ResourceKey<DensityFunction> CONTINENTS = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/continents"));
+    public static final ResourceKey<DensityFunction> EROSION = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/erosion"));
+    public static final ResourceKey<DensityFunction> RIDGES = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/ridges"));
+    private static final ResourceKey<DensityFunction> PILLARS = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/pillars"));
+    private static final ResourceKey<DensityFunction> SPAGHETTI_ROUGHNESS_FUNCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_roughness_function"));
+    private static final ResourceKey<DensityFunction> SPAGHETTI_2D = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_2d"));
+    private static final ResourceKey<DensityFunction> BASE_3D_NOISE_OVERWORLD = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/base_3d_noise"));
     private static final DensityFunction BLENDING_FACTOR = DensityFunctions.constant(10.0D);
     private static final DensityFunction BLENDING_JAGGEDNESS = DensityFunctions.zero();
-    public static final ResourceKey<DensityFunction> RIDGES_FOLDED =  ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/ridges_folded"));
-    private static final ResourceKey<DensityFunction> SPAGHETTI_2D_THICKNESS_MODULATOR = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_2d_thickness_modulator"));
-    public static final ResourceKey<DensityFunction> OFFSET = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/offset"));
-    public static final ResourceKey<DensityFunction> JAGGEDNESS = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo/jaggedness"));
+    public static final ResourceKey<DensityFunction> RIDGES_FOLDED = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/ridges_folded"));
+    private static final ResourceKey<DensityFunction> SPAGHETTI_2D_THICKNESS_MODULATOR = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/caves/spaghetti_2d_thickness_modulator"));
+    public static final ResourceKey<DensityFunction> OFFSET = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/offset"));
+    public static final ResourceKey<DensityFunction> JAGGEDNESS = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo/jaggedness"));
 
-    public static Holder<? extends DensityFunction> bootstrapDensity(BootstapContext<DensityFunction> pContext) {
+    public static Holder<? extends DensityFunction> bootstrapDensity(BootstrapContext<DensityFunction> pContext) {
 
         HolderGetter<NormalNoise.NoiseParameters> holdergetter = pContext.lookup(Registries.NOISE);
         HolderGetter<DensityFunction> holdergetter1 = pContext.lookup(Registries.DENSITY_FUNCTION);
         int i = DimensionType.MIN_Y * 2;
         int j = DimensionType.MAX_Y * 2;
-        pContext.register(Y, DensityFunctions.yClampedGradient(i, j, (double)i, (double)j));
+        pContext.register(Y, DensityFunctions.yClampedGradient(i, j, (double) i, (double) j));
         DensityFunction densityfunction = registerAndWrap(pContext, SHIFT_X, DensityFunctions.flatCache(DensityFunctions.cache2d(DensityFunctions.shiftA(holdergetter.getOrThrow(Noises.SHIFT)))));
         DensityFunction densityfunction1 = registerAndWrap(pContext, SHIFT_Z, DensityFunctions.flatCache(DensityFunctions.cache2d(DensityFunctions.shiftB(holdergetter.getOrThrow(Noises.SHIFT)))));
         pContext.register(BASE_3D_NOISE_OVERWORLD, BlendedNoise.createUnseeded(0.25D, 0.125D, 80.0D, 160.0D, 8.0D));
@@ -150,7 +147,7 @@ public class ModDimensions {
     private static DensityFunction spaghetti2D(HolderGetter<DensityFunction> pDensityFunctions, HolderGetter<NormalNoise.NoiseParameters> pNoiseParameters) {
         DensityFunction densityfunction = DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.SPAGHETTI_2D_MODULATOR), 2.0D, 1.0D);
         DensityFunction densityfunction1 = weirdScaledSampler(densityfunction, pNoiseParameters.getOrThrow(Noises.SPAGHETTI_2D), WeirdScaledSampler.RarityValueMapper.TYPE2);
-        DensityFunction densityfunction2 = DensityFunctions.mappedNoise(pNoiseParameters.getOrThrow(Noises.SPAGHETTI_2D_ELEVATION), 0.0D, (double)Math.floorDiv(-64, 8), 8.0D);
+        DensityFunction densityfunction2 = DensityFunctions.mappedNoise(pNoiseParameters.getOrThrow(Noises.SPAGHETTI_2D_ELEVATION), 0.0D, (double) Math.floorDiv(-64, 8), 8.0D);
         DensityFunction densityfunction3 = getFunction(pDensityFunctions, SPAGHETTI_2D_THICKNESS_MODULATOR);
         DensityFunction densityfunction4 = DensityFunctions.add(densityfunction2, DensityFunctions.yClampedGradient(-64, 320, 8.0D, -40.0D)).abs();
         DensityFunction densityfunction5 = DensityFunctions.add(densityfunction4, densityfunction3).cube();
@@ -188,16 +185,16 @@ public class ModDimensions {
         return DensityFunctions.mul(DensityFunctions.add(DensityFunctions.add(pDensityFunction.abs(), DensityFunctions.constant(-0.6666666666666666D)).abs(), DensityFunctions.constant(-0.3333333333333333D)), DensityFunctions.constant(-3.0D));
     }
 
-    private static DensityFunction registerAndWrap(BootstapContext<DensityFunction> pContext, ResourceKey<DensityFunction> pKey, DensityFunction pDensityFunction) {
+    private static DensityFunction registerAndWrap(BootstrapContext<DensityFunction> pContext, ResourceKey<DensityFunction> pKey, DensityFunction pDensityFunction) {
         return new DensityFunctions.HolderHolder(pContext.register(pKey, pDensityFunction));
     }
 
-    private static void registerTerrainNoises(BootstapContext<DensityFunction> pContext, HolderGetter<DensityFunction> pDensityFunctionGetter, DensityFunction pJaggedNoise, Holder<DensityFunction> pContinents, Holder<DensityFunction> pErosion, ResourceKey<DensityFunction> pOffsetKey, ResourceKey<DensityFunction> pFactorKey, ResourceKey<DensityFunction> pJaggednessKey, ResourceKey<DensityFunction> pDepthKey, ResourceKey<DensityFunction> pSlopedCheeseKey) {
+    private static void registerTerrainNoises(BootstrapContext<DensityFunction> pContext, HolderGetter<DensityFunction> pDensityFunctionGetter, DensityFunction pJaggedNoise, Holder<DensityFunction> pContinents, Holder<DensityFunction> pErosion, ResourceKey<DensityFunction> pOffsetKey, ResourceKey<DensityFunction> pFactorKey, ResourceKey<DensityFunction> pJaggednessKey, ResourceKey<DensityFunction> pDepthKey, ResourceKey<DensityFunction> pSlopedCheeseKey) {
         DensityFunctions.Spline.Coordinate densityfunctions$spline$coordinate = new DensityFunctions.Spline.Coordinate(pContinents);
         DensityFunctions.Spline.Coordinate densityfunctions$spline$coordinate1 = new DensityFunctions.Spline.Coordinate(pErosion);
         DensityFunctions.Spline.Coordinate densityfunctions$spline$coordinate2 = new DensityFunctions.Spline.Coordinate(pDensityFunctionGetter.getOrThrow(RIDGES));
         DensityFunctions.Spline.Coordinate densityfunctions$spline$coordinate3 = new DensityFunctions.Spline.Coordinate(pDensityFunctionGetter.getOrThrow(RIDGES_FOLDED));
-        DensityFunction densityfunction = registerAndWrap(pContext, pOffsetKey, splineWithBlending(DensityFunctions.add(DensityFunctions.constant((double)-0.50375F), DensityFunctions.spline(TerrainProvider.overworldOffset(densityfunctions$spline$coordinate, densityfunctions$spline$coordinate1, densityfunctions$spline$coordinate3, false))), DensityFunctions.blendOffset()));
+        DensityFunction densityfunction = registerAndWrap(pContext, pOffsetKey, splineWithBlending(DensityFunctions.add(DensityFunctions.constant((double) -0.50375F), DensityFunctions.spline(TerrainProvider.overworldOffset(densityfunctions$spline$coordinate, densityfunctions$spline$coordinate1, densityfunctions$spline$coordinate3, false))), DensityFunctions.blendOffset()));
         DensityFunction densityfunction1 = registerAndWrap(pContext, pFactorKey, splineWithBlending(DensityFunctions.spline(TerrainProvider.overworldFactor(densityfunctions$spline$coordinate, densityfunctions$spline$coordinate1, densityfunctions$spline$coordinate2, densityfunctions$spline$coordinate3, false)), BLENDING_FACTOR));
         DensityFunction densityfunction2 = registerAndWrap(pContext, pDepthKey, DensityFunctions.add(DensityFunctions.yClampedGradient(-64, 320, 1.5D, -1.5D), densityfunction));
         DensityFunction densityfunction3 = registerAndWrap(pContext, pJaggednessKey, splineWithBlending(DensityFunctions.spline(TerrainProvider.overworldJaggedness(densityfunctions$spline$coordinate, densityfunctions$spline$coordinate1, densityfunctions$spline$coordinate2, densityfunctions$spline$coordinate3, false)), BLENDING_JAGGEDNESS));
@@ -210,6 +207,7 @@ public class ModDimensions {
         DensityFunction densityfunction = DensityFunctions.lerp(DensityFunctions.blendAlpha(), pMaxFunction, pMinFunction);
         return DensityFunctions.flatCache(DensityFunctions.cache2d(densityfunction));
     }
+
     public static DensityFunction weirdScaledSampler(DensityFunction pInput, Holder<NormalNoise.NoiseParameters> pNoiseData, WeirdScaledSampler.RarityValueMapper pRarityValueMapper) {
         return new WeirdScaledSampler(pInput, new DensityFunction.NoiseHolder(pNoiseData), pRarityValueMapper);
     }
@@ -224,15 +222,17 @@ public class ModDimensions {
         default void fillArray(double[] pArray, DensityFunction.ContextProvider pContextProvider) {
             this.input().fillArray(pArray, pContextProvider);
 
-            for(int i = 0; i < pArray.length; ++i) {
+            for (int i = 0; i < pArray.length; ++i) {
                 pArray[i] = this.transform(pContextProvider.forIndex(i), pArray[i]);
             }
 
         }
+
         double transform(DensityFunction.FunctionContext pContext, double pValue);
     }
 
-    protected static record WeirdScaledSampler(DensityFunction input, DensityFunction.NoiseHolder noise, WeirdScaledSampler.RarityValueMapper rarityValueMapper) implements TransformerWithContext {
+    protected static record WeirdScaledSampler(DensityFunction input, DensityFunction.NoiseHolder noise,
+                                               WeirdScaledSampler.RarityValueMapper rarityValueMapper) implements TransformerWithContext {
         private static final MapCodec<WeirdScaledSampler> DATA_CODEC = RecordCodecBuilder.mapCodec((p_208438_) -> {
             return p_208438_.group(DensityFunction.HOLDER_HELPER_CODEC.fieldOf("input").forGetter(WeirdScaledSampler::input), DensityFunction.NoiseHolder.CODEC.fieldOf("noise").forGetter(WeirdScaledSampler::noise), WeirdScaledSampler.RarityValueMapper.CODEC.fieldOf("rarity_value_mapper").forGetter(WeirdScaledSampler::rarityValueMapper)).apply(p_208438_, WeirdScaledSampler::new);
         });
@@ -240,7 +240,7 @@ public class ModDimensions {
 
         public double transform(DensityFunction.FunctionContext pContext, double pValue) {
             double d0 = this.rarityValueMapper.mapper.get(pValue);
-            return d0 * Math.abs(this.noise.getValue((double)pContext.blockX() / d0, (double)pContext.blockY() / d0, (double)pContext.blockZ() / d0));
+            return d0 * Math.abs(this.noise.getValue((double) pContext.blockX() / d0, (double) pContext.blockY() / d0, (double) pContext.blockZ() / d0));
         }
 
         public DensityFunction mapAll(DensityFunction.Visitor pVisitor) {
@@ -283,9 +283,11 @@ public class ModDimensions {
             }
         }
     }
+
     static <O> KeyDispatchDataCodec<O> makeCodec(MapCodec<O> pMapCodec) {
         return KeyDispatchDataCodec.of(pMapCodec);
     }
+
     protected static final class QuantizedSpaghettiRarity {
         public static double getSphaghettiRarity2D(double pValue) {
             if (pValue < -0.75D) {
@@ -310,28 +312,28 @@ public class ModDimensions {
         }
     }
 
-    private static Codec<? extends DensityFunction> register(Registry<Codec<? extends DensityFunction>> pRegistry, String pName, KeyDispatchDataCodec<? extends DensityFunction> pCodec) {
+    private static MapCodec<? extends DensityFunction> register(Registry<MapCodec<? extends DensityFunction>> pRegistry, String pName, KeyDispatchDataCodec<? extends DensityFunction> pCodec) {
         return Registry.register(pRegistry, pName, pCodec.codec());
     }
 
-    public static void bootstrapNoise(BootstapContext<NoiseGeneratorSettings> context) {
+    public static void bootstrapNoise(BootstrapContext<NoiseGeneratorSettings> context) {
         HolderGetter<DensityFunction> functions = context.lookup(Registries.DENSITY_FUNCTION);
         HolderGetter<NormalNoise.NoiseParameters> noises = context.lookup(Registries.NOISE);
 
-       context.register(KAKURIYO_NOISE_GEN, new NoiseGeneratorSettings(
-               NoiseSettings.create(0, 512, 1, 2),
-               Blocks.STONE.defaultBlockState(),
-               Blocks.WATER.defaultBlockState(),
-               kakuriyoNoise(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
-                       kakuriyoSurfaceRules(true, false, true),
-                       List.of(),
-                       63,
-                       false,
-                       true,
-                       true,
-                       false
+        context.register(KAKURIYO_NOISE_GEN, new NoiseGeneratorSettings(
+                NoiseSettings.create(0, 512, 1, 2),
+                Blocks.STONE.defaultBlockState(),
+                Blocks.WATER.defaultBlockState(),
+                kakuriyoNoise(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
+                kakuriyoSurfaceRules(true, false, true),
+                List.of(),
+                63,
+                false,
+                true,
+                true,
+                false
 
-       ));
+        ));
     }
 
     private static NoiseRouter kakuriyoNoise(HolderGetter<DensityFunction> pDensityFunctions, HolderGetter<NormalNoise.NoiseParameters> pNoiseParameters) {
@@ -361,7 +363,7 @@ public class ModDimensions {
         float f = 4.0F;
         DensityFunction densityfunction17 = yLimitedInterpolatable(densityfunction15, DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.ORE_VEIN_A), 4.0D, 4.0D), i, j, 0).abs();
         DensityFunction densityfunction18 = yLimitedInterpolatable(densityfunction15, DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.ORE_VEIN_B), 4.0D, 4.0D), i, j, 0).abs();
-        DensityFunction densityfunction19 = DensityFunctions.add(DensityFunctions.constant((double)-0.08F), DensityFunctions.max(densityfunction17, densityfunction18));
+        DensityFunction densityfunction19 = DensityFunctions.add(DensityFunctions.constant((double) -0.08F), DensityFunctions.max(densityfunction17, densityfunction18));
         DensityFunction densityfunction20 = DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.ORE_GAP));
 
         return new NoiseRouter(densityfunction, densityfunction1, densityfunction2, densityfunction3, densityfunction6, densityfunction7, getFunction(pDensityFunctions, CONTINENTS), getFunction(pDensityFunctions, EROSION), densityfunction9, getFunction(pDensityFunctions, RIDGES), slideKakuriyo(DensityFunctions.add(densityfunction10, DensityFunctions.constant(-0.703125D)).clamp(-64.0D, 64.0D)), densityfunction14, densityfunction16, densityfunction19, densityfunction20);
@@ -382,8 +384,9 @@ public class ModDimensions {
     }
 
     private static DensityFunction slideKakuriyo(DensityFunction pDensityFunction) {
-        return slide(pDensityFunction, 0, 512,  80,  64, -0.078125D, 0, 24,  0.1171875D);
+        return slide(pDensityFunction, 0, 512, 80, 64, -0.078125D, 0, 24, 0.1171875D);
     }
+
     private static DensityFunction slide(DensityFunction pDensityFunction, int pMinY, int pMaxY, int p_224447_, int p_224448_, double p_224449_, int p_224450_, int p_224451_, double p_224452_) {
         DensityFunction densityfunction1 = DensityFunctions.yClampedGradient(pMinY + pMaxY - p_224447_, pMinY + pMaxY - p_224448_, 1.0D, 0.0D);
         DensityFunction $$9 = DensityFunctions.lerp(densityfunction1, p_224449_, pDensityFunction);
@@ -392,7 +395,7 @@ public class ModDimensions {
     }
 
     private static DensityFunction yLimitedInterpolatable(DensityFunction p_209472_, DensityFunction p_209473_, int p_209474_, int p_209475_, int p_209476_) {
-        return DensityFunctions.interpolated(DensityFunctions.rangeChoice(p_209472_, (double)p_209474_, (double)(p_209475_ + 1), p_209473_, DensityFunctions.constant((double)p_209476_)));
+        return DensityFunctions.interpolated(DensityFunctions.rangeChoice(p_209472_, (double) p_209474_, (double) (p_209475_ + 1), p_209473_, DensityFunctions.constant((double) p_209476_)));
     }
 
     private static DensityFunction underground(HolderGetter<DensityFunction> pDensityFunctions, HolderGetter<NormalNoise.NoiseParameters> pNoiseParameters, DensityFunction p_256658_) {
@@ -411,7 +414,7 @@ public class ModDimensions {
     }
 
     public static SurfaceRules.RuleSource kakuriyoSurfaceRules(boolean p_198381_, boolean pBedrockRoof, boolean pBedrockFloor) {
-            return ModSurfaceRules.generateRules(p_198381_, pBedrockRoof, pBedrockFloor);
+        return ModSurfaceRules.generateRules(p_198381_, pBedrockRoof, pBedrockFloor);
     }
 }
 
