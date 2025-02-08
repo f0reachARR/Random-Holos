@@ -1,7 +1,7 @@
 package net.theivan066.randomholos.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
 import net.theivan066.randomholos.screen.ManufacturingTableMenu;
@@ -54,8 +53,6 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     private static final int INPUT_SLOT_PATTERN = 9;
     private static final int OUTPUT_SLOT = 10;
 
-    private IItemHandler lazyItemHandler = null;
-
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 20;
@@ -63,23 +60,21 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     @Override
     public void onLoad() {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    }
-    
-    @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("manufacturing_table.progress", progress);
-
-        super.saveAdditional(pTag);
     }
 
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("manufacturing_table.progress");
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        tag.put("Inventory", itemHandler.serializeNBT(registries));
+        tag.putInt("Progress", progress);
 
+        super.saveAdditional(tag, registries);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        itemHandler.deserializeNBT(registries, tag.getCompound("Inventory"));
+        progress = tag.getInt("Progress");
     }
 
     public ManufacturingTableBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -121,15 +116,6 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     public Component getDisplayName() {
         return Component.translatable("gui.randomholos.manufacturing_table");
     }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap, side);
-    }
-
 
     @Nullable
     @Override
@@ -190,12 +176,17 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     }
 
     private boolean isOutputtable(Item item, int count) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize() >= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count
-                && (this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item));
+        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()
+                >= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count
+                && (
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty()
+                        || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item)
+        );
     }
 
     private boolean isOutputSlotAvailable() {
         return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() ||
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+                this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()
+                        < this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
     }
 }

@@ -298,7 +298,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
 
 
     public HumidifierBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntities.HUMIDIFIER_BE, pPos, pBlockState);
+        super(ModBlockEntities.HUMIDIFIER_BE.get(), pPos, pBlockState);
         this.humidifierBlock = (HumidifierBlock) ModBlocks.HUMIDIFIER.get();
         this.data = new ContainerData() {
             @Override
@@ -326,7 +326,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable("gui.randomholos.humidifier");
     }
 

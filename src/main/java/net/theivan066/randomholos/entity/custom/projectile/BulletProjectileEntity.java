@@ -2,8 +2,6 @@ package net.theivan066.randomholos.entity.custom.projectile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -20,9 +18,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 import net.theivan066.randomholos.entity.ModEntities;
 
-@SuppressWarnings({"deprecation"})
+
 public class BulletProjectileEntity extends Projectile {
 
     private int pelletGpCount;
@@ -37,7 +36,7 @@ public class BulletProjectileEntity extends Projectile {
     }
 
     public BulletProjectileEntity(Level pLevel, Player player, float dmg, int pelletGpCount) {
-        super(ModEntities.BULLET_PROJECTILE, pLevel);
+        super(ModEntities.BULLET_PROJECTILE.get(), pLevel);
         this.setDamage(dmg);
         this.pelletGpCount = pelletGpCount;
         setOwner(player);
@@ -83,7 +82,7 @@ public class BulletProjectileEntity extends Projectile {
 
         Vec3 vec3 = this.getDeltaMovement();
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        if (hitresult.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hitresult))
+        if (hitresult.getType() != HitResult.Type.MISS && !EventHooks.onProjectileImpact(this, hitresult))
             this.onHit(hitresult);
 
         double d0 = this.getX() + vec3.x;
@@ -147,10 +146,5 @@ public class BulletProjectileEntity extends Projectile {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(HIT, false);
-    }
-
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

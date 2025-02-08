@@ -28,13 +28,13 @@ public class MikoAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
+    protected void checkAndPerformAttack(LivingEntity pEnemy) {
+        if (this.canPerformAttack(pEnemy)) {
             shouldCountTillNextAttack = true;
-            if(isTimeToStartAttackAnimation()) {
+            if (isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }
-            if(isTimeToAttack()) {
+            if (isTimeToAttack()) {
                 this.mob.getLookControl().setLookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
                 performAttack(pEnemy);
             }
@@ -46,33 +46,32 @@ public class MikoAttackGoal extends MeleeAttackGoal {
         }
     }
 
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
-        return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
-    }
-
+    @Override
     protected void resetAttackCooldown() {
         this.ticksUntilNextAttack = this.adjustedTickDelay((int) (attackDelay));
     }
 
+    @Override
     protected boolean isTimeToAttack() {
         return this.ticksUntilNextAttack == 0 || this.ticksUntilNextAttack == 5 || this.ticksUntilNextAttack == 10 || this.ticksUntilNextAttack == 15;
     }
 
     protected boolean isComboOver() {
-        return  this.ticksUntilNextAttack <= 0;
+        return this.ticksUntilNextAttack <= 0;
     }
 
     protected boolean isTimeToStartAttackAnimation() {
         return this.ticksUntilNextAttack <= attackDelay;
     }
 
+    @Override
     protected int getTicksUntilNextAttack() {
         return this.ticksUntilNextAttack;
     }
 
 
     protected void performAttack(LivingEntity pEnemy) {
-        if(isComboOver()) {
+        if (isComboOver()) {
             this.resetAttackCooldown();
         }
         this.mob.swing(InteractionHand.MAIN_HAND);
@@ -82,7 +81,7 @@ public class MikoAttackGoal extends MeleeAttackGoal {
     @Override
     public void tick() {
         super.tick();
-        if(shouldCountTillNextAttack) {
+        if (shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
     }

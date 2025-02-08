@@ -1,6 +1,5 @@
 package net.theivan066.randomholos.entity.custom;
 
-import com.google.common.collect.Sets;
 import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -34,8 +33,6 @@ import net.theivan066.randomholos.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-
 public class MikopEntity extends Animal implements Npc, Merchant {
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(MikopEntity.class, EntityDataSerializers.INT);
@@ -67,7 +64,6 @@ public class MikopEntity extends Animal implements Npc, Merchant {
 
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6f));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -145,10 +141,10 @@ public class MikopEntity extends Animal implements Npc, Merchant {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
-                                        @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+                                        @Nullable SpawnGroupData pSpawnData) {
         MikopVariant variant = Util.getRandom(MikopVariant.values(), this.random);
         this.setVariant(variant);
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
     }
 
     @Override
@@ -212,33 +208,10 @@ public class MikopEntity extends Animal implements Npc, Merchant {
     }
 
     protected void populateTradeData() {
-        ModTrades.ItemListing[] trades = ModTrades.MIKOP_TRADES.get(1);
-        if (trades != null) {
-            MerchantOffers merchantoffers = this.getOffers();
-            this.addTrades(merchantoffers, trades, 4);
-        }
+        MerchantOffers merchantoffers = this.getOffers();
+        merchantoffers.addAll(ModTrades.MIKOP_TRADES);
     }
 
-    protected void addTrades(MerchantOffers givenMerchantOffers, ModTrades.ItemListing[] newTrades, int maxNumbers) {
-        Set<Integer> set = Sets.newHashSet();
-        if (newTrades.length > maxNumbers) {
-            while (set.size() < maxNumbers) {
-                set.add(this.random.nextInt(newTrades.length));
-            }
-        } else {
-            for (int i = 0; i < newTrades.length; ++i) {
-                set.add(i);
-            }
-        }
-
-        for (Integer integer : set) {
-            ModTrades.ItemListing modtrades$itrade = newTrades[integer];
-            MerchantOffer merchantoffer = modtrades$itrade.getOffer(this, this.random);
-            if (merchantoffer != null) {
-                givenMerchantOffers.add(merchantoffer);
-            }
-        }
-    }
 
     @Override
     public void overrideOffers(MerchantOffers pOffers) {
@@ -301,10 +274,10 @@ public class MikopEntity extends Animal implements Npc, Merchant {
         return this.customer != null;
     }
 
+    @Override
     public boolean canRestock() {
         return true;
     }
-
 
     public void restock() {
         for (MerchantOffer merchantoffer : this.getOffers()) {

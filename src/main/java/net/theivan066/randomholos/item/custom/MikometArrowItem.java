@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.theivan066.randomholos.entity.ModEntities;
 import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class MikometArrowItem extends ArrowItem {
@@ -19,8 +20,8 @@ public class MikometArrowItem extends ArrowItem {
     }
 
     @Override
-    public AbstractArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter, ItemStack pArrowStack) {
-        return new MikometArrowEntity(ModEntities.MIKOMET_ARROW.get(), pShooter, pLevel);
+    public AbstractArrow createArrow(Level level, ItemStack ammo, LivingEntity shooter, @Nullable ItemStack weapon) {
+        return new MikometArrowEntity(ModEntities.MIKOMET_ARROW.get(), shooter, level);
     }
 
     @Override

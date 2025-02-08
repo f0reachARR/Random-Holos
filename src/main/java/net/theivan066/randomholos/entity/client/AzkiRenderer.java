@@ -20,13 +20,13 @@ public class AzkiRenderer extends MobRenderer<AzkiEntity, AzkiModel<AzkiEntity>>
     private static final Map<AzkiVariant, ResourceLocation> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(AzkiVariant.class), map -> {
                 map.put(AzkiVariant.DEFAULT,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/azki/azki.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/azki/azki.png"));
                 map.put(AzkiVariant.SECOND,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/azki/second_azki.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/azki/second_azki.png"));
                 map.put(AzkiVariant.FOURTH,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/azki/fourth_azki.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/azki/fourth_azki.png"));
                 map.put(AzkiVariant.DRESS,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/azki/dress_azki.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/azki/dress_azki.png"));
             });
 
     public AzkiRenderer(EntityRendererProvider.Context pContext) {
@@ -41,11 +41,10 @@ public class AzkiRenderer extends MobRenderer<AzkiEntity, AzkiModel<AzkiEntity>>
     @Override
     public void render(AzkiEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.45f, 0.45f, 0.45f);
         }
-
-
+        
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
 

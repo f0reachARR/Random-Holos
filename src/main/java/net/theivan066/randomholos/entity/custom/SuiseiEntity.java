@@ -19,11 +19,15 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.ai.SuiseiAttackGoal;
 import net.theivan066.randomholos.entity.variant.SuiseiVariant;
+import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
@@ -142,16 +146,21 @@ public class SuiseiEntity extends Animal {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
-                                        @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+                                        @Nullable SpawnGroupData pSpawnData) {
         SuiseiVariant variant = Util.getRandom(SuiseiVariant.values(), this.random);
         this.setVariant(variant);
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Variant"));
+    }
+
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return itemStack.is(ModItems.APPLE_JUICE.get());
     }
 
     @Override
@@ -165,6 +174,21 @@ public class SuiseiEntity extends Animal {
     @Override
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
         return super.interactAt(pPlayer, pVec, pHand);
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (!this.level().isClientSide && this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
+            FoodProperties foodProperties = itemStack.getFoodProperties(this);
+            float f = foodProperties != null ? (float) foodProperties.nutrition() : 1.0F;
+            this.heal(2.0F * f);
+            itemStack.consume(1, player);
+            this.gameEvent(GameEvent.EAT);
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
+        } else {
+            return super.mobInteract(player, hand);
+        }
     }
 
     @Nullable

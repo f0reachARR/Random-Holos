@@ -44,7 +44,7 @@ public class ModEntities {
                             .sized(0.25f, 0.25f)
                             .clientTrackingRange(4)
                             .updateInterval(20)
-                            .setCustomClientFactory((spawnEntity, level) -> new GlassHeelsProjectileEntity(level))
+//                            .setCustomClientFactory((spawnEntity, level) -> new GlassHeelsProjectileEntity(level))
                             .build("glass_heels_projectile"));
     public static final DeferredHolder<EntityType<?>, EntityType<GuesserPinProjectileEntity>> GUESSER_PIN_PROJECTILE =
             ENTITY_TYPES.register("guesser_pin_projectile",
@@ -52,7 +52,7 @@ public class ModEntities {
                             .sized(0.3f, 0.5f)
                             .clientTrackingRange(4)
                             .updateInterval(20)
-                            .setCustomClientFactory((spawnEntity, level) -> new GuesserPinProjectileEntity(level))
+//                            .setCustomClientFactory((spawnEntity, level) -> new GuesserPinProjectileEntity(level))
                             .build("guesser_pin_projectile"));
     public static final DeferredHolder<EntityType<?>, EntityType<BulletProjectileEntity>> BULLET_PROJECTILE =
             ENTITY_TYPES.register("bullet_projectile",

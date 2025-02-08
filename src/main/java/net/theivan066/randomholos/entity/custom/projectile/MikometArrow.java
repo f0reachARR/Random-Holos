@@ -5,10 +5,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 
-public class MikometArrow extends MikometArrowEntity{
+public class MikometArrow extends MikometArrowEntity {
     public MikometArrow(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+
     public MikometArrow(Level pLevel, double pX, double pY, double pZ) {
         super(EntityType.ARROW, pX, pY, pZ, pLevel);
     }
@@ -17,3 +18,4 @@ public class MikometArrow extends MikometArrowEntity{
         super(EntityType.ARROW, pShooter, pLevel);
     }
 }
+

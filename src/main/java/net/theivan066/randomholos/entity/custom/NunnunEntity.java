@@ -83,6 +83,7 @@ public class NunnunEntity extends Animal {
                 .add(Attributes.ATTACK_KNOCKBACK, 0.6f);
     }
 
+    @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ID_SIZE, 1);
@@ -173,6 +174,7 @@ public class NunnunEntity extends Animal {
         return this.random.nextInt(20, 80) + 15;
     }
 
+    @Override
     public void refreshDimensions() {
         double d0 = this.getX();
         double d1 = this.getY();
@@ -228,10 +230,14 @@ public class NunnunEntity extends Animal {
         super.remove(pReason);
     }
 
-    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
-        return 0.625F * pSize.height;
+    @Override
+    public double getEyeY() {
+        return super.getEyeY();
     }
 
+//    protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
+//        return 0.625F * pSize.height;
+//    }
 
     protected boolean spawnCustomParticles() {
         return false;
@@ -248,13 +254,14 @@ public class NunnunEntity extends Animal {
         return ModEntities.NUNNUN.get().create(pLevel);
     }
 
-    @javax.annotation.Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @javax.annotation.Nullable SpawnGroupData pSpawnData, @javax.annotation.Nullable CompoundTag pDataTag) {
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty,
+                                        MobSpawnType pReason, @javax.annotation.Nullable SpawnGroupData pSpawnData) {
         RandomSource randomsource = pLevel.getRandom();
         int i = randomsource.nextInt(2);
         int j = 1 << i;
         this.setSize(j, true);
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
     }
 
     private void setupAnimationStates() {
@@ -266,6 +273,7 @@ public class NunnunEntity extends Animal {
         }
     }
 
+    @Override
     protected void updateWalkAnimation(float v) {
         float f;
         if (this.getPose() == Pose.STANDING) {
@@ -277,14 +285,16 @@ public class NunnunEntity extends Animal {
         this.walkAnimation.update(f, 0.2F);
     }
 
-    public @NotNull EntityDimensions getDimensions(Pose pPose) {
-        return super.getDimensions(pPose).scale(0.5F * (float) this.getSize());
+    @Override
+    public float getScale() {
+        return 0.5F * (float) this.getSize();
     }
 
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
-    protected void jumpFromGround() {
+    @Override
+    public void jumpFromGround() {
         Vec3 vec3 = this.getDeltaMovement();
         this.setDeltaMovement(vec3.x, (double) this.getJumpPower(), vec3.z);
         this.hasImpulse = true;
@@ -313,6 +323,7 @@ public class NunnunEntity extends Animal {
         return this.isTiny() ? SoundEvents.SLIME_SQUISH_SMALL : SoundEvents.SLIME_SQUISH;
     }
 
+    @Override
     public float getSoundVolume() {
         return 0.4F * (float) this.getSize();
     }

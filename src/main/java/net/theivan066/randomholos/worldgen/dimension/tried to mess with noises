@@ -1,11 +1,11 @@
 //    public static final ResourceKey<NoiseGeneratorSettings> KAKURIYO_NOISE_GEN = ResourceKey.create(Registries.NOISE_SETTINGS,
-//            new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
+//            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo_noise_gen"));
 
 //    public static void bootstrapNoise(BootstrapContext<NoiseGeneratorSettings> context) {
 //        context.register(KAKURIYO_NOISE_GEN, makeNoiseSettings(context));
 //    }
 
-//    public static final ResourceKey<DensityFunction> KAKURIYO_DENSITY_FUCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, "kakuriyo_density_fuction"));
+//    public static final ResourceKey<DensityFunction> KAKURIYO_DENSITY_FUCTION = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "kakuriyo_density_fuction"));
 //    public static NoiseGeneratorSettings makeNoiseSettings(BootstrapContext<NoiseGeneratorSettings> context) {
 //        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
 //        DensityFunction finalDensity = new DensityFunctions.HolderHolder(densityFunctions.getOrThrow(KAKURIYO_TERRAIN));
@@ -48,7 +48,7 @@
 //        );
 //    }
 //
-//    public static final ResourceKey<DensityFunction> KAKURIYO_TERRAIN = ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(RandomHolos.MOD_ID, ""));
+//    public static final ResourceKey<DensityFunction> KAKURIYO_TERRAIN = ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, ""));
 //    public static void bootstrap(BootstrapContext<DensityFunction> context) {
 //        DensityFunction ambientTerrainNoise = makeAmbientNoise2D(context);
 //        makeSkylightTerrain(context, ambientTerrainNoise);

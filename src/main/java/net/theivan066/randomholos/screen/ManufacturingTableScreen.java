@@ -11,7 +11,8 @@ import net.theivan066.randomholos.RandomHolos;
 
 public class ManufacturingTableScreen extends AbstractContainerScreen<ManufacturingTableMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(RandomHolos.MOD_ID,"textures/gui/manufacturing_table_gui.png");
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/gui/manufacturing_table_gui.png");
+
     public ManufacturingTableScreen(ManufacturingTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -37,13 +38,14 @@ public class ManufacturingTableScreen extends AbstractContainerScreen<Manufactur
     }
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
-        if(menu.isCrafting()) {
+        if (menu.isCrafting()) {
             guiGraphics.blit(TEXTURE, x + 111, y + 35, 178, 0, menu.getScaledProgress(), 15);
         }
     }
+
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }

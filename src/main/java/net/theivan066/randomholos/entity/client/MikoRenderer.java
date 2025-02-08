@@ -20,19 +20,19 @@ public class MikoRenderer extends MobRenderer<MikoEntity, MikoModel<MikoEntity>>
     private static final Map<MikoVariant, ResourceLocation> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MikoVariant.class), map -> {
                 map.put(MikoVariant.DEFAULT,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/miko.png"));
                 map.put(MikoVariant.MIKOHUKU_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/mikohuku_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/mikohuku_miko.png"));
                 map.put(MikoVariant.PRIVATE_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/private_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/private_miko.png"));
                 map.put(MikoVariant.SHOUGATSU_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/shougatsu_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/shougatsu_miko.png"));
                 map.put(MikoVariant.BATTLESUIT_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/battlesuit_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/battlesuit_miko.png"));
                 map.put(MikoVariant.SCHOOL_UNIFORM_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/school_uniform_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/school_uniform_miko.png"));
                 map.put(MikoVariant.DEKAKE_MIKO,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/miko/dekake_miko.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/miko/dekake_miko.png"));
             });
 
     public MikoRenderer(EntityRendererProvider.Context pContext) {
@@ -47,7 +47,7 @@ public class MikoRenderer extends MobRenderer<MikoEntity, MikoModel<MikoEntity>>
     @Override
     public void render(MikoEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.45f, 0.45f, 0.45f);
         }
 

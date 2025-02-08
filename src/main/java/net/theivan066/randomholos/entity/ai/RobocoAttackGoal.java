@@ -27,13 +27,13 @@ public class RobocoAttackGoal extends RangedAttackGoal {
         super(pRangedAttackMob, pSpeedModifier, pAttackInterval, pAttackRadius);
         entity = ((RobocoEntity) pRangedAttackMob);
         this.rangedAttackMob = pRangedAttackMob;
-        this.mob = (Mob)pRangedAttackMob;
+        this.mob = (Mob) pRangedAttackMob;
         this.speedModifier = pSpeedModifier;
         this.attackRadius = pAttackRadius;
         this.attackRadiusSqr = pAttackRadius * pAttackRadius;
     }
 
-
+    @Override
     public boolean canUse() {
         LivingEntity livingentity = this.mob.getTarget();
         if (livingentity instanceof Player && ((Player) livingentity).isCreative()) {

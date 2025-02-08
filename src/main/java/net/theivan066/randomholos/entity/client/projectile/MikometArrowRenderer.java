@@ -14,8 +14,10 @@ import net.theivan066.randomholos.entity.custom.projectile.MikometArrowEntity;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 public class MikometArrowRenderer extends EntityRenderer<MikometArrowEntity> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/mikomet_arrow/mikomet_arrow.png");
+    public static final ResourceLocation TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/mikomet_arrow/mikomet_arrow.png");
     protected MikometArrowModel model;
+
     public MikometArrowRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
         model = new MikometArrowModel(pContext.bakeLayer(ModModelLayers.MIKOMET_ARROW_LAYER));

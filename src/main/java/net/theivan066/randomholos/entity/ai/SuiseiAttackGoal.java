@@ -26,15 +26,15 @@ public class SuiseiAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
+    protected void checkAndPerformAttack(LivingEntity pEnemy) {
+        if (this.canPerformAttack(pEnemy)) {
             shouldCountTillNextAttack = true;
 
-            if(isTimeToStartAttackAnimation()) {
+            if (isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }
 
-            if(isTimeToAttack()) {
+            if (isTimeToAttack()) {
                 this.mob.getLookControl().setLookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
                 performAttack(pEnemy);
             }
@@ -46,14 +46,12 @@ public class SuiseiAttackGoal extends MeleeAttackGoal {
         }
     }
 
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
-        return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
-    }
-
+    @Override
     protected void resetAttackCooldown() {
         this.ticksUntilNextAttack = this.adjustedTickDelay((int) (attackDelay * 2.5));
     }
 
+    @Override
     protected boolean isTimeToAttack() {
         return this.ticksUntilNextAttack <= 0;
     }
@@ -62,6 +60,7 @@ public class SuiseiAttackGoal extends MeleeAttackGoal {
         return this.ticksUntilNextAttack <= attackDelay;
     }
 
+    @Override
     protected int getTicksUntilNextAttack() {
         return this.ticksUntilNextAttack;
     }
@@ -76,7 +75,7 @@ public class SuiseiAttackGoal extends MeleeAttackGoal {
     @Override
     public void tick() {
         super.tick();
-        if(shouldCountTillNextAttack) {
+        if (shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
     }

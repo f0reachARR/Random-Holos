@@ -70,12 +70,12 @@ public class MikometArrowEntity extends AbstractArrow {
         }
     }
 
+    @Override
     protected void tickDespawn() {
         ++this.life;
         if (this.life >= 1200) {
             this.discard();
         }
-
     }
 
     @Override
@@ -213,7 +213,7 @@ public class MikometArrowEntity extends AbstractArrow {
         super.onHitEntity(pResult);
         Entity entity = pResult.getEntity();
         float f = (float) this.getDeltaMovement().length();
-        int i = Mth.ceil(Mth.clamp((double) f * this.baseDamage, 0.0D, (double) Integer.MAX_VALUE));
+        int damage = Mth.ceil(Mth.clamp((double) f * this.baseDamage, 0.0D, (double) Integer.MAX_VALUE));
         if (this.getPierceLevel() > 0) {
             if (this.piercingIgnoreEntityIds == null) {
                 this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
@@ -232,8 +232,8 @@ public class MikometArrowEntity extends AbstractArrow {
         }
 
         if (this.isCritArrow()) {
-            long j = (long) this.random.nextInt(i / 2 + 2);
-            i = (int) Math.min(j + (long) i, 2147483647L);
+            long j = (long) this.random.nextInt(damage / 2 + 2);
+            damage = (int) Math.min(j + (long) damage, 2147483647L);
         }
 
         Entity entity1 = this.getOwner();
@@ -248,12 +248,12 @@ public class MikometArrowEntity extends AbstractArrow {
         }
 
         boolean isEnderman = entity.getType() == EntityType.ENDERMAN;
-        int k = entity.getRemainingFireTicks();
         if (this.isOnFire() && !isEnderman) {
-            entity.setSecondsOnFire(5);
+            int k = entity.getRemainingFireTicks();
+            entity.setRemainingFireTicks(k + 100);
         }
 
-        if (entity.hurt(damagesource, (float) i)) {
+        if (entity.hurt(damagesource, (float) damage)) {
             if (isEnderman) {
                 return;
             }
@@ -299,7 +299,6 @@ public class MikometArrowEntity extends AbstractArrow {
                 this.discard();
             }
         } else {
-            entity.setRemainingFireTicks(k);
             this.setDeltaMovement(this.getDeltaMovement().scale(-0.1D));
             this.setYRot(this.getYRot() + 180.0F);
             this.yRotO += 180.0F;
@@ -346,7 +345,6 @@ public class MikometArrowEntity extends AbstractArrow {
         this.inGround = true;
         this.shakeTime = 7;
         this.setCritArrow(false);
-        this.setPierceLevel((byte) 0);
         this.setSoundEvent(SoundEvents.ARROW_HIT);
         this.setShotFromCrossbow(false);
         this.resetPiercedEntities();
@@ -363,6 +361,7 @@ public class MikometArrowEntity extends AbstractArrow {
         return ProjectileUtil.getEntityHitResult(this.level(), this, pStartVec, pEndVec, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
     }
 
+    @Override
     protected boolean canHitEntity(Entity p_36743_) {
         return super.canHitEntity(p_36743_) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(p_36743_.getId())) && !this.ignoredEntities.contains(p_36743_.getId());
     }

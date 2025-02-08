@@ -1,47 +1,49 @@
 package net.theivan066.randomholos.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.theivan066.randomholos.RandomHolos;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 import java.util.stream.IntStream;
 
-public class ManufacturingRecipe implements Recipe<SimpleContainer> {
+public class ManufacturingRecipe implements Recipe<RecipeWrapper> {
 
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
     private final ItemStack additives;
-    private final ResourceLocation id;
 
-    public ManufacturingRecipe(NonNullList<Ingredient> inputItems, ItemStack additives, ItemStack output, ResourceLocation id) {
+    public ManufacturingRecipe(NonNullList<Ingredient> inputItems, ItemStack additives, ItemStack output) {
         this.inputItems = inputItems;
         this.additives = additives;
         this.output = output;
-        this.id = id;
     }
 
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if(pLevel.isClientSide()) {
+    public boolean matches(RecipeWrapper pContainer, Level pLevel) {
+        if (pLevel.isClientSide()) {
             return false;
         }
-        if (pContainer.getContainerSize() < inputItems.size()) {
+        if (pContainer.size() < inputItems.size()) {
             return false;
         }
-        return IntStream.range(0, inputItems.size()).allMatch(i -> inputItems.get(i).test(pContainer.getItem(i))) && pContainer.getItem(9).is(additives.getItem());
+        return IntStream.range(0, inputItems.size())
+                .allMatch(i -> inputItems.get(i).test(pContainer.getItem(i)))
+                && pContainer.getItem(9).is(additives.getItem());
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(RecipeWrapper simpleContainer, HolderLookup.Provider provider) {
         return output.copy();
     }
 
@@ -51,7 +53,7 @@ public class ManufacturingRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return output.copy();
     }
 
@@ -65,68 +67,62 @@ public class ManufacturingRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
     public RecipeSerializer<?> getSerializer() {
-        return Serializer.INSTANCE;
+        return ModRecipes.MANUFACTURING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<ManufacturingRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "manufacturing";
+        return ModRecipes.MANUFACTURING_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<ManufacturingRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(RandomHolos.MOD_ID,"manufacturing");
+        private static final MapCodec<ManufacturingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst ->
+                inst.group(
+                        Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
+                            NonNullList<Ingredient> nonNullList = NonNullList.create();
+                            nonNullList.addAll(ingredients);
+                            return nonNullList;
+                        }, ingredients -> ingredients).forGetter(ManufacturingRecipe::getIngredients),
+                        ItemStack.STRICT_CODEC.fieldOf("additional_input").forGetter(r -> r.additives),
+                        ItemStack.STRICT_CODEC.fieldOf("output").forGetter(r -> r.output)
+                ).apply(inst, ManufacturingRecipe::new)
+        );
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, ManufacturingRecipe> STREAM_CODEC =
+                StreamCodec.of(ManufacturingRecipe.Serializer::toNetwork, ManufacturingRecipe.Serializer::fromNetwork);
+
         @Override
-        public ManufacturingRecipe fromJson(ResourceLocation id, JsonObject json) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
-
-            JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(9, Ingredient.EMPTY);
-
-            ItemStack additives = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "additional_input"));
-
-            for (int i = 0; i < ingredients.size() && i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-            }
-            return new ManufacturingRecipe(inputs, additives, output, id);
+        public MapCodec<ManufacturingRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public ManufacturingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public StreamCodec<RegistryFriendlyByteBuf, ManufacturingRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
+
+        public static ManufacturingRecipe fromNetwork(RegistryFriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buf));
+                inputs.set(i, Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
             }
-            ItemStack additives = buf.readItem();
+            ItemStack additives = ItemStack.STREAM_CODEC.decode(buf);
 
-            ItemStack output = buf.readItem();
-            return new ManufacturingRecipe(inputs, additives, output, id);
+            ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
+            return new ManufacturingRecipe(inputs, additives, output);
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buf, ManufacturingRecipe recipe) {
+        public static void toNetwork(RegistryFriendlyByteBuf buf, ManufacturingRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
 
             for (Ingredient ing : recipe.getIngredients()) {
-                ing.toNetwork(buf);
+                Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ing);
             }
-            buf.writeItemStack(recipe.getAdditiveInputItem(null), false);
 
-            buf.writeItemStack(recipe.getResultItem(null), false);
+            ItemStack.STREAM_CODEC.encode(buf, recipe.additives);
+            ItemStack.STREAM_CODEC.encode(buf, recipe.output);
         }
     }
 }

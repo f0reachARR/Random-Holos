@@ -61,6 +61,8 @@ public class RandomHolos {
 
         ModTrunkPlacerTypes.register(modEventBus);
 
+        DataComponentRegistries.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         NeoForge.EVENT_BUS.register(this);

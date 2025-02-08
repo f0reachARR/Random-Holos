@@ -10,7 +10,7 @@ import net.theivan066.randomholos.entity.custom.boss.KurosoraEntity;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 public class KurosoraRenderer extends MobRenderer<KurosoraEntity, KurosoraModel<KurosoraEntity>> {
-    private static final ResourceLocation KUROSORA_LOCATION = new ResourceLocation(RandomHolos.MOD_ID,"textures/entity/kurosora/kurosora.png");
+    private static final ResourceLocation KUROSORA_LOCATION = ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/kurosora/kurosora.png");
 
     public KurosoraRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new KurosoraModel<>(pContext.bakeLayer(ModModelLayers.KUROSORA_LAYER)), 0.5f);
@@ -24,7 +24,7 @@ public class KurosoraRenderer extends MobRenderer<KurosoraEntity, KurosoraModel<
     @Override
     public void render(KurosoraEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.45f, 0.45f, 0.45f);
         }
 

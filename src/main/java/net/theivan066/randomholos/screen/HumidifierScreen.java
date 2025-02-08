@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.screen.renderer.EnergyDisplayArea;
 import net.theivan066.randomholos.screen.renderer.FluidRenderer;
@@ -18,13 +18,14 @@ import java.util.Optional;
 
 public class HumidifierScreen extends AbstractContainerScreen<HumidifierMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(RandomHolos.MOD_ID,"textures/gui/humidifier_gui.png");
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/gui/humidifier_gui.png");
     private EnergyDisplayArea energyArea;
     private FluidRenderer fluidRenderer;
 
     public HumidifierScreen(HumidifierMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
+
     @Override
     protected void init() {
         super.init();
@@ -50,26 +51,30 @@ public class HumidifierScreen extends AbstractContainerScreen<HumidifierMenu> {
         int y = (height - imageHeight) / 2;
 
         renderEnergyAreaTooltip(guiGraphics, pMouseX, pMouseY, x, y);
-        renderFluidTooltipArea(guiGraphics, pMouseX, pMouseY, x, y, menu.blockEntity.getFluidTank().getFluid(), 87, 10, fluidRenderer);
+        renderFluidTooltipArea(guiGraphics, pMouseX, pMouseY, x, y,
+                menu.blockEntity.getFluidTank().getFluid(), 87, 10, fluidRenderer);
     }
+
 
     private void renderFluidTooltipArea(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y,
                                         FluidStack stack, int offsetX, int offsetY, FluidRenderer renderer) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
+        if (isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
             guiGraphics.renderTooltip(this.font, renderer.getTooltip(stack, TooltipFlag.Default.NORMAL),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
 
     private void renderEnergyAreaTooltip(GuiGraphics guiGraphics, int pMouseX, int pMouseY, int x, int y) {
-        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 10, 10, 12, 66)) {
+        if (isMouseAboveArea(pMouseX, pMouseY, x, y, 10, 10, 12, 66)) {
             guiGraphics.renderTooltip(this.font, energyArea.getTooltips(),
                     Optional.empty(), pMouseX - x, pMouseY - y);
         }
     }
+
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
+
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidRenderer renderer) {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
     }
@@ -90,7 +95,7 @@ public class HumidifierScreen extends AbstractContainerScreen<HumidifierMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
+        renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }

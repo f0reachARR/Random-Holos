@@ -16,7 +16,8 @@ import net.theivan066.randomholos.entity.layers.ModModelLayers;
 import org.joml.Random;
 
 public class NoteProjectileRenderer extends EntityRenderer<NoteProjectileEntity> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/note_projectile/note_projectile.png");
+    public static final ResourceLocation TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/note_projectile/note_projectile.png");
     protected NoteProjectileModel model;
 
     public NoteProjectileRenderer(EntityRendererProvider.Context pContext) {
@@ -31,7 +32,8 @@ public class NoteProjectileRenderer extends EntityRenderer<NoteProjectileEntity>
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(entity)), false, false);
 
         Random ran = new Random();
-        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, ((float) ran.nextInt(255) /255), ((float) ran.nextInt(255) /255), ((float) ran.nextInt(255) /255), 0f);
+        int rgba = ran.nextInt(255) << 24 | ran.nextInt(255) << 16 | ran.nextInt(255) << 8;
+        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, rgba);
         pPoseStack.popPose();
         super.render(entity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

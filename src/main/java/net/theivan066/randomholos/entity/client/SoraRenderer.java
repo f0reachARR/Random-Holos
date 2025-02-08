@@ -20,12 +20,12 @@ public class SoraRenderer extends MobRenderer<SoraEntity, SoraModel<SoraEntity>>
     private static final Map<SoraVariant, ResourceLocation> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(SoraVariant.class), map -> {
                 map.put(SoraVariant.DEFAULT,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/sora/sora.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/sora/sora.png"));
                 map.put(SoraVariant.CASUAL,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/sora/casual_sora.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/sora/casual_sora.png"));
                 map.put(SoraVariant.HOODIE,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/sora/hoodie_sora.png"));
-              });
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/sora/hoodie_sora.png"));
+            });
 
     public SoraRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new SoraModel<>(pContext.bakeLayer(ModModelLayers.SORA_LAYER)), 0.5f);
@@ -39,7 +39,7 @@ public class SoraRenderer extends MobRenderer<SoraEntity, SoraModel<SoraEntity>>
     @Override
     public void render(SoraEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.45f, 0.45f, 0.45f);
         }
 

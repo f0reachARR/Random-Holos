@@ -7,7 +7,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.theivan066.randomholos.entity.custom.SoraEntity;
 
 public class SoraAttackGoal extends MeleeAttackGoal {
-
     private final SoraEntity entity;
     private int attackDelay = 12;
     private int ticksUntilNextAttack = 15;
@@ -25,16 +24,17 @@ public class SoraAttackGoal extends MeleeAttackGoal {
         ticksUntilNextAttack = 12;
     }
 
+
     @Override
-    protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
+    protected void checkAndPerformAttack(LivingEntity pEnemy) {
+        if (this.canPerformAttack(pEnemy)) {
             shouldCountTillNextAttack = true;
 
-            if(isTimeToStartAttackAnimation()) {
+            if (isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);
             }
 
-            if(isTimeToAttack()) {
+            if (isTimeToAttack()) {
                 this.mob.getLookControl().setLookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
                 performAttack(pEnemy);
             }
@@ -46,14 +46,13 @@ public class SoraAttackGoal extends MeleeAttackGoal {
         }
     }
 
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
-        return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
-    }
 
+    @Override
     protected void resetAttackCooldown() {
-        this.ticksUntilNextAttack = this.adjustedTickDelay((int) (attackDelay * 15/12));
+        this.ticksUntilNextAttack = this.adjustedTickDelay((int) (attackDelay * 15 / 12));
     }
 
+    @Override
     protected boolean isTimeToAttack() {
         return this.ticksUntilNextAttack <= 0;
     }
@@ -62,10 +61,10 @@ public class SoraAttackGoal extends MeleeAttackGoal {
         return this.ticksUntilNextAttack <= attackDelay;
     }
 
+    @Override
     protected int getTicksUntilNextAttack() {
         return this.ticksUntilNextAttack;
     }
-
 
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
@@ -76,7 +75,7 @@ public class SoraAttackGoal extends MeleeAttackGoal {
     @Override
     public void tick() {
         super.tick();
-        if(shouldCountTillNextAttack) {
+        if (shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
     }

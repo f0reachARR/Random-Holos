@@ -7,8 +7,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
-public class MikometArrowModel <T extends Entity> extends EntityModel<T> {
-   private final ModelPart bb_main;
+
+public class MikometArrowModel<T extends Entity> extends EntityModel<T> {
+    private final ModelPart bb_main;
 
     public MikometArrowModel(ModelPart root) {
         this.bb_main = root.getChild("bb_main");
@@ -29,7 +30,7 @@ public class MikometArrowModel <T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

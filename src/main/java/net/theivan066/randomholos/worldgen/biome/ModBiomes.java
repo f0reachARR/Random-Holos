@@ -41,6 +41,6 @@ public class ModBiomes {
     }
 
     public static ResourceKey<Biome> register(String name) {
-        return ResourceKey.create(Registries.BIOME, new ResourceLocation(RandomHolos.MOD_ID, name));
+        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, name));
     }
 }

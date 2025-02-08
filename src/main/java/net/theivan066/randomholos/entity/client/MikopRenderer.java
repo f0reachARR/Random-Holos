@@ -20,14 +20,14 @@ public class MikopRenderer extends MobRenderer<MikopEntity, MikopModel<MikopEnti
     private static final Map<MikopVariant, ResourceLocation> LOCATION_BY_VARIANT =
             Util.make(Maps.newEnumMap(MikopVariant.class), map -> {
                 map.put(MikopVariant.DEFAULT,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/mikop/mikop.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/mikop/mikop.png"));
                 map.put(MikopVariant.NYE,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_nye.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_nye.png"));
                 map.put(MikopVariant.SHADES,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_shades.png"));
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_shades.png"));
                 map.put(MikopVariant.SHADES_2,
-                        new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_shades_2.png"));
-           });
+                        ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/mikop/mikop_shades_2.png"));
+            });
 
     public MikopRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new MikopModel<>(pContext.bakeLayer(ModModelLayers.MIKOP_LAYER)), 0.5f);
@@ -41,10 +41,10 @@ public class MikopRenderer extends MobRenderer<MikopEntity, MikopModel<MikopEnti
     @Override
     public void render(MikopEntity pEntity, float pEntityYaw, float pPartialTicks,
                        PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()) {
+        if (pEntity.isBaby()) {
             pMatrixStack.scale(0.35f, 0.35f, 0.35f);
         } else
-        pMatrixStack.scale(0.75f, 0.75f, 0.75f);
+            pMatrixStack.scale(0.75f, 0.75f, 0.75f);
 //        if(pEntity.getVariant().getId() == 1) {
 //            pMatrixStack.scale(1f, 1f, 1f);
 //        }

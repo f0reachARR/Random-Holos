@@ -14,7 +14,8 @@ import net.theivan066.randomholos.entity.custom.projectile.DartProjectileEntity;
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/note_projectile/note_projectile.png");
+    public static final ResourceLocation TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/note_projectile/note_projectile.png");
     protected DartProjectileModel model;
 
     public DartProjectileRenderer(EntityRendererProvider.Context pContext) {
@@ -27,9 +28,9 @@ public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity>
         pPoseStack.translate(0, -4, 0);
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(entity)), false, false);
         pPoseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-        pPoseStack.scale(10,10,10);
+        pPoseStack.scale(10, 10, 10);
 
-        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0f);
+        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
         pPoseStack.popPose();
         super.render(entity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

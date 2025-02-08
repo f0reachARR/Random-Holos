@@ -1,20 +1,19 @@
 package net.theivan066.randomholos.item.custom;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,15 +23,15 @@ import net.neoforged.neoforge.common.ItemAbility;
 @SuppressWarnings("deprecation")
 public class MicsaberItem extends Item {
     private final float attackDamage;
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
+    private final ItemAttributeModifiers defaultModifiers;
 
     public MicsaberItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pProperties);
         this.attackDamage = (float) pAttackDamageModifier + pTier.getAttackDamageBonus();
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(Attributes.ATTACK_DAMAGE, "Weapon modifier", (double) this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(Attributes.ATTACK_SPEED, "Weapon modifier", (double) pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
-        this.defaultModifiers = builder.build();
+        this.defaultModifiers = ItemAttributeModifiers.builder()
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, this.attackDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, pAttackSpeedModifier, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build();
     }
 
     @Override
@@ -56,14 +55,16 @@ public class MicsaberItem extends Item {
 //        }
 //    }
 
-    public float getDamage() {
-        return this.attackDamage;
-    }
+//    public float getDamage() {
+//        return this.attackDamage;
+//    }
 
+    @Override
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
         return !pPlayer.isCreative();
     }
 
+    @Override
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
         if (pState.is(Blocks.COBWEB)) {
             return 15.0F;
@@ -72,11 +73,13 @@ public class MicsaberItem extends Item {
         }
     }
 
+    @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         pStack.hurtAndBreak(1, pAttacker, EquipmentSlot.MAINHAND);
         return true;
     }
 
+    @Override
     public boolean mineBlock(ItemStack pStack, Level pLevel, BlockState pState, BlockPos pPos, LivingEntity pEntityLiving) {
         if (pState.getDestroySpeed(pLevel, pPos) != 0.0F) {
             pStack.hurtAndBreak(2, pEntityLiving, EquipmentSlot.MAINHAND);
@@ -85,15 +88,26 @@ public class MicsaberItem extends Item {
         return true;
     }
 
-    public boolean isCorrectToolForDrops(BlockState pBlock) {
-        return pBlock.is(Blocks.COBWEB);
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+        return state.is(Blocks.COBWEB);
     }
 
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
-        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
+//    /**
+//     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+//     */
+//    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
+//        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
+//    }
+//
+//    public Multimap<Attribute, AttributeModifier> getDefaultModifiers() {
+//        return defaultModifiers;
+//    }
+
+
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
+        return defaultModifiers;
     }
 
     @Override

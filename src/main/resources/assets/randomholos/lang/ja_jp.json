@@ -3,9 +3,7 @@
   "item.randomholos.baguette": "バゲット",
   "item.randomholos.humongous_baguette": "でかいバゲット",
   "item.randomholos.gargantuan_baguette": "でかすぎるバゲット",
-
   "block.randomholos.test_block": "Block of How did we get here?",
-
   "block.randomholos.maple_log": "楓の原木",
   "block.randomholos.maple_planks": "楓の板材",
   "block.randomholos.maple_wood": "楓の木",
@@ -14,7 +12,6 @@
   "block.randomholos.maple_leaves": "楓の葉",
   "block.randomholos.maple_sapling": "楓の苗木",
   "block.randomholos.fallen_leaves": "落ち葉",
-
   "item.randomholos.shaken_bottle": "揺さぶれたボトル",
   "item.randomholos.soda_water": "炭酸水",
   "item.randomholos.can": "缶",
@@ -35,7 +32,6 @@
   "item.randomholos.tokinosora_set_meal_b": "ときのそら定食B",
   "item.randomholos.broken_hair_accessory": "壊れた髪飾り",
   "item.randomholos.talisman_of_the_ether": "蒼穹の護符",
-
   "item.randomholos.blueprint": "空き設計図",
   "item.randomholos.firearm_blueprint": "銃器設計図",
   "item.randomholos.blade_blueprint": "刃物設計図",
@@ -59,18 +55,15 @@
   "item.randomholos.kimchi": "キムチ",
   "block.randomholos.cooking_pot": "調理鍋",
   "block.randomholos.kimchi_hotpot": "キムチ鍋",
-
   "item.randomholos.psychopath_axe": "サイコパスの斧",
   "item.randomholos.glass_heels": "ガラスのハイヒール",
   "item.randomholos.glass_heel_single_side": "片足のガラスのハイヒール",
   "item.randomholos.meteorite_piece": "隕石の欠片",
   "item.randomholos.stellarite": "ステラーライト",
   "item.randomholos.apple_juice": "リンゴジュース",
-
   "block.randomholos.crude_meteorite": "隕石の粗鉱",
   "block.randomholos.meteorite": "隕石の鉱石",
   "block.randomholos.rich_meteorite": "隕石の富鉱",
-
   "item.randomholos.elite_lava_bucket": "エリート溶岩バケット",
   "item.randomholos.ahoge": "アホ毛",
   "item.randomholos.ahoge_string": "アホ毛の糸",
@@ -78,10 +71,8 @@
   "item.randomholos.mikomet_bow": "みこめっとの弓",
   "item.randomholos.mikomet_arrow": "みこめっとの矢",
   "block.randomholos.humidifier": "加湿器",
-
   "item.randomholos.copper_rod": "銅の棒",
   "item.randomholos.reinforced_copper_rod": "強化された銅棒",
-
   "item.randomholos.guesser_pin": "ゲッサーピン",
   "item.randomholos.micsaber": "マイクセーバー",
   "effect.randomholos.zero_guesser": "ゼロゲッサー",
@@ -89,10 +80,8 @@
   "block.randomholos.deepslate_tourmaline_ore": "深層トルマリン鉱石",
   "item.randomholos.tourmaline": "トルマリン",
   "block.randomholos.tourmaline_block": "トルマリンブロック",
-
   "item.randomholos.sidereal_ingot": "恒星インゴット",
   "item.randomholos.star_diva_hammer": "星の歌姫ハンマー",
-
   "item.randomholos.sora_spawn_egg": "ときのそら",
   "item.randomholos.kurosora_spawn_egg": "黒化したそら",
   "item.randomholos.nunnun_spawn_egg": "ぬんぬん",
@@ -101,7 +90,6 @@
   "item.randomholos.miko_spawn_egg": "さくらみこ",
   "item.randomholos.mikop_spawn_egg": "35p",
   "item.randomholos.azki_spawn_egg": "AZKi",
-
   "entity.randomholos.sora": "ときのそら",
   "entity.randomholos.kurosora": "黒化したそら",
   "entity.randomholos.nunnun": "ぬんぬん",
@@ -110,18 +98,13 @@
   "entity.randomholos.miko": "さくらみこ",
   "entity.randomholos.mikop": "35p",
   "entity.randomholos.azki": "AZKi",
-
   "bossbar.randomholos.kurosora": "黒化したそら",
-
   "block.randomholos.kakuriyo_portal": "幽世へのポータル",
-
   "enchantment.randomholos.fast_draw": "早打ち",
-
   "creativetab.random_food": "食べ物",
   "creativetab.holo": "ホロアイテム",
   "creativetab.holo_spawn_eggs": "ホロメン",
   "creativetab.random_blocks": "ブロック",
-
   "creativetab.sora": "ときのそら",
   "creativetab.roboco": "ロボ子",
   "creativetab.miko": "さくらみこ",
@@ -131,22 +114,18 @@
   "creativetab.collab": "コラボアイテム",
   "creativetab.materials": "原料",
   "creativetab.book": "本",
-
   "sounds.randomholos.metal_detector_found_ore": "Metal Detector Found an Ore",
-
   "gui.randomholos.manufacturing_table": "製造",
   "title.randomholos.manufacturing": "製造",
   "gui.randomholos.humidifier": "加湿器",
   "title.randomholos.humidifier": "加湿器",
-
-  "messages.randomholos.no_ahoge" : "髪切るのは要らなさそうね",
-  "messages.randomholos.aenbien": "あるみこは阿鼻叫喚（亜鉛鼻炎）を体験した",
+  "messages.randomholos.no_ahoge": "髪切るのは要らなさそうね",
+  "messages.randomholos.aenbien": "あっちゅ！あっちゅ！！あっちゅ！！！あーーーーーー",
   "messages.randomholos.reloading": "リロード中...",
-  "messages.randomholos.no_ammo": "弾切れた!",
+  "messages.randomholos.no_ammo": "弾切れだ!",
   "messages.randomholos.ghost_pepper": "あちゅい！あちゅい！あちゅいい！",
-  "messages.randomholos.kuroka1": "一体§oなに§rを。 やりあがったか。",
+  "messages.randomholos.kuroka1": "一体§oなに§rを。 やりやがった...",
   "messages.randomholos.kuroka2": "じゃあ... §4敵§rだね。",
-
   "tooltip.randomholos.tooltip": "<§eshift§r>を押して詳細を見る",
   "tooltip.randomholos.tooltip.caution": "<§ealt§r>を押して注意事項を確認",
   "tooltip.randomholos.shaken_bottle.shift": "ソーダには水を、オイルには溶岩を",
@@ -159,21 +138,19 @@
   "tooltip.randomholos.singleglassheels.shift": "§lおしゃまな馬車 飛び乗って§r drivin'\n§lあたしは大変身メイクアップ！§r§l\n我儘の随に 燦きに注意～§r",
   "tooltip.randomholos.apple_juice.shift": "実は§kcc§rレモンのほうがおいしいんだよね",
   "tooltip.randomholos.kakuriyo.shift": "幽世に繋がるポータル。\n置いて<§e右クリック§r>で使える。",
-  "tooltip.randomholos.elite_lava_bucket.shift": "電脳桜神社の巫女より洗浄された溶岩\n§o赤ちゃんが使っても大丈夫!",
-  "tooltip.randomholos.ahoge.shift": "あんた... 誰かの本体を手に入ったの?",
+  "tooltip.randomholos.elite_lava_bucket.shift": "電脳桜神社の巫女より浄化された溶岩\n§o赤ちゃんが使っても大丈夫!",
+  "tooltip.randomholos.ahoge.shift": "あんた... 本体をどこで...",
   "tooltip.randomholos.ahoge_string.shift": "アホ毛から精錬された糸",
   "tooltip.randomholos.miko_bow.shift": "巫女の髪から作った弓\n§oとんでもない弾力!",
-  "tooltip.randomholos.mikomet_bow.shift": "ステラとポンのパワーを併せ持ったステラとポン\n§oみこめっとの矢しか使わない!",
-  "tooltip.randomholos.mikomet_arrow.shift": "みこめっとの弓のために作りあげた矢",
+  "tooltip.randomholos.mikomet_bow.shift": "ステラとポンのパワーを併せ持った弓\n§oみこめっとの矢しか使わない!",
+  "tooltip.randomholos.mikomet_arrow.shift": "みこめっとのための矢",
   "tooltip.randomholos.guesser_pin.shift": "あなたの心をゼロゲッサー！ ♡",
   "tooltip.randomholos.gun_ammo": "弾数",
-  "tooltip.randomholos.kakuriyo.alt": "<§c注意§r>: 水はポータルを壊す!\nポータルが向こう側で生成しない可能性があるから、もう一個持っといてね!",
+  "tooltip.randomholos.kakuriyo.alt": "<§c注意§r>: ポータルは水で壊れる!\n帰還ポータルが生成しないことがあるから、もう一個持っといてね!",
   "tooltip.randomholos.sidereal_ingot.shift": "§b閒雲潭影日に悠悠、物換り星移りて幾度の秋ぞ。\n幾度の春秋が去って行くとも、五人が共に、ポラリスのように耀く。\nどれだけ多くのフロンティアを踰えても、どれだけ無理矢理なゲームを挑んでも、\nどれだけ狂いポンで躓いても、どれだけ長い旅路を切り拓いても。\n夢見がちの御伽噺じゃない―― \nだって、五人は§o星だから§r。\n§b熄滅ことなき、永久に矍鑠たる§o星、だから§r§b。",
-  "tooltip.randomholos.star_diva_hammer.shift": "五人の力が合わせた究極のハンマー\n§o5x5のエリアを一気に掘削！",
-
+  "tooltip.randomholos.star_diva_hammer.shift": "五人の力が合わさった究極のハンマー\n§o5x5のエリアを一気に掘削！",
   "tooltip.randomholos.liquid.amount.with.capacity": "%s / %s mB",
   "tooltip.randomholos.liquid.amount": "%s mB",
-
   "key.randomholos.ability": "アビリティー",
   "key.randomholos.secondary_ability": "セカンダリーアビリティー",
   "key.categories.randomholos": "ホロコンティニュアム"

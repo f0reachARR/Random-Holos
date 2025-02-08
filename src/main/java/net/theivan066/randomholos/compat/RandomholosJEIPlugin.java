@@ -7,9 +7,11 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
+import net.theivan066.randomholos.recipe.ModRecipes;
 import net.theivan066.randomholos.screen.ManufacturingTableScreen;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
 public class RandomholosJEIPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(RandomHolos.MOD_ID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "jei_plugin");
     }
 
     @Override
@@ -30,7 +32,9 @@ public class RandomholosJEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-        List<ManufacturingRecipe> empoweringRecipes = recipeManager.getAllRecipesFor(ManufacturingRecipe.Type.INSTANCE);
+        List<ManufacturingRecipe> empoweringRecipes = recipeManager
+                .getAllRecipesFor(ModRecipes.MANUFACTURING_TYPE.get())
+                .stream().map(RecipeHolder::value).toList();
         registration.addRecipes(ManufacturingRecipeCategory.MANUFACTURING_TYPE, empoweringRecipes);
     }
 

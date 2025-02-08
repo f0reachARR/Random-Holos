@@ -1,10 +1,12 @@
 package net.theivan066.randomholos.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,13 +25,18 @@ import net.theivan066.randomholos.block.entity.ManufacturingTableBlockEntity;
 import net.theivan066.randomholos.block.entity.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings({"deprecation", "dep-ann"})
-public class ManufacturingTableBlock extends BaseEntityBlock {
 
+public class ManufacturingTableBlock extends BaseEntityBlock {
+    public static final MapCodec<ManufacturingTableBlock> CODEC = simpleCodec(ManufacturingTableBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public ManufacturingTableBlock(Properties pProperties) {
         super(pProperties);
+    }
+
+    @Override
+    protected MapCodec<ManufacturingTableBlock> codec() {
+        return CODEC;
     }
 
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 12, 16);
@@ -39,17 +46,12 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
         return SHAPE;
     }
 
+    @Override
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
-
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     *
-     * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#mirror} whenever
-     * possible. Implementing/overriding is fine.
-     */
+    
+    @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
@@ -84,16 +86,29 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!level.isClientSide()) {
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof ManufacturingTableBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (ManufacturingTableBlockEntity) entity, pPos);
+                player.openMenu((ManufacturingTableBlockEntity) entity);
             } else {
                 throw new IllegalStateException("Container provider is missing!");
             }
         }
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide()) {
+            BlockEntity entity = level.getBlockEntity(pos);
+            if (entity instanceof ManufacturingTableBlockEntity) {
+                player.openMenu((ManufacturingTableBlockEntity) entity);
+            } else {
+                throw new IllegalStateException("Container provider is missing!");
+            }
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Nullable

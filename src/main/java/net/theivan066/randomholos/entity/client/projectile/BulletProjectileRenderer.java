@@ -15,7 +15,8 @@ import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntit
 import net.theivan066.randomholos.entity.layers.ModModelLayers;
 
 public class BulletProjectileRenderer extends EntityRenderer<BulletProjectileEntity> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(RandomHolos.MOD_ID, "textures/entity/bullet_projectile/bullet_projectile.png");
+    public static final ResourceLocation TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(RandomHolos.MOD_ID, "textures/entity/bullet_projectile/bullet_projectile.png");
     protected BulletProjectileModel model;
 
     public BulletProjectileRenderer(EntityRendererProvider.Context pContext) {
@@ -29,7 +30,7 @@ public class BulletProjectileRenderer extends EntityRenderer<BulletProjectileEnt
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTick, entity.xRotO, entity.getXRot()) + 90.0F));
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(entity)), false, false);
 
-        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, ((float) 128 /255), ((float) 78 /255), ((float) 127 /255), 0.5f);
+        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 0x7F4E7F7F);
         pPoseStack.popPose();
         super.render(entity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

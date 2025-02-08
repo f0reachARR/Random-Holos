@@ -1,8 +1,13 @@
 package net.theivan066.randomholos.item.custom.base_items;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +24,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
+import net.theivan066.randomholos.registries.DataComponentRegistries;
 import net.theivan066.randomholos.util.InventoryUtil;
 
 import javax.annotation.Nullable;
@@ -53,7 +60,6 @@ public class GunItem extends ProjectileWeaponItem {
     public int reloadingTicks = 0;
     private int clip;
 
-
     public GunItem(Properties pProperties, float gunDamage, float bulletSpeed, int rateOfFire, int magSize,
                    Item ammoType, int reloadCooldown, float[] bulletSpread,
                    float[] gunRecoil, int pelletCount, Holder<SoundEvent> reloadSound,
@@ -84,23 +90,42 @@ public class GunItem extends ProjectileWeaponItem {
         this.clip = magSize;
     }
 
-    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
-        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
-            if (!pPlayer.getCooldowns().isOnCooldown(item)) {
-                item.shoot(pLevel, pPlayer, stack);
-                pPlayer.getCooldowns().addCooldown(item, item.rateOfFire);
-            }
-        } else if (item.getClip() <= 0) {
-            item.reload(pPlayer, stack);
-        }
+    public record GunItemRecord(int clip, boolean aiming) {
+        public static final Codec<GunItemRecord> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.INT.fieldOf("clip").forGetter(GunItemRecord::clip),
+                Codec.BOOL.fieldOf("aiming").forGetter(GunItemRecord::aiming)
+        ).apply(instance, GunItemRecord::new));
+        public static final StreamCodec<ByteBuf, GunItemRecord> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.INT, GunItemRecord::clip,
+                ByteBufCodecs.BOOL, GunItemRecord::aiming,
+                GunItemRecord::new
+        );
     }
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<GunItemRecord>> GUN_ITEM_RECORD
+            = DataComponentRegistries.REGISTRAR.registerComponentType(
+            "gun_item_record",
+            builder -> builder
+                    .persistent(GunItemRecord.CODEC)
+                    .networkSynchronized(GunItemRecord.STREAM_CODEC));
+
+//    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
+//        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+//        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
+//            if (!pPlayer.getCooldowns().isOnCooldown(item)) {
+//                item.shootBullet(pLevel, pPlayer, stack);
+//                pPlayer.getCooldowns().addCooldown(item, item.rateOfFire);
+//            }
+//        } else if (item.getClip() <= 0) {
+//            item.reload(pPlayer, stack);
+//        }
+//    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (this.getClip() > 0) {
-            this.shoot(pLevel, pPlayer, stack);
+        if (this.getClip() > 0 && pUsedHand == InteractionHand.MAIN_HAND) {
+            this.shootBullet(pLevel, pPlayer, stack);
             pPlayer.getCooldowns().addCooldown(this, this.rateOfFire);
         } else {
             this.reload(pPlayer, stack);
@@ -113,11 +138,9 @@ public class GunItem extends ProjectileWeaponItem {
         projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot() + angle, 0.0F, velocity, inaccuracy);
     }
 
-    public void shoot(Level pLevel, Player pPlayer, ItemStack itemStack) {
-
+    public void shootBullet(Level pLevel, Player pPlayer, ItemStack itemStack) {
         float h_kick = getRecoilX(itemStack);
         float v_kick = getRecoilY(itemStack);
-
 
         if (!pLevel.isClientSide) {
             this.setClip(this.getClip() - 1);
@@ -222,13 +245,13 @@ public class GunItem extends ProjectileWeaponItem {
 
     public float getRecoilX(ItemStack stack) {
         boolean ran = this.random.nextBoolean();
-        return stack.getOrCreateTag().getBoolean("isAiming") ?
+        return stack.get(GUN_ITEM_RECORD).aiming ?
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]) / 2 :
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]);
     }
 
     public float getRecoilY(ItemStack stack) {
-        return stack.getco().getBoolean("isAiming") ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
+        return stack.get(GUN_ITEM_RECORD).aiming ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
     }
 
     public int getRateOfFire() {
@@ -264,8 +287,7 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     public static int remainingAmmo(ItemStack stack) {
-        CompoundTag nbtCompound = stack.getOrCreateTag();
-        return nbtCompound.getInt("Clip");
+        return stack.get(GUN_ITEM_RECORD).clip;
     }
 
     public static int reserveAmmoCount(Player player, Item item) {
