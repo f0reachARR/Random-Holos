@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "randomholos:maple_forest",
+  "features": "randomholos:maple_placed",
+  "step": "vegetal_decoration"
+}

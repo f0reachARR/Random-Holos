@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.entity.ManufacturingTableBlockEntity;
@@ -31,19 +31,19 @@ public class ManufacturingTableMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(Capabilities.ItemHandler).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 14, 17));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 32, 17));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 50, 17));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3, 14, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 4, 32, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 50, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 6, 14, 53));
-            this.addSlot(new SlotItemHandler(iItemHandler, 7, 32, 53));
-            this.addSlot(new SlotItemHandler(iItemHandler, 8, 50, 53));
-            this.addSlot(new SlotItemHandler(iItemHandler, 9, 91, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 10, 142, 35));
-        });
+        ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
+
+        this.addSlot(new SlotItemHandler(itemHandler, 0, 14, 17));
+        this.addSlot(new SlotItemHandler(itemHandler, 1, 32, 17));
+        this.addSlot(new SlotItemHandler(itemHandler, 2, 50, 17));
+        this.addSlot(new SlotItemHandler(itemHandler, 3, 14, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 4, 32, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 5, 50, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 6, 14, 53));
+        this.addSlot(new SlotItemHandler(itemHandler, 7, 32, 53));
+        this.addSlot(new SlotItemHandler(itemHandler, 8, 50, 53));
+        this.addSlot(new SlotItemHandler(itemHandler, 9, 91, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 10, 142, 35));
 
         addDataSlots(data);
     }

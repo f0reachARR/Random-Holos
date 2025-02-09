@@ -13,7 +13,7 @@ import net.theivan066.randomholos.item.custom.MikometBowItem;
 import net.theivan066.randomholos.item.custom.RobosniperItem;
 
 @SuppressWarnings("deprecation")
-@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class PovModifyEvent {
 
     //bow FOVs

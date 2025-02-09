@@ -9,8 +9,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,8 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -271,10 +267,10 @@ public class MikometArrowEntity extends AbstractArrow {
                     }
                 }
 
-                if (!this.level().isClientSide && entity1 instanceof LivingEntity) {
-                    EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
-                }
+//                if (!this.level().isClientSide && entity1 instanceof LivingEntity) {
+//                    EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
+//                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
+//                }
 
                 this.doPostHurtEffects(livingentity);
                 if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this.isSilent()) {
@@ -346,10 +342,10 @@ public class MikometArrowEntity extends AbstractArrow {
         this.shakeTime = 7;
         this.setCritArrow(false);
         this.setSoundEvent(SoundEvents.ARROW_HIT);
-        this.setShotFromCrossbow(false);
         this.resetPiercedEntities();
     }
 
+    @Override
     protected void doPostHurtEffects(LivingEntity pTarget) {
     }
 
@@ -401,12 +397,12 @@ public class MikometArrowEntity extends AbstractArrow {
 
         this.pickup = AbstractArrow.Pickup.byOrdinal(pCompound.getByte("pickup"));
         this.setCritArrow(pCompound.getBoolean("crit"));
-        this.setPierceLevel(pCompound.getByte("PierceLevel"));
+//        this.setPierceLevel(pCompound.getByte("PierceLevel"));
         if (pCompound.contains("SoundEvent", 8)) {
-            this.soundEvent = BuiltInRegistries.SOUND_EVENT.getOptional(new ResourceLocation(pCompound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
+            this.soundEvent = BuiltInRegistries.SOUND_EVENT.getOptional(ResourceLocation.parse(pCompound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
         }
 
-        this.setShotFromCrossbow(pCompound.getBoolean("ShotFromCrossbow"));
+//        this.setShotFromCrossbow(pCompound.getBoolean("ShotFromCrossbow"));
     }
 
     public void setOwner(@Nullable Entity pEntity) {
@@ -440,25 +436,25 @@ public class MikometArrowEntity extends AbstractArrow {
                 return false;
         }
     }
-
-    @Override
-    public void setEnchantmentEffectsFromEntity(LivingEntity pShooter, float pVelocity) {
-        int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER_ARROWS, pShooter);
-        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH_ARROWS, pShooter);
-        this.setBaseDamage((double) (pVelocity * 2.5F) + this.random.triangle((double) this.level().getDifficulty().getId() * 0.11D, 0.57425D));
-        if (i > 0) {
-            this.setBaseDamage(this.getBaseDamage() + (double) i * 0.5D + 0.5D);
-        }
-
-        if (j > 0) {
-            this.setKnockback(j);
-        }
-
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, pShooter) > 0) {
-            this.setSecondsOnFire(100);
-        }
-
-    }
+//
+//    @Override
+//    public void setEnchantmentEffectsFromEntity(LivingEntity pShooter, float pVelocity) {
+//        int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER_ARROWS, pShooter);
+//        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH_ARROWS, pShooter);
+//        this.setBaseDamage((double) (pVelocity * 2.5F) + this.random.triangle((double) this.level().getDifficulty().getId() * 0.11D, 0.57425D));
+//        if (i > 0) {
+//            this.setBaseDamage(this.getBaseDamage() + (double) i * 0.5D + 0.5D);
+//        }
+//
+//        if (j > 0) {
+//            this.setKnockback(j);
+//        }
+//
+//        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAMING_ARROWS, pShooter) > 0) {
+//            this.setSecondsOnFire(100);
+//        }
+//
+//    }
 
     @Override
     public double getBaseDamage() {
@@ -471,12 +467,12 @@ public class MikometArrowEntity extends AbstractArrow {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
+    protected ItemStack getPickupItem() {
+        return new ItemStack(ModItems.MIKOMET_ARROW.get());
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return new ItemStack(ModItems.MIKOMET_ARROW.get());
     }
 

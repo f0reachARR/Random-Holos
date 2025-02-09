@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -24,7 +23,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
 import net.theivan066.randomholos.registries.DataComponentRegistries;
 import net.theivan066.randomholos.util.InventoryUtil;
@@ -102,13 +100,6 @@ public class GunItem extends ProjectileWeaponItem {
         );
     }
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<GunItemRecord>> GUN_ITEM_RECORD
-            = DataComponentRegistries.REGISTRAR.registerComponentType(
-            "gun_item_record",
-            builder -> builder
-                    .persistent(GunItemRecord.CODEC)
-                    .networkSynchronized(GunItemRecord.STREAM_CODEC));
-
 //    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
 //        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 //        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
@@ -124,7 +115,7 @@ public class GunItem extends ProjectileWeaponItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (this.getClip() > 0 && pUsedHand == InteractionHand.MAIN_HAND) {
+        if (this.getClip(stack) > 0 && pUsedHand == InteractionHand.MAIN_HAND) {
             this.shootBullet(pLevel, pPlayer, stack);
             pPlayer.getCooldowns().addCooldown(this, this.rateOfFire);
         } else {
@@ -143,7 +134,7 @@ public class GunItem extends ProjectileWeaponItem {
         float v_kick = getRecoilY(itemStack);
 
         if (!pLevel.isClientSide) {
-            this.setClip(this.getClip() - 1);
+            this.setClip(itemStack, getClip(itemStack) - 1);
             for (int i = 0; i < this.pelletCount; i++) {
                 BulletProjectileEntity bullet = new BulletProjectileEntity(pLevel, pPlayer, this.gunDamage, this.pelletCount);
                 bullet.setPos(pPlayer.getX(), pPlayer.getEyeY(), pPlayer.getZ());
@@ -153,6 +144,7 @@ public class GunItem extends ProjectileWeaponItem {
                 Vec3 v1 = lookDirect.scale(bulletSpeed).add(v0);
                 float spreadModifier = (float) ((pPlayer.isPushedByFluid() ? 1.5 : 0) + (pPlayer.isSwimming() ? 2.5 : 0)
                         + (pPlayer.isSprinting() ? 2.5 : 0) + (pPlayer.isCrouching() ? -0.5 : 0));
+                spreadModifier = Math.min(spreadModifier, 0.1f);
                 float verticalSpread = random.nextFloat(-bulletSpread[0] * Math.max(spreadModifier, 0), bulletSpread[0] * Math.min(spreadModifier, 0));
                 float horizontalSpread = random.nextFloat(-bulletSpread[1] * Math.max(spreadModifier, 0), bulletSpread[1] * Math.min(spreadModifier, 0));
 
@@ -162,7 +154,7 @@ public class GunItem extends ProjectileWeaponItem {
                 pLevel.addFreshEntity(bullet);
             }
             pPlayer.setYRot(pPlayer.getYRot() + v_kick);
-            pPlayer.setXRot(pPlayer.getXRot() + random.nextFloat(-h_kick, h_kick));
+            pPlayer.setXRot(pPlayer.getXRot() + h_kick > 0.f ? random.nextFloat(-h_kick, h_kick) : 0.f);
         }
         pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.shootSound, SoundSource.PLAYERS, 1.0f, 1.0f);
     }
@@ -170,7 +162,7 @@ public class GunItem extends ProjectileWeaponItem {
     @Override
     public void onCraftedBy(ItemStack pStack, Level pLevel, Player pPlayer) {
         super.onCraftedBy(pStack, pLevel, pPlayer);
-        this.setClip(0);
+        this.setClip(pStack, 0);
     }
 
     private void reload(Player player, ItemStack stack) {
@@ -185,7 +177,7 @@ public class GunItem extends ProjectileWeaponItem {
                     }
                     int count = Math.min(reserveAmmoCount(player, this.ammoType), magSize);
                     InventoryUtil.removeItem(player, this.ammoType, count);
-                    this.setClip(count);
+                    this.setClip(stack, count);
                 } else {
                     if (!player.level().isClientSide) {
                         player.displayClientMessage(Component.translatable("messages.randomholos.no_ammo"), true);
@@ -199,15 +191,17 @@ public class GunItem extends ProjectileWeaponItem {
                     player.displayClientMessage(Component.translatable("messages.randomholos.reloading"), true);
                     for (int j = 0; j < magSize; j++) {
                         player.getCooldowns().addCooldown(this, reloadCooldown);
-                        this.setClip(this.getClip() + 1);
-                        InventoryUtil.removeItem(player, this.ammoType, 1);
+                        this.setClip(stack, this.getClip(stack) + 1);
+                        if (!player.isCreative())
+                            InventoryUtil.removeItem(player, this.ammoType, 1);
                     }
                 } else if (ammo > 0 && ammo < magSize) {
                     player.displayClientMessage(Component.translatable("messages.randomholos.reloading"), true);
                     for (int j = 0; j < ammo; j++) {
                         player.getCooldowns().addCooldown(this, reloadCooldown);
-                        this.setClip(this.getClip() + 1);
-                        InventoryUtil.removeItem(player, this.ammoType, 1);
+                        this.setClip(stack, this.getClip(stack) + 1);
+                        if (!player.isCreative())
+                            InventoryUtil.removeItem(player, this.ammoType, 1);
                     }
                 } else {
                     player.displayClientMessage(Component.translatable("messages.randomholos.no_ammo"), true);
@@ -242,16 +236,24 @@ public class GunItem extends ProjectileWeaponItem {
         return 0;
     }
 
+    private static GunItemRecord getGunItemRecord(ItemStack stack) {
+        GunItemRecord record = stack.get(DataComponentRegistries.GUN_ITEM_RECORD);
+        return record == null ? new GunItemRecord(0, false) : record;
+    }
+
+    private static void setGunItemRecord(ItemStack stack, GunItemRecord record) {
+        stack.set(DataComponentRegistries.GUN_ITEM_RECORD, record);
+    }
 
     public float getRecoilX(ItemStack stack) {
         boolean ran = this.random.nextBoolean();
-        return stack.get(GUN_ITEM_RECORD).aiming ?
+        return getGunItemRecord(stack).aiming ?
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]) / 2 :
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]);
     }
 
     public float getRecoilY(ItemStack stack) {
-        return stack.get(GUN_ITEM_RECORD).aiming ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
+        return getGunItemRecord(stack).aiming ? this.gunRecoil[1] / 2 : this.gunRecoil[1];
     }
 
     public int getRateOfFire() {
@@ -262,12 +264,14 @@ public class GunItem extends ProjectileWeaponItem {
         return this.reloadCooldown;
     }
 
-    public int getClip() {
-        return this.clip;
+    public int getClip(ItemStack stack) {
+        return remainingAmmo(stack);
     }
 
-    public void setClip(int i) {
-        clip = i;
+    public void setClip(ItemStack stack, int i) {
+        GunItemRecord record = getGunItemRecord(stack);
+        GunItemRecord newRecord = new GunItemRecord(i, record.aiming);
+        setGunItemRecord(stack, newRecord);
     }
 
     public int getReloadTicks() {
@@ -287,10 +291,12 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     public static int remainingAmmo(ItemStack stack) {
-        return stack.get(GUN_ITEM_RECORD).clip;
+        return getGunItemRecord(stack).clip;
     }
 
     public static int reserveAmmoCount(Player player, Item item) {
+        if (!player.isCreative())
+            return 9999;
         return player.getInventory().countItem(item);
     }
 
@@ -322,7 +328,7 @@ public class GunItem extends ProjectileWeaponItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("tooltip.randomholos.gun_ammo").append(Component.literal(": " + this.getClip() + " / " + this.getMagSize())));
+        pTooltipComponents.add(Component.translatable("tooltip.randomholos.gun_ammo").append(Component.literal(": " + this.getClip(pStack) + " / " + this.getMagSize())));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 

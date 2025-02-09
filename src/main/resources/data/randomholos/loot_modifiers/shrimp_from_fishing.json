@@ -1,0 +1,14 @@
+{
+  "type": "randomholos:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/fishing/fish"
+    },
+    {
+      "chance": 0.095,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "randomholos:shrimp"
+}

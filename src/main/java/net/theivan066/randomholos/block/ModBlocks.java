@@ -18,7 +18,9 @@ import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.block.custom.*;
 import net.theivan066.randomholos.fluid.ModFluids;
 import net.theivan066.randomholos.item.ModItems;
+import net.theivan066.randomholos.worldgen.ModConfiguredFeatures;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -71,7 +73,9 @@ public class ModBlocks {
                 }
             });
     public static final DeferredBlock<Block> MAPLE_SAPLING = registerBlock("maple_sapling",
-            () -> new SaplingBlock(TreeGrower.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+            () -> new SaplingBlock(
+                    new TreeGrower("maple", Optional.empty(), Optional.of(ModConfiguredFeatures.MAPLE_KEY), Optional.empty()),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     public static final DeferredBlock<Block> POTTED_MAPLE_SAPLING = BLOCKS.register("potted_maple_sapling",
             () -> new FlowerPotBlock((() -> (FlowerPotBlock) Blocks.FLOWER_POT), MAPLE_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)));
     public static final DeferredBlock<Block> FALLEN_LEAVES = registerBlock("fallen_leaves", () ->

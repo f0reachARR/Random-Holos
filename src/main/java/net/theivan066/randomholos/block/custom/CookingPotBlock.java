@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings({"deprecation", "dep-ann"})
 public class CookingPotBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
     public CookingPotBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -29,16 +30,12 @@ public class CookingPotBlock extends Block {
         return SHAPE;
     }
 
+    @Override
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#mirror} whenever
-     * possible. Implementing/overriding is fine.
-     */
+    @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
@@ -53,6 +50,8 @@ public class CookingPotBlock extends Block {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
     }
+
+    @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }

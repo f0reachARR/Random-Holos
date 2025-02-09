@@ -1,0 +1,14 @@
+{
+  "type": "randomholos:add_item",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/village_savanna_house"
+    },
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "randomholos:raw_rice"
+}

@@ -29,7 +29,7 @@ public class MikoAttackGoal extends MeleeAttackGoal {
 
     @Override
     protected void checkAndPerformAttack(LivingEntity pEnemy) {
-        if (this.canPerformAttack(pEnemy)) {
+        if (mob.isWithinMeleeAttackRange(pEnemy)) {
             shouldCountTillNextAttack = true;
             if (isTimeToStartAttackAnimation()) {
                 entity.setAttacking(true);

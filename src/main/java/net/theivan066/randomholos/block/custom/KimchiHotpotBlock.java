@@ -1,16 +1,13 @@
 package net.theivan066.randomholos.block.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
@@ -30,7 +27,8 @@ import org.jetbrains.annotations.Nullable;
 public class KimchiHotpotBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final int MAX_BITES = 3;
-    public static final IntegerProperty TIMES_EATEN = IntegerProperty.create("times_eaten", 0, 3);;
+    public static final IntegerProperty TIMES_EATEN = IntegerProperty.create("times_eaten", 0, 3);
+
     public KimchiHotpotBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(TIMES_EATEN, Integer.valueOf(0)));
@@ -43,16 +41,12 @@ public class KimchiHotpotBlock extends Block {
         return SHAPE;
     }
 
+    @Override
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     * @deprecated call via {@link BlockStateBase#mirror} whenever
-     * possible. Implementing/overriding is fine.
-     */
+    @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
@@ -69,25 +63,13 @@ public class KimchiHotpotBlock extends Block {
         pBuilder.add(TIMES_EATEN);
     }
 
+    @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
-    //eat
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (pLevel.isClientSide) {
-            if (eat(pLevel, pPos, pState, pPlayer).consumesAction()) {
-                return InteractionResult.SUCCESS;
-            }
-            if (itemstack.isEmpty()) {
-                return InteractionResult.CONSUME;
-            }
-        }
-        return eat(pLevel, pPos, pState, pPlayer);
-    }
-
-    protected static InteractionResult eat(LevelAccessor pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+    @Override
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult hitResult) {
         if (!pPlayer.canEat(false)) {
             return InteractionResult.PASS;
         } else {
@@ -104,6 +86,7 @@ public class KimchiHotpotBlock extends Block {
         }
     }
 
+    @Override
     public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
         return getOutputSignal(pBlockState.getValue(TIMES_EATEN));
     }

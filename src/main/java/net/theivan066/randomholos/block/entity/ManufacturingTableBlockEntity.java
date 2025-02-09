@@ -13,11 +13,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
+import net.theivan066.randomholos.recipe.ModRecipes;
 import net.theivan066.randomholos.screen.ManufacturingTableMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,6 +78,10 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
         super.loadAdditional(tag, registries);
         itemHandler.deserializeNBT(registries, tag.getCompound("Inventory"));
         progress = tag.getInt("Progress");
+    }
+
+    public ItemStackHandler getItemHandler() {
+        return itemHandler;
     }
 
     public ManufacturingTableBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -168,11 +175,10 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     }
 
     private Optional<ManufacturingRecipe> getCurrentRecipe() {
-        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
-        for (int i = 0; i < this.itemHandler.getSlots(); i++) {
-            inventory.setItem(i, this.itemHandler.getStackInSlot(i));
-        }
-        return this.level.getRecipeManager().getRecipeFor(ManufacturingRecipe.Type.INSTANCE, inventory, level);
+        RecipeWrapper recipeWrapper = new RecipeWrapper(this.itemHandler);
+        Optional<RecipeHolder<ManufacturingRecipe>> recipeFor = this.level.getRecipeManager()
+                .getRecipeFor(ModRecipes.MANUFACTURING_TYPE.get(), recipeWrapper, level);
+        return recipeFor.map(RecipeHolder::value);
     }
 
     private boolean isOutputtable(Item item, int count) {

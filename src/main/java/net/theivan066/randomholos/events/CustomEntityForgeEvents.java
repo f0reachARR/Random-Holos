@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class CustomEntityForgeEvents {
     //miko あえんびえん death
     @SubscribeEvent
@@ -39,7 +39,7 @@ public class CustomEntityForgeEvents {
 
                 int fireAspectLevel = fireAspect.isPresent() ? mainHandItem.getEnchantmentLevel(fireAspect.get()) : 0;
                 int flameLevel = flame.isPresent() ? mainHandItem.getEnchantmentLevel(flame.get()) : 0;
-                
+
                 fireEnchants = fireAspectLevel > 0 || flameLevel > 0;
             }
             boolean diedFromAenbien = damageSource.is(DamageTypes.ON_FIRE) || damageSource.is(DamageTypes.IN_FIRE) || damageSource.is(DamageTypes.LAVA) || damageSource.is(DamageTypes.FIREBALL) || damageSource.is(DamageTypes.PLAYER_EXPLOSION) || miko.isOnFire();

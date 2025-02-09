@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "randomholos:moririn",
+    "randomholos:sakura_forest"
+  ],
+  "spawners": {
+    "type": "randomholos:mikop",
+    "maxCount": 8,
+    "minCount": 1,
+    "weight": 10
+  }
+}

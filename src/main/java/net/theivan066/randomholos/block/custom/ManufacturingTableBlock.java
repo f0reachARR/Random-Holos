@@ -50,7 +50,7 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
-    
+
     @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
@@ -90,7 +90,7 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof ManufacturingTableBlockEntity) {
-                player.openMenu((ManufacturingTableBlockEntity) entity);
+                player.openMenu((ManufacturingTableBlockEntity) entity, pos);
             } else {
                 throw new IllegalStateException("Container provider is missing!");
             }
@@ -103,7 +103,7 @@ public class ManufacturingTableBlock extends BaseEntityBlock {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof ManufacturingTableBlockEntity) {
-                player.openMenu((ManufacturingTableBlockEntity) entity);
+                player.openMenu((ManufacturingTableBlockEntity) entity, pos);
             } else {
                 throw new IllegalStateException("Container provider is missing!");
             }

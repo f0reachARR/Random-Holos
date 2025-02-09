@@ -1,10 +1,12 @@
 package net.theivan066.randomholos.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -29,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-@SuppressWarnings({"deprecation", "dep-ann"})
+
 public class HumidifierBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static BooleanProperty WITH_WATER = BooleanProperty.create("with_water");
@@ -40,6 +42,11 @@ public class HumidifierBlock extends BaseEntityBlock {
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(WITH_LAVA, false)
                 .setValue(WITH_WATER, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
     }
 
     public static final VoxelShape SHAPE = Stream.of(
@@ -61,17 +68,12 @@ public class HumidifierBlock extends BaseEntityBlock {
         return SHAPE;
     }
 
+    @Override
     public BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     *
-     * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#mirror} whenever
-     * possible. Implementing/overriding is fine.
-     */
+    @Override
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
@@ -118,17 +120,25 @@ public class HumidifierBlock extends BaseEntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
+
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        // TODO: accept bucket of water and lava
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide()) {
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof HumidifierBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (HumidifierBlockEntity) entity, pPos);
+                HumidifierBlockEntity humidifierBlockEntity = (HumidifierBlockEntity) entity;
+                player.openMenu(humidifierBlockEntity, pos);
             } else {
                 throw new IllegalStateException("Container provider is missing!");
             }
         }
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Nullable

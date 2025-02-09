@@ -129,6 +129,10 @@ public class MikoEntity extends Animal {
         return this.entityData.get(ATTACKING);
     }
 
+    public boolean hasAhoge() {
+        return this.entityData.get(WITH_AHOGE);
+    }
+
     @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemInHand = pPlayer.getItemInHand(pHand);
@@ -201,6 +205,7 @@ public class MikoEntity extends Animal {
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Variant"));
+        this.entityData.set(WITH_AHOGE, pCompound.getBoolean("WithAhoge"));
     }
 
     @Override
@@ -212,6 +217,7 @@ public class MikoEntity extends Animal {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getTypeVariant());
+        pCompound.putBoolean("WithAhoge", this.hasAhoge());
     }
 
     //Mob-specifics

@@ -7,6 +7,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.block.entity.HumidifierBlockEntity;
@@ -30,10 +31,10 @@ public class HumidifierMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 35, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 143, 35));
-        });
+        ItemStackHandler itemHandler = this.blockEntity.getItemHandler();
+
+        this.addSlot(new SlotItemHandler(itemHandler, 0, 35, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 1, 143, 35));
 
         addDataSlots(data);
     }

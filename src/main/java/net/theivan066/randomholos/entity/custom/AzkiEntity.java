@@ -53,7 +53,7 @@ public class AzkiEntity extends Animal implements RangedAttackMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(1, new AzkiAttackGoal(this, 1.29, 1, 48));
+        this.goalSelector.addGoal(1, new AzkiAttackGoal(this, 1.29, 1, 10));
 
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6f));

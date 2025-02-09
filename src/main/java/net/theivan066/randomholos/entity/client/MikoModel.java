@@ -12,11 +12,12 @@ public class MikoModel<T extends MikoEntity> extends HierarchicalModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     private final ModelPart miko;
     private final ModelPart head;
+    private final ModelPart ahoge;
 
     public MikoModel(ModelPart root) {
         this.miko = root.getChild("miko");
-
         this.head = miko.getChild("head");
+        this.ahoge = head.getChild("headwear").getChild("ahoge");
     }
 
 
@@ -63,6 +64,12 @@ public class MikoModel<T extends MikoEntity> extends HierarchicalModel<T> {
     }
 
     @Override
+    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTick) {
+        this.ahoge.visible = entity.hasAhoge();
+        super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTick);
+    }
+
+    @Override
     public void setupAnim(MikoEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.applyHeadRotation(entity, netHeadYaw, headPitch, ageInTicks);
@@ -79,7 +86,7 @@ public class MikoModel<T extends MikoEntity> extends HierarchicalModel<T> {
         this.head.yRot = pNetHeadYaw * ((float) Math.PI / 180F);
         this.head.xRot = pHeadPitch * ((float) Math.PI / 180F);
     }
-	
+
     @Override
     public ModelPart root() {
         return miko;

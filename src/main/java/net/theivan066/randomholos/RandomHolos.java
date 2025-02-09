@@ -33,7 +33,7 @@ import net.theivan066.randomholos.sound.ModSounds;
 import net.theivan066.randomholos.worldgen.tree.trunk_placer.ModTrunkPlacerTypes;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(RandomHolos.MOD_ID)
 public class RandomHolos {
     public static final String MOD_ID = "randomholos";

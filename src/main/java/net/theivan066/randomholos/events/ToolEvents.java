@@ -13,7 +13,7 @@ import net.theivan066.randomholos.item.custom.base_items.HammerItem;
 import java.util.HashSet;
 import java.util.Set;
 
-@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RandomHolos.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class ToolEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
 
