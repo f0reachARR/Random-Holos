@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -38,19 +39,24 @@ public class ShakenBottleItem extends Item {
                     pLevel.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     pLevel.gameEvent(pPlayer, GameEvent.FLUID_PICKUP, blockpos);
                     itemstack.shrink(1);
-                    pPlayer.addItem(new ItemStack(ModItems.SODA_WATER.get()));
+                    ItemStack newStack = new ItemStack(ModItems.SODA_WATER.get());
+                    return InteractionResultHolder.sidedSuccess(
+                            ItemUtils.createFilledResult(itemstack, pPlayer, newStack), pLevel.isClientSide());
                 }
                 if (pLevel.getFluidState(blockpos).is(FluidTags.LAVA)) {
                     pLevel.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     pLevel.gameEvent(pPlayer, GameEvent.FLUID_PICKUP, blockpos);
                     itemstack.shrink(1);
-                    pPlayer.addItem(new ItemStack(ModItems.OIL.get()));
+                    ItemStack newStack = new ItemStack(ModItems.OIL.get());
+                    return InteractionResultHolder.sidedSuccess(
+                            ItemUtils.createFilledResult(itemstack, pPlayer, newStack), pLevel.isClientSide());
                 }
             }
             return InteractionResultHolder.pass(itemstack);
         }
     }
 
+    @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.shaken_bottle.shift"));

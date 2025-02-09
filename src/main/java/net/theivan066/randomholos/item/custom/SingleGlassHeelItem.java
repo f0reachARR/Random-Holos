@@ -42,6 +42,7 @@ public class SingleGlassHeelItem extends Item {
 
     public static Player glassThrower;
 
+    @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.singleglassheels.shift"));

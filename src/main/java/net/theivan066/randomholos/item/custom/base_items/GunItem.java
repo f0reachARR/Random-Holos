@@ -26,15 +26,14 @@ import net.minecraft.world.phys.Vec3;
 import net.theivan066.randomholos.entity.custom.projectile.BulletProjectileEntity;
 import net.theivan066.randomholos.registries.DataComponentRegistries;
 import net.theivan066.randomholos.util.InventoryUtil;
+import net.theivan066.randomholos.util.RandomUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Predicate;
 
 @SuppressWarnings("deprecation")
 public class GunItem extends ProjectileWeaponItem {
-    public final Random random;
     private final float gunDamage;
     private final float bulletSpeed;
     private final int rateOfFire;
@@ -65,7 +64,6 @@ public class GunItem extends ProjectileWeaponItem {
                    boolean unscopeAfterShot,
                    int reloadStage1, int reloadStage2, int reloadStage3, LoadingType loadingType, FiringType firingType) {
         super(pProperties);
-        this.random = new Random();
         this.gunDamage = gunDamage;
         this.bulletSpeed = bulletSpeed;
         this.rateOfFire = rateOfFire;
@@ -100,18 +98,6 @@ public class GunItem extends ProjectileWeaponItem {
         );
     }
 
-//    public static void fireCheck(Level pLevel, Player pPlayer, InteractionHand pUsedHand, GunItem item) {
-//        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-//        if (pUsedHand == InteractionHand.MAIN_HAND && item.getClip() > 0) {
-//            if (!pPlayer.getCooldowns().isOnCooldown(item)) {
-//                item.shootBullet(pLevel, pPlayer, stack);
-//                pPlayer.getCooldowns().addCooldown(item, item.rateOfFire);
-//            }
-//        } else if (item.getClip() <= 0) {
-//            item.reload(pPlayer, stack);
-//        }
-//    }
-
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
@@ -134,7 +120,7 @@ public class GunItem extends ProjectileWeaponItem {
         float v_kick = getRecoilY(itemStack);
 
         if (!pLevel.isClientSide) {
-            this.setClip(itemStack, getClip(itemStack) - 1);
+            if (!pPlayer.isCreative()) this.setClip(itemStack, getClip(itemStack) - 1);
             for (int i = 0; i < this.pelletCount; i++) {
                 BulletProjectileEntity bullet = new BulletProjectileEntity(pLevel, pPlayer, this.gunDamage, this.pelletCount);
                 bullet.setPos(pPlayer.getX(), pPlayer.getEyeY(), pPlayer.getZ());
@@ -145,8 +131,8 @@ public class GunItem extends ProjectileWeaponItem {
                 float spreadModifier = (float) ((pPlayer.isPushedByFluid() ? 1.5 : 0) + (pPlayer.isSwimming() ? 2.5 : 0)
                         + (pPlayer.isSprinting() ? 2.5 : 0) + (pPlayer.isCrouching() ? -0.5 : 0));
                 spreadModifier = Math.min(spreadModifier, 0.1f);
-                float verticalSpread = random.nextFloat(-bulletSpread[0] * Math.max(spreadModifier, 0), bulletSpread[0] * Math.min(spreadModifier, 0));
-                float horizontalSpread = random.nextFloat(-bulletSpread[1] * Math.max(spreadModifier, 0), bulletSpread[1] * Math.min(spreadModifier, 0));
+                float verticalSpread = RandomUtil.nextFloat(-bulletSpread[0] * Math.max(spreadModifier, 0), bulletSpread[0] * Math.min(spreadModifier, 0));
+                float horizontalSpread = RandomUtil.nextFloat(-bulletSpread[1] * Math.max(spreadModifier, 0), bulletSpread[1] * Math.min(spreadModifier, 0));
 
                 bullet.setDeltaMovement((v1.x + horizontalSpread), v1.y + verticalSpread, (v1.z + horizontalSpread));
                 bullet.setOwner(pPlayer);
@@ -154,7 +140,7 @@ public class GunItem extends ProjectileWeaponItem {
                 pLevel.addFreshEntity(bullet);
             }
             pPlayer.setYRot(pPlayer.getYRot() + v_kick);
-            pPlayer.setXRot(pPlayer.getXRot() + h_kick > 0.f ? random.nextFloat(-h_kick, h_kick) : 0.f);
+            pPlayer.setXRot(pPlayer.getXRot() + RandomUtil.nextFloat(-h_kick, h_kick));
         }
         pLevel.playSound(null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.shootSound, SoundSource.PLAYERS, 1.0f, 1.0f);
     }
@@ -246,7 +232,7 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     public float getRecoilX(ItemStack stack) {
-        boolean ran = this.random.nextBoolean();
+        boolean ran = RandomUtil.nextBoolean();
         return getGunItemRecord(stack).aiming ?
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]) / 2 :
                 (ran ? this.gunRecoil[0] : -this.gunRecoil[0]);
@@ -295,7 +281,7 @@ public class GunItem extends ProjectileWeaponItem {
     }
 
     public static int reserveAmmoCount(Player player, Item item) {
-        if (!player.isCreative())
+        if (player.isCreative())
             return 9999;
         return player.getInventory().countItem(item);
     }

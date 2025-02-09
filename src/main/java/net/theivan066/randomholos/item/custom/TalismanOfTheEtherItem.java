@@ -37,6 +37,7 @@ public class TalismanOfTheEtherItem extends Item {
         }
     }
 
+    @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (Screen.hasShiftDown()) {
             pTooltipComponents.add(Component.translatable("tooltip.randomholos.talisman_of_the_ether.shift"));
