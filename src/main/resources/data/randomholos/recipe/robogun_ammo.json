@@ -2,20 +2,20 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "tag": "forge:gems/diamond"
+      "tag": "c:gems/diamond"
     },
     {
-      "tag": "forge:ingots/copper"
+      "tag": "c:ingots/copper"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     }
   ],
   "additional_input": {
-    "item": "randomholos:firearm_blueprint"
+    "id": "randomholos:firearm_blueprint"
   },
   "output": {
-    "item": "randomholos:robogun_ammo",
+    "id": "randomholos:robogun_ammo",
     "count": 4
   }
 }

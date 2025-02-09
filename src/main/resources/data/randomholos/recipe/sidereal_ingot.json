@@ -30,9 +30,9 @@
     }
   ],
   "additional_input": {
-    "item": "randomholos:alloy_blueprint"
+    "id": "randomholos:alloy_blueprint"
   },
   "output": {
-    "item": "randomholos:sidereal_ingot"
+    "id": "randomholos:sidereal_ingot"
   }
 }

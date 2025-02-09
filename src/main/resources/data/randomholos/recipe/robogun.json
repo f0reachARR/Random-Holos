@@ -2,37 +2,37 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
       "item": "randomholos:energy_core"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     }
   ],
   "additional_input": {
-    "item": "randomholos:firearm_blueprint"
+    "id": "randomholos:firearm_blueprint"
   },
   "output": {
-    "item": "randomholos:robogun"
+    "id": "randomholos:robogun"
   }
 }

@@ -130,7 +130,6 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
         return new ManufacturingTableMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
-    //crafting
     public void tick(Level level, BlockPos pPos, BlockState pState) {
         if (isOutputSlotAvailable() && hasRecipe()) {
             this.progress++;
@@ -182,12 +181,11 @@ public class ManufacturingTableBlockEntity extends BlockEntity implements MenuPr
     }
 
     private boolean isOutputtable(Item item, int count) {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize()
-                >= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count
-                && (
-                this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty()
-                        || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item)
-        );
+        int maxStackSize = this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
+        int afterCount = this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count;
+        boolean isEmpty = this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty();
+        boolean isSame = this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
+        return isEmpty || (isSame && maxStackSize >= afterCount);
     }
 
     private boolean isOutputSlotAvailable() {

@@ -30,9 +30,9 @@
     }
   ],
   "additional_input": {
-    "item": "randomholos:blade_blueprint"
+    "id": "randomholos:blade_blueprint"
   },
   "output": {
-    "item": "randomholos:micsaber"
+    "id": "randomholos:micsaber"
   }
 }

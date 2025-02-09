@@ -3,7 +3,9 @@ package net.theivan066.randomholos.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -50,14 +53,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     public final HumidifierBlock humidifierBlock;
 
-
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
-
 
     protected final ContainerData data;
 
@@ -155,9 +157,6 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level.isClientSide()) {
-            return;
-        }
     }
 
     @Override
@@ -176,19 +175,48 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
         FLUID_TANK.readFromNBT(registries, tag);
     }
 
-    public void tick(Level level, BlockPos pPos, BlockState pState) {
-        getEnergyFromBlocks(level, pPos);
-        extractEnergy();
-        fillOrDrainFluid();
+    private int processTick = 0;
 
-        humidify(pPos, pState);
+    public void tick(Level level, BlockPos pPos, BlockState pState) {
+        if (processTick++ % 5 != 0) {
+            return;
+        }
+
+        if (level.isClientSide()) {
+            humidityParticle(pPos, pState);
+        } else {
+            getEnergyFromBlocks(level, pPos);
+            extractEnergy();
+            fillOrDrainFluid();
+
+            humidify(pPos, pState);
+        }
+    }
+
+
+    private void humidityParticle(BlockPos pPos, BlockState pState) {
+        Map<Integer, SimpleParticleType> particleMap = Map.of(
+                HumidifierBlock.PARTICLE_ELITE_LAVA, ParticleTypes.CHERRY_LEAVES,
+                HumidifierBlock.PARTICLE_WATER, ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                HumidifierBlock.PARTICLE_LAVA, ParticleTypes.LAVA
+        );
+        int particle = pState.getValue(HumidifierBlock.PARTICLE);
+        if (particleMap.containsKey(particle)) {
+            ParticleOptions particleOptions = particleMap.get(particle);
+            Vec3 emitPos = pPos.above().getCenter();
+            level.addParticle(particleOptions, emitPos.x, emitPos.y, emitPos.z, 0, 0.02, 0);
+        }
     }
 
     private void humidify(BlockPos pPos, BlockState pState) {
         FluidStack fluidStack = this.FLUID_TANK.drain(2, IFluidHandler.FluidAction.EXECUTE);
         if (fluidStack.is(Fluids.WATER)) {
-            this.getLevel().setBlock(pPos, pState.setValue(HumidifierBlock.WITH_WATER, true)
-                    .setValue(HumidifierBlock.WITH_LAVA, false), 3);
+            this.getLevel().setBlock(pPos,
+                    pState
+                            .setValue(HumidifierBlock.WITH_WATER, true)
+                            .setValue(HumidifierBlock.WITH_LAVA, false)
+                            .setValue(HumidifierBlock.PARTICLE, HumidifierBlock.PARTICLE_WATER)
+                    , 3);
             AABB box = new AABB(pPos).inflate(10);
             List<Entity> entities = level.getEntitiesOfClass(Entity.class, box);
             for (Entity entity : entities) {
@@ -198,30 +226,26 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
                     }
                 }
             }
-            for (int i = 0; i < 2; i++) {
-                this.getLevel().addParticle(ParticleTypes.BUBBLE, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
-            }
         } else if (fluidStack.is(Fluids.LAVA)) {
             this.getLevel().setBlock(pPos,
                     pState
                             .setValue(HumidifierBlock.WITH_WATER, false)
-                            .setValue(HumidifierBlock.WITH_LAVA, true),
+                            .setValue(HumidifierBlock.WITH_LAVA, true)
+                            .setValue(HumidifierBlock.PARTICLE, HumidifierBlock.PARTICLE_LAVA),
                     3);
             AABB box = new AABB(pPos).inflate(8);
             List<Entity> entities = level.getEntitiesOfClass(Entity.class, box);
             for (Entity entity : entities) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    livingEntity.setRemainingFireTicks(30);
+                    livingEntity.igniteForSeconds(1);
                 }
-            }
-            for (int i = 0; i < 2; i++) {
-                this.getLevel().addParticle(ParticleTypes.LAVA, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
             }
         } else if (fluidStack.is(ModFluids.SOURCE_ELITE_LAVA)) {
             this.getLevel()
                     .setBlock(pPos, pState
-                                    .setValue(HumidifierBlock.WITH_WATER, true)
-                                    .setValue(HumidifierBlock.WITH_LAVA, false),
+                                    .setValue(HumidifierBlock.WITH_WATER, false)
+                                    .setValue(HumidifierBlock.WITH_LAVA, false)
+                                    .setValue(HumidifierBlock.PARTICLE, HumidifierBlock.PARTICLE_ELITE_LAVA),
                             3);
             AABB box = new AABB(pPos).inflate(10);
             List<Entity> entities = level.getEntitiesOfClass(Entity.class, box);
@@ -233,11 +257,11 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 35, 0, true, false));
                 }
             }
-            for (int i = 0; i < 2; i++) {
-                this.getLevel().addParticle(ParticleTypes.CHERRY_LEAVES, pPos.getX(), pPos.getY() + i, pPos.getZ(), 1, 1, 1);
-            }
         } else {
-            this.getLevel().setBlock(pPos, pState.setValue(HumidifierBlock.WITH_WATER, false).setValue(HumidifierBlock.WITH_LAVA, false), 3);
+            this.getLevel().setBlock(pPos, pState
+                    .setValue(HumidifierBlock.WITH_WATER, false)
+                    .setValue(HumidifierBlock.WITH_LAVA, false)
+                    .setValue(HumidifierBlock.PARTICLE, HumidifierBlock.PARTICLE_NONE), 3);
         }
     }
 
@@ -353,7 +377,7 @@ public class HumidifierBlockEntity extends BlockEntity implements MenuProvider {
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
-    
+
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         return saveWithoutMetadata(registries);

@@ -10,9 +10,11 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.theivan066.randomholos.RandomHolos;
 import net.theivan066.randomholos.block.ModBlocks;
 import net.theivan066.randomholos.recipe.ManufacturingRecipe;
@@ -70,15 +72,16 @@ public class ManufacturingRecipeCategory implements IRecipeCategory<Manufacturin
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ManufacturingRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 14, 17).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 17).addIngredients(recipe.getIngredients().get(1));
-        builder.addSlot(RecipeIngredientRole.INPUT, 50, 17).addIngredients(recipe.getIngredients().get(2));
-        builder.addSlot(RecipeIngredientRole.INPUT, 14, 35).addIngredients(recipe.getIngredients().get(3));
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 35).addIngredients(recipe.getIngredients().get(4));
-        builder.addSlot(RecipeIngredientRole.INPUT, 50, 35).addIngredients(recipe.getIngredients().get(5));
-        builder.addSlot(RecipeIngredientRole.INPUT, 14, 53).addIngredients(recipe.getIngredients().get(6));
-        builder.addSlot(RecipeIngredientRole.INPUT, 32, 53).addIngredients(recipe.getIngredients().get(7));
-        builder.addSlot(RecipeIngredientRole.INPUT, 50, 53).addIngredients(recipe.getIngredients().get(8));
+        NonNullList<Ingredient> ingredients = recipe.getIngredients();
+        builder.addSlot(RecipeIngredientRole.INPUT, 14, 17).addIngredients(ingredients.get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 17).addIngredients(ingredients.get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 17).addIngredients(ingredients.get(2));
+        builder.addSlot(RecipeIngredientRole.INPUT, 14, 35).addIngredients(ingredients.get(3));
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 35).addIngredients(ingredients.get(4));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 35).addIngredients(ingredients.get(5));
+        builder.addSlot(RecipeIngredientRole.INPUT, 14, 53).addIngredients(ingredients.get(6));
+        builder.addSlot(RecipeIngredientRole.INPUT, 32, 53).addIngredients(ingredients.get(7));
+        builder.addSlot(RecipeIngredientRole.INPUT, 50, 53).addIngredients(ingredients.get(8));
 
         builder.addSlot(RecipeIngredientRole.INPUT, 91, 35).addItemStack(recipe.getAdditiveInputItem(null));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 142, 35).addItemStack(recipe.getResultItem(null));

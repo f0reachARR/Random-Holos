@@ -2,38 +2,38 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     {
-      "tag": "forge:storage_blocks/diamond"
+      "tag": "c:storage_blocks/diamond"
     },
     {
       "item": "randomholos:energy_core"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     }
   ],
   "additional_input": {
-    "item": "randomholos:firearm_blueprint"
+    "id": "randomholos:firearm_blueprint"
   },
   "output": {
-    "item": "randomholos:robosniper_ammo",
+    "id": "randomholos:robosniper_ammo",
     "count": 3
   }
 }

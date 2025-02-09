@@ -2,20 +2,20 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "tag": "forge:storage_blocks/iron"
+      "tag": "c:storage_blocks/iron"
     },
     {
-      "tag": "forge:storage_blocks/iron"
+      "tag": "c:storage_blocks/iron"
     },
     {
-      "tag": "forge:storage_blocks/coal"
+      "tag": "c:storage_blocks/coal"
     }
   ],
   "additional_input": {
-    "item": "randomholos:alloy_blueprint"
+    "id": "randomholos:alloy_blueprint"
   },
   "output": {
-    "item": "randomholos:steel_block",
+    "id": "randomholos:steel_block",
     "count": 2
   }
 }

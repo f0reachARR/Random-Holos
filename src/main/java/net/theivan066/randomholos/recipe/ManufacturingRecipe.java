@@ -38,7 +38,7 @@ public class ManufacturingRecipe implements Recipe<RecipeWrapper> {
             return false;
         }
         return IntStream.range(0, inputItems.size())
-                .allMatch(i -> inputItems.get(i).test(pContainer.getItem(i)))
+                .allMatch(i -> (inputItems.get(i).isEmpty() && pContainer.getItem(i).isEmpty()) || inputItems.get(i).test(pContainer.getItem(i)))
                 && pContainer.getItem(9).is(additives.getItem());
     }
 
@@ -82,6 +82,12 @@ public class ManufacturingRecipe implements Recipe<RecipeWrapper> {
                         Ingredient.LIST_CODEC_NONEMPTY.fieldOf("ingredients").xmap(ingredients -> {
                             NonNullList<Ingredient> nonNullList = NonNullList.create();
                             nonNullList.addAll(ingredients);
+                            if (nonNullList.size() != 9) {
+                                // Fill the rest of the list with empty ingredients
+                                for (int i = nonNullList.size(); i < 9; i++) {
+                                    nonNullList.add(Ingredient.EMPTY);
+                                }
+                            }
                             return nonNullList;
                         }, ingredients -> ingredients).forGetter(ManufacturingRecipe::getIngredients),
                         ItemStack.STRICT_CODEC.fieldOf("additional_input").forGetter(r -> r.additives),

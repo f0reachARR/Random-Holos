@@ -2,13 +2,13 @@
   "type": "randomholos:manufacturing",
   "ingredients": [
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
       "item": "randomholos:reinforced_copper_rod"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
       "item": "randomholos:robotic_parts"
@@ -20,19 +20,19 @@
       "item": "randomholos:robotic_parts"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "forge:storage_blocks/steel"
+      "tag": "c:storage_blocks/steel"
     }
   ],
   "additional_input": {
-    "item": "randomholos:firearm_blueprint"
+    "id": "randomholos:firearm_blueprint"
   },
   "output": {
-    "item": "randomholos:robosniper"
+    "id": "randomholos:robosniper"
   }
 }

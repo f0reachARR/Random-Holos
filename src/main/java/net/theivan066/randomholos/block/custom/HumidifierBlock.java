@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -36,12 +37,20 @@ public class HumidifierBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static BooleanProperty WITH_WATER = BooleanProperty.create("with_water");
     public static BooleanProperty WITH_LAVA = BooleanProperty.create("with_lava");
+    public static IntegerProperty PARTICLE = IntegerProperty.create("particle", 0, 3);
+
+    public static final int PARTICLE_NONE = 0;
+    public static final int PARTICLE_WATER = 1;
+    public static final int PARTICLE_LAVA = 2;
+    public static final int PARTICLE_ELITE_LAVA = 3;
 
     public HumidifierBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(WITH_LAVA, false)
-                .setValue(WITH_WATER, false));
+                .setValue(WITH_WATER, false)
+                .setValue(PARTICLE, PARTICLE_NONE)
+        );
     }
 
     @Override
@@ -89,6 +98,7 @@ public class HumidifierBlock extends BaseEntityBlock {
         pBuilder.add(FACING);
         pBuilder.add(WITH_WATER);
         pBuilder.add(WITH_LAVA);
+        pBuilder.add(PARTICLE);
     }
 
     @Override
@@ -101,8 +111,6 @@ public class HumidifierBlock extends BaseEntityBlock {
         boolean shouldLightup = state.getValue(WITH_LAVA);
         return shouldLightup ? 12 : 0;
     }
-
-    //BE
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {
@@ -150,10 +158,6 @@ public class HumidifierBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if (pLevel.isClientSide()) {
-            return null;
-        }
-
         return createTickerHelper(pBlockEntityType, ModBlockEntities.HUMIDIFIER_BE.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
     }

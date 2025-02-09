@@ -7,10 +7,10 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:storage_blocks/iron"
+      "tag": "c:storage_blocks/iron"
     },
     "C": {
-      "tag": "forge:storage_blocks/gold"
+      "tag": "c:storage_blocks/gold"
     },
     "#": {
       "item": "minecraft:crafting_table"
