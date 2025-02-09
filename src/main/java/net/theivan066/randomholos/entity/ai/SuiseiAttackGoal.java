@@ -21,8 +21,8 @@ public class SuiseiAttackGoal extends MeleeAttackGoal {
     @Override
     public void start() {
         super.start();
-        attackDelay = 8;
-        ticksUntilNextAttack = 12;
+        attackDelay = 16;
+        ticksUntilNextAttack = 28;
     }
 
     @Override

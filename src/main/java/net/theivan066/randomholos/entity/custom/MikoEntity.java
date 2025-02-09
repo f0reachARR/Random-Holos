@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -32,6 +33,8 @@ import net.theivan066.randomholos.item.ModItems;
 import net.theivan066.randomholos.sound.ModSounds;
 import net.theivan066.randomholos.util.InventoryUtil;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class MikoEntity extends Animal {
     private static final EntityDataAccessor<Boolean> ATTACKING =
@@ -227,10 +230,33 @@ public class MikoEntity extends Animal {
         return super.interactAt(pPlayer, pVec, pHand);
     }
 
+    private int previousAchuTime = 0;
+
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        if (pDamageSource.is(DamageTypeTags.IS_FIRE)) {
+            if (this.tickCount - previousAchuTime > 100 || previousAchuTime == 0) {
+                previousAchuTime = this.tickCount;
+                return ModSounds.MIKO_ACHU.get();
+            } else {
+                return null;
+            }
+        }
         return ModSounds.MIKO_HURT.get();
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        if (damageSource.is(DamageTypeTags.IS_FIRE)) {
+            List<? extends Player> players = level().players();
+            for (Player player : players) {
+                if (!level().isClientSide) {
+                    player.sendSystemMessage(Component.translatable("messages.randomholos.aenbien"));
+                }
+            }
+        }
+        super.die(damageSource);
     }
 
     @Nullable
@@ -244,7 +270,5 @@ public class MikoEntity extends Animal {
     protected SoundEvent getAmbientSound() {
         return ModSounds.MIKO_AMBIENT.get();
     }
-
-
 }
 

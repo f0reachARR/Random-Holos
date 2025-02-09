@@ -18,6 +18,7 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SORA_DEATH = registerSoundEvents("sora_death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ROBOGUN_SHOOT = registerSoundEvents("robogun_shoot");
     public static final DeferredHolder<SoundEvent, SoundEvent> MIKO_HURT = registerSoundEvents("miko_hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MIKO_ACHU = registerSoundEvents("miko_achu");
     public static final DeferredHolder<SoundEvent, SoundEvent> MIKO_AMBIENT = registerSoundEvents("miko_ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> MIKO_DEATH = registerSoundEvents("miko_death");
     public static final DeferredHolder<SoundEvent, SoundEvent> AZKI_HURT = registerSoundEvents("azki_hurt");

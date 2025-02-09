@@ -35,6 +35,8 @@ public class SuiseiRenderer extends MobRenderer<SuiseiEntity, SuiseiModel<Suisei
 
     public SuiseiRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new SuiseiModel<>(pContext.bakeLayer(ModModelLayers.SUISEI_LAYER)), 0.5f);
+
+        addLayer(new SuiseiWeaponLayer(this, pContext.getItemRenderer()));
     }
 
     @Override

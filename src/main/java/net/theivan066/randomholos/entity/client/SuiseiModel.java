@@ -70,6 +70,10 @@ public class SuiseiModel<T extends SuiseiEntity> extends HierarchicalModel<T> {
         this.head.xRot = pHeadPitch * ((float) Math.PI / 180F);
     }
 
+    public ModelPart getAttackArm() {
+        return this.suisei.getChild("right_arm");
+    }
+
     @Override
     public ModelPart root() {
         return suisei;

@@ -67,6 +67,12 @@
       "randomholos:miko/miko_nyaharosong"
     ]
   },
+  "miko_achu": {
+    "subtitle": "sounds.randomholos.miko_achu",
+    "sounds": [
+      "randomholos:miko/miko_achu"
+    ]
+  },
   "azki_hurt": {
     "subtitle": "sounds.randomholos.azki_hurt",
     "sounds": [
