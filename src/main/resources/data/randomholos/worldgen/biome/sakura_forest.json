@@ -157,6 +157,18 @@
         "maxCount": 4,
         "minCount": 4,
         "weight": 8
+      },
+      {
+        "type": "randomholos:miko",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "randomholos:suisei",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 8
       }
     ],
     "misc": [],

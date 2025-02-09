@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StarDivaHammerItem extends HammerItem {
     public StarDivaHammerItem(Tier pTier, Properties pProperties) {
-        super(pTier, pProperties);
+        super(pTier, 2, pProperties);
     }
 
     @Override

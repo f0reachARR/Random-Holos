@@ -1,5 +1,4 @@
 {
-  "name": "randomholos:jinja_miko/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {

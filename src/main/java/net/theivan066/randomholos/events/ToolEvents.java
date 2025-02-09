@@ -27,7 +27,7 @@ public class ToolEvents {
             if (HARVESTED_BLOCKS.contains(initalBlockPos)) {
                 return;
             }
-            for (BlockPos pos : HammerItem.blocksToDestroy(HammerItem.getRange(), initalBlockPos, serverPlayer)) {
+            for (BlockPos pos : HammerItem.blocksToDestroy(hammer.getRange(), initalBlockPos, serverPlayer)) {
                 if (pos == initalBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                     continue;
                 }
