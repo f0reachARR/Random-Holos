@@ -9,7 +9,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:blunt_blueprint",
-    "count" : 1
+    "id": "randomholos:blunt_blueprint",
+    "count": 1
   }
 }

@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:shaken_bottle",
-    "count" : 1
+    "id": "randomholos:shaken_bottle",
+    "count": 1
   }
 }

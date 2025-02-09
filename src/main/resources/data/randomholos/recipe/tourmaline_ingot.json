@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:tourmaline",
-    "count" : 9
+    "id": "randomholos:tourmaline",
+    "count": 9
   }
 }

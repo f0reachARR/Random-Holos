@@ -21,7 +21,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:curry_bread",
-    "count" : 1
+    "id": "randomholos:curry_bread",
+    "count": 1
   }
 }

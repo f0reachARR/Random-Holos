@@ -24,7 +24,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:kimchi_hotpot",
-    "count" : 1
+    "id": "randomholos:kimchi_hotpot",
+    "count": 1
   }
 }

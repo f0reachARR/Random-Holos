@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "mmorpg:rare_mats/mining/lesser",
+    "id": "mmorpg:rare_mats/mining/lesser",
     "count": 4
   }
 }

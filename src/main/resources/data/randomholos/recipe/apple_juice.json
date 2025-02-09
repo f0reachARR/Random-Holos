@@ -12,7 +12,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:apple_juice",
-    "count" : 1
+    "id": "randomholos:apple_juice",
+    "count": 1
   }
 }

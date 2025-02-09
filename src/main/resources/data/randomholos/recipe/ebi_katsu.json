@@ -21,7 +21,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:ebi_katsu",
-    "count" : 1
+    "id": "randomholos:ebi_katsu",
+    "count": 1
   }
 }

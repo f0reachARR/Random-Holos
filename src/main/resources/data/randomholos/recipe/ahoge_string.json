@@ -27,7 +27,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:ahoge_string",
-    "count" : 2
+    "id": "randomholos:ahoge_string",
+    "count": 2
   }
 }

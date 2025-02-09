@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "mmorpg:rare_mats/fishing/medium",
+    "id": "mmorpg:rare_mats/fishing/medium",
     "count": 4
   }
 }

@@ -15,7 +15,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:tokino_soda",
-    "count" : 1
+    "id": "randomholos:tokino_soda",
+    "count": 1
   }
 }

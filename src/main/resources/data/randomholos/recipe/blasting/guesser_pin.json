@@ -14,7 +14,7 @@
     }
   },
   "result": {
-    "item": "randomholos:guesser_pin",
+    "id": "randomholos:guesser_pin",
     "count": 4
   }
 }

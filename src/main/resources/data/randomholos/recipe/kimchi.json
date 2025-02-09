@@ -18,7 +18,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:kimchi",
-    "count" : 1
+    "id": "randomholos:kimchi",
+    "count": 1
   }
 }

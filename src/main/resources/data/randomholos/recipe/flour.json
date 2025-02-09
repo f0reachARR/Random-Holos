@@ -9,7 +9,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:flour",
-    "count" : 1
+    "id": "randomholos:flour",
+    "count": 1
   }
 }

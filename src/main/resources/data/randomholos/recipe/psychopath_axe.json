@@ -1,4 +1,3 @@
-
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
@@ -18,7 +17,7 @@
     }
   },
   "result": {
-    "item": "randomholos:psychopath_axe",
+    "id": "randomholos:psychopath_axe",
     "count": 1
   }
 }

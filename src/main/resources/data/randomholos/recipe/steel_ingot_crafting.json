@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:steel_ingot",
-    "count" : 9
+    "id": "randomholos:steel_ingot",
+    "count": 9
   }
 }

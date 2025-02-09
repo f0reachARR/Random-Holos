@@ -12,7 +12,7 @@
     }
   ],
   "result": {
-    "item": "randomholos:tokinosora_set_meal_a",
-    "count" : 1
+    "id": "randomholos:tokinosora_set_meal_a",
+    "count": 1
   }
 }

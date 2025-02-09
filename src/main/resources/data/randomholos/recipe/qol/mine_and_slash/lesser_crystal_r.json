@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "mmorpg:rare_mats/mining/medium",
+    "id": "mmorpg:rare_mats/mining/medium",
     "count": 4
   }
 }
