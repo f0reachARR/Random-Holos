@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.theivan066.randomholos.entity.custom.SuiseiEntity;
-import net.theivan066.randomholos.item.ModItems;
 import org.joml.Quaternionf;
 
 public class SuiseiWeaponLayer extends RenderLayer<SuiseiEntity, SuiseiModel<SuiseiEntity>> {
@@ -28,7 +28,10 @@ public class SuiseiWeaponLayer extends RenderLayer<SuiseiEntity, SuiseiModel<Sui
     public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLight,
                        SuiseiEntity entity, float limbSwing, float limbSwingAmount,
                        float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (entity.isAttacking()) {
+        ItemStack hand = entity.getItemBySlot(EquipmentSlot.MAINHAND);
+        if (hand.isEmpty()) return;
+
+        if (entity.isAttacking() || entity.getTarget() != null) {
             ModelPart attackArm = this.getParentModel().getAttackArm();
             matrixStack.mulPose(Axis.YP.rotationDegrees(-90F));
             matrixStack.mulPose(Axis.ZP.rotationDegrees(-130F));
@@ -52,7 +55,7 @@ public class SuiseiWeaponLayer extends RenderLayer<SuiseiEntity, SuiseiModel<Sui
         matrixStack.scale(1.2F, 1.2F, 1.2F);
         // Render the weapon here
         this.itemRenderer.renderStatic(
-                new ItemStack(ModItems.PSYCHOPATH_AXE.get()),
+                hand,
                 ItemDisplayContext.NONE,
                 packedLight,
                 OverlayTexture.NO_OVERLAY,

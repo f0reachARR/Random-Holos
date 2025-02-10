@@ -98,6 +98,7 @@ public class SuiseiEntity extends Animal {
         }
     }
 
+    @Override
     protected void updateWalkAnimation(float v) {
         float f;
         if (this.getPose() == Pose.STANDING) {
@@ -201,7 +202,7 @@ public class SuiseiEntity extends Animal {
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return ModSounds.SUISEI_HURT.get();
     }
-
+    
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {

@@ -16,28 +16,28 @@ public class ModEntities {
             DeferredRegister.create(Registries.ENTITY_TYPE, RandomHolos.MOD_ID);
     public static final DeferredHolder<EntityType<?>, EntityType<SoraEntity>> SORA =
             ENTITY_TYPES.register("sora", () -> EntityType.Builder.of(SoraEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("sora"));
+                    .sized(0.6f, 1.8f).build("sora"));
     public static final DeferredHolder<EntityType<?>, EntityType<KurosoraEntity>> KUROSORA =
             ENTITY_TYPES.register("kurosora", () -> EntityType.Builder.of(KurosoraEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("kurosora"));
+                    .sized(0.6f, 1.8f).build("kurosora"));
     public static final DeferredHolder<EntityType<?>, EntityType<NunnunEntity>> NUNNUN =
             ENTITY_TYPES.register("nunnun", () -> EntityType.Builder.of(NunnunEntity::new, MobCategory.CREATURE)
                     .sized(1.5f, 1f).build("nunnun"));
     public static final DeferredHolder<EntityType<?>, EntityType<RobocoEntity>> ROBOCO =
             ENTITY_TYPES.register("roboco", () -> EntityType.Builder.of(RobocoEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("roboco"));
+                    .sized(0.6f, 1.8f).build("roboco"));
     public static final DeferredHolder<EntityType<?>, EntityType<SuiseiEntity>> SUISEI =
             ENTITY_TYPES.register("suisei", () -> EntityType.Builder.of(SuiseiEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("suisei"));
+                    .sized(0.6f, 1.8f).build("suisei"));
     public static final DeferredHolder<EntityType<?>, EntityType<MikoEntity>> MIKO =
             ENTITY_TYPES.register("miko", () -> EntityType.Builder.of(MikoEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("miko"));
+                    .sized(0.6f, 1.8f).build("miko"));
     public static final DeferredHolder<EntityType<?>, EntityType<MikopEntity>> MIKOP =
             ENTITY_TYPES.register("mikop", () -> EntityType.Builder.of(MikopEntity::new, MobCategory.CREATURE)
                     .sized(1f, 1.6f).build("mikop"));
     public static final DeferredHolder<EntityType<?>, EntityType<AzkiEntity>> AZKI =
             ENTITY_TYPES.register("azki", () -> EntityType.Builder.of(AzkiEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1.8f).build("azki"));
+                    .sized(0.6f, 1.8f).build("azki"));
     public static final DeferredHolder<EntityType<?>, EntityType<GlassHeelsProjectileEntity>> GLASS_HEELS_PROJECTILE =
             ENTITY_TYPES.register("glass_heels_projectile",
                     () -> EntityType.Builder.<GlassHeelsProjectileEntity>of(GlassHeelsProjectileEntity::new, MobCategory.MISC)
