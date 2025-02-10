@@ -87,7 +87,7 @@ public class SuiseiEntity extends Animal {
         }
 
         if (this.isAttacking() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 10; // Length in ticks of your animation
+            attackAnimationTimeout = 20; // Length in ticks of your animation
             attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;

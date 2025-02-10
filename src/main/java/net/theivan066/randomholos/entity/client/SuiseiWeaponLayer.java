@@ -45,8 +45,8 @@ public class SuiseiWeaponLayer extends RenderLayer<SuiseiEntity, SuiseiModel<Sui
             matrixStack.mulPose(Axis.ZP.rotationDegrees(-80F));
         } else {
             matrixStack.mulPose(Axis.XP.rotationDegrees(-10.0F));
-            matrixStack.mulPose(Axis.ZP.rotationDegrees(-100F));
-            matrixStack.translate(-0.4D, -0.1D, 0.4D);
+//            matrixStack.mulPose(Axis.ZP.rotationDegrees(100F));
+            matrixStack.translate(0.0D, 0.2D, 0.4D);
         }
 
         matrixStack.scale(1.2F, 1.2F, 1.2F);

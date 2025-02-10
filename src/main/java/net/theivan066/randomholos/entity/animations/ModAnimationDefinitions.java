@@ -1139,18 +1139,18 @@ public class ModAnimationDefinitions {
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(2f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
-    public static final AnimationDefinition SUISEI_ATTACK = AnimationDefinition.Builder.withLength(1.0f)
+    public static final AnimationDefinition SUISEI_ATTACK = AnimationDefinition.Builder.withLength(0.5f)
             .addAnimation("right_arm",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,
                             new Keyframe(0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.25f, KeyframeAnimations.degreeVec(-90f, 0f, 0f),
+                            new Keyframe(0.125f, KeyframeAnimations.degreeVec(-90f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.5f, KeyframeAnimations.degreeVec(-180f, 0f, 0f),
+                            new Keyframe(0.25f, KeyframeAnimations.degreeVec(-180f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(0.6f, KeyframeAnimations.degreeVec(-100f, 0f, 0f),
+                            new Keyframe(0.2916767f, KeyframeAnimations.degreeVec(-100f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR),
-                            new Keyframe(1.0f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
+                            new Keyframe(0.5f, KeyframeAnimations.degreeVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
 
 
